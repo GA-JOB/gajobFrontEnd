@@ -1,7 +1,23 @@
-import React from 'react';
+import React from "react";
+import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
+import { Header } from "components/header";
+import { Footer } from "components/footer";
 
-function App() {
-  return <></>;
+export default function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Main />}></Route>
+      </Routes>
+    </Router>
+  );
 }
 
-export default App;
+const Main = () => {
+  return (
+    <>
+      <Header />
+      <Footer />
+    </>
+  );
+};
