@@ -48,10 +48,7 @@ const Main = () => {
     <>
       <Header MenuClickRes={MenuClick} onClickMenuRes={onClickMenu} />
       <MainWrapper>
-        <Sidebar
-          closeSideBarRes={closeSideBar}
-          setCloseSideBarRes={setCloseSideBar}
-        />
+        <Sidebar closeSideBarRes={closeSideBar} />
         {/* <AlertDismissible /> */}
       </MainWrapper>
       <Footer />

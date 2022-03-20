@@ -3,13 +3,9 @@ import styled from "styled-components";
 
 interface ISidebarProps {
   closeSideBarRes: boolean;
-  setCloseSideBarRes: Dispatch<SetStateAction<boolean>>;
 }
 
-export const Sidebar = ({
-  closeSideBarRes,
-  setCloseSideBarRes,
-}: ISidebarProps) => {
+export const Sidebar = ({ closeSideBarRes }: ISidebarProps) => {
   if (closeSideBarRes === true) return <></>;
 
   return <SidebarBox></SidebarBox>;
