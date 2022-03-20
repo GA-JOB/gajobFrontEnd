@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
-import { Header } from "components/layout/header";
-import { Footer } from "components/layout/footer";
-import { NoEmail } from "components/layout/footer/NoEmail";
-import { PersonalRule } from "components/layout/footer/PersonalRules";
-import { Sitemap } from "components/layout/footer/Sitemap";
-import { AlertDismissible } from "components/alert";
+import { Header } from "components/header";
+import { Sidebar } from "components/main/sidebar";
+import { Footer } from "components/footer";
+import { NoEmail } from "components/footer/NoEmail";
+import { PersonalRule } from "components/footer/PersonalRules";
+import { Sitemap } from "components/footer/Sitemap";
+// import { AlertDismissible } from "components/alert";
 import "bootstrap/dist/css/bootstrap.min.css";
+import styled from "styled-components";
 
 export default function App() {
   return (
@@ -24,20 +26,39 @@ export default function App() {
 }
 
 const Main = () => {
+  // default sidebar open 상태 (menuClick === false)
+  const [MenuClick, setMenuClick] = useState<boolean>(false);
+  const [closeSideBar, setCloseSideBar] = useState<boolean>(false);
+
+  // Menu Icon Click Event
+  const onClickMenu = () => {
+    // menuClick 상태 변경
+    setMenuClick(!MenuClick);
+
+    if (MenuClick === false) {
+      setCloseSideBar(false);
+      console.log("메뉴 열림");
+    } else {
+      setCloseSideBar(true);
+      console.log("메뉴 닫힘");
+    }
+  };
+
   return (
     <>
-      <Header />
-      <button type="button" className="btn btn-danger">
-        danger
-      </button>
-      <button type="button" className="btn btn-warning">
-        warning
-      </button>
-      <button type="button" className="btn btn-success">
-        success
-      </button>
-      <AlertDismissible />
+      <Header MenuClickRes={MenuClick} onClickMenuRes={onClickMenu} />
+      <MainWrapper>
+        <Sidebar closeSideBarRes={closeSideBar} />
+        {/* <AlertDismissible /> */}
+      </MainWrapper>
       <Footer />
     </>
   );
 };
+
+const MainWrapper = styled.div`
+  width: 100%;
+  height: 500px;
+  /* border-top: 1px solid black; */
+  /* box-shadow: 0px 0px 3px 3px inset; */
+`;

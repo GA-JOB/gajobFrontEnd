@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Alert, Button } from "react-bootstrap";
 
 export const AlertDismissible = () => {
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState<boolean>(true);
 
   return (
     <>

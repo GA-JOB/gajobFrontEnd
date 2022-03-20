@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const NoEmail = () => {
   return (
     <>
-      <Etitle>이메일 무단수집거부</Etitle>
+      {/* <Etitle>이메일 무단수집거부</Etitle> */}
 
       <Econtainer>
         <EcontainerBox>
@@ -65,9 +65,9 @@ export const NoEmail = () => {
 //     padding: 2px;
 //     font-weight: bold;
 // `;
-const Etitle = styled.div`
-  text-align: center;
-`;
+// const Etitle = styled.div`
+//   text-align: center;
+// `;
 
 /* container 여백 적용*/
 const Econtainer = styled.div`
