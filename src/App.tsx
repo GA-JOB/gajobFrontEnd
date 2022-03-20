@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 import { Header } from "components/header";
 import { Sidebar } from "components/main/sidebar";
+import { SlideItem } from "components/main/slider/SlideItem";
 import { Footer } from "components/footer";
 import { NoEmail } from "components/footer/NoEmail";
 import { PersonalRule } from "components/footer/PersonalRules";
@@ -49,6 +50,7 @@ const Main = () => {
       <Header MenuClickRes={MenuClick} onClickMenuRes={onClickMenu} />
       <MainWrapper>
         <Sidebar closeSideBarRes={closeSideBar} />
+        <SlideItem />
         {/* <AlertDismissible /> */}
       </MainWrapper>
       <Footer />
