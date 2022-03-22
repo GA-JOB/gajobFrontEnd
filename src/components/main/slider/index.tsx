@@ -35,13 +35,25 @@ export const SlideBanner = ({
     }),
     [autoplay, loop, speed]
   );
+
   return (
     <SlideWrapper className={className}>
-      <Slider {...settings}>{children}</Slider>
+      <StyledSlider {...settings}>{children}</StyledSlider>
     </SlideWrapper>
   );
 };
 
 const SlideWrapper = styled.section`
-  position: relative;
+  /* position: relative; */
+  width: 100%;
+  margin: auto;
+  text-align: center;
+`;
+
+// slick-slider css
+const StyledSlider = styled(Slider)`
+  ul.slick-dots {
+    width: 100%;
+    text-align: center;
+  }
 `;

@@ -1,7 +1,10 @@
 import React, { useState } from "react";
-import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Header } from "components/header";
 import { Sidebar } from "components/main/sidebar";
+// menu
+import { Chats } from "components/main/menu/Chats";
+import { Analytics } from "components/main/menu/Analytics";
 import { SlideItem } from "components/main/slider/SlideItem";
 import { Footer } from "components/footer";
 import { NoEmail } from "components/footer/NoEmail";
@@ -16,6 +19,10 @@ export default function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Main />}></Route>
+        {/* <Route path="/team" element={<Team />} />
+        <Route path="/tasks" element={<Tasks />} /> */}
+        <Route path="/chats" element={<Chats />} />
+        <Route path="/analytics" element={<Analytics />} />
 
         {/* footer link */}
         <Route path="/noEmail" element={<NoEmail />}></Route>
@@ -48,19 +55,32 @@ const Main = () => {
   return (
     <>
       <Header MenuClickRes={MenuClick} onClickMenuRes={onClickMenu} />
-      <MainWrapper>
-        <Sidebar closeSideBarRes={closeSideBar} />
-        <SlideItem />
+      <MainContainer>
+        <Sidebar />
+        {/* <SidebarWrapper>
+          <Sidebar />
+        </SidebarWrapper> */}
+        <NewsBanner>
+          <SlideItem />
+        </NewsBanner>
         {/* <AlertDismissible /> */}
-      </MainWrapper>
+      </MainContainer>
       <Footer />
     </>
   );
 };
 
-const MainWrapper = styled.div`
+const MainContainer = styled.div`
   width: 100%;
   height: 500px;
-  /* border-top: 1px solid black; */
-  /* box-shadow: 0px 0px 3px 3px inset; */
+`;
+
+// const SidebarWrapper = styled.span`
+//   width: 15%;
+// `;
+
+const NewsBanner = styled.div`
+  width: 85%;
+  text-align: center;
+  /* margin: auto; */
 `;

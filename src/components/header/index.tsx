@@ -29,7 +29,7 @@ export const Header = ({ MenuClickRes, onClickMenuRes }: IHeaderProps) => {
     if ((target as HTMLElement).id !== "logo-name") return;
 
     if (logoName === "GA-JOB") {
-      setLogoName("Get A Job !");
+      setLogoName("Get A JOB !");
     } else {
       setLogoName("GA-JOB");
     }

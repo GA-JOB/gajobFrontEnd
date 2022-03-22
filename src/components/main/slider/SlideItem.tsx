@@ -6,14 +6,6 @@ interface itemsProps {
   name: string;
 }
 
-const SliderItem = styled.div`
-  width: 100%;
-  img {
-    max-width: 100%;
-    height: auto;
-  }
-`;
-
 const items: itemsProps[] = [
   {
     item: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSv382Pv78RFpHghWoGUgsQdmEBEgtZvqIR8g2CHyQykOqakEKbbcRpkDsCPGgY3LWf27Y&usqp=CAU",
@@ -34,9 +26,22 @@ export const SlideItem = () => {
     <SlideBanner>
       {items.map((item, index) => (
         <SliderItem key={index}>
-          <img src={item.item} alt={item.name} />
+          <SlideImg src={item.item} alt={item.name} />
         </SliderItem>
       ))}
     </SlideBanner>
   );
 };
+
+const SliderItem = styled.div`
+  width: 100%;
+`;
+
+const SlideImg = styled.img`
+  width: 40%;
+  height: auto;
+  margin: auto;
+  margin-top: 2vw;
+  text-align: center;
+  border-radius: 10px;
+`;
