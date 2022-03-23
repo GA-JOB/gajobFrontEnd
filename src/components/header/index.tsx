@@ -1,15 +1,14 @@
-import { useState, MouseEvent } from "react";
+import React, { useState, MouseEvent } from "react";
+import { Link } from "react-router-dom";
+import { SidebarData } from "./SidebarData";
 import { Navbar, Nav, Container } from "react-bootstrap";
-import MenuIcon from "@mui/icons-material/Menu";
-import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import styled from "styled-components";
+import { Menu, MenuOpen } from "@mui/icons-material";
 
-interface IHeaderProps {
-  MenuClickRes: boolean;
-  onClickMenuRes: () => void;
-}
+export const Header = () => {
+  const [close, setClose] = useState(false);
+  const showSidebar = () => setClose(!close);
 
-export const Header = ({ MenuClickRes, onClickMenuRes }: IHeaderProps) => {
   const [logoName, setLogoName] = useState<String>("GA-JOB");
   const defaultLogoStyle = {
     fontSize: "18pt",
@@ -38,13 +37,9 @@ export const Header = ({ MenuClickRes, onClickMenuRes }: IHeaderProps) => {
   return (
     <header>
       <Navbar bg="light" expand="lg">
-        <MenuIconWrap onClick={onClickMenuRes}>
-          {MenuClickRes === true ? (
-            <MenuOpenIcon fontSize="large" />
-          ) : (
-            <MenuIcon fontSize="large" />
-          )}
-        </MenuIconWrap>
+        <MenuIconOpen to="#" onClick={showSidebar}>
+          <Menu />
+        </MenuIconOpen>
 
         <Container>
           <LogoTitle>
@@ -59,13 +54,31 @@ export const Header = ({ MenuClickRes, onClickMenuRes }: IHeaderProps) => {
           </LogoTitle>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Nav>
-            <Nav.Link>Home</Nav.Link>
-            <Nav.Link>JOB담</Nav.Link>
-            <Nav.Link>Matching</Nav.Link>
-            <Nav.Link>MyPage</Nav.Link>
+            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/job-posting">채용공고</Nav.Link>
+            <Nav.Link href="/jobdam">Job담</Nav.Link>
+            <Nav.Link href="/gajob-study">GA-Study</Nav.Link>
+            <Nav.Link href="/mypage">MyPage</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
+
+      <SidebarMenu close={close}>
+        <MenuIconClose to="#" onClick={showSidebar}>
+          <MenuOpen />
+        </MenuIconClose>
+
+        {SidebarData.map((item, index) => {
+          return (
+            <MenuItems key={index}>
+              <MenuItemLinks to={item.path}>
+                {item.icon}
+                <span style={{ marginLeft: "16px" }}>{item.title}</span>
+              </MenuItemLinks>
+            </MenuItems>
+          );
+        })}
+      </SidebarMenu>
     </header>
   );
 };
@@ -74,7 +87,58 @@ const LogoTitle = styled.div`
   font-weight: bold;
 `;
 
-const MenuIconWrap = styled.span`
-  margin-left: 3vw;
-  cursor: pointer;
+const MenuIconOpen = styled(Link)`
+  display: flex;
+  justify-content: start;
+  font-size: 1.5rem;
+  margin-left: 2rem;
+  color: black;
+`;
+
+const MenuIconClose = styled(Link)`
+  display: flex;
+  justify-content: end;
+  font-size: 1.5rem;
+  margin-top: 0.75rem;
+  margin-right: 1rem;
+  color: #ffffff;
+`;
+
+const SidebarMenu = styled.div<{ close: boolean }>`
+  width: 250px;
+  height: 100vh;
+  background-color: #000080;
+  position: fixed;
+  top: 0;
+  left: ${({ close }) => (close ? "0" : "-100%")};
+  transition: 0.6s;
+`;
+
+const MenuItems = styled.li`
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  width: 100%;
+  height: 90px;
+  padding: 1rem 0 1.25rem;
+`;
+
+const MenuItemLinks = styled(Link)`
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+  font-size: 20px;
+  text-decoration: none;
+  color: #ffffff;
+
+  &:hover {
+    background-color: #ffffff;
+    color: #000080;
+    width: 100%;
+    height: 45px;
+    text-align: center;
+    border-radius: 5px;
+    margin: 0 2rem;
+  }
 `;

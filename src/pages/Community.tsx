@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const AnalyticsText = styled.div`
+const CommunityWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -8,6 +8,6 @@ const AnalyticsText = styled.div`
   height: 70vh;
 `;
 
-export const Analytics = () => {
-  return <AnalyticsText>Analytics</AnalyticsText>;
+export const Community = () => {
+  return <CommunityWrapper>Community</CommunityWrapper>;
 };

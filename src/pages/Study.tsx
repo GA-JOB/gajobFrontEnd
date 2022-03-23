@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const ChatText = styled.div`
+const StudyWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -8,6 +8,6 @@ const ChatText = styled.div`
   height: 70vh;
 `;
 
-export const Chats = () => {
-  return <ChatText>Chats</ChatText>;
+export const Study = () => {
+  return <StudyWrapper>Study</StudyWrapper>;
 };

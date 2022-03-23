@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Header } from "components/header";
-import { Sidebar } from "components/main/sidebar";
-// menu
-import { Chats } from "components/main/menu/Chats";
-import { Analytics } from "components/main/menu/Analytics";
-import { SlideItem } from "components/main/slider/SlideItem";
 import { Footer } from "components/footer";
+// menu
+import { Issues } from "pages/Issues";
+import { JobPosting } from "pages/JobPosting";
+import { Community } from "pages/Community";
+import { Study } from "pages/Study";
+import { Portfolio } from "pages/Portfolio";
+import { MyPage } from "pages/MyPage";
+// import { SlideItem } from "components/main/slider/SlideItem";
+
 import { NoEmail } from "components/footer/NoEmail";
 import { PersonalRule } from "components/footer/PersonalRules";
 import { Sitemap } from "components/footer/Sitemap";
@@ -19,10 +23,12 @@ export default function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Main />}></Route>
-        {/* <Route path="/team" element={<Team />} />
-        <Route path="/tasks" element={<Tasks />} /> */}
-        <Route path="/chats" element={<Chats />} />
-        <Route path="/analytics" element={<Analytics />} />
+        <Route path="/job-news" element={<Issues />} />
+        <Route path="/job-posting" element={<JobPosting />} />
+        <Route path="/jobdam" element={<Community />} />
+        <Route path="/gajob-study" element={<Study />} />
+        <Route path="/portfolio" element={<Portfolio />} />
+        <Route path="/mypage" element={<MyPage />} />
 
         {/* footer link */}
         <Route path="/noEmail" element={<NoEmail />}></Route>
@@ -34,35 +40,13 @@ export default function App() {
 }
 
 const Main = () => {
-  // default sidebar open 상태 (menuClick === false)
-  const [MenuClick, setMenuClick] = useState<boolean>(false);
-  const [closeSideBar, setCloseSideBar] = useState<boolean>(false);
-
-  // Menu Icon Click Event
-  const onClickMenu = () => {
-    // menuClick 상태 변경
-    setMenuClick(!MenuClick);
-
-    if (MenuClick === false) {
-      setCloseSideBar(false);
-      console.log("메뉴 열림");
-    } else {
-      setCloseSideBar(true);
-      console.log("메뉴 닫힘");
-    }
-  };
-
   return (
     <>
-      <Header MenuClickRes={MenuClick} onClickMenuRes={onClickMenu} />
+      <Header />
       <MainContainer>
-        <Sidebar />
-        {/* <SidebarWrapper>
-          <Sidebar />
-        </SidebarWrapper> */}
-        <NewsBanner>
+        {/* <NewsBanner>
           <SlideItem />
-        </NewsBanner>
+        </NewsBanner> */}
         {/* <AlertDismissible /> */}
       </MainContainer>
       <Footer />
@@ -71,16 +55,13 @@ const Main = () => {
 };
 
 const MainContainer = styled.div`
+  z-index: 1;
   width: 100%;
   height: 500px;
 `;
 
-// const SidebarWrapper = styled.span`
-//   width: 15%;
-// `;
-
 const NewsBanner = styled.div`
-  width: 85%;
+  width: 100%;
   text-align: center;
   /* margin: auto; */
 `;
