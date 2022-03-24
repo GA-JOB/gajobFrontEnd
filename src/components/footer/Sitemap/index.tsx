@@ -1,3 +1,3 @@
 export const Sitemap = () => {
-  return <></>;
+  return <>Sitemap</>;
 };

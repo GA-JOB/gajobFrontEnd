@@ -1,8 +1,17 @@
-import React, { useState } from "react";
-import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Header } from "components/header";
-import { Sidebar } from "components/main/sidebar";
 import { Footer } from "components/footer";
+// menu
+import { Issues } from "pages/Issues";
+import { JobPosting } from "pages/JobPosting";
+import { Community } from "pages/Community";
+import { Study } from "pages/Study";
+import { Portfolio } from "pages/Portfolio";
+import { MyPage } from "pages/MyPage";
+import { SlideItem } from "components/slider/SlideItem";
+import { Shortcuts } from "components/shortcuts";
+
 import { NoEmail } from "components/footer/NoEmail";
 import { PersonalRule } from "components/footer/PersonalRules";
 import { Sitemap } from "components/footer/Sitemap";
@@ -15,6 +24,12 @@ export default function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Main />}></Route>
+        <Route path="/job-news" element={<Issues />} />
+        <Route path="/job-posting" element={<JobPosting />} />
+        <Route path="/jobdam" element={<Community />} />
+        <Route path="/gajob-study" element={<Study />} />
+        <Route path="/portfolio" element={<Portfolio />} />
+        <Route path="/mypage" element={<MyPage />} />
 
         {/* footer link */}
         <Route path="/noEmail" element={<NoEmail />}></Route>
@@ -26,39 +41,42 @@ export default function App() {
 }
 
 const Main = () => {
-  // default sidebar open 상태 (menuClick === false)
-  const [MenuClick, setMenuClick] = useState<boolean>(false);
-  const [closeSideBar, setCloseSideBar] = useState<boolean>(false);
-
-  // Menu Icon Click Event
-  const onClickMenu = () => {
-    // menuClick 상태 변경
-    setMenuClick(!MenuClick);
-
-    if (MenuClick === false) {
-      setCloseSideBar(false);
-      console.log("메뉴 열림");
-    } else {
-      setCloseSideBar(true);
-      console.log("메뉴 닫힘");
-    }
-  };
-
   return (
     <>
-      <Header MenuClickRes={MenuClick} onClickMenuRes={onClickMenu} />
-      <MainWrapper>
-        <Sidebar closeSideBarRes={closeSideBar} />
-        {/* <AlertDismissible /> */}
-      </MainWrapper>
+      <HeaderStyle>
+        <Header />
+      </HeaderStyle>
+
+      <MainContainer>
+        <SliderStyle />
+        <ShortcutsStyle />
+      </MainContainer>
+
       <Footer />
     </>
   );
 };
-
-const MainWrapper = styled.div`
+const MainContainer = styled.div`
+  position: relative;
+  z-index: 0;
   width: 100%;
-  height: 500px;
-  /* border-top: 1px solid black; */
-  /* box-shadow: 0px 0px 3px 3px inset; */
+  min-height: 60vw;
+  padding-top: 5vw;
+`;
+
+const HeaderStyle = styled.header`
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  position: fixed;
+`;
+
+const SliderStyle = styled(SlideItem)`
+  width: 100%;
+  text-align: center;
+`;
+
+const ShortcutsStyle = styled(Shortcuts)`
+  width: 100%;
+  text-align: center;
 `;
