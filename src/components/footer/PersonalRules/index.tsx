@@ -1,3 +1,3 @@
 export const PersonalRule = () => {
-  return <></>;
+  return <>PersonalRules</>;
 };
