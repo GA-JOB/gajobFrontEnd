@@ -5,15 +5,10 @@ import "slick-carousel/slick/slick-theme.css";
 import styled from "styled-components";
 
 interface sliderProps {
-  /** 슬라이더 아이템 요소 */
   children: React.ReactNode;
-  /** 커스텀 클래스 */
   className?: string;
-  /** 자동재생 (속도 설정시 number 타입으로) */
   autoplay?: boolean | number;
-  /** 슬라이더 속도 */
   speed?: number;
-  /** 반복 여부 */
   loop?: boolean;
 }
 
@@ -45,7 +40,7 @@ export const SlideBanner = ({
 
 const SlideWrapper = styled.section`
   /* position: relative; */
-  width: 100%;
+  width: 62%;
   margin: auto;
   text-align: center;
 `;
@@ -56,4 +51,7 @@ const StyledSlider = styled(Slider)`
     width: 100%;
     text-align: center;
   }
+  /* button.slick-arrow.slick-next {
+    background-color: black;
+  } */
 `;

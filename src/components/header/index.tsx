@@ -1,8 +1,8 @@
 import React, { useState, MouseEvent } from "react";
 import { Link } from "react-router-dom";
 import { SidebarData } from "./SidebarData";
-import { Navbar, Nav, Container } from "react-bootstrap";
 import styled from "styled-components";
+import { Navbar, Nav, Container } from "react-bootstrap";
 import { Menu, MenuOpen } from "@mui/icons-material";
 
 export const Header = () => {
@@ -14,11 +14,13 @@ export const Header = () => {
     fontSize: "18pt",
     fontWeight: "lighter",
     transition: "0.2s",
+    cursor: "pointer",
   };
   const hoverLogoStyle = {
     fontSize: "20pt",
-    fontWeight: "bolder",
+    fontWeight: "normal",
     transition: "0.2s",
+    cursor: "pointer",
   };
   // 변수 지정하기
 
@@ -32,6 +34,7 @@ export const Header = () => {
     } else {
       setLogoName("GA-JOB");
     }
+    // history.push("/") 추가
   };
 
   return (
@@ -57,7 +60,7 @@ export const Header = () => {
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/job-posting">채용공고</Nav.Link>
             <Nav.Link href="/jobdam">Job담</Nav.Link>
-            <Nav.Link href="/gajob-study">GA-Study</Nav.Link>
+            <Nav.Link href="/gajob-study">Study</Nav.Link>
             <Nav.Link href="/mypage">MyPage</Nav.Link>
           </Nav>
         </Container>
@@ -84,21 +87,22 @@ export const Header = () => {
 };
 
 const LogoTitle = styled.div`
-  font-weight: bold;
+  /* font-weight: bold; */
 `;
 
 const MenuIconOpen = styled(Link)`
   display: flex;
   justify-content: start;
-  font-size: 1.5rem;
-  margin-left: 2rem;
+  font-size: 2rem;
+  margin-left: 3.5rem;
+  margin-top: -0.2vw;
   color: black;
 `;
 
 const MenuIconClose = styled(Link)`
   display: flex;
   justify-content: end;
-  font-size: 1.5rem;
+  font-size: 2rem;
   margin-top: 0.75rem;
   margin-right: 1rem;
   color: #ffffff;

@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import { SlideBanner } from "./index";
 
-interface itemsProps {
+interface ISlideItemsProps {
   item: string;
   name: string;
 }
 
-const items: itemsProps[] = [
+const items: ISlideItemsProps[] = [
   {
     item: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSv382Pv78RFpHghWoGUgsQdmEBEgtZvqIR8g2CHyQykOqakEKbbcRpkDsCPGgY3LWf27Y&usqp=CAU",
     name: "이미지01",
@@ -35,10 +35,11 @@ export const SlideItem = () => {
 
 const SliderItem = styled.div`
   width: 100%;
+  z-index: 1;
 `;
 
 const SlideImg = styled.img`
-  width: 40%;
+  width: 65%;
   height: auto;
   margin: auto;
   margin-top: 2vw;

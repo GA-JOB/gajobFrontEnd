@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Header } from "components/header";
 import { Footer } from "components/footer";
@@ -9,7 +9,8 @@ import { Community } from "pages/Community";
 import { Study } from "pages/Study";
 import { Portfolio } from "pages/Portfolio";
 import { MyPage } from "pages/MyPage";
-// import { SlideItem } from "components/main/slider/SlideItem";
+import { SlideItem } from "components/slider/SlideItem";
+import { Shortcuts } from "components/shortcuts";
 
 import { NoEmail } from "components/footer/NoEmail";
 import { PersonalRule } from "components/footer/PersonalRules";
@@ -42,26 +43,40 @@ export default function App() {
 const Main = () => {
   return (
     <>
-      <Header />
+      <HeaderStyle>
+        <Header />
+      </HeaderStyle>
+
       <MainContainer>
-        {/* <NewsBanner>
-          <SlideItem />
-        </NewsBanner> */}
-        {/* <AlertDismissible /> */}
+        <SliderStyle />
+        <ShortcutsStyle />
       </MainContainer>
+
       <Footer />
     </>
   );
 };
-
 const MainContainer = styled.div`
-  z-index: 1;
+  position: relative;
+  z-index: 0;
   width: 100%;
-  height: 500px;
+  min-height: 60vw;
+  padding-top: 5vw;
 `;
 
-const NewsBanner = styled.div`
+const HeaderStyle = styled.header`
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  position: fixed;
+`;
+
+const SliderStyle = styled(SlideItem)`
   width: 100%;
   text-align: center;
-  /* margin: auto; */
+`;
+
+const ShortcutsStyle = styled(Shortcuts)`
+  width: 100%;
+  text-align: center;
 `;
