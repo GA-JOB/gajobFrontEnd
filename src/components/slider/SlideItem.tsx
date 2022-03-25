@@ -23,13 +23,15 @@ const items: ISlideItemsProps[] = [
 
 export const SlideItem = () => {
   return (
-    <SlideBanner>
-      {items.map((item, index) => (
-        <SliderItem key={index}>
-          <SlideImg src={item.item} alt={item.name} />
-        </SliderItem>
-      ))}
-    </SlideBanner>
+    <>
+      <SlideBanner>
+        {items.map((item, index) => (
+          <SliderItem key={index}>
+            <SlideImg src={item.item} alt={item.name} />
+          </SliderItem>
+        ))}
+      </SlideBanner>
+    </>
   );
 };
 
@@ -39,7 +41,7 @@ const SliderItem = styled.div`
 `;
 
 const SlideImg = styled.img`
-  width: 65%;
+  width: 85%;
   height: auto;
   margin: auto;
   margin-top: 2vw;
