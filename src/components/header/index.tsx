@@ -111,7 +111,7 @@ const MenuIconClose = styled(Link)`
 const SidebarMenu = styled.div<{ close: boolean }>`
   width: 250px;
   height: 100vh;
-  background-color: #000080;
+  background-color: #000010;
   position: fixed;
   top: 0;
   left: ${({ close }) => (close ? "0" : "-100%")};
@@ -138,7 +138,7 @@ const MenuItemLinks = styled(Link)`
 
   &:hover {
     background-color: #ffffff;
-    color: #000080;
+    color: #000010;
     width: 100%;
     height: 45px;
     text-align: center;

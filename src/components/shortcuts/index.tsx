@@ -3,6 +3,19 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Shortcuts = () => {
+  // MouseHover 이벤트에 의한 shortcut 상태 변화
+  //  const onShortcutChange = (e: MouseEvent<HTMLDivElement>) => {
+  //   const { target } = e;
+  //   if ((target as HTMLElement).id !== "logo-name") return;
+
+  //   if (logoName === "GA-JOB") {
+  //     setLogoName("Get A JOB !");
+  //   } else {
+  //     setLogoName("GA-JOB");
+  //   }
+  //   // history.push("/") 추가
+  // };
+
   return (
     <>
       <ShortcutWrapper>

@@ -25,6 +25,20 @@ export const SlideBanner = ({
       infinite: loop,
       speed: speed,
       slidesToShow: 1,
+      slidesToScroll: 1,
+      autoplay: Boolean(autoplay),
+      autoplaySpeed: typeof autoplay === "boolean" ? 2500 : autoplay,
+    }),
+    [autoplay, loop, speed]
+  );
+
+  const multipleSettings = useMemo<Settings>(
+    () => ({
+      dots: true,
+      infinite: loop,
+      speed: speed,
+      slidesToShow: 2,
+      slidesToScroll: 1,
       autoplay: Boolean(autoplay),
       autoplaySpeed: typeof autoplay === "boolean" ? 2500 : autoplay,
     }),
@@ -32,15 +46,21 @@ export const SlideBanner = ({
   );
 
   return (
-    <SlideWrapper className={className}>
-      <StyledSlider {...settings}>{children}</StyledSlider>
-    </SlideWrapper>
+    <>
+      <SlideWrapper className={className}>
+        <StyledSlider {...settings}>{children}</StyledSlider>
+      </SlideWrapper>
+      <SlideWrapper className={className}>
+        <StyledSlider {...multipleSettings}>{children}</StyledSlider>
+      </SlideWrapper>
+    </>
   );
 };
 
 const SlideWrapper = styled.section`
   /* position: relative; */
-  width: 62%;
+  width: 80%;
+  height: 10%;
   margin: auto;
   text-align: center;
 `;
