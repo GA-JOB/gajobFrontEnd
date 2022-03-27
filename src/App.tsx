@@ -49,7 +49,7 @@ const Main = () => {
 
       <MainContainer>
         <SliderStyle />
-        <ShortcutsStyle />
+        <Shortcuts />
       </MainContainer>
 
       <Footer />
@@ -63,6 +63,8 @@ const MainContainer = styled.div`
   min-height: 60vw;
   padding-top: 5vw;
   padding-bottom: 10vw;
+
+  text-align: center;
 `;
 
 const HeaderStyle = styled.header`
@@ -77,7 +79,7 @@ const SliderStyle = styled(SlideItem)`
   text-align: center;
 `;
 
-const ShortcutsStyle = styled(Shortcuts)`
-  width: 100%;
-  text-align: center;
-`;
+// const ShortcutsStyle = styled(Shortcuts)`
+//   width: 100%;
+//   text-align: center;
+// `;
