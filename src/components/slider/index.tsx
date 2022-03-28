@@ -58,8 +58,7 @@ export const SlideBanner = ({
 };
 
 const SlideWrapper = styled.section`
-  /* position: relative; */
-  width: 60%;
+  width: 50%;
   height: 10%;
   margin: auto;
   text-align: center;
@@ -71,7 +70,7 @@ const StyledSlider = styled(Slider)`
     width: 100%;
     text-align: center;
   }
-  /* button.slick-arrow.slick-next {
+  /* button.slick-arrow {
     background-color: black;
   } */
 `;

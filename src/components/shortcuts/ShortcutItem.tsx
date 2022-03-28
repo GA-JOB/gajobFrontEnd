@@ -1,6 +1,6 @@
 export const ShortcutItem = [
   {
-    title: "취업 NEWS 알리미",
+    title: " 취업 NEWS 알리미",
     path: "/job-news",
     imgUrl:
       "https://img.freepik.com/free-vector/tv-news-show_74855-6683.jpg?t=st=1648429369~exp=1648429969~hmac=72eec5402a3f040d4a60379f49925fbc71054c8aff7d76bdc6c575ca427660c7&w=1800",
@@ -14,7 +14,7 @@ export const ShortcutItem = [
     ),
   },
   {
-    title: "카테고리별 채용정보",
+    title: "카테고리 별 채용정보",
     path: "/job-posting",
     imgUrl:
       "https://img.freepik.com/free-vector/recruit-agent-analyzing-candidates_74855-4565.jpg?t=st=1648429422~exp=1648430022~hmac=a384c42910bde8689483d6bf399f0187adc8d81aae236021f687f6e403bc6ade&w=1800",
@@ -29,7 +29,7 @@ export const ShortcutItem = [
     ),
   },
   {
-    title: "STUDY 모집 | 신청",
+    title: "STUDY 모집 및 신청",
     path: "/gajob-study",
     imgUrl:
       "https://img.freepik.com/free-vector/happy-coworkers-talking-on-lunch-in-office-kitchen-isolated-flat-illustration_74855-15429.jpg?t=st=1648429329~exp=1648429929~hmac=9a1d06e8f30495f9786b1b633d9dc4d793e66c5afdc8b4db9bcad414e2adc8ea&w=1800",

@@ -24,7 +24,7 @@ export const SidebarData = [
     icon: <Task />,
   },
   {
-    title: "Job담",
+    title: "JOB담",
     path: "/jobdam",
     icon: <Chat />,
   },

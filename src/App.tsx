@@ -72,7 +72,6 @@ const MainContainer = styled.div`
   width: 100%;
   min-height: 60vw;
   padding-top: 4.8vw;
-  padding-bottom: 10vw;
 
   text-align: center;
   font-weight: 20pt;

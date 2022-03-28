@@ -44,7 +44,7 @@ const SlideImg = styled.img`
   width: 85%;
   height: auto;
   margin: auto;
-  margin-top: 2vw;
+  /* margin-top: 2vw; */
   text-align: center;
   border-radius: 10px;
 `;

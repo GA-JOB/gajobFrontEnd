@@ -24,10 +24,11 @@ function AccordionMenu(props: Props) {
       }
       if (parentRef.current.clientHeight > 0) {
         parentRef.current.style.height = "0";
-        parentRef.current.style.background = "white";
+        // parentRef.current.style.background = "white";
       } else {
         parentRef.current.style.height = `${childRef.current.clientHeight}px`;
-        parentRef.current.style.background = "lightgray";
+        parentRef.current.style.background = "#c9ae00";
+        parentRef.current.style.color = "black";
         parentRef.current.style.borderRadius = "5px";
       }
       setIsCollapse(!isCollapse);
@@ -41,7 +42,7 @@ function AccordionMenu(props: Props) {
 
   return (
     <>
-      <img src={props.imgUrl} alt="ShortcutImg" width={"300px"} />
+      <ImgStyle src={props.imgUrl} alt="ShortcutImg" />
       <MenuWrapper
         onMouseEnter={MenuButtonHover}
         onMouseLeave={MenuButtonHover}
@@ -60,6 +61,10 @@ function AccordionMenu(props: Props) {
 
 export default React.memo(AccordionMenu);
 
+const ImgStyle = styled.img`
+  width: 250px;
+  padding: 1vw;
+`;
 const MenuWrapper = styled.div`
   width: 20vw;
   height: 50%;
@@ -69,36 +74,30 @@ const MenuWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
 
-  border: 1px solid silver;
   border-radius: 20px;
-
-  &:hover {
-    background-color: #ffffff;
-    margin: 0.2rem;
-    transition: 1s;
-  }
+  background-color: black;
+  color: white;
 `;
 
 const MenuContainer = styled.div`
-  /* width: 10%; */
   display: flex;
   align-items: center;
+  text-align: center;
   cursor: pointer;
 
-  height: 32px;
-  margin-left: 1vw;
+  height: 2.5vw;
+  margin-left: 1.6vw;
 `;
 
 const LinkStyle = styled(Link)`
-  padding-left: 2.3rem;
+  padding-left: 0;
   text-decoration: none;
-  color: black;
+  color: white;
 
   &:hover {
-    background-color: #ffffff;
-    color: #000080;
-    margin: 0.8rem;
-    transition: 1s;
+    margin: 2.5rem;
+    color: white;
+    transition: 1.5s;
   }
 `;
 

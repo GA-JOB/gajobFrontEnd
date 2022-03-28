@@ -70,7 +70,7 @@ export const Header = () => {
               <NavTitle> 채용공고</NavTitle>
             </Nav.Link>
             <Nav.Link href="/jobdam">
-              <NavTitle>Job담</NavTitle>
+              <NavTitle>JOB담</NavTitle>
             </Nav.Link>
             <Nav.Link href="/gajob-study">
               <NavTitle> Study</NavTitle>
