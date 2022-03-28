@@ -28,6 +28,7 @@ function AccordionMenu(props: Props) {
       } else {
         parentRef.current.style.height = `${childRef.current.clientHeight}px`;
         parentRef.current.style.background = "lightgray";
+        parentRef.current.style.borderRadius = "5px";
       }
       setIsCollapse(!isCollapse);
     },
@@ -39,17 +40,21 @@ function AccordionMenu(props: Props) {
     parentRefHeight === "0px" ? <ArrowDropDown /> : <ArrowDropUp />;
 
   return (
-    <MenuWrapper onMouseEnter={MenuButtonHover} onMouseLeave={MenuButtonHover}>
-      <MenuContainer>
-        <LinkStyle to={props.path}> {props.title}</LinkStyle>
-
-        {/* <img src={props.imgUrl} width={"200px"} /> */}
-        <Button>{buttonIcon}</Button>
-      </MenuContainer>
-      <ContentsWrapper ref={parentRef}>
-        <Contents ref={childRef}>{props.contents}</Contents>
-      </ContentsWrapper>
-    </MenuWrapper>
+    <>
+      <img src={props.imgUrl} alt="ShortcutImg" width={"300px"} />
+      <MenuWrapper
+        onMouseEnter={MenuButtonHover}
+        onMouseLeave={MenuButtonHover}
+      >
+        <MenuContainer>
+          <LinkStyle to={props.path}> {props.title}</LinkStyle>
+          <Button>{buttonIcon}</Button>
+        </MenuContainer>
+        <ContentsWrapper ref={parentRef}>
+          <Contents ref={childRef}>{props.contents}</Contents>
+        </ContentsWrapper>
+      </MenuWrapper>
+    </>
   );
 }
 
@@ -57,15 +62,21 @@ export default React.memo(AccordionMenu);
 
 const MenuWrapper = styled.div`
   width: 20vw;
-  height: 10vw;
+  height: 50%;
   padding: 1vw;
   display: flex;
   position: relative;
   flex-direction: column;
   justify-content: center;
 
-  border-radius: 4px;
   border: 1px solid silver;
+  border-radius: 20px;
+
+  &:hover {
+    background-color: #ffffff;
+    margin: 0.2rem;
+    transition: 1s;
+  }
 `;
 
 const MenuContainer = styled.div`
@@ -79,14 +90,14 @@ const MenuContainer = styled.div`
 `;
 
 const LinkStyle = styled(Link)`
-  padding: 0 2rem;
+  padding-left: 2.3rem;
   text-decoration: none;
   color: black;
 
   &:hover {
     background-color: #ffffff;
     color: #000080;
-    margin: 1rem;
+    margin: 0.8rem;
     transition: 1s;
   }
 `;
@@ -103,5 +114,6 @@ const ContentsWrapper = styled.div`
 `;
 
 const Contents = styled.div`
-  padding: 0.1px;
+  padding: 1vw;
+  font-size: 11pt;
 `;

@@ -50,16 +50,16 @@ export const SlideBanner = ({
       <SlideWrapper className={className}>
         <StyledSlider {...settings}>{children}</StyledSlider>
       </SlideWrapper>
-      <SlideWrapper className={className}>
+      {/* <SlideWrapper className={className}>
         <StyledSlider {...multipleSettings}>{children}</StyledSlider>
-      </SlideWrapper>
+      </SlideWrapper> */}
     </>
   );
 };
 
 const SlideWrapper = styled.section`
   /* position: relative; */
-  width: 80%;
+  width: 60%;
   height: 10%;
   margin: auto;
   text-align: center;

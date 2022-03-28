@@ -5,7 +5,9 @@ import styled from "styled-components";
 export const Shortcuts = () => {
   return (
     <ShortcutWrapper>
-      <div> * GA JOB 에서는 이런 서비스를 제공해드려요 !</div>
+      <ShortcutTitle>
+        * GA JOB 에서는 이런 서비스를 제공해드려요 !
+      </ShortcutTitle>
       {ShortcutItem.map((item, index) => {
         return (
           <ShortcutItems key={index}>
@@ -28,8 +30,11 @@ const ShortcutWrapper = styled.div`
   align-items: center;
 `;
 
+const ShortcutTitle = styled.div``;
+
 const ShortcutItems = styled.span`
   display: list-item;
   list-style: none;
   display: inline-block;
+  margin: 1vw;
 `;

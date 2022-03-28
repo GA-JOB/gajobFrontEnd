@@ -8,15 +8,15 @@ interface ISlideItemsProps {
 
 const items: ISlideItemsProps[] = [
   {
-    item: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSv382Pv78RFpHghWoGUgsQdmEBEgtZvqIR8g2CHyQykOqakEKbbcRpkDsCPGgY3LWf27Y&usqp=CAU",
+    item: "https://img.freepik.com/free-vector/team-of-business-people-putting-hands-up-together_74855-19906.jpg?t=st=1648431164~exp=1648431764~hmac=6327b5c7a9bad4b614806c0178140c1338034da7e078686181fa11403dd3c315&w=1480",
     name: "이미지01",
   },
   {
-    item: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgzWo1VXq_sT0DwtXt1v7MBnxq0z8mLbSvL_SLEixTbuDIJa7zUPVFGRzdAz40iGY8_Fo&usqp=CAU",
+    item: "https://img.freepik.com/free-vector/people-search-concept-illustration_114360-2656.jpg?t=st=1648431164~exp=1648431764~hmac=04fceb264aa27a720531bf7fefcab36bb68be8263f2bfdb972fcb2fc36cc286d&w=1480",
     name: "이미지02",
   },
   {
-    item: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPWZjtRwwqVa-qNYgV6-LRW239zS23piqinIl7wSK1s9yYNsRJfEL24pTCgmg7NBAjA-g&usqp=CAU",
+    item: "https://img.freepik.com/free-vector/team-leader-and-teamwork-concept_74855-6671.jpg?t=st=1648431164~exp=1648431764~hmac=e26542d96b662d322103cfafb7443ffd3a3556ee0f8da0b1dee268d60cb3f4b8&w=1480",
     name: "이미지03",
   },
 ];
