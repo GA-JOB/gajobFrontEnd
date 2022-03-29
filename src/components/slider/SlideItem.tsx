@@ -19,6 +19,10 @@ const items: ISlideItemsProps[] = [
     item: "https://img.freepik.com/free-vector/team-leader-and-teamwork-concept_74855-6671.jpg?t=st=1648431164~exp=1648431764~hmac=e26542d96b662d322103cfafb7443ffd3a3556ee0f8da0b1dee268d60cb3f4b8&w=1480",
     name: "이미지03",
   },
+  {
+    item: "https://img.freepik.com/free-vector/happy-family-with-kid-sitting-on-sofa-and-watching-news-isolated-flat-illustration_74855-14049.jpg?t=st=1648520283~exp=1648520883~hmac=56dcf4c9b9111ec244643b4b395baf87dcacff9bf2d76d785b75c3e2d55c8dfa&w=1480",
+    name: "이미지04",
+  },
 ];
 
 export const SlideItem = () => {
@@ -41,8 +45,8 @@ const SliderItem = styled.div`
 `;
 
 const SlideImg = styled.img`
-  width: 85%;
-  height: auto;
+  width: 90%;
+  /* height: auto; */
   margin: auto;
   /* margin-top: 2vw; */
   text-align: center;

@@ -11,7 +11,7 @@ import { Portfolio } from "pages/Portfolio";
 import { MyPage } from "pages/MyPage";
 import { UpperContent } from "components/upperContent";
 import { SlideItem } from "components/slider/SlideItem";
-import { Shortcuts } from "components/shortcuts";
+import { ShortcutMenu } from "components/shortcuts";
 
 import { NoEmail } from "components/footer/NoEmail";
 import { PersonalRule } from "components/footer/PersonalRules";
@@ -51,10 +51,10 @@ const Main = () => {
       <MainContainer>
         <UpperContent />
         <SliderStyle />
-        <Shortcuts />
+        <ShortcutMenu />
       </MainContainer>
 
-      <Footer />
+      <FooterStyle />
     </>
   );
 };
@@ -80,4 +80,9 @@ const MainContainer = styled.div`
 const SliderStyle = styled(SlideItem)`
   width: 100%;
   text-align: center;
+`;
+
+const FooterStyle = styled(Footer)`
+  position: relative;
+  z-index: 100;
 `;

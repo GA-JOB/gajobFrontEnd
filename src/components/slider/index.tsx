@@ -26,19 +26,7 @@ export const SlideBanner = ({
       speed: speed,
       slidesToShow: 1,
       slidesToScroll: 1,
-      autoplay: Boolean(autoplay),
-      autoplaySpeed: typeof autoplay === "boolean" ? 2500 : autoplay,
-    }),
-    [autoplay, loop, speed]
-  );
-
-  const multipleSettings = useMemo<Settings>(
-    () => ({
-      dots: true,
-      infinite: loop,
-      speed: speed,
-      slidesToShow: 2,
-      slidesToScroll: 1,
+      // dotsClass: "custom-class-name:",
       autoplay: Boolean(autoplay),
       autoplaySpeed: typeof autoplay === "boolean" ? 2500 : autoplay,
     }),
@@ -50,27 +38,38 @@ export const SlideBanner = ({
       <SlideWrapper className={className}>
         <StyledSlider {...settings}>{children}</StyledSlider>
       </SlideWrapper>
-      {/* <SlideWrapper className={className}>
-        <StyledSlider {...multipleSettings}>{children}</StyledSlider>
-      </SlideWrapper> */}
     </>
   );
 };
 
 const SlideWrapper = styled.section`
   width: 50%;
-  height: 10%;
+  /* height: 10%; */
   margin: auto;
   text-align: center;
 `;
 
 // slick-slider css
 const StyledSlider = styled(Slider)`
-  ul.slick-dots {
-    width: 100%;
+  .slick-dots li button:before {
+    font-family: "slick";
+    font-size: 6px;
+    line-height: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    content: "•";
     text-align: center;
+    opacity: 0.25;
+    color: white;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
-  /* button.slick-arrow {
-    background-color: black;
-  } */
+
+  .slick-dots li.slick-active button:before {
+    opacity: 0.75;
+    color: white;
+  }
 `;

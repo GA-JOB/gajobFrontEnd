@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 type Props = {
   title?: string | React.ReactNode;
-  imgUrl?: string | undefined;
+  icon?: React.ReactNode;
   path: string;
   contents?: string | React.ReactNode;
   // onClick: () => void;
@@ -24,12 +24,12 @@ function AccordionMenu(props: Props) {
       }
       if (parentRef.current.clientHeight > 0) {
         parentRef.current.style.height = "0";
-        // parentRef.current.style.background = "white";
       } else {
         parentRef.current.style.height = `${childRef.current.clientHeight}px`;
-        parentRef.current.style.background = "#c9ae00";
-        parentRef.current.style.color = "black";
-        parentRef.current.style.borderRadius = "5px";
+        parentRef.current.style.background = "black";
+        parentRef.current.style.color = "white";
+        parentRef.current.style.opacity = "0.6";
+        parentRef.current.style.borderRadius = "20px";
       }
       setIsCollapse(!isCollapse);
     },
@@ -42,15 +42,14 @@ function AccordionMenu(props: Props) {
 
   return (
     <>
-      <ImgStyle src={props.imgUrl} alt="ShortcutImg" />
-      <MenuWrapper
-        onMouseEnter={MenuButtonHover}
-        onMouseLeave={MenuButtonHover}
-      >
-        <MenuContainer>
-          <LinkStyle to={props.path}> {props.title}</LinkStyle>
-          <Button>{buttonIcon}</Button>
-        </MenuContainer>
+      <LinkStyle to={props.path}> {props.icon}</LinkStyle>
+      <MenuWrapper onClick={MenuButtonHover}>
+        <ButtonStyle>
+          <Button>
+            {props.title}
+            {buttonIcon}
+          </Button>
+        </ButtonStyle>
         <ContentsWrapper ref={parentRef}>
           <Contents ref={childRef}>{props.contents}</Contents>
         </ContentsWrapper>
@@ -61,49 +60,38 @@ function AccordionMenu(props: Props) {
 
 export default React.memo(AccordionMenu);
 
-const ImgStyle = styled.img`
-  width: 250px;
-  padding: 1vw;
-`;
 const MenuWrapper = styled.div`
   width: 20vw;
-  height: 50%;
-  padding: 1vw;
-  display: flex;
+  height: 20%;
+  margin: 2vw 0 2vw 0;
   position: relative;
   flex-direction: column;
   justify-content: center;
 
-  border-radius: 20px;
-  background-color: black;
-  color: white;
-`;
-
-const MenuContainer = styled.div`
-  display: flex;
-  align-items: center;
-  text-align: center;
-  cursor: pointer;
-
-  height: 2.5vw;
-  margin-left: 1.6vw;
+  color: black;
 `;
 
 const LinkStyle = styled(Link)`
-  padding-left: 0;
+  padding: 0rem;
+  margin: 1vw;
+  text-align: center;
   text-decoration: none;
-  color: white;
-
-  &:hover {
-    margin: 2.5rem;
-    color: white;
-    transition: 1.5s;
-  }
+  color: black;
 `;
 
 const Button = styled.div`
-  right: 1vw;
+  width: 100%;
+  height: 8vw;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 2px;
+  cursor: pointer;
   position: absolute;
+`;
+
+const ButtonStyle = styled.div`
+  width: 100%;
+  height: 3vw;
 `;
 
 const ContentsWrapper = styled.div`
