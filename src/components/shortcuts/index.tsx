@@ -1,73 +1,91 @@
-import { ShortcutItem } from "./ShortcutItem";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { Menu } from "./Menu";
+import "./index.scss";
+import { MenuBook } from "@mui/icons-material";
 
-export const Shortcuts = () => {
-  // MouseHover 이벤트에 의한 shortcut 상태 변화
-  //  const onShortcutChange = (e: MouseEvent<HTMLDivElement>) => {
-  //   const { target } = e;
-  //   if ((target as HTMLElement).id !== "logo-name") return;
-
-  //   if (logoName === "GA-JOB") {
-  //     setLogoName("Get A JOB !");
-  //   } else {
-  //     setLogoName("GA-JOB");
-  //   }
-  //   // history.push("/") 추가
-  // };
+export const ShortcutMenu = () => {
+  const menus = [
+    {
+      id: 1,
+      name: "취업 News",
+    },
+    {
+      id: 2,
+      name: "공모전 소식",
+    },
+    {
+      id: 3,
+      name: "실시간 채용공고",
+    },
+    {
+      id: 4,
+      name: "Job Community",
+    },
+    {
+      id: 5,
+      name: "Study 모집",
+    },
+    {
+      id: 6,
+      name: "Study 조회 및 신청",
+    },
+    {
+      id: 7,
+      name: "자기소개서 작성",
+    },
+    {
+      id: 8,
+      name: "JOB Calendar",
+    },
+    {
+      id: 9,
+      name: "My Calendar",
+    },
+    {
+      id: 10,
+      name: "취업 News",
+    },
+  ];
 
   return (
-    <>
-      <ShortcutWrapper>
-        {ShortcutItem.map((item, index) => {
-          return (
-            <ShortcutBox>
-              <ShortcutItems key={index}>
-                <ShortcutLinks to={item.path}>
-                  {item.icon}
-                  <span style={{ marginLeft: "16px" }}>{item.title}</span>
-                </ShortcutLinks>
-              </ShortcutItems>
-            </ShortcutBox>
-          );
-        })}
-      </ShortcutWrapper>
-    </>
+    <ShortcutMenuWrapper className="section">
+      <Container className="masthead-image" id="master-container">
+        <ContentsWrapper>
+          <Contents id="master">
+            <ContentText>GA-JOB 에서</ContentText>
+            <ContentText id="master-container-scroller">
+              {menus.map((menu, index) => (
+                <ScrollMenu className="master-container-scroller_item">
+                  {menu.name}
+                </ScrollMenu>
+              ))}
+            </ContentText>
+            <ContentText>누려보세요 !</ContentText>
+          </Contents>
+        </ContentsWrapper>
+        <MenuStyle />
+      </Container>
+    </ShortcutMenuWrapper>
   );
 };
 
-const ShortcutWrapper = styled.div`
+const ShortcutMenuWrapper = styled.section`
+  position: relative;
+  z-index: 5;
   width: 100%;
-  margin-top: 12vw;
-  text-align: center;
+  min-height: 10vw;
 `;
-
-const ShortcutBox = styled.span`
-  width: 10%;
-  border: 2px solid black;
-  border-radius: 10px;
+const Container = styled.div``;
+const ContentsWrapper = styled.div`
+  width: 85%;
+`;
+const Contents = styled.h1``;
+const ContentText = styled.div`
   margin: 1vw;
-  padding: 6vw;
 `;
+const ScrollMenu = styled.div``;
 
-const ShortcutItems = styled.span`
-  width: 20%;
-  height: 20%;
-  padding: 1rem 0 1.25rem;
-`;
-
-const ShortcutLinks = styled(Link)`
-  padding: 0 2rem;
-  font-size: 20px;
-  text-decoration: none;
-  color: black;
-
-  &:hover {
-    background-color: #ffffff;
-    color: #000080;
-    margin: 0 1rem;
-    border-radius: 5px;
-    text-align: center;
-    transition: 1s;
-  }
+const MenuStyle = styled(Menu)`
+  position: relative;
+  z-index: 10;
 `;
