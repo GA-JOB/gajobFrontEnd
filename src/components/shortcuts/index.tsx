@@ -77,7 +77,7 @@ const ShortcutMenuWrapper = styled.section`
 `;
 const Container = styled.div``;
 const ContentsWrapper = styled.div`
-  width: 60%;
+  width: 85%;
 `;
 const Contents = styled.h1``;
 const ContentText = styled.div`

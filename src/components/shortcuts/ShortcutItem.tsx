@@ -8,7 +8,7 @@ import {
 } from "@mui/icons-material";
 
 const IconStyle = {
-  fontSize: 50,
+  fontSize: 55,
   color: "black",
   opacity: 0.6,
 };
@@ -26,7 +26,7 @@ export const ShortcutItem = [
     ),
   },
   {
-    title: "카테고리 별 채용정보",
+    title: "채용정보",
     path: "/job-posting",
     icon: <Business sx={IconStyle} />,
     description: (
@@ -52,7 +52,7 @@ export const ShortcutItem = [
     ),
   },
   {
-    title: "STUDY 모집 및 신청",
+    title: "STUDY 참여",
     path: "/gajob-study",
     icon: <GroupAdd sx={IconStyle} />,
     description: (

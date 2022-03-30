@@ -26,6 +26,7 @@ function AccordionMenu(props: Props) {
         parentRef.current.style.height = "0";
       } else {
         parentRef.current.style.height = `${childRef.current.clientHeight}px`;
+        parentRef.current.style.width = `15vw`;
         parentRef.current.style.background = "black";
         parentRef.current.style.color = "white";
         parentRef.current.style.opacity = "0.6";
@@ -44,12 +45,10 @@ function AccordionMenu(props: Props) {
     <>
       <LinkStyle to={props.path}> {props.icon}</LinkStyle>
       <MenuWrapper onClick={MenuButtonHover}>
-        <ButtonStyle>
-          <Button>
-            {props.title}
-            {buttonIcon}
-          </Button>
-        </ButtonStyle>
+        <Button>
+          {props.title}
+          <ButtonStyle>{buttonIcon}</ButtonStyle>
+        </Button>
         <ContentsWrapper ref={parentRef}>
           <Contents ref={childRef}>{props.contents}</Contents>
         </ContentsWrapper>
@@ -61,37 +60,39 @@ function AccordionMenu(props: Props) {
 export default React.memo(AccordionMenu);
 
 const MenuWrapper = styled.div`
-  width: 20vw;
-  height: 20%;
+  /* display: flex; */
+  min-width: 20vw;
   margin: 2vw 0 2vw 0;
   position: relative;
   flex-direction: column;
-  justify-content: center;
 
   color: black;
 `;
 
 const LinkStyle = styled(Link)`
-  padding: 0rem;
+  padding-left: 0;
   margin: 1vw;
   text-align: center;
   text-decoration: none;
   color: black;
+
+  &:hover {
+    margin: 2rem;
+    color: white;
+    transition: 1s;
+  }
 `;
 
 const Button = styled.div`
   width: 100%;
-  height: 8vw;
-  align-items: center;
-  text-align: center;
+  display: flex;
   letter-spacing: 2px;
   cursor: pointer;
-  position: absolute;
+  position: relative;
 `;
 
-const ButtonStyle = styled.div`
-  width: 100%;
-  height: 3vw;
+const ButtonStyle = styled.span`
+  margin-left: 0.5vw;
 `;
 
 const ContentsWrapper = styled.div`
@@ -102,5 +103,6 @@ const ContentsWrapper = styled.div`
 
 const Contents = styled.div`
   padding: 1vw;
-  font-size: 11pt;
+  font-size: 10pt;
+  text-align: center;
 `;
