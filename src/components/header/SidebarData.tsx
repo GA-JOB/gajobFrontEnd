@@ -14,7 +14,7 @@ export const SidebarData = [
     icon: <Home />,
   },
   {
-    title: "Issues",
+    title: "News",
     path: "/job-news",
     icon: <Newspaper />,
   },
@@ -24,7 +24,7 @@ export const SidebarData = [
     icon: <Task />,
   },
   {
-    title: "Job담",
+    title: "JOB담",
     path: "/jobdam",
     icon: <Chat />,
   },

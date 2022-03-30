@@ -9,8 +9,9 @@ import { Community } from "pages/Community";
 import { Study } from "pages/Study";
 import { Portfolio } from "pages/Portfolio";
 import { MyPage } from "pages/MyPage";
+import { UpperContent } from "components/upperContent";
 import { SlideItem } from "components/slider/SlideItem";
-import { Shortcuts } from "components/shortcuts";
+import { ShortcutMenu } from "components/shortcuts";
 
 import { NoEmail } from "components/footer/NoEmail";
 import { PersonalRule } from "components/footer/PersonalRules";
@@ -48,21 +49,15 @@ const Main = () => {
       </HeaderStyle>
 
       <MainContainer>
+        <UpperContent />
         <SliderStyle />
-        <ShortcutsStyle />
+        <ShortcutMenu />
       </MainContainer>
 
-      <Footer />
+      <FooterStyle />
     </>
   );
 };
-const MainContainer = styled.div`
-  position: relative;
-  z-index: 0;
-  width: 100%;
-  min-height: 60vw;
-  padding-top: 5vw;
-`;
 
 const HeaderStyle = styled.header`
   position: relative;
@@ -71,12 +66,23 @@ const HeaderStyle = styled.header`
   position: fixed;
 `;
 
+const MainContainer = styled.div`
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  min-height: 60vw;
+  padding-top: 4.8vw;
+
+  text-align: center;
+  font-weight: 20pt;
+`;
+
 const SliderStyle = styled(SlideItem)`
   width: 100%;
   text-align: center;
 `;
 
-const ShortcutsStyle = styled(Shortcuts)`
-  width: 100%;
-  text-align: center;
+const FooterStyle = styled(Footer)`
+  position: relative;
+  z-index: 100;
 `;
