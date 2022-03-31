@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Header } from "components/header";
+import { Home } from "main";
 import { Footer } from "components/footer";
 // menu
 import { Issues } from "pages/Issues";
@@ -9,9 +10,6 @@ import { Community } from "pages/Community";
 import { Study } from "pages/Study";
 import { Portfolio } from "pages/Portfolio";
 import { MyPage } from "pages/MyPage";
-import { UpperContent } from "components/upperContent";
-import { SlideItem } from "components/slider/SlideItem";
-import { ShortcutMenu } from "components/shortcuts";
 
 import { NoEmail } from "components/footer/NoEmail";
 import { PersonalRule } from "components/footer/PersonalRules";
@@ -23,41 +21,29 @@ import styled from "styled-components";
 export default function App() {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<Main />}></Route>
-        <Route path="/job-news" element={<Issues />} />
-        <Route path="/job-posting" element={<JobPosting />} />
-        <Route path="/jobdam" element={<Community />} />
-        <Route path="/gajob-study" element={<Study />} />
-        <Route path="/portfolio" element={<Portfolio />} />
-        <Route path="/mypage" element={<MyPage />} />
-
-        {/* footer link */}
-        <Route path="/noEmail" element={<NoEmail />}></Route>
-        <Route path="/personalRule" element={<PersonalRule />}></Route>
-        <Route path="/sitemap" element={<Sitemap />}></Route>
-      </Routes>
-    </Router>
-  );
-}
-
-const Main = () => {
-  return (
-    <>
       <HeaderStyle>
         <Header />
       </HeaderStyle>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/job-news" element={<Issues />} />
+          <Route path="/job-posting" element={<JobPosting />} />
+          <Route path="/jobdam" element={<Community />} />
+          <Route path="/gajob-study" element={<Study />} />
+          <Route path="/portfolio" element={<Portfolio />} />
+          <Route path="/mypage" element={<MyPage />} />
 
-      <MainContainer>
-        <UpperContent />
-        <SliderStyle />
-        <ShortcutMenu />
-      </MainContainer>
-
+          {/* footer link */}
+          <Route path="/noEmail" element={<NoEmail />}></Route>
+          <Route path="/personalRule" element={<PersonalRule />}></Route>
+          <Route path="/sitemap" element={<Sitemap />}></Route>
+        </Routes>
+      </Layout>
       <FooterStyle />
-    </>
+    </Router>
   );
-};
+}
 
 const HeaderStyle = styled.header`
   position: relative;
@@ -66,20 +52,8 @@ const HeaderStyle = styled.header`
   position: fixed;
 `;
 
-const MainContainer = styled.div`
-  position: relative;
-  z-index: 0;
-  width: 100%;
+const Layout = styled.div`
   min-height: 60vw;
-  padding-top: 4.8vw;
-
-  text-align: center;
-  font-weight: 20pt;
-`;
-
-const SliderStyle = styled(SlideItem)`
-  width: 100%;
-  text-align: center;
 `;
 
 const FooterStyle = styled(Footer)`
