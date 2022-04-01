@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { SidebarData } from "./SidebarData";
 import styled from "styled-components";
 import { Navbar, Nav, Container } from "react-bootstrap";
-import { AssignmentInd, Menu, MenuOpen } from "@mui/icons-material";
+import { Menu, MenuOpen } from "@mui/icons-material";
 
 export const Header = () => {
   const [close, setClose] = useState(false);
@@ -57,6 +57,7 @@ export const Header = () => {
               onMouseEnter={onHoverLogo}
               onMouseLeave={onHoverLogo}
               style={logoName === "GA-JOB" ? defaultLogoStyle : hoverLogoStyle}
+              href="/"
             >
               {logoName}
             </Navbar.Brand>
@@ -90,8 +91,6 @@ export const Header = () => {
           </Nav>
         </Container>
       </Navbar>
-
-      <HrStyle />
 
       <SidebarMenu close={close}>
         <MenuIconClose to="#" onClick={showSidebar}>
@@ -131,10 +130,6 @@ const NavTitle = styled.div`
     transform-origin: 0% 50%;
   }
 `;
-const HrStyle = styled.hr`
-  background-color: yellow;
-  width: 1px;
-`;
 
 const MenuIconOpen = styled(Link)`
   display: flex;
@@ -155,13 +150,14 @@ const MenuIconClose = styled(Link)`
 `;
 
 const SidebarMenu = styled.div<{ close: boolean }>`
-  width: 250px;
+  width: 20vw;
   height: 100vh;
   background-color: #000000;
   position: fixed;
   top: 0;
   left: ${({ close }) => (close ? "0" : "-100%")};
   transition: 0.6s;
+  overflow: scroll;
 `;
 
 const MenuItems = styled.li`
@@ -171,13 +167,13 @@ const MenuItems = styled.li`
   justify-content: start;
   width: 100%;
   height: 90px;
-  padding: 1rem 0 1.25rem;
+  padding: 1rem 0 1rem;
 `;
 
 const MenuItemLinks = styled(Link)`
   display: flex;
   align-items: center;
-  padding: 0 2rem;
+  padding: 0 3rem;
   font-size: 20px;
   text-decoration: none;
   color: #ffffff;

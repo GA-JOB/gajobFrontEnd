@@ -19,7 +19,8 @@ const MainContainer = styled.div`
   position: relative;
   z-index: 0;
   width: 100%;
-  padding-top: 4.8vw;
+  margin-top: -6vw;
+  margin-bottom: -10vw;
 
   text-align: center;
   font-weight: 20pt;

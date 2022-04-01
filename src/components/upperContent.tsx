@@ -33,7 +33,7 @@ export const UpperContent = () => {
 
 const ContentsWrapper = styled.div`
   width: 100%;
-  min-height: 15vw;
+  min-height: 20vw;
   text-align: left;
   background-color: black;
   color: white;
@@ -59,7 +59,7 @@ const Highlight = styled.strong`
   color: #c9ae00;
 
   &:hover {
-    font-size: ;
+    font-size: 12;
     cursor: pointer;
   }
 `;

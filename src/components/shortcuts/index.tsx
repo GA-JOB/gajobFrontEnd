@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { Menu } from "./Menu";
 import "./index.scss";
-import { MenuBook } from "@mui/icons-material";
 
 export const ShortcutMenu = () => {
   const menus = [
