@@ -1,10 +1,11 @@
 import React from "react";
+import { MenuTitle } from "components/Menutitle";
+import useGetNews from "hooks/api/useGetNews";
 import { ReactTabulator } from "react-tabulator";
 import { ColumnDefinition, ReactTabulatorOptions } from "react-tabulator";
-import useGetNews from "hooks/api/useGetNews";
-import styled from "styled-components";
 import "react-tabulator/lib/styles.css"; // default theme
 import "react-tabulator/css/bootstrap/tabulator_bootstrap.min.css"; // use Theme(s)
+import styled from "styled-components";
 
 export const JobNews = () => {
   const { data } = useGetNews();
@@ -71,7 +72,10 @@ export const JobNews = () => {
   if (!data) return <div>loading...</div>;
   return (
     <JobNewsWrapper>
-      <NewsTitle>GA-JOB 뉴스</NewsTitle>
+      <MenuTitle
+        title="JOB NEWS"
+        info="실시간으로 제공되는 최신 취업 소식을 확인해보세요."
+      />
       <NewsList>
         <TabulatorStyle columns={columns} data={data} options={options} />
       </NewsList>
@@ -85,10 +89,6 @@ const JobNewsWrapper = styled.div`
   align-items: center;
   justify-content: center;
   text-align: center;
-`;
-
-const NewsTitle = styled.div`
-  font-size: 12pt;
 `;
 
 const NewsList = styled.div`

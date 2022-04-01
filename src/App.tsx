@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Header } from "components/header";
-import { Home } from "main";
+import { Home } from "components/main";
 import { Footer } from "components/footer";
 // menu
 import { JobNews } from "pages/News";

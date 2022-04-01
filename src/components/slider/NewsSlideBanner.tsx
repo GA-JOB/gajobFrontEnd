@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { MenuTitle } from "components/Menutitle";
 import { SlideBanner } from "./index";
 
 interface ISlideItemsProps {
@@ -25,9 +26,13 @@ const items: ISlideItemsProps[] = [
   },
 ];
 
-export const SlideItem = () => {
+export const NewsSlideBanner = () => {
   return (
-    <>
+    <NewsBannerWrapper>
+      <MenuTitle
+        title="JOB NEWS"
+        info="실시간으로 제공되는 최신 취업 소식을 확인해보세요."
+      />
       <SlideBanner>
         {items.map((item, index) => (
           <SliderItem key={index}>
@@ -35,9 +40,13 @@ export const SlideItem = () => {
           </SliderItem>
         ))}
       </SlideBanner>
-    </>
+    </NewsBannerWrapper>
   );
 };
+
+const NewsBannerWrapper = styled.div`
+  margin: 5vw;
+`;
 
 const SliderItem = styled.div`
   width: 100%;
@@ -45,10 +54,8 @@ const SliderItem = styled.div`
 `;
 
 const SlideImg = styled.img`
-  width: 90%;
-  /* height: auto; */
+  width: 100%;
   margin: auto;
-  /* margin-top: 2vw; */
   text-align: center;
   border-radius: 10px;
 `;

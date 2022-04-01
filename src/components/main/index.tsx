@@ -1,5 +1,5 @@
 import { UpperContent } from "components/upperContent";
-import { SlideItem } from "components/slider/SlideItem";
+import { NewsSlideBanner } from "components/slider/NewsSlideBanner";
 import { ShortcutMenu } from "components/shortcuts";
 import styled from "styled-components";
 
@@ -26,7 +26,7 @@ const MainContainer = styled.div`
   font-weight: 20pt;
 `;
 
-const SliderStyle = styled(SlideItem)`
+const SliderStyle = styled(NewsSlideBanner)`
   width: 100%;
   text-align: center;
 `;

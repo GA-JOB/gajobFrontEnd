@@ -61,8 +61,8 @@ export default React.memo(AccordionMenu);
 
 const MenuWrapper = styled.div`
   /* display: flex; */
-  min-width: 20vw;
-  margin: 2vw 0 2vw 0;
+  min-width: 15vw;
+  margin: 1vw 1vw 3vw 0;
   position: relative;
   flex-direction: column;
 

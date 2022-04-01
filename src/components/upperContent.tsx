@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Button } from "@mui/material";
-import { SlideItem } from "./slider/SlideItem";
+import { UpperSlideBanner } from "./slider/UpperSlideBanner";
 
 export const UpperContent = () => {
   const ButtonStyle = {
@@ -24,7 +24,7 @@ export const UpperContent = () => {
         </Description>
 
         <SlideItemStyle>
-          <SlideItem />
+          <UpperSlideBanner />
         </SlideItemStyle>
       </Contents>
     </ContentsWrapper>

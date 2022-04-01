@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { MenuTitle } from "components/Menutitle";
 import Slider, { Settings } from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -26,7 +27,6 @@ export const SlideBanner = ({
       speed: speed,
       slidesToShow: 1,
       slidesToScroll: 1,
-      // dotsClass: "custom-class-name:",
       autoplay: Boolean(autoplay),
       autoplaySpeed: typeof autoplay === "boolean" ? 2500 : autoplay,
     }),
@@ -44,7 +44,6 @@ export const SlideBanner = ({
 
 const SlideWrapper = styled.section`
   width: 50%;
-  /* height: 10%; */
   margin: auto;
   text-align: center;
 `;
