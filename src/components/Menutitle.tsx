@@ -16,7 +16,7 @@ export const MenuTitle = ({ title, info }: IMenuTitleProps) => {
 };
 
 const TitleWrapper = styled.div`
-  /* margin: 3vw; */
+  margin-top: 5vw;
 `;
 const Title = styled.div`
   font-size: 25pt;

@@ -1,8 +1,9 @@
-import styled from "styled-components";
 import { MenuTitle } from "components/Menutitle";
 import { SlideBanner } from "./index";
-import { INewsCrawling } from "types";
 import { IUpperSlideProps } from "components/UpperContent";
+import styled from "styled-components";
+import { Button } from "@mui/material";
+import { INewsCrawling } from "types";
 
 interface ISlideTitlerops {
   title: string;
@@ -17,51 +18,61 @@ export const SlideItem = ({
   data,
   upper_data,
 }: ISlideTitlerops) => {
-  if ((title === "JOB NEWS" && !data) || (title === "" && !upper_data))
+  const SlideWidth = title === "" ? { width: "60%" } : { width: "80%" };
+  const ButtonStyle = {
+    marginTop: "2vw",
+    marginBottom: "5vw",
+  };
+
+  if ((title !== "" && !data) || (title === "" && !upper_data))
     return <div>loading...</div>;
 
-  if (title === "JOB NEWS") {
+  if (title === "") {
+    // upper banner
     return (
-      <SlideBannerWrapper>
+      <SlideBannerWrapper style={SlideWidth}>
+        <SlideBanner>
+          {upper_data?.map((list, id) => (
+            <SliderItem key={id}>
+              <UpperSlideImg src={list.imgUrl} alt={list.name} />
+            </SliderItem>
+          ))}
+        </SlideBanner>
+      </SlideBannerWrapper>
+    );
+  } else {
+    // news banner
+    return (
+      <SlideBannerWrapper style={SlideWidth}>
         <MenuTitle title={title} info={info} />
         <SlideBanner>
           {data?.map((list) => (
             <SliderItem key={list.id}>
-              <NewsContentWrapper>
-                <SlideImg
-                  src={list.imgUrl + ".jpg"}
-                  alt="newsImg"
-                  width="100px"
-                />
-              </NewsContentWrapper>
-              <NewsContentWrapper>
+              <ImgContainer>
+                <NewsSlideImg src={list.imgUrl + ".jpg"} alt="ImageAlt" />
+              </ImgContainer>
+
+              <ContentsBox>
                 <NewsTitle>{list.title}</NewsTitle>
                 <NewsContents>{list.contents}</NewsContents>
-              </NewsContentWrapper>
+                <Button
+                  variant="contained"
+                  href={"https://" + list.url}
+                  style={ButtonStyle}
+                >
+                  바로가기
+                </Button>
+              </ContentsBox>
             </SliderItem>
           ))}
         </SlideBanner>
       </SlideBannerWrapper>
     );
   }
-  return (
-    <SlideBannerWrapper>
-      <SlideBanner>
-        {upper_data?.map((upper_data, index) => (
-          <SliderItem key={index}>
-            <NewsContentWrapper>
-              <SlideImg src={upper_data.item} alt="newsImg" width="100px" />
-            </NewsContentWrapper>
-          </SliderItem>
-        ))}
-      </SlideBanner>
-    </SlideBannerWrapper>
-  );
 };
 
 const SlideBannerWrapper = styled.div`
   margin: 2vw auto;
-  justify-content: center;
 `;
 
 const SliderItem = styled.div`
@@ -70,18 +81,33 @@ const SliderItem = styled.div`
   z-index: 1;
 `;
 
-const SlideImg = styled.img`
+const ImgContainer = styled.div`
+  float: left;
+  width: 40%;
+`;
+const UpperSlideImg = styled.img`
   margin: auto;
-  padding: 0.3vw;
-  text-align: center;
-  border-radius: 15px;
+  padding: 0.8vw;
+  border-radius: 20px;
   width: 100%;
-  height: 300px;
+`;
+const NewsSlideImg = styled.img`
+  margin: auto;
+  width: 100%;
+  height: 350px;
   object-fit: contain;
 `;
 
-const NewsContentWrapper = styled.span`
-  display: inline-block;
+const ContentsBox = styled.div`
+  float: right;
+  width: 60%;
+  height: 250px;
+  padding: 8vw 1vw;
 `;
-const NewsTitle = styled.h2``;
-const NewsContents = styled.div``;
+
+const NewsTitle = styled.h4`
+  width: 100%;
+`;
+const NewsContents = styled.div`
+  padding: 0 8vw;
+`;

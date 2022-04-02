@@ -55,7 +55,7 @@ const HeaderStyle = styled.header`
 
 const Layout = styled.div`
   min-height: 55vw;
-  padding-top: 10vw;
+  padding-top: 3vw;
   padding-bottom: 10vw;
   align-items: center;
   justify-content: center;

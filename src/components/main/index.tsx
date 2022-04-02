@@ -10,7 +10,7 @@ export const Home = () => {
   return (
     <>
       <MainContainer>
-        <UpperContent />
+        <UpperContentStyle />
         <SliderStyle
           title="JOB NEWS"
           info="실시간으로 제공되는 최신 취업 소식을 확인해보세요."
@@ -31,6 +31,10 @@ const MainContainer = styled.div`
 
   text-align: center;
   font-weight: 20pt;
+`;
+
+const UpperContentStyle = styled(UpperContent)`
+  margin: 2vw;
 `;
 
 const SliderStyle = styled(SlideItem)`
