@@ -28,9 +28,6 @@ const ShortcutWrapper = styled.div`
 `;
 
 const ShortcutItems = styled.span`
-  width: 17vw;
-  text-align: left;
-  margin-bottom: 1vw;
-  list-style: none;
+  margin-bottom: 2vw;
   display: inline-block;
 `;

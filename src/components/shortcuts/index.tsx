@@ -1,7 +1,7 @@
 import styled from "styled-components";
+import { MenuTitle } from "components/Menutitle";
 import { Menu } from "./Menu";
 import "./index.scss";
-import { MenuBook } from "@mui/icons-material";
 
 export const ShortcutMenu = () => {
   const menus = [
@@ -49,6 +49,11 @@ export const ShortcutMenu = () => {
 
   return (
     <ShortcutMenuWrapper className="section">
+      <MenuTitle
+        title="OUR SERVICES"
+        info="GA-JOB에서 제공되는 다양한 서비스를 이용해보세요."
+      />
+
       <Container className="masthead-image" id="master-container">
         <ContentsWrapper>
           <Contents id="master">
@@ -75,13 +80,18 @@ const ShortcutMenuWrapper = styled.section`
   width: 100%;
   min-height: 10vw;
 `;
-const Container = styled.div``;
+
+const Container = styled.div`
+  position: relative;
+  z-index: 6;
+  padding: 2vw;
+`;
 const ContentsWrapper = styled.div`
-  width: 85%;
+  width: 90%;
 `;
 const Contents = styled.h1``;
 const ContentText = styled.div`
-  margin: 1vw;
+  margin: 2vw;
 `;
 const ScrollMenu = styled.div``;
 

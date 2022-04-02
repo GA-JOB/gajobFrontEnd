@@ -5,6 +5,8 @@ import {
   Chat,
   GroupAdd,
   Assignment,
+  CalendarMonth,
+  ContactPage,
 } from "@mui/icons-material";
 
 export const SidebarData = [
@@ -37,5 +39,15 @@ export const SidebarData = [
     title: "Portfolio",
     path: "/portfolio",
     icon: <Assignment />,
+  },
+  {
+    title: "Calendar",
+    path: "/calendar",
+    icon: <CalendarMonth />,
+  },
+  {
+    title: "MyPage",
+    path: "/mypage",
+    icon: <ContactPage />,
   },
 ];
