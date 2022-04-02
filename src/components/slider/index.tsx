@@ -1,5 +1,4 @@
 import { useMemo } from "react";
-import { MenuTitle } from "components/Menutitle";
 import Slider, { Settings } from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -22,7 +21,7 @@ export const SlideBanner = ({
 }: sliderProps) => {
   const settings = useMemo<Settings>(
     () => ({
-      dots: true,
+      // dots: true,
       infinite: loop,
       speed: speed,
       slidesToShow: 1,

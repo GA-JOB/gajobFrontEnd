@@ -1,14 +1,21 @@
-import { UpperContent } from "components/upperContent";
-import { NewsSlideBanner } from "components/slider/NewsSlideBanner";
+import { UpperContent } from "components/UpperContent";
+import { SlideItem } from "components/slider/SlideItem";
 import { ShortcutMenu } from "components/shortcuts";
 import styled from "styled-components";
+import useGetNews from "hooks/api/useGetNews";
 
 export const Home = () => {
+  const { data } = useGetNews();
+
   return (
     <>
       <MainContainer>
         <UpperContent />
-        <SliderStyle />
+        <SliderStyle
+          title="JOB NEWS"
+          info="실시간으로 제공되는 최신 취업 소식을 확인해보세요."
+          data={data}
+        />
         <ShortcutMenu />
       </MainContainer>
     </>
@@ -26,7 +33,7 @@ const MainContainer = styled.div`
   font-weight: 20pt;
 `;
 
-const SliderStyle = styled(NewsSlideBanner)`
+const SliderStyle = styled(SlideItem)`
   width: 100%;
   text-align: center;
 `;

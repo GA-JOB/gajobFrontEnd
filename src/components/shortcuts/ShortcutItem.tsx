@@ -38,7 +38,7 @@ export const ShortcutItem = [
   },
   {
     title: "Community",
-    path: "/job-posting",
+    path: "/jobdam",
     icon: <Forum sx={IconStyle} />,
     description: (
       <>
