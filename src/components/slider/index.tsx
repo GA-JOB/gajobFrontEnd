@@ -21,12 +21,11 @@ export const SlideBanner = ({
 }: sliderProps) => {
   const settings = useMemo<Settings>(
     () => ({
-      dots: true,
+      // dots: true,
       infinite: loop,
       speed: speed,
       slidesToShow: 1,
       slidesToScroll: 1,
-      // dotsClass: "custom-class-name:",
       autoplay: Boolean(autoplay),
       autoplaySpeed: typeof autoplay === "boolean" ? 2500 : autoplay,
     }),
@@ -36,40 +35,38 @@ export const SlideBanner = ({
   return (
     <>
       <SlideWrapper className={className}>
-        <StyledSlider {...settings}>{children}</StyledSlider>
+        <Slider {...settings}>{children}</Slider>
       </SlideWrapper>
     </>
   );
 };
 
 const SlideWrapper = styled.section`
-  width: 50%;
-  /* height: 10%; */
   margin: auto;
   text-align: center;
 `;
 
 // slick-slider css
-const StyledSlider = styled(Slider)`
-  .slick-dots li button:before {
-    font-family: "slick";
-    font-size: 6px;
-    line-height: 20px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 20px;
-    height: 20px;
-    content: "•";
-    text-align: center;
-    opacity: 0.25;
-    color: white;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+// const StyledSlider = styled(Slider)`
+//   .slick-dots li button:before {
+//     font-family: "slick";
+//     font-size: 6px;
+//     line-height: 20px;
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     width: 20px;
+//     height: 20px;
+//     content: "•";
+//     text-align: center;
+//     opacity: 0.25;
+//     color: white;
+//     -webkit-font-smoothing: antialiased;
+//     -moz-osx-font-smoothing: grayscale;
+//   }
 
-  .slick-dots li.slick-active button:before {
-    opacity: 0.75;
-    color: white;
-  }
-`;
+//   .slick-dots li.slick-active button:before {
+//     opacity: 0.75;
+//     color: white;
+//   }
+// `;

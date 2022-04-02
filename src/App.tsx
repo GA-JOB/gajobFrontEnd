@@ -1,10 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Header } from "components/header";
-import { Home } from "main";
+import { Home } from "components/main";
 import { Footer } from "components/footer";
 // menu
-import { Issues } from "pages/Issues";
+import { JobNews } from "pages/News";
 import { JobPosting } from "pages/JobPosting";
 import { Community } from "pages/Community";
 import { Study } from "pages/Study";
@@ -14,9 +14,9 @@ import { MyPage } from "pages/MyPage";
 import { NoEmail } from "components/footer/NoEmail";
 import { PersonalRule } from "components/footer/PersonalRules";
 import { Sitemap } from "components/footer/Sitemap";
-// import { AlertDismissible } from "components/alert";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styled from "styled-components";
+import { Calendar } from "pages/Calendar";
 
 export default function App() {
   return (
@@ -27,11 +27,12 @@ export default function App() {
       <Layout>
         <Routes>
           <Route path="/" element={<Home />}></Route>
-          <Route path="/job-news" element={<Issues />} />
+          <Route path="/job-news" element={<JobNews />} />
           <Route path="/job-posting" element={<JobPosting />} />
           <Route path="/jobdam" element={<Community />} />
           <Route path="/gajob-study" element={<Study />} />
           <Route path="/portfolio" element={<Portfolio />} />
+          <Route path="/calendar" element={<Calendar />} />
           <Route path="/mypage" element={<MyPage />} />
 
           {/* footer link */}
@@ -53,7 +54,12 @@ const HeaderStyle = styled.header`
 `;
 
 const Layout = styled.div`
-  min-height: 60vw;
+  min-height: 55vw;
+  padding-top: 3vw;
+  padding-bottom: 10vw;
+  align-items: center;
+  justify-content: center;
+  display: flex;
 `;
 
 const FooterStyle = styled(Footer)`

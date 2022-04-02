@@ -14,55 +14,51 @@ const IconStyle = {
 };
 export const ShortcutItem = [
   {
-    title: " 취업 NEWS",
+    title: "취업 NEWS",
     path: "/job-news",
     icon: <Newspaper sx={IconStyle} />,
     description: (
       <>
-        사용자들이 궁금해하는
-        <br /> 취업과 관련된 소식을 알려주는 <br />
-        서비스를 제공해드립니다
+        실시간 취업 관련 뉴스를 통해 <br />
+        빠르게 취업 소식을 확인하세요 !
       </>
     ),
   },
   {
-    title: "채용정보",
+    title: "채용공고",
     path: "/job-posting",
     icon: <Business sx={IconStyle} />,
     description: (
       <>
-        사용자 맞춤 채용 소식을 찾을 수 있도록
-        <br />
-        직업 카테고리 별 채용공고 <br />
-        서비스를 제공해드립니다
+        사용자 맞춤 채용 소식은 <br />
+        카테고리 별 채용공고를 통해 <br />
+        확인할 수 있습니다 ! <br />
       </>
     ),
   },
   {
     title: "Community",
-    path: "/job-posting",
+    path: "/jobdam",
     icon: <Forum sx={IconStyle} />,
     description: (
       <>
-        사용자 맞춤 채용 소식을 찾을 수 있도록
-        <br />
-        직업 카테고리 별 채용공고 <br />
-        서비스를 제공해드립니다
+        스터디, 모임 일정 혹은 <br />
+        중요한 면접 일정 등 <br />
+        GA-JOB에서 제공되는 <br />
+        캘린더로 관리하세요 !
       </>
     ),
   },
   {
-    title: "STUDY 참여",
+    title: "GA-JOB STUDY",
     path: "/gajob-study",
     icon: <GroupAdd sx={IconStyle} />,
     description: (
       <>
-        사용자가 직접 스터디를 만들수 있고,
-        <br />
-        관심 분야에 적합한 스터디를 찾아 <br />
-        자유롭게 신청을 할 수 있는
-        <br />
-        스터디 매칭 서비스를 제공해드립니다.
+        관심 분야인 스터디를 만들거나 <br />
+        비슷한 관심 분야를 가진 <br />
+        스터디원들과 함께 <br />
+        스터디에 참여해보세요 !
       </>
     ),
   },
@@ -72,10 +68,10 @@ export const ShortcutItem = [
     icon: <Assignment sx={IconStyle} />,
     description: (
       <>
-        사용자 맞춤 채용 소식을 찾을 수 있도록
-        <br />
-        직업 카테고리 별 채용공고 <br />
-        서비스를 제공해드립니다
+        모의 자소서 작성에서 <br />
+        글자수 제한 기준 및 <br />
+        GA-JOB에서 제공되는 <br />
+        캘린더로 관리하세요 !
       </>
     ),
   },
@@ -85,10 +81,9 @@ export const ShortcutItem = [
     icon: <CalendarMonth sx={IconStyle} />,
     description: (
       <>
-        사용자 맞춤 채용 소식을 찾을 수 있도록
-        <br />
-        직업 카테고리 별 채용공고 <br />
-        서비스를 제공해드립니다
+        스터디, 모임 일정 혹은 <br />
+        중요한 면접 일정 등 <br />
+        캘린더로 관리하세요 !
       </>
     ),
   },
