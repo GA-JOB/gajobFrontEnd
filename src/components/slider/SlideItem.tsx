@@ -25,7 +25,7 @@ export const SlideItem = ({
   };
 
   if ((title !== "" && !data) || (title === "" && !upper_data))
-    return <div>loading...</div>;
+    return <SlideBannerWrapper>loading...</SlideBannerWrapper>;
 
   if (title === "") {
     // upper banner
@@ -49,7 +49,7 @@ export const SlideItem = ({
           {data?.map((list) => (
             <SliderItem key={list.id}>
               <ImgContainer>
-                <NewsSlideImg src={list.imgUrl + ".jpg"} alt="ImageAlt" />
+                <NewsSlideImg src={list.imgUrl} alt="ImageAlt" />
               </ImgContainer>
 
               <ContentsBox>
@@ -72,18 +72,19 @@ export const SlideItem = ({
 };
 
 const SlideBannerWrapper = styled.div`
-  margin: 2vw auto;
+  margin: 1vw auto;
 `;
 
 const SliderItem = styled.div`
-  width: 100%;
+  width: 90%;
   min-height: 200px;
   z-index: 1;
 `;
 
 const ImgContainer = styled.div`
   float: left;
-  width: 40%;
+  margin-left: 5vw;
+  width: 30%;
 `;
 const UpperSlideImg = styled.img`
   margin: auto;
@@ -94,15 +95,16 @@ const UpperSlideImg = styled.img`
 const NewsSlideImg = styled.img`
   margin: auto;
   width: 100%;
-  height: 350px;
+  height: 300px;
   object-fit: contain;
 `;
 
 const ContentsBox = styled.div`
   float: right;
+  margin-right: 3vw;
   width: 60%;
   height: 250px;
-  padding: 8vw 1vw;
+  padding: 5vw 1vw;
 `;
 
 const NewsTitle = styled.h4`
@@ -110,4 +112,5 @@ const NewsTitle = styled.h4`
 `;
 const NewsContents = styled.div`
   padding: 0 8vw;
+  text-align: left;
 `;
