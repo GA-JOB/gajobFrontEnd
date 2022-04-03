@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { MenuTitle } from "components/Menutitle";
 import { SubmitButton } from "components/button/SubmitButton";
 // import { useAuth } from "hooks/api/auth";
@@ -72,6 +73,11 @@ export const Login = ({ email = "", password = "" }: ILoginProps) => {
           />
         </InputLabel>
         <SubmitButton title={"로그인"} widthStyle={"100%"} />
+
+        <LinkToLogin>
+          회원이 아니신가요?&nbsp;
+          <LinkStyle to="/signup">회원가입 하러가기</LinkStyle>
+        </LinkToLogin>
       </SignForm>
     </>
   );
@@ -93,3 +99,12 @@ const InputField = styled(TextField)({
   fontSize: "10pt",
   marginBottom: "1vw",
 });
+
+const LinkToLogin = styled.div`
+  padding: 1vw 0;
+  text-align: center;
+  font-size: 10pt;
+`;
+const LinkStyle = styled(Link)`
+  text-decoration: none;
+`;

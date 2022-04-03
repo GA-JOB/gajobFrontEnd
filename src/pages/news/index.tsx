@@ -12,8 +12,6 @@ export const JobNews = () => {
   const { data } = useGetNews();
   const [searchedData, setSearchedData] = useState<INewsCrawling[]>([]);
 
-  console.log(data);
-
   if (!data) return <div>loading...</div>;
   return (
     <JobNewsWrapper>

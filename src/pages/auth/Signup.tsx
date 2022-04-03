@@ -142,7 +142,7 @@ export const Signup = ({
 
         <LinkToLogin>
           이미 회원이신가요?&nbsp;
-          <Link to="/login">로그인 하러가기</Link>
+          <LinkStyle to="/login">로그인 하러가기</LinkStyle>
         </LinkToLogin>
       </SignForm>
     </>
@@ -173,4 +173,7 @@ const LinkToLogin = styled.div`
   padding: 1vw 0;
   text-align: center;
   font-size: 10pt;
+`;
+const LinkStyle = styled(Link)`
+  text-decoration: none;
 `;
