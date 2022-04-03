@@ -1,6 +1,6 @@
 import { SlideItem } from "components/slider/SlideItem";
+import { ButtonLink } from "./button/ButtonLink";
 import styled from "styled-components";
-import { Button } from "@mui/material";
 
 export interface IUpperSlideProps {
   imgUrl: string;
@@ -31,10 +31,6 @@ const items: IUpperSlideProps[] = [
 ];
 
 export const UpperContent = () => {
-  const ButtonStyle = {
-    marginTop: "2vw",
-  };
-
   return (
     <ContentsWrapper>
       <Contents>
@@ -49,9 +45,7 @@ export const UpperContent = () => {
           <br />
           관심 분야 STUDY 매칭까지 <Highlight>GA-JOB</Highlight> 에서
           체험하세요. <br />
-          <Button variant="contained" href="#" style={ButtonStyle}>
-            가입하기
-          </Button>
+          <ButtonLink title={"가입하기"} link={"#"} />
         </Description>
 
         <SlideItemStyle>
@@ -77,7 +71,7 @@ const Contents = styled.div`
 
 const ContentsTitle = styled.div`
   margin-bottom: 1vw;
-  color: #c9ae00;
+  color: var(--brand-color);
   font-size: 11pt;
 `;
 const SubTitle = styled.h2`
@@ -87,16 +81,15 @@ const SubTitle = styled.h2`
 const Description = styled.div`
   float: left;
   width: 30%;
-  margin: 1.5vw 0vw 0vw 8vw;
+  margin: 1vw 0vw 0vw 8vw;
   font-size: 1.2vw;
   line-height: 2.5vw;
 `;
 const Highlight = styled.strong`
-  color: #c9ae00;
+  color: var(--brand-color);
 
   &:hover {
     font-size: 12;
-    cursor: pointer;
   }
 `;
 

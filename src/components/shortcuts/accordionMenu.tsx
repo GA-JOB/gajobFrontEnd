@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ArrowDropDown, ArrowDropUp } from "@mui/icons-material";
 import styled from "styled-components";
+import { ArrowDropDown, ArrowDropUp } from "@mui/icons-material";
 
 type Props = {
   title?: string | React.ReactNode;

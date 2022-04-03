@@ -82,10 +82,10 @@ export const Header = () => {
           </Nav>
 
           <Nav>
-            <Nav.Link href="#" style={signFontStyle}>
+            <Nav.Link href="/login" style={signFontStyle}>
               로그인
             </Nav.Link>
-            <Nav.Link href="#" style={signFontStyle}>
+            <Nav.Link href="/signup" style={signFontStyle}>
               회원가입
             </Nav.Link>
           </Nav>
@@ -120,7 +120,7 @@ const NavTitle = styled.div`
   &:after {
     display: block;
     content: "";
-    border-bottom: solid 3px #c9ae00;
+    border-bottom: solid 3px var(--brand-color);
     transform: scaleX(0);
     transition: transform 250ms ease-in-out;
   }
@@ -184,7 +184,7 @@ const MenuItemLinks = styled(Link)`
     margin: 0 2rem;
     padding: 2rem;
     border-radius: 10px;
-    background-color: #c9ae00;
+    background-color: var(--brand-color);
 
     color: #000000;
     text-align: center;

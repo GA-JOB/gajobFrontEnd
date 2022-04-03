@@ -9,7 +9,7 @@ export const MenuTitle = ({ title, info }: IMenuTitleProps) => {
   return (
     <TitleWrapper>
       <Title>{title}</Title>
-      <Info>{info}</Info>
+      {info !== "" ? <Info>{info}</Info> : <></>}
       <HrLine />
     </TitleWrapper>
   );
@@ -17,6 +17,7 @@ export const MenuTitle = ({ title, info }: IMenuTitleProps) => {
 
 const TitleWrapper = styled.div`
   margin-top: 5vw;
+  text-align: center;
 `;
 const Title = styled.div`
   font-size: 25pt;
