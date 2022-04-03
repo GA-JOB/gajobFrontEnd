@@ -1,68 +1,63 @@
 import {
   Newspaper,
   Business,
-  Forum,
+  Chat,
   GroupAdd,
   Assignment,
   CalendarMonth,
 } from "@mui/icons-material";
 
 const IconStyle = {
-  fontSize: 55,
+  fontSize: 60,
   color: "black",
-  opacity: 0.6,
+  opacity: 0.7,
 };
 export const ShortcutItem = [
   {
-    title: " 취업 NEWS",
+    title: "취업 NEWS",
     path: "/job-news",
     icon: <Newspaper sx={IconStyle} />,
     description: (
       <>
-        사용자들이 궁금해하는
-        <br /> 취업과 관련된 소식을 알려주는 <br />
-        서비스를 제공해드립니다
+        실시간으로 제공되는 <br />
+        취업 관련 뉴스를 통해 <br />
+        빠르게 취업 소식을 확인하세요 !
       </>
     ),
   },
   {
-    title: "채용정보",
+    title: "채용공고",
     path: "/job-posting",
     icon: <Business sx={IconStyle} />,
     description: (
       <>
-        사용자 맞춤 채용 소식을 찾을 수 있도록
-        <br />
-        직업 카테고리 별 채용공고 <br />
-        서비스를 제공해드립니다
+        사용자 맞춤 채용 소식은 <br />
+        카테고리 별 채용공고를 통해 <br />
+        확인할 수 있습니다 ! <br />
       </>
     ),
   },
   {
     title: "Community",
-    path: "/job-posting",
-    icon: <Forum sx={IconStyle} />,
+    path: "/jobdam",
+    icon: <Chat sx={IconStyle} />,
     description: (
       <>
-        사용자 맞춤 채용 소식을 찾을 수 있도록
-        <br />
-        직업 카테고리 별 채용공고 <br />
-        서비스를 제공해드립니다
+        취업에 도움이 될만한 <br />
+        취업, 면접, 공부 꿀 tip <br />
+        다함께 공유하세요 !
       </>
     ),
   },
   {
-    title: "STUDY 참여",
+    title: "GA-JOB STUDY",
     path: "/gajob-study",
     icon: <GroupAdd sx={IconStyle} />,
     description: (
       <>
-        사용자가 직접 스터디를 만들수 있고,
-        <br />
-        관심 분야에 적합한 스터디를 찾아 <br />
-        자유롭게 신청을 할 수 있는
-        <br />
-        스터디 매칭 서비스를 제공해드립니다.
+        스터디를 직접 만들거나 <br />
+        본인 관심 분야의 스터디를 <br />
+        조회하고 참여해보세요 !
       </>
     ),
   },
@@ -72,10 +67,9 @@ export const ShortcutItem = [
     icon: <Assignment sx={IconStyle} />,
     description: (
       <>
-        사용자 맞춤 채용 소식을 찾을 수 있도록
-        <br />
-        직업 카테고리 별 채용공고 <br />
-        서비스를 제공해드립니다
+        자소서 작성 및 저장 <br />
+        작성 이력 조회까지 <br />
+        미리 경험해 보세요 !
       </>
     ),
   },
@@ -85,10 +79,9 @@ export const ShortcutItem = [
     icon: <CalendarMonth sx={IconStyle} />,
     description: (
       <>
-        사용자 맞춤 채용 소식을 찾을 수 있도록
-        <br />
-        직업 카테고리 별 채용공고 <br />
-        서비스를 제공해드립니다
+        스터디, 모임 일정 혹은 <br />
+        중요한 면접 일정 등 <br />
+        캘린더로 관리하세요 !
       </>
     ),
   },

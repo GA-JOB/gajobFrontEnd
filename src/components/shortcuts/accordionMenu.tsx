@@ -29,7 +29,6 @@ function AccordionMenu(props: Props) {
         parentRef.current.style.width = `15vw`;
         parentRef.current.style.background = "black";
         parentRef.current.style.color = "white";
-        parentRef.current.style.opacity = "0.6";
         parentRef.current.style.borderRadius = "20px";
       }
       setIsCollapse(!isCollapse);
@@ -43,11 +42,12 @@ function AccordionMenu(props: Props) {
 
   return (
     <>
-      <LinkStyle to={props.path}> {props.icon}</LinkStyle>
+      <LinkWrapper>
+        <LinkStyle to={props.path}> {props.icon}</LinkStyle>
+      </LinkWrapper>
       <MenuWrapper onClick={MenuButtonHover}>
         <Button>
-          {props.title}
-          <ButtonStyle>{buttonIcon}</ButtonStyle>
+          {props.title} {buttonIcon}
         </Button>
         <ContentsWrapper ref={parentRef}>
           <Contents ref={childRef}>{props.contents}</Contents>
@@ -59,46 +59,46 @@ function AccordionMenu(props: Props) {
 
 export default React.memo(AccordionMenu);
 
-const MenuWrapper = styled.div`
-  /* display: flex; */
-  min-width: 20vw;
-  margin: 2vw 0 2vw 0;
-  position: relative;
-  flex-direction: column;
-
-  color: black;
+const LinkWrapper = styled.div`
+  width: 100%;
+  margin: 1vw 0.5vw;
+  text-align: left;
 `;
-
 const LinkStyle = styled(Link)`
-  padding-left: 0;
-  margin: 1vw;
-  text-align: center;
   text-decoration: none;
   color: black;
 
   &:hover {
-    margin: 2rem;
-    color: white;
+    margin: 0 1rem;
     transition: 1s;
   }
 `;
 
-const Button = styled.div`
-  width: 100%;
-  display: flex;
-  letter-spacing: 2px;
-  cursor: pointer;
+const MenuWrapper = styled.div`
+  /* display: flex; */
+  min-width: 15vw;
+  margin: 1vw 0.5vw;
   position: relative;
+  flex-direction: column;
+  opacity: 0.6;
+
+  color: black;
 `;
 
-const ButtonStyle = styled.span`
-  margin-left: 0.5vw;
+const Button = styled.div`
+  /* display: flex; */
+  width: 15vw;
+  text-align: left;
+  letter-spacing: 1px;
+  cursor: pointer;
+  position: relative;
 `;
 
 const ContentsWrapper = styled.div`
   height: 0;
   overflow: hidden;
   transition: height 0.35s ease, background 0.35s ease;
+  cursor: pointer;
 `;
 
 const Contents = styled.div`

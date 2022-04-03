@@ -1,10 +1,12 @@
 import {
   Home,
   Newspaper,
-  Task,
+  Business,
   Chat,
   GroupAdd,
   Assignment,
+  CalendarMonth,
+  ContactPage,
 } from "@mui/icons-material";
 
 export const SidebarData = [
@@ -21,7 +23,7 @@ export const SidebarData = [
   {
     title: "채용공고",
     path: "/job-posting",
-    icon: <Task />,
+    icon: <Business />,
   },
   {
     title: "JOB담",
@@ -37,5 +39,15 @@ export const SidebarData = [
     title: "Portfolio",
     path: "/portfolio",
     icon: <Assignment />,
+  },
+  {
+    title: "Calendar",
+    path: "/calendar",
+    icon: <CalendarMonth />,
+  },
+  {
+    title: "MyPage",
+    path: "/mypage",
+    icon: <ContactPage />,
   },
 ];
