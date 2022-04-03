@@ -1,15 +1,15 @@
-import React from "react";
-import { MenuTitle } from "components/Menutitle";
 import { ReactTabulator } from "react-tabulator";
 import { ColumnDefinition, ReactTabulatorOptions } from "react-tabulator";
 import "react-tabulator/lib/styles.css"; // default theme
 import "react-tabulator/css/bootstrap/tabulator_bootstrap.min.css"; // use Theme(s)
 import styled from "styled-components";
-import useGetNews from "hooks/api/useGetNews";
+import { INewsCrawling } from "types";
 
-export const JobNews = () => {
-  const { data } = useGetNews();
+interface INewsProps {
+  searchedData: INewsCrawling[];
+}
 
+export const NewsList = ({ searchedData }: INewsProps) => {
   const columns: ColumnDefinition[] = [
     {
       title: "id",
@@ -69,29 +69,14 @@ export const JobNews = () => {
     movableColumns: true,
   };
 
-  if (!data) return <div>loading...</div>;
   return (
-    <JobNewsWrapper>
-      <MenuTitle
-        title="JOB NEWS"
-        info="실시간으로 제공되는 최신 취업 소식을 확인해보세요."
-      />
-      <NewsList>
-        <TabulatorStyle columns={columns} data={data} options={options} />
-      </NewsList>
-    </JobNewsWrapper>
+    <NewsListWrapper>
+      <TabulatorStyle columns={columns} data={searchedData} options={options} />
+    </NewsListWrapper>
   );
 };
 
-const JobNewsWrapper = styled.div`
-  height: 100%;
-  width: 80%;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-`;
-
-const NewsList = styled.div`
+const NewsListWrapper = styled.div`
   width: 100%;
 `;
 

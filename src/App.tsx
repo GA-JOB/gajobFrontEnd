@@ -4,11 +4,12 @@ import { Header } from "components/header";
 import { Home } from "components/main";
 import { Footer } from "components/footer";
 // menu
-import { JobNews } from "pages/News";
+import { JobNews } from "pages/news/index";
 import { JobPosting } from "pages/JobPosting";
 import { Community } from "pages/Community";
 import { Study } from "pages/Study";
 import { Portfolio } from "pages/Portfolio";
+import { Calendar } from "pages/Calendar";
 import { MyPage } from "pages/MyPage";
 
 import { NoEmail } from "components/footer/NoEmail";
@@ -16,14 +17,18 @@ import { PersonalRule } from "components/footer/PersonalRules";
 import { Sitemap } from "components/footer/Sitemap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styled from "styled-components";
-import { Calendar } from "pages/Calendar";
+import useGetNews from "hooks/api/useGetNews";
 
 export default function App() {
+  // main 화면에서 component route시 데이터 불러오기 위함.
+  const { data } = useGetNews();
+
   return (
     <Router>
       <HeaderStyle>
         <Header />
       </HeaderStyle>
+
       <Layout>
         <Routes>
           <Route path="/" element={<Home />}></Route>
