@@ -1,16 +1,16 @@
 import {
   Newspaper,
   Business,
-  Forum,
+  Chat,
   GroupAdd,
   Assignment,
   CalendarMonth,
 } from "@mui/icons-material";
 
 const IconStyle = {
-  fontSize: 55,
+  fontSize: 60,
   color: "black",
-  opacity: 0.6,
+  opacity: 0.7,
 };
 export const ShortcutItem = [
   {
@@ -19,7 +19,8 @@ export const ShortcutItem = [
     icon: <Newspaper sx={IconStyle} />,
     description: (
       <>
-        실시간 취업 관련 뉴스를 통해 <br />
+        실시간으로 제공되는 <br />
+        취업 관련 뉴스를 통해 <br />
         빠르게 취업 소식을 확인하세요 !
       </>
     ),
@@ -39,13 +40,12 @@ export const ShortcutItem = [
   {
     title: "Community",
     path: "/jobdam",
-    icon: <Forum sx={IconStyle} />,
+    icon: <Chat sx={IconStyle} />,
     description: (
       <>
-        스터디, 모임 일정 혹은 <br />
-        중요한 면접 일정 등 <br />
-        GA-JOB에서 제공되는 <br />
-        캘린더로 관리하세요 !
+        취업에 도움이 될만한 <br />
+        취업, 면접, 공부 꿀 tip <br />
+        다함께 공유하세요 !
       </>
     ),
   },
@@ -55,10 +55,9 @@ export const ShortcutItem = [
     icon: <GroupAdd sx={IconStyle} />,
     description: (
       <>
-        관심 분야인 스터디를 만들거나 <br />
-        비슷한 관심 분야를 가진 <br />
-        스터디원들과 함께 <br />
-        스터디에 참여해보세요 !
+        스터디를 직접 만들거나 <br />
+        본인 관심 분야의 스터디를 <br />
+        조회하고 참여해보세요 !
       </>
     ),
   },
@@ -68,10 +67,9 @@ export const ShortcutItem = [
     icon: <Assignment sx={IconStyle} />,
     description: (
       <>
-        모의 자소서 작성에서 <br />
-        글자수 제한 기준 및 <br />
-        GA-JOB에서 제공되는 <br />
-        캘린더로 관리하세요 !
+        자소서 작성 및 저장 <br />
+        작성 이력 조회까지 <br />
+        미리 경험해 보세요 !
       </>
     ),
   },
