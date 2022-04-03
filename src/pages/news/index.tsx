@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { MenuTitle } from "components/Menutitle";
 import { SearchData } from "components/search";
 import { NewsList } from "./NewsList";
-import { ReactTabulator } from "react-tabulator";
-import { ColumnDefinition, ReactTabulatorOptions } from "react-tabulator";
 import "react-tabulator/lib/styles.css"; // default theme
 import "react-tabulator/css/bootstrap/tabulator_bootstrap.min.css"; // use Theme(s)
 import styled from "styled-components";

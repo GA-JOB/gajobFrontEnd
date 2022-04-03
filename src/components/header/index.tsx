@@ -82,10 +82,10 @@ export const Header = () => {
           </Nav>
 
           <Nav>
-            <Nav.Link href="#" style={signFontStyle}>
+            <Nav.Link href="/login" style={signFontStyle}>
               로그인
             </Nav.Link>
-            <Nav.Link href="#" style={signFontStyle}>
+            <Nav.Link href="/signup" style={signFontStyle}>
               회원가입
             </Nav.Link>
           </Nav>

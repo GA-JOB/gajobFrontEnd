@@ -92,7 +92,7 @@ const NewsSlideImg = styled.img`
 const ContentsBox = styled.div`
   float: right;
   margin-right: 3vw;
-  width: 60%;
+  width: 55%;
   height: 250px;
   padding: 5vw 1vw;
 `;

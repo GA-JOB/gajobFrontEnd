@@ -81,7 +81,7 @@ const SubTitle = styled.h2`
 const Description = styled.div`
   float: left;
   width: 30%;
-  margin: 1.5vw 0vw 0vw 8vw;
+  margin: 1vw 0vw 0vw 8vw;
   font-size: 1.2vw;
   line-height: 2.5vw;
 `;

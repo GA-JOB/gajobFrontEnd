@@ -6,6 +6,8 @@ import { TopButton } from "components/button/TopButton";
 import { Footer } from "components/footer";
 
 // menu
+import { Signup } from "pages/auth/Signup";
+import { Login } from "pages/auth/Login";
 import { JobNews } from "pages/news/index";
 import { JobPosting } from "pages/JobPosting";
 import { Community } from "pages/Community";
@@ -33,6 +35,8 @@ export default function App() {
 
       <Layout>
         <Routes>
+          <Route path="/signup" element={<Signup />}></Route>
+          <Route path="/login" element={<Login />}></Route>
           <Route path="/" element={<Home />}></Route>
           <Route path="/job-news" element={<JobNews />} />
           <Route path="/job-posting" element={<JobPosting />} />
@@ -63,7 +67,7 @@ const HeaderStyle = styled.header`
 `;
 
 const Layout = styled.div`
-  min-height: 55vw;
+  min-height: 40vw;
   padding-top: 3vw;
   padding-bottom: 10vw;
   align-items: center;
