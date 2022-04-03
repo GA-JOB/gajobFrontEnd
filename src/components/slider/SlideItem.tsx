@@ -1,8 +1,8 @@
 import { MenuTitle } from "components/Menutitle";
 import { SlideBanner } from "./index";
+import { ButtonLink } from "components/button/ButtonLink";
 import { IUpperSlideProps } from "components/UpperContent";
 import styled from "styled-components";
-import { Button } from "@mui/material";
 import { INewsCrawling } from "types";
 
 interface ISlideTitlerops {
@@ -19,10 +19,6 @@ export const SlideItem = ({
   upper_data,
 }: ISlideTitlerops) => {
   const SlideWidth = title === "" ? { width: "60%" } : { width: "80%" };
-  const ButtonStyle = {
-    marginTop: "2vw",
-    marginBottom: "5vw",
-  };
 
   if ((title !== "" && !data) || (title === "" && !upper_data))
     return <SlideBannerWrapper>loading...</SlideBannerWrapper>;
@@ -55,13 +51,7 @@ export const SlideItem = ({
               <ContentsBox>
                 <NewsTitle>{list.title}</NewsTitle>
                 <NewsContents>{list.contents}</NewsContents>
-                <Button
-                  variant="contained"
-                  href={"https://" + list.url}
-                  style={ButtonStyle}
-                >
-                  바로가기
-                </Button>
+                <ButtonLink title={"바로가기"} link={"https://" + list.url} />
               </ContentsBox>
             </SliderItem>
           ))}

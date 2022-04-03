@@ -2,7 +2,9 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Header } from "components/header";
 import { Home } from "components/main";
+import { TopButton } from "components/button/TopButton";
 import { Footer } from "components/footer";
+
 // menu
 import { JobNews } from "pages/news/index";
 import { JobPosting } from "pages/JobPosting";
@@ -47,6 +49,7 @@ export default function App() {
         </Routes>
       </Layout>
 
+      <TopButton />
       <FooterStyle />
     </Router>
   );

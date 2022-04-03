@@ -6,7 +6,7 @@ import {
   Dispatch,
   SetStateAction,
 } from "react";
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { TextField, InputAdornment } from "@material-ui/core";
 import { Search } from "@mui/icons-material";
 import { INewsCrawling } from "types";
