@@ -6,10 +6,6 @@ import "react-tabulator/css/bootstrap/tabulator_bootstrap.min.css"; // use Theme
 
 import { ReactTabulator, reactFormatter } from "react-tabulator";
 import { ColumnDefinition, ReactTabulatorOptions } from "react-tabulator";
-// import ReactTabulator, {
-//   ReactTabulatorOptions,
-//   ColumnDefinition,
-// } from "../components/tabulator/ReactTabulator";
 
 const JobPostingWrapper = styled.div`
   display: flex;
@@ -22,10 +18,7 @@ const JobPostingWrapper = styled.div`
 export const JobPosting = () => {
   const columns: ColumnDefinition[] | any = [
     { formatter: "rownum", hozAlign: "center", width: 40 },
-
     { title: "회사이름", field: "name", width: 150 },
-    // { title: "Age", field: "age", hozAlign: "left", formatter: "progress" },
-    // { title: "Favourite Color", field: "color" },
     { title: "Date Of Birth", field: "dob", sorter: "date" },
     { title: "Rating", field: "rating", hozAlign: "center", formatter: "star" },
     {
@@ -37,14 +30,6 @@ export const JobPosting = () => {
     { title: "사원수", field: "사원수", hozAlign: "center" },
     { title: "최저연봉", field: "최저연봉", hozAlign: "center" },
     { title: "최고연봉", field: "최고연봉", hozAlign: "center" },
-    // {
-    //   formatter: "rowSelection",
-    //   titleFormatter: "rowSelection",
-    //   hozAlign: "center",
-    //   width: 20,
-    //   headerSort: false,
-    //   // cellClick: (e, cell) => cell.getRow().toggleSelect(),
-    // },
   ];
   const data = [
     {
@@ -271,17 +256,9 @@ export const JobPosting = () => {
   const options: ReactTabulatorOptions = {
     height: 300,
     layout: "fitColumns",
-
     pagination: true,
-    paginationMode: "remote",
+    paginationMode: "local",
     paginationSize: 5,
-    // paginationInitialPage: 2,
-
-    // rowFormatter: function (row) {
-    //   if (row.getData().col === "blue") {
-    //     row.getElement().style.backgroundColor = "#1e3b20";
-    //   }
-    // },
   };
   return (
     <JobPostingWrapper>
@@ -290,7 +267,6 @@ export const JobPosting = () => {
         columns={columns}
         data={data}
         options={options}
-        // data={[]}
       />
     </JobPostingWrapper>
   );
