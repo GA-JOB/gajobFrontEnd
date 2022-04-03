@@ -91,7 +91,7 @@ const ContentsWrapper = styled.div`
 `;
 const Contents = styled.h1``;
 const ContentText = styled.div`
-  margin: 2vw;
+  margin: 2.5vw;
 `;
 const ScrollMenu = styled.div``;
 

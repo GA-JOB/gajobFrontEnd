@@ -26,7 +26,6 @@ export const NewsList = ({ searchedData }: INewsProps) => {
       formatterParams: {
         height: "100px",
         width: "150px",
-        urlSuffix: ".jpg" || ".png",
       },
       width: 200,
       hozAlign: "center",

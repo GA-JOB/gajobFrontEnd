@@ -46,6 +46,7 @@ export default function App() {
           <Route path="/sitemap" element={<Sitemap />}></Route>
         </Routes>
       </Layout>
+
       <FooterStyle />
     </Router>
   );

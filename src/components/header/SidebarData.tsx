@@ -1,7 +1,7 @@
 import {
   Home,
   Newspaper,
-  Task,
+  Business,
   Chat,
   GroupAdd,
   Assignment,
@@ -23,7 +23,7 @@ export const SidebarData = [
   {
     title: "채용공고",
     path: "/job-posting",
-    icon: <Task />,
+    icon: <Business />,
   },
   {
     title: "JOB담",
