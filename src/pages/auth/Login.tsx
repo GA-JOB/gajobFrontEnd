@@ -1,0 +1,95 @@
+import { useState } from "react";
+import { MenuTitle } from "components/Menutitle";
+import { SubmitButton } from "components/button/SubmitButton";
+// import { useAuth } from "hooks/api/auth";
+import styled from "styled-components";
+import { TextField } from "@material-ui/core";
+
+interface ILoginProps {
+  id?: number;
+  name?: string;
+  nickname?: string;
+  email?: string;
+  password?: string;
+}
+
+export const Login = ({ email = "", password = "" }: ILoginProps) => {
+  //   const { postAuth, useGetAuth, deleteAuth } = useAuth();
+
+  const [form, setForm] = useState({
+    emailForm: email,
+    passwordForm: password,
+  });
+  const { emailForm, passwordForm } = form;
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setForm({
+      ...form,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    console.log(form);
+
+    // postAuth({
+    //   email: emailForm,
+    //   password: passwordForm,
+    // });
+  };
+
+  return (
+    <>
+      <SignForm onSubmit={handleSubmit}>
+        <MenuTitle title="LOG IN" info="" />
+        <InputLabel>
+          <span>E-mail</span>
+          <InputField
+            label="E-mail을 입력하세요."
+            variant="filled"
+            type="email"
+            name="emailForm"
+            value={emailForm}
+            onChange={onChange}
+            size="small"
+            inputProps={{ style: { fontSize: 15, verticalAlign: "middle" } }}
+          />
+        </InputLabel>
+        <InputLabel>
+          <span>비밀번호</span>
+          <InputField
+            label="비밀번호를 입력하세요."
+            variant="filled"
+            type="password"
+            name="passwordForm"
+            value={passwordForm}
+            onChange={onChange}
+            size="small"
+            inputProps={{ style: { fontSize: 15, verticalAlign: "middle" } }}
+          />
+        </InputLabel>
+        <SubmitButton title={"로그인"} widthStyle={"100%"} />
+      </SignForm>
+    </>
+  );
+};
+
+const SignForm = styled.form`
+  position: relative;
+  z-index: 5;
+  width: 20%;
+`;
+
+const InputLabel = styled.div`
+  width: 100%;
+  padding: 1vw 0;
+  font-size: 10pt;
+`;
+const InputField = styled(TextField)({
+  width: "100%",
+  fontSize: "10pt",
+  marginBottom: "1vw",
+});
