@@ -66,6 +66,9 @@ export const NewsList = ({ searchedData }: INewsProps) => {
     height: "100%",
     movableRows: false,
     movableColumns: true,
+    pagination: true,
+    paginationMode: "local",
+    paginationSize: 10,
   };
 
   return (

@@ -45,7 +45,7 @@ export const UpperContent = () => {
           <br />
           관심 분야 STUDY 매칭까지 <Highlight>GA-JOB</Highlight> 에서
           체험하세요. <br />
-          <ButtonLink title={"가입하기"} link={"#"} />
+          <ButtonLink title={"가입하기"} link={"/signup"} />
         </Description>
 
         <SlideItemStyle>
