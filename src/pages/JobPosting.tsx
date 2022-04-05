@@ -1,19 +1,9 @@
-import React from "react";
 import styled from "styled-components";
-import MultiValueFormatter from "react-tabulator/lib/formatters/MultiValueFormatter";
+import { MenuTitle } from "components/Menutitle";
 import "react-tabulator/lib/styles.css"; // default theme
 import "react-tabulator/css/bootstrap/tabulator_bootstrap.min.css"; // use Theme(s)
-
-import { ReactTabulator, reactFormatter } from "react-tabulator";
+import { ReactTabulator } from "react-tabulator";
 import { ColumnDefinition, ReactTabulatorOptions } from "react-tabulator";
-
-const JobPostingWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 50px;
-  height: 70vh;
-`;
 
 export const JobPosting = () => {
   const columns: ColumnDefinition[] | any = [
@@ -254,14 +244,18 @@ export const JobPosting = () => {
     },
   ];
   const options: ReactTabulatorOptions = {
-    height: 300,
+    height: "100%",
     layout: "fitColumns",
     pagination: true,
     paginationMode: "local",
-    paginationSize: 5,
+    paginationSize: 10,
   };
   return (
     <JobPostingWrapper>
+      <MenuTitle
+        title="채용공고"
+        info="카테고리 별 채용 공고 소식을 한눈에 확인하세요."
+      />
       <ReactTabulator
         className="Table"
         columns={columns}
@@ -271,3 +265,11 @@ export const JobPosting = () => {
     </JobPostingWrapper>
   );
 };
+
+const JobPostingWrapper = styled.div`
+  height: 100%;
+  width: 80%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+`;

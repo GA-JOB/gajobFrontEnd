@@ -1,7 +1,8 @@
 import { MenuTitle } from "components/Menutitle";
 import { SlideBanner } from "./index";
-import { ButtonLink } from "components/button/ButtonLink";
+import { ButtonType } from "components/button/ButtonType";
 import { IUpperSlideProps } from "components/UpperContent";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { INewsCrawling } from "types";
 
@@ -41,6 +42,11 @@ export const SlideItem = ({
     return (
       <SlideBannerWrapper style={SlideWidth}>
         <MenuTitle title={title} info={info} />
+
+        <LinkWrapper>
+          <ViewAllLink to="/job-news"> 전체보기 {">"}</ViewAllLink>
+        </LinkWrapper>
+
         <SlideBanner>
           {data?.map((list) => (
             <SliderItem key={list.id}>
@@ -51,7 +57,7 @@ export const SlideItem = ({
               <ContentsBox>
                 <NewsTitle>{list.title}</NewsTitle>
                 <NewsContents>{list.contents}</NewsContents>
-                <ButtonLink title={"바로가기"} link={"https://" + list.url} />
+                <ButtonType title={"바로가기"} link={"https://" + list.url} />
               </ContentsBox>
             </SliderItem>
           ))}
@@ -67,7 +73,7 @@ const SlideBannerWrapper = styled.div`
 
 const SliderItem = styled.div`
   width: 90%;
-  min-height: 200px;
+  min-height: 20px;
   z-index: 1;
 `;
 
@@ -99,6 +105,14 @@ const ContentsBox = styled.div`
 
 const NewsTitle = styled.h4`
   width: 100%;
+`;
+const LinkWrapper = styled.div`
+  width: 95%;
+  text-align: right;
+`;
+const ViewAllLink = styled(Link)`
+  text-decoration: none;
+  font-size: 10pt;
 `;
 const NewsContents = styled.div`
   padding: 0 8vw;
