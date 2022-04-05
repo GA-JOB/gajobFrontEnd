@@ -11,13 +11,13 @@ export const useAuth = () => {
   // 데이터 최신화
   const { mutate } = useSWRConfig();
 
-  const postAuth = async ({
+  const postSignup = async ({
     name,
     nickname,
     email,
     password,
   }: IPostAuthRequest) => {
-    await post(`/auth`, { name, nickname, email, password });
+    await post(`/signup`, { name, nickname, email, password });
 
     mutate("/signup");
   };
@@ -33,5 +33,5 @@ export const useAuth = () => {
     mutate("/signup");
   };
 
-  return { postAuth, useGetAuth, deleteAuth };
+  return { postSignup, useGetAuth, deleteAuth };
 };

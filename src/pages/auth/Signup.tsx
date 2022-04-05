@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { MenuTitle } from "components/Menutitle";
-import { SubmitButton } from "components/button/SubmitButton";
+import { ButtonType } from "components/button/ButtonType";
 import { useAuth } from "hooks/api/auth";
 import styled from "styled-components";
 import { TextField } from "@material-ui/core";
@@ -22,7 +22,7 @@ export const Signup = ({
   email = "",
   password = "",
 }: ISignupProps) => {
-  const { postAuth } = useAuth();
+  const { postSignup } = useAuth();
 
   const [passwordCheck, setPasswordCheck] = useState<string>("");
   const [mismatchError, setMismatchError] = useState(false);
@@ -57,7 +57,7 @@ export const Signup = ({
 
     console.log(form);
 
-    postAuth({
+    postSignup({
       name: nameForm,
       nickname: nicknameForm,
       email: emailForm,
@@ -138,7 +138,7 @@ export const Signup = ({
           </InputField>
           {mismatchError && <Alert>비밀번호가 일치하지 않습니다.</Alert>}
         </InputLabel>
-        <SubmitButton title={"가입하기"} widthStyle={"100%"} />
+        <ButtonType title={"가입하기"} widthStyle={"100%"} />
 
         <LinkToLogin>
           이미 회원이신가요?&nbsp;
@@ -152,12 +152,12 @@ export const Signup = ({
 const SignForm = styled.form`
   position: relative;
   z-index: 5;
-  width: 20%;
+  width: 25%;
 `;
 
 const InputLabel = styled.div`
   width: 100%;
-  padding: 1vw 0;
+  padding: 0.8vw 0;
   font-size: 10pt;
 `;
 const InputField = styled(TextField)({

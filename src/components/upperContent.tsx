@@ -1,5 +1,5 @@
 import { SlideItem } from "components/slider/SlideItem";
-import { ButtonLink } from "./button/ButtonLink";
+import { ButtonType } from "./button/ButtonType";
 import styled from "styled-components";
 
 export interface IUpperSlideProps {
@@ -45,7 +45,7 @@ export const UpperContent = () => {
           <br />
           관심 분야 STUDY 매칭까지 <Highlight>GA-JOB</Highlight> 에서
           체험하세요. <br />
-          <ButtonLink title={"가입하기"} link={"/signup"} />
+          <ButtonType title={"가입하기"} link={"/signup"} />
         </Description>
 
         <SlideItemStyle>

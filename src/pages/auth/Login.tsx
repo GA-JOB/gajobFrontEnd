@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { MenuTitle } from "components/Menutitle";
-import { SubmitButton } from "components/button/SubmitButton";
+import { ButtonType } from "components/button/ButtonType";
 // import { useAuth } from "hooks/api/auth";
 import styled from "styled-components";
 import { TextField } from "@material-ui/core";
@@ -72,7 +72,7 @@ export const Login = ({ email = "", password = "" }: ILoginProps) => {
             inputProps={{ style: { fontSize: 15, verticalAlign: "middle" } }}
           />
         </InputLabel>
-        <SubmitButton title={"로그인"} widthStyle={"100%"} />
+        <ButtonType title={"로그인"} widthStyle={"100%"} />
 
         <LinkToLogin>
           회원이 아니신가요?&nbsp;
@@ -86,12 +86,12 @@ export const Login = ({ email = "", password = "" }: ILoginProps) => {
 const SignForm = styled.form`
   position: relative;
   z-index: 5;
-  width: 20%;
+  width: 25%;
 `;
 
 const InputLabel = styled.div`
   width: 100%;
-  padding: 1vw 0;
+  padding: 0.8vw 0;
   font-size: 10pt;
 `;
 const InputField = styled(TextField)({
