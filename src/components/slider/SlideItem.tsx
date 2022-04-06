@@ -1,6 +1,7 @@
 import { MenuTitle } from "components/Menutitle";
 import { SlideBanner } from "./index";
 import { ButtonType } from "components/button/ButtonType";
+import { SkeletonLoading } from "components/loading/Skeleton";
 import { IUpperSlideProps } from "components/UpperContent";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
@@ -21,20 +22,21 @@ export const SlideItem = ({
 }: ISlideTitlerops) => {
   const SlideWidth = title === "" ? { width: "60%" } : { width: "80%" };
 
-  if ((title !== "" && !data) || (title === "" && !upper_data))
-    return <SlideBannerWrapper>loading...</SlideBannerWrapper>;
-
   if (title === "") {
     // upper banner
     return (
       <SlideBannerWrapper style={SlideWidth}>
-        <SlideBanner>
-          {upper_data?.map((list, id) => (
-            <SliderItem key={id}>
-              <UpperSlideImg src={list.imgUrl} alt={list.name} />
-            </SliderItem>
-          ))}
-        </SlideBanner>
+        {upper_data ? (
+          <SlideBanner>
+            {upper_data.map((list, id) => (
+              <SliderItem key={id}>
+                <UpperSlideImg src={list.imgUrl} alt={list.name} />
+              </SliderItem>
+            ))}
+          </SlideBanner>
+        ) : (
+          <SkeletonLoading />
+        )}
       </SlideBannerWrapper>
     );
   } else {
@@ -47,21 +49,27 @@ export const SlideItem = ({
           <ViewAllLink to="/job-news"> 전체보기 {">"}</ViewAllLink>
         </LinkWrapper>
 
-        <SlideBanner>
-          {data?.map((list) => (
-            <SliderItem key={list.id}>
-              <ImgContainer>
-                <NewsSlideImg src={list.imgUrl} alt="ImageAlt" />
-              </ImgContainer>
+        {data ? (
+          <SlideBanner>
+            {data.map((list) => (
+              <SliderItem key={list.id}>
+                <ImgContainer>
+                  <NewsSlideImg src={list.imgUrl} alt="ImageAlt" />
+                </ImgContainer>
 
-              <ContentsBox>
-                <NewsTitle>{list.title}</NewsTitle>
-                <NewsContents>{list.contents}</NewsContents>
-                <ButtonType title={"바로가기"} link={"https://" + list.url} />
-              </ContentsBox>
-            </SliderItem>
-          ))}
-        </SlideBanner>
+                <ContentsBox>
+                  <NewsTitle>{list.title}</NewsTitle>
+                  <NewsContents>{list.contents}</NewsContents>
+                  <ButtonType title={"바로가기"} link={"https://" + list.url} />
+                </ContentsBox>
+              </SliderItem>
+            ))}
+          </SlideBanner>
+        ) : (
+          <SlideBanner>
+            <SkeletonLoading />
+          </SlideBanner>
+        )}
       </SlideBannerWrapper>
     );
   }
