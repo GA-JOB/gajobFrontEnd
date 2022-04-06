@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { MenuTitle } from "components/Menutitle";
 import { SearchData } from "components/search";
 import { NewsList } from "./NewsList";
+import { Loading } from "components/loading/index";
 import "react-tabulator/lib/styles.css"; // default theme
 import "react-tabulator/css/bootstrap/tabulator_bootstrap.min.css"; // use Theme(s)
 import styled from "styled-components";
@@ -12,7 +13,7 @@ export const JobNews = () => {
   const { data } = useGetNews();
   const [searchedData, setSearchedData] = useState<INewsCrawling[]>([]);
 
-  if (!data) return <div>loading...</div>;
+  if (!data) return <Loading />;
   return (
     <JobNewsWrapper>
       <MenuTitle
