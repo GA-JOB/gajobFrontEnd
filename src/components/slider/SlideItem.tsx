@@ -1,7 +1,9 @@
 import { MenuTitle } from "components/Menutitle";
 import { SlideBanner } from "./index";
-import { ButtonLink } from "components/button/ButtonLink";
+import { ButtonType } from "components/button/ButtonType";
+import { SkeletonLoading } from "components/loading/Skeleton";
 import { IUpperSlideProps } from "components/UpperContent";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { INewsCrawling } from "types";
 
@@ -20,20 +22,21 @@ export const SlideItem = ({
 }: ISlideTitlerops) => {
   const SlideWidth = title === "" ? { width: "60%" } : { width: "80%" };
 
-  if ((title !== "" && !data) || (title === "" && !upper_data))
-    return <SlideBannerWrapper>loading...</SlideBannerWrapper>;
-
   if (title === "") {
     // upper banner
     return (
       <SlideBannerWrapper style={SlideWidth}>
-        <SlideBanner>
-          {upper_data?.map((list, id) => (
-            <SliderItem key={id}>
-              <UpperSlideImg src={list.imgUrl} alt={list.name} />
-            </SliderItem>
-          ))}
-        </SlideBanner>
+        {upper_data ? (
+          <SlideBanner>
+            {upper_data.map((list, id) => (
+              <SliderItem key={id}>
+                <UpperSlideImg src={list.imgUrl} alt={list.name} />
+              </SliderItem>
+            ))}
+          </SlideBanner>
+        ) : (
+          <SkeletonLoading />
+        )}
       </SlideBannerWrapper>
     );
   } else {
@@ -41,21 +44,32 @@ export const SlideItem = ({
     return (
       <SlideBannerWrapper style={SlideWidth}>
         <MenuTitle title={title} info={info} />
-        <SlideBanner>
-          {data?.map((list) => (
-            <SliderItem key={list.id}>
-              <ImgContainer>
-                <NewsSlideImg src={list.imgUrl} alt="ImageAlt" />
-              </ImgContainer>
 
-              <ContentsBox>
-                <NewsTitle>{list.title}</NewsTitle>
-                <NewsContents>{list.contents}</NewsContents>
-                <ButtonLink title={"바로가기"} link={"https://" + list.url} />
-              </ContentsBox>
-            </SliderItem>
-          ))}
-        </SlideBanner>
+        <LinkWrapper>
+          <ViewAllLink to="/job-news"> 전체보기 {">"}</ViewAllLink>
+        </LinkWrapper>
+
+        {data ? (
+          <SlideBanner>
+            {data?.map((list) => (
+              <SliderItem key={list.id}>
+                <ImgContainer>
+                  <NewsSlideImg src={list.imgUrl} alt="ImageAlt" />
+                </ImgContainer>
+
+                <ContentsBox>
+                  <NewsTitle>{list.title}</NewsTitle>
+                  <NewsContents>{list.contents}</NewsContents>
+                  <ButtonType title={"바로가기"} link={"https://" + list.url} />
+                </ContentsBox>
+              </SliderItem>
+            ))}
+          </SlideBanner>
+        ) : (
+          <SlideBanner>
+            <SkeletonLoading />
+          </SlideBanner>
+        )}
       </SlideBannerWrapper>
     );
   }
@@ -67,7 +81,7 @@ const SlideBannerWrapper = styled.div`
 
 const SliderItem = styled.div`
   width: 90%;
-  min-height: 200px;
+  min-height: 20px;
   z-index: 1;
 `;
 
@@ -99,6 +113,14 @@ const ContentsBox = styled.div`
 
 const NewsTitle = styled.h4`
   width: 100%;
+`;
+const LinkWrapper = styled.div`
+  width: 95%;
+  text-align: right;
+`;
+const ViewAllLink = styled(Link)`
+  text-decoration: none;
+  font-size: 10pt;
 `;
 const NewsContents = styled.div`
   padding: 0 8vw;

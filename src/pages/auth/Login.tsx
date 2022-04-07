@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { MenuTitle } from "components/Menutitle";
-import { SubmitButton } from "components/button/SubmitButton";
-// import { useAuth } from "hooks/api/auth";
+import { ButtonType } from "components/button/ButtonType";
 import styled from "styled-components";
 import { TextField } from "@material-ui/core";
+import { useAuth } from "hooks/api/auth";
 
 interface ILoginProps {
   id?: number;
@@ -15,7 +15,7 @@ interface ILoginProps {
 }
 
 export const Login = ({ email = "", password = "" }: ILoginProps) => {
-  //   const { postAuth, useGetAuth, deleteAuth } = useAuth();
+  const { postLogin } = useAuth();
 
   const [form, setForm] = useState({
     emailForm: email,
@@ -36,10 +36,11 @@ export const Login = ({ email = "", password = "" }: ILoginProps) => {
 
     console.log(form);
 
-    // postAuth({
-    //   email: emailForm,
-    //   password: passwordForm,
-    // });
+    postLogin({
+      email: emailForm,
+      password: passwordForm,
+    });
+    console.log("로그인 성공");
   };
 
   return (
@@ -72,7 +73,7 @@ export const Login = ({ email = "", password = "" }: ILoginProps) => {
             inputProps={{ style: { fontSize: 15, verticalAlign: "middle" } }}
           />
         </InputLabel>
-        <SubmitButton title={"로그인"} widthStyle={"100%"} />
+        <ButtonType title={"로그인"} widthStyle={"100%"} />
 
         <LinkToLogin>
           회원이 아니신가요?&nbsp;
@@ -86,12 +87,12 @@ export const Login = ({ email = "", password = "" }: ILoginProps) => {
 const SignForm = styled.form`
   position: relative;
   z-index: 5;
-  width: 20%;
+  width: 25%;
 `;
 
 const InputLabel = styled.div`
   width: 100%;
-  padding: 1vw 0;
+  padding: 0.8vw 0;
   font-size: 10pt;
 `;
 const InputField = styled(TextField)({

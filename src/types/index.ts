@@ -14,3 +14,13 @@ export interface INewsCrawling {
   imgUrl: string;
   url: string;
 }
+
+export interface IContestCrawling {
+  id: number;
+  title: string;
+  organization: string;
+  state: string;
+  todayState: string;
+  url: string;
+  imgUrl: string;
+}

@@ -9,6 +9,7 @@ import { Footer } from "components/footer";
 import { Signup } from "pages/auth/Signup";
 import { Login } from "pages/auth/Login";
 import { JobNews } from "pages/news/index";
+import { Contest } from "pages/contest/index";
 import { JobPosting } from "pages/JobPosting";
 import { Community } from "pages/Community";
 import { Study } from "pages/Study";
@@ -39,6 +40,7 @@ export default function App() {
           <Route path="/login" element={<Login />}></Route>
           <Route path="/" element={<Home />}></Route>
           <Route path="/job-news" element={<JobNews />} />
+          <Route path="/contest" element={<Contest />} />
           <Route path="/job-posting" element={<JobPosting />} />
           <Route path="/jobdam" element={<Community />} />
           <Route path="/gajob-study" element={<Study />} />

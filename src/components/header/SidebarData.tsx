@@ -1,6 +1,7 @@
 import {
   Home,
   Newspaper,
+  ContentPasteSearch,
   Business,
   Chat,
   GroupAdd,
@@ -19,6 +20,11 @@ export const SidebarData = [
     title: "News",
     path: "/job-news",
     icon: <Newspaper />,
+  },
+  {
+    title: "공모전 소식",
+    path: "/contest",
+    icon: <ContentPasteSearch />,
   },
   {
     title: "채용공고",
