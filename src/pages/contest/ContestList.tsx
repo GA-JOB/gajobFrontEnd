@@ -1,8 +1,10 @@
+import { Loading } from "components/loading";
 import styled from "styled-components";
 import "react-tabulator/lib/styles.css"; // default theme
 import "react-tabulator/css/bootstrap/tabulator_bootstrap.min.css"; // use Theme(s)
 import { ReactTabulator } from "react-tabulator";
 import { ColumnDefinition, ReactTabulatorOptions } from "react-tabulator";
+// import { IContestCrawling } from "types";
 
 interface IContestProps {
   data: any;
@@ -13,31 +15,40 @@ export const ContestList = ({ data }: IContestProps) => {
     { formatter: "rownum", hozAlign: "center", width: 40 },
     {
       title: "이미지",
-      field: "imgUrl",
+      field: "data.imgUrl",
       formatter: "image",
       formatterParams: {
         height: "100px",
         width: "150px",
       },
+      width: 150,
     },
-    { title: "제목", field: "title", hozAlign: "center", vertAlign: "middle" },
+    {
+      title: "제목",
+      field: "title",
+      hozAlign: "center",
+      vertAlign: "middle",
+    },
     {
       title: "주최기관",
       field: "organization",
       hozAlign: "center",
       vertAlign: "middle",
-    },
-    {
-      title: "모집상태",
-      field: "state",
-      hozAlign: "center",
-      vertAlign: "middle",
+      width: 120,
     },
     {
       title: "카테고리",
       field: "category",
       hozAlign: "center",
       vertAlign: "middle",
+      width: 120,
+    },
+    {
+      title: "모집상태",
+      field: "state",
+      hozAlign: "center",
+      vertAlign: "middle",
+      width: 120,
     },
     {
       title: "상세페이지",
@@ -62,6 +73,8 @@ export const ContestList = ({ data }: IContestProps) => {
     paginationMode: "local",
     paginationSize: 10,
   };
+
+  if (!data) return <Loading />;
   return (
     <ContestListWrapper>
       <TabulatorStyle

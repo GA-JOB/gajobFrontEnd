@@ -4,6 +4,7 @@ import { ContestGallery } from "./ContestGallery";
 import { ContestList } from "./ContestList";
 import styled from "styled-components";
 import { FormatListBulleted, GridView } from "@mui/icons-material";
+import useGetContests from "hooks/api/useGetContest";
 
 const boxs: any = [
   {
@@ -174,6 +175,7 @@ const boxs: any = [
 ];
 
 export const Contest = () => {
+  const { data } = useGetContests();
   const [viewType, setViewType] = useState<string>("grid");
   let gridStyle,
     listStyle = {

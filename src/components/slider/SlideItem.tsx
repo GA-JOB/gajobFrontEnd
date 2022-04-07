@@ -51,7 +51,7 @@ export const SlideItem = ({
 
         {data ? (
           <SlideBanner>
-            {data.map((list) => (
+            {data?.map((list) => (
               <SliderItem key={list.id}>
                 <ImgContainer>
                   <NewsSlideImg src={list.imgUrl} alt="ImageAlt" />

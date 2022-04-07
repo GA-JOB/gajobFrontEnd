@@ -1,3 +1,4 @@
+import { Loading } from "components/loading";
 import { ButtonType } from "components/button/ButtonType";
 import styled from "styled-components";
 // import { IContestCrawling } from "types";
@@ -7,6 +8,7 @@ interface IContestProps {
 }
 
 export const ContestGallery = ({ data }: IContestProps) => {
+  if (!data) return <Loading />;
   return (
     <GalleryWrapper>
       {data.map((box: any, index: number) => (
