@@ -22,7 +22,7 @@ export const SidebarData = [
     icon: <Newspaper />,
   },
   {
-    title: "공모전 정보",
+    title: "공모전 소식",
     path: "/contest",
     icon: <ContentPasteSearch />,
   },

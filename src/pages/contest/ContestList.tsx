@@ -1,34 +1,27 @@
-import { ReactTabulator } from "react-tabulator";
-import { ColumnDefinition, ReactTabulatorOptions } from "react-tabulator";
+import { Loading } from "components/loading";
+import styled from "styled-components";
 import "react-tabulator/lib/styles.css"; // default theme
 import "react-tabulator/css/bootstrap/tabulator_bootstrap.min.css"; // use Theme(s)
-import styled from "styled-components";
-import { INewsCrawling } from "types";
+import { ReactTabulator } from "react-tabulator";
+import { ColumnDefinition, ReactTabulatorOptions } from "react-tabulator";
+// import { IContestCrawling } from "types";
 
-interface INewsProps {
-  searchedData: INewsCrawling[];
+interface IContestProps {
+  data: any;
 }
 
-export const NewsList = ({ searchedData }: INewsProps) => {
-  const columns: ColumnDefinition[] = [
-    {
-      title: "id",
-      field: "id",
-      width: 80,
-      hozAlign: "center",
-      vertAlign: "middle",
-    },
+export const ContestList = ({ data }: IContestProps) => {
+  const columns: ColumnDefinition[] | any = [
+    { formatter: "rownum", hozAlign: "center", width: 40 },
     {
       title: "이미지",
-      field: "imgUrl",
+      field: "data.imgUrl",
       formatter: "image",
       formatterParams: {
         height: "100px",
         width: "150px",
       },
-      width: 200,
-      hozAlign: "center",
-      vertAlign: "middle",
+      width: 150,
     },
     {
       title: "제목",
@@ -36,22 +29,34 @@ export const NewsList = ({ searchedData }: INewsProps) => {
       hozAlign: "center",
       vertAlign: "middle",
     },
-
     {
-      title: "작성일",
-      field: "createTime",
-      sorter: "date",
-      width: 120,
+      title: "주최기관",
+      field: "organization",
       hozAlign: "center",
       vertAlign: "middle",
+      width: 120,
+    },
+    {
+      title: "카테고리",
+      field: "category",
+      hozAlign: "center",
+      vertAlign: "middle",
+      width: 120,
+    },
+    {
+      title: "모집상태",
+      field: "state",
+      hozAlign: "center",
+      vertAlign: "middle",
+      width: 120,
     },
     {
       title: "상세페이지",
       field: "url",
       formatter: "link",
       formatterParams: {
-        label: "Click Here",
-        urlPrefix: "https://" || "http://", // tabulator link 적용하기.
+        label: "바로가기",
+        urlPrefix: "", // tabulator link 적용하기.
         urlField: "url",
         target: "_blank", // 새 탭에서 링크를 열기 위함.
       },
@@ -63,21 +68,26 @@ export const NewsList = ({ searchedData }: INewsProps) => {
 
   const options: ReactTabulatorOptions = {
     height: "100%",
-    movableRows: false,
-    movableColumns: true,
+    layout: "fitColumns",
     pagination: true,
     paginationMode: "local",
     paginationSize: 10,
   };
 
+  if (!data) return <Loading />;
   return (
-    <NewsListWrapper>
-      <TabulatorStyle columns={columns} data={searchedData} options={options} />
-    </NewsListWrapper>
+    <ContestListWrapper>
+      <TabulatorStyle
+        className="Table"
+        columns={columns}
+        data={data}
+        options={options}
+      />
+    </ContestListWrapper>
   );
 };
 
-const NewsListWrapper = styled.div`
+const ContestListWrapper = styled.div`
   width: 100%;
 `;
 

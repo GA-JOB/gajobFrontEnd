@@ -31,7 +31,7 @@ export const Header = () => {
   };
 
   // MouseHover 이벤트에 의한 logo 상태 변화.
-  const onHoverLogo = (e: MouseEvent<HTMLDivElement>) => {
+  const onHoverLogo = (e: any) => {
     const { target } = e;
     if ((target as HTMLElement).id !== "logo-name") return;
 
