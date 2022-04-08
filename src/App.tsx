@@ -9,7 +9,7 @@ import { Footer } from "components/footer";
 import { Signup } from "pages/auth/Signup";
 import { Login } from "pages/auth/Login";
 import { JobNews } from "pages/news/index";
-import { Contest } from "pages/Contest";
+import { Contest } from "pages/contest/index";
 import { JobPosting } from "pages/JobPosting";
 import { Community } from "pages/Community";
 import { Study } from "pages/Study";

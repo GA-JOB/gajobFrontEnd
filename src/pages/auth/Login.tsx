@@ -2,9 +2,10 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { MenuTitle } from "components/Menutitle";
 import { ButtonType } from "components/button/ButtonType";
-// import { useAuth } from "hooks/api/auth";
 import styled from "styled-components";
 import { TextField } from "@material-ui/core";
+import { useAuth } from "hooks/api/auth";
+import useGetAuth from "hooks/api/useGetAuth";
 
 interface ILoginProps {
   id?: number;
@@ -15,7 +16,7 @@ interface ILoginProps {
 }
 
 export const Login = ({ email = "", password = "" }: ILoginProps) => {
-  //   const { postAuth, useGetAuth, deleteAuth } = useAuth();
+  const { postLogin } = useAuth();
 
   const [form, setForm] = useState({
     emailForm: email,
@@ -36,10 +37,10 @@ export const Login = ({ email = "", password = "" }: ILoginProps) => {
 
     console.log(form);
 
-    // postAuth({
-    //   email: emailForm,
-    //   password: passwordForm,
-    // });
+    postLogin({
+      email: emailForm,
+      password: passwordForm,
+    });
   };
 
   return (
