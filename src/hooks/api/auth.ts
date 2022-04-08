@@ -30,16 +30,11 @@ export const useAuth = () => {
     mutate("/login");
   };
 
-  const useGetAuth = async (id: number) => {
-    const { data } = useSWR<IAuthData[]>("news", fetcher);
-    return { data };
-  };
-
   const deleteAuth = async (id: number) => {
     await del(`/signup/${id}`);
 
     mutate("/signup");
   };
 
-  return { postSignup, postLogin, useGetAuth, deleteAuth };
+  return { postSignup, postLogin, deleteAuth };
 };

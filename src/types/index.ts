@@ -1,9 +1,9 @@
 export interface IAuthData {
-  id: number;
-  name: string;
-  nickname: string;
-  email: string;
-  password: string;
+  id?: number;
+  name?: string;
+  nickname?: string;
+  email?: string;
+  password?: string;
 }
 
 export interface INewsCrawling {
