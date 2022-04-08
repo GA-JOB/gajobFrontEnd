@@ -63,7 +63,6 @@ export const Signup = ({
       email: emailForm,
       password: passwordForm,
     });
-    window.alert("가입하시겠습니까?");
   };
 
   return (
