@@ -44,4 +44,8 @@ export const SlideBanner = ({
 const SlideWrapper = styled.section`
   margin: auto;
   text-align: center;
+
+  @media screen and (max-width: 1000px) {
+    display: none;
+  }
 `;

@@ -19,13 +19,32 @@ export const useAuth = () => {
     email,
     password,
   }: IPostSignupRequest) => {
-    await post(`/signup`, { name, nickname, email, password });
+    const res = await post(`/signup`, {
+      name,
+      nickname,
+      email,
+      password,
+    }).then((res: any) => {
+      if (res.activated === true) {
+        alert("환영합니다!\n회원가입이 정상적으로 처리되었습니다.");
+      }
+    });
+
+    console.log(res);
+    return { res };
 
     mutate("/signup");
   };
 
   const postLogin = async ({ email, password }: IPostLoginRequest) => {
-    await post(`/login`, { email, password });
+    const res = await post(`/login`, { email, password }).then((res: any) => {
+      if (res.token !== "undefiend") {
+        console.log("로그인 성공");
+      }
+    });
+
+    console.log(res);
+    return { res };
 
     mutate("/login");
   };

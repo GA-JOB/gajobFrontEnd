@@ -1,5 +1,6 @@
 import { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { MenuTitle } from "components/Menutitle";
 import { ButtonType } from "components/button/ButtonType";
 import { useAuth } from "hooks/api/auth";
@@ -22,6 +23,7 @@ export const Signup = ({
   email = "",
   password = "",
 }: ISignupProps) => {
+  let navigate = useNavigate();
   const { postSignup } = useAuth();
 
   const [passwordCheck, setPasswordCheck] = useState<string>("");
@@ -57,12 +59,16 @@ export const Signup = ({
 
     console.log(form);
 
-    postSignup({
-      name: nameForm,
-      nickname: nicknameForm,
-      email: emailForm,
-      password: passwordForm,
-    });
+    if (window.confirm("회원가입을 하시겠습니까?") === true) {
+      postSignup({
+        name: nameForm,
+        nickname: nicknameForm,
+        email: emailForm,
+        password: passwordForm,
+      });
+
+      navigate("/login");
+    } else return;
   };
 
   return (

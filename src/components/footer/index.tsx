@@ -29,13 +29,20 @@ const FooterBox = styled.footer`
   background-color: var(--footer-bg-color);
   color: var(--footer-text-color);
   padding: var(--layout-padding);
+
+  @media screen and (max-width: 900px) {
+    height: 15vw;
+  }
 `;
 
 const FooterContents = styled.p`
   text-align: center;
   margin-top: 1vw;
   width: 90%;
-  /* height: 80%; */
+
+  @media screen and (max-width: 1000px) {
+    display: none;
+  }
 `;
 const FooterContainer = styled.span`
   float: left;
@@ -58,4 +65,10 @@ const CopyrightStyle = styled.div`
   margin-top: 7%;
   font-size: 0.8rem;
   text-align: center;
+
+  @media screen and (max-width: 1000px) {
+    margin: 3%;
+    font-size: 0.9rem;
+    transition: 1s;
+  }
 `;

@@ -65,6 +65,7 @@ const HeaderStyle = styled.header`
   position: relative;
   z-index: 10;
   width: 100%;
+  height: 10vw;
   position: fixed;
 `;
 
@@ -75,6 +76,10 @@ const Layout = styled.div`
   align-items: center;
   justify-content: center;
   display: flex;
+
+  @media screen and (max-width: 900px) {
+    min-height: 80vw;
+  }
 `;
 
 const FooterStyle = styled(Footer)`

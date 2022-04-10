@@ -3,7 +3,9 @@ import { fetcher } from "lib/api/fetcher";
 import { IAuthData } from "types";
 
 function useGetAuth() {
-  const { data } = useSWR<IAuthData[]>("user", fetcher);
+  const { data } = useSWR<IAuthData[]>("user", fetcher, {
+    // headers: { Authorization: "ㄴ" },
+  });
 
   return { data };
 }
