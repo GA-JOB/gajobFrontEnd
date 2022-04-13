@@ -3,9 +3,12 @@ import { fetcher } from "lib/api/fetcher";
 import { IAuthData } from "types";
 
 function useGetAuth() {
-  const { data } = useSWR<IAuthData[]>("user", fetcher, {
-    // headers: { Authorization: "ㄴ" },
-  });
+  // localStorage 에 저장된 access token 접근
+  let token = localStorage.getItem("user-token") || "";
+
+  console.log(token);
+
+  const { data } = useSWR<IAuthData[]>("user", fetcher);
 
   return { data };
 }

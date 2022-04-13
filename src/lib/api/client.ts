@@ -5,7 +5,15 @@ const instance = axios.create({ baseURL: process.env.REACT_APP_API_URL });
 const responseInterceptorFulfilled = (res: AxiosResponse) => {
   if (200 <= res.status && res.status < 300) return res.data;
 
-  return Promise.reject(res.data);
+  return {
+    ...res,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Content-Type": "application/json; charset=UTF-8",
+      // prettier-ignore
+      'Authorization': `Bearer ${localStorage.getItem('user-token') ? localStorage.getItem('user-token') : null}`,
+    },
+  };
 };
 
 const responseInterceptorRejected = (error: AxiosError) => {

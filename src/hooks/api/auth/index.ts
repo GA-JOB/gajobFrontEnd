@@ -1,5 +1,4 @@
-import useSWR, { useSWRConfig } from "swr";
-import { fetcher } from "lib/api/fetcher";
+import { useSWRConfig } from "swr";
 import { post, del } from "lib/api/client";
 import { IAuthData } from "types";
 
@@ -10,9 +9,6 @@ interface IPostLoginRequest {
 }
 
 export const useAuth = () => {
-  // 데이터 최신화
-  const { mutate } = useSWRConfig();
-
   const postSignup = async ({
     name,
     nickname,
@@ -32,27 +28,24 @@ export const useAuth = () => {
 
     console.log(res);
     return { res };
-
-    mutate("/signup");
   };
 
   const postLogin = async ({ email, password }: IPostLoginRequest) => {
     const res = await post(`/login`, { email, password }).then((res: any) => {
-      if (res.token !== "undefiend") {
+      if (res.token) {
         console.log("로그인 성공");
+        console.log(res.token);
+
+        // localStorage 에 access token 저장.
+        localStorage.setItem("user-token", res.token);
       }
     });
 
-    console.log(res);
     return { res };
-
-    mutate("/login");
   };
 
   const deleteAuth = async (id: number) => {
     await del(`/signup/${id}`);
-
-    mutate("/signup");
   };
 
   return { postSignup, postLogin, deleteAuth };
