@@ -18,15 +18,19 @@ export const StudyList = ({ data }: IContestProps) => {
       field: "category",
       hozAlign: "center",
       vertAlign: "middle",
+      display: "block",
       width: 120,
     },
 
     {
       title: "제목",
       field: "title",
-      hozAlign: "center",
-      vertAlign: "middle",
-      width: 120,
+      width: 180,
+      // text-overflow: ellipsis; 사용을 위해 주석처리
+      //   hozAlign: "center",
+      //   vertAlign: "middle",
+
+      headerSort: false, //sorting안함
     },
     {
       title: "인원제한",
@@ -34,6 +38,7 @@ export const StudyList = ({ data }: IContestProps) => {
       hozAlign: "center",
       vertAlign: "middle",
       width: 120,
+      headerSort: false,
     },
 
     {
@@ -46,8 +51,7 @@ export const StudyList = ({ data }: IContestProps) => {
     {
       title: "상세내용",
       field: "content",
-      hozAlign: "center",
-      vertAlign: "middle",
+      headerSort: false, //sorting안함
     },
     {
       title: "오픈카톡",
@@ -62,17 +66,21 @@ export const StudyList = ({ data }: IContestProps) => {
       width: 150,
       hozAlign: "center",
       vertAlign: "middle",
+      headerSort: false,
     },
   ];
 
   const options: ReactTabulatorOptions = {
-    height: "100%",
+    height: "100px",
     layout: "fitColumns",
     pagination: true,
     paginationMode: "local",
     paginationSize: 10,
+    printAsHtml: true,
   };
-
+  const rowClickHandler = (e: any, data: any) => {
+    console.log(data._row.data);
+  };
   if (!data) return <Loading />;
   return (
     <StudyListWrapper>
@@ -81,6 +89,7 @@ export const StudyList = ({ data }: IContestProps) => {
         columns={columns}
         data={data}
         options={options}
+        events={{ rowClick: rowClickHandler }}
       />
     </StudyListWrapper>
   );
@@ -91,28 +100,11 @@ const StudyListWrapper = styled.div`
 `;
 
 const TabulatorStyle = styled(ReactTabulator)`
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-
-  .tabulator-row table {
-    vertical-align: middle;
-    border-collapse: collapse;
-  }
-
-  .tabulator-row table img {
-    border: 2px solid #ccc;
-  }
-
-  .tabulator-row table tr td {
-    border: none;
-  }
-
-  .tabulator-row table tr td:first-of-type {
-    width: 60px;
-  }
-
-  .tabulator-row table tr td div {
-    padding: 5px;
+  .tabulator .tabulator-tableHolder {
+    position: relative;
+    width: 100%;
+    white-space: nowrap;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
   }
 `;
