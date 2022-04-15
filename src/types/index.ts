@@ -24,3 +24,9 @@ export interface IContestCrawling {
   url: string;
   imgUrl: string;
 }
+
+export interface ICommunity {
+  title: string;
+  content: string;
+  category: string;
+}

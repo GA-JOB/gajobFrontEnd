@@ -4,8 +4,11 @@ import { SidebarData } from "./SidebarData";
 import styled from "styled-components";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { Menu, MenuOpen } from "@mui/icons-material";
+import storage from "hooks/store";
 
 export const Header = () => {
+  const token = storage.get("user-token");
+
   const [close, setClose] = useState(false);
   const showSidebar = () => setClose(!close);
 
@@ -66,6 +69,9 @@ export const Header = () => {
             <Nav.Link href="/job-news">
               <NavTitle>News</NavTitle>
             </Nav.Link>
+            <Nav.Link href="/contest">
+              <NavTitle>공모전</NavTitle>
+            </Nav.Link>
             <Nav.Link href="/job-posting">
               <NavTitle> 채용공고</NavTitle>
             </Nav.Link>
@@ -73,20 +79,34 @@ export const Header = () => {
               <NavTitle>JOB담</NavTitle>
             </Nav.Link>
             <Nav.Link href="/gajob-study">
-              <NavTitle> Study</NavTitle>
-            </Nav.Link>
-            <Nav.Link href="/join">
-              <NavTitle> MyPage</NavTitle>
+              <NavTitle>Study</NavTitle>
             </Nav.Link>
           </Nav>
 
           <Nav>
-            <Nav.Link href="/login" style={signFontStyle}>
-              <NavTitle>로그인</NavTitle>
-            </Nav.Link>
-            <Nav.Link href="/signup" style={signFontStyle}>
-              <NavTitle>회원가입</NavTitle>
-            </Nav.Link>
+            {!token ? (
+              <>
+                <Nav.Link href="/login" style={signFontStyle}>
+                  <NavTitle>로그인</NavTitle>
+                </Nav.Link>
+                <Nav.Link href="/signup" style={signFontStyle}>
+                  <NavTitle>회원가입</NavTitle>
+                </Nav.Link>
+              </>
+            ) : (
+              <>
+                <Nav.Link href="/mypage" style={signFontStyle}>
+                  <NavTitle>MyPage</NavTitle>
+                </Nav.Link>
+                <Nav.Link
+                  href="/mypage"
+                  style={signFontStyle}
+                  onClick={() => storage.remove("user-token")}
+                >
+                  <NavTitle>로그아웃</NavTitle>
+                </Nav.Link>
+              </>
+            )}
           </Nav>
         </ContainerStyle>
       </Navbar>
@@ -232,7 +252,7 @@ const MenuItemLinks = styled(Link)`
   }
 `;
 const MenuTitle = styled.span`
-  @media screen and (max-width: 900px) {
+  @media screen and (max-width: 800px) {
     display: none;
   }
 `;

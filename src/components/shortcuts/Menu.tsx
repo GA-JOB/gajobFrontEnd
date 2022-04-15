@@ -26,7 +26,7 @@ export const Menu = () => {
 const ShortcutWrapper = styled.div`
   width: 100%;
 
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 900px) {
     display: none;
   }
 `;

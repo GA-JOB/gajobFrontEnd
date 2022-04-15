@@ -45,7 +45,7 @@ const SlideWrapper = styled.section`
   margin: auto;
   text-align: center;
 
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 900px) {
     display: none;
   }
 `;
