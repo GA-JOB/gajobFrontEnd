@@ -12,7 +12,7 @@ import { JobNews } from "pages/news/index";
 import { Contest } from "pages/contest/index";
 import { JobPosting } from "pages/JobPosting";
 import { Community } from "pages/Community";
-import { Study } from "pages/Study";
+import { Study } from "pages/study/index";
 import { Portfolio } from "pages/Portfolio";
 import { Calendar } from "pages/Calendar";
 import { MyPage } from "pages/MyPage";
