@@ -1,9 +1,9 @@
-export interface IAuthData {
-  id: number;
-  name: string;
-  nickname: string;
-  email: string;
-  password: string;
+export interface IUserData {
+  id?: number;
+  name?: string;
+  nickname?: string;
+  email?: string;
+  password?: string;
 }
 
 export interface INewsCrawling {
@@ -49,4 +49,10 @@ export interface IJobPostingCrawling {
   authNum: string;
   region: string;
   salary: string;
+}
+
+export interface ICommunity {
+  title: string;
+  content: string;
+  category: string;
 }

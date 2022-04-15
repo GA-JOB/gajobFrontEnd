@@ -10,12 +10,14 @@ import { ReactTabulator } from "react-tabulator";
 import { ColumnDefinition, ReactTabulatorOptions } from "react-tabulator";
 import useGetJobPosting from "hooks/api/useGetJobPosting";
 import { IJobPostingCrawling } from "types";
+import storage from "hooks/store";
 
 export const JobPosting = () => {
+  const token = storage.get("user-token");
   const { data } = useGetJobPosting();
 
   if (!data) return <Loading />;
-
+  if (!token) return <>접근 못함</>;
   return (
     <JobPostingWrapper>
       <MenuTitle

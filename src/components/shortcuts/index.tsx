@@ -60,7 +60,10 @@ export const ShortcutMenu = () => {
             <ContentText>GA-JOB 에서</ContentText>
             <ContentText id="master-container-scroller">
               {menus.map((menu, index) => (
-                <ScrollMenu className="master-container-scroller_item">
+                <ScrollMenu
+                  className="master-container-scroller_item"
+                  key={index}
+                >
                   {menu.name}
                 </ScrollMenu>
               ))}

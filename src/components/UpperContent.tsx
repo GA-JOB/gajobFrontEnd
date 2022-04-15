@@ -70,7 +70,6 @@ const Contents = styled.div`
 `;
 
 const ContentsTitle = styled.div`
-  margin-bottom: 1vw;
   color: var(--brand-color);
   font-size: 11pt;
 `;
@@ -84,6 +83,10 @@ const Description = styled.div`
   margin: 1vw 0vw 0vw 8vw;
   font-size: 1.2vw;
   line-height: 2.5vw;
+
+  @media screen and (max-width: 1000px) {
+    display: none;
+  }
 `;
 const Highlight = styled.strong`
   color: var(--brand-color);
@@ -96,4 +99,8 @@ const Highlight = styled.strong`
 const SlideItemStyle = styled.div`
   float: right;
   width: 60%;
+
+  @media screen and (max-width: 1000px) {
+    display: none;
+  }
 `;

@@ -1,16 +1,31 @@
-import axios, { AxiosError, AxiosResponse } from "axios";
+import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 
 const instance = axios.create({ baseURL: process.env.REACT_APP_API_URL });
 
+// Request interceptor
+function interceptorRequestFulfilled(config: AxiosRequestConfig) {
+  let token = localStorage.getItem("user-token");
+  return {
+    ...config,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+}
+
+instance.interceptors.request.use(interceptorRequestFulfilled);
+
+// Response interceptor
 const responseInterceptorFulfilled = (res: AxiosResponse) => {
   if (200 <= res.status && res.status < 300) return res.data;
 
-  return Promise.reject(res.data);
+  return Promise.reject(...res.data);
 };
 
 const responseInterceptorRejected = (error: AxiosError) => {
   const errorMsg = error.response?.data?.message ?? "에러입니다";
-
+  console.log(error);
   alert(errorMsg);
   return new Error(error.response?.data?.message ?? error);
 };

@@ -1,9 +1,9 @@
 import { useState } from "react";
-import styled from "styled-components";
-// import { ButtonType } from "../components/button/ButtonType";
 import { MenuTitle } from "components/Menutitle";
-import { Button } from "@mui/material";
 import { StudyList } from "pages/study/StudyList";
+import styled from "styled-components";
+import { Button } from "@mui/material";
+import storage from "hooks/store";
 
 const boxs: any = [
   {
@@ -108,7 +108,11 @@ const boxs: any = [
 ];
 
 export const Study = () => {
+  const token = storage.get("user-token");
+
   const [register, setRegister] = useState<Boolean>(false);
+
+  if (!token) return <>접근 못함</>;
   return (
     <StudyWrapper>
       <MenuTitle

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import storage from "hooks/store";
 
 const MyPageWrapper = styled.div`
   display: flex;
@@ -9,5 +10,8 @@ const MyPageWrapper = styled.div`
 `;
 
 export const MyPage = () => {
+  const token = storage.get("user-token");
+
+  if (!token) return <>접근 못함</>;
   return <MyPageWrapper>MyPage</MyPageWrapper>;
 };
