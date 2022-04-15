@@ -75,7 +75,7 @@ export const Header = () => {
             <Nav.Link href="/gajob-study">
               <NavTitle> Study</NavTitle>
             </Nav.Link>
-            <Nav.Link href="/mypage">
+            <Nav.Link href="/join">
               <NavTitle> MyPage</NavTitle>
             </Nav.Link>
           </Nav>

@@ -1,78 +1,77 @@
 import styled from "styled-components";
+import { MenuTitle } from "components/Menutitle";
 
 export const NoEmail = () => {
   return (
     <>
-      {/* <Etitle>이메일 무단수집거부</Etitle> */}
+      <ContainerWrapper>
+        <MenuTitle title={"이메일무단수집거부"} info={""}></MenuTitle>
 
-      <Econtainer>
-        <EcontainerBox>
-          <Eimg src="http://ilasskorea.org/inc/application/dubu_policy/skin/s150319001001/images/img_email_refusal.png"></Eimg>
-          <Econtents>
-            본 웹 사이트에 게시된 이메일 주소가 전자우편 수집 프로그램이나 그
-            밖의 기술적 장치를 이용하여 무단으로 수집되는 것을 거부하며 이를
-            위반 시 정보통신망법에 의해 형사 처벌됨을 유념하시기 바랍니다.
-          </Econtents>
-          <Elegal>
-            ※ 정보통신망 이용촉진 및 정보보호 등에 관한법률 제50조의 2
-            (전자우편주소의 무단 수집행위 등 금지)
-          </Elegal>
-        </EcontainerBox>
+        <ContentBox>
+          <EcontainerBox>
+            <Eimg src="http://ilasskorea.org/inc/application/dubu_policy/skin/s150319001001/images/img_email_refusal.png"></Eimg>
+            <Econtents>
+              본 웹 사이트에 게시된 이메일 주소가 전자우편 수집 프로그램이나 그
+              밖의 기술적 장치를 이용하여 무단으로 수집되는 것을 거부하며 이를
+              위반 시 정보통신망법에 의해 형사 처벌됨을 유념하시기 바랍니다.
+            </Econtents>
+            <Elegal>
+              ※ 정보통신망 이용촉진 및 정보보호 등에 관한법률 제50조의 2
+              (전자우편주소의 무단 수집행위 등 금지)
+            </Elegal>
+          </EcontainerBox>
 
-        <EcontainerUl>
-          <ul>
-            <h4>
-              | 정보통신망법 제 50조의 2 (전자우편주소의 무단 수집행위 등 금지)
-            </h4>
-            <LegalContents>
-              누구든지 전자우편주소의 수집을 거부하는 의사가 명시된 인터넷
-              홈페이지에서 자동으로 전자우편주소를 수집하는 프로그램 그 밖의
-              기술적 장치를 이용하여 전자우편주소를 수집하여서는 아니된다.
-            </LegalContents>
-            <LegalContents>
-              누구든지 제1항의 규정을 위반하여 수집된 전자우편주소를
-              판매·유통하여서는 아니된다.
-            </LegalContents>
-            <LegalContents>
-              누구든지 제1항의 및 제2항의 규정에 의하여 수집·판매 및 유통이
-              금지된 전자우편주소임을 알고 이를 정보전송에 이용하여서는
-              아니된다.
-            </LegalContents>
-          </ul>
-        </EcontainerUl>
+          <EcontainerUl>
+            <ul>
+              <h4>
+                | 정보통신망법 제 50조의 2 (전자우편주소의 무단 수집행위 등
+                금지)
+              </h4>
+              <LegalContents>
+                누구든지 전자우편주소의 수집을 거부하는 의사가 명시된 인터넷
+                홈페이지에서 자동으로 전자우편주소를 수집하는 프로그램 그 밖의
+                기술적 장치를 이용하여 전자우편주소를 수집하여서는 아니된다.
+              </LegalContents>
+              <LegalContents>
+                누구든지 제1항의 규정을 위반하여 수집된 전자우편주소를
+                판매·유통하여서는 아니된다.
+              </LegalContents>
+              <LegalContents>
+                누구든지 제1항의 및 제2항의 규정에 의하여 수집·판매 및 유통이
+                금지된 전자우편주소임을 알고 이를 정보전송에 이용하여서는
+                아니된다.
+              </LegalContents>
+            </ul>
+          </EcontainerUl>
 
-        <Ealert>
-          ※ 만일, 위와 같은 기술적 조치를 사용한 이메일주소 무단수집 피해를
-          당하신 경우
-          <Alerthighlight>
-            {" "}
-            불법스팸 대응센터 전용전화(국번없이 02-1336)나 홈페이지(
-            www.spamcop.or.kr )의 신고
-          </Alerthighlight>{" "}
-          창을 통하여 신고하기 바랍니다.
-        </Ealert>
-      </Econtainer>
+          <Ealert>
+            ※ 만일, 위와 같은 기술적 조치를 사용한 이메일주소 무단수집 피해를
+            당하신 경우
+            <Alerthighlight>
+              {" "}
+              불법스팸 대응센터 전용전화(국번없이 02-1336)나 홈페이지(
+              www.spamcop.or.kr )의 신고
+            </Alerthighlight>{" "}
+            창을 통하여 신고하기 바랍니다.
+          </Ealert>
+        </ContentBox>
+      </ContainerWrapper>
     </>
   );
 };
 
-/* 소제목 디자인 적용 */
-// const noEmail_Title styled.div`
-//     margin-left: 20%;
-//     margin-top: 5%;
-
-//     border-left: 5px solid #2a4476;
-//     padding: 2px;
-//     font-weight: bold;
-// `;
-// const Etitle = styled.div`
-//   text-align: center;
-// `;
-
 /* container 여백 적용*/
-const Econtainer = styled.div`
-  margin-left: 20%;
-  margin-bottom: 10%;
+const ContainerWrapper = styled.div`
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+`;
+
+const ContentBox = styled.div`
+  width: 100%;
+  align-items: center;
+  justify-content: center;
 `;
 
 /*container box*/
@@ -95,10 +94,10 @@ const Eimg = styled.img`
   margin-right: 20px;
   float: left;
 `;
-const Econtents = styled.p`
+const Econtents = styled.div`
   font-size: 12pt;
 `;
-const Elegal = styled.p`
+const Elegal = styled.div`
   font-size: 10pt;
 `;
 

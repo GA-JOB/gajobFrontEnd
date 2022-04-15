@@ -1,12 +1,11 @@
-import { useSWRConfig } from "swr";
 import { post, del } from "lib/api/client";
-import { IAuthData } from "types";
+import { IUserData } from "types";
 
-interface IPostSignupRequest extends Omit<IAuthData, "id"> {}
-interface IPostLoginRequest {
-  email: string;
-  password: string;
-}
+type ISignupType = "id";
+type ILoginType = "id" | "name" | "nickname";
+
+interface IPostSignupRequest extends Omit<IUserData, ISignupType> {}
+interface IPostLoginRequest extends Omit<IUserData, ILoginType> {}
 
 export const useAuth = () => {
   const postSignup = async ({
@@ -20,28 +19,37 @@ export const useAuth = () => {
       nickname,
       email,
       password,
-    }).then((res: any) => {
-      if (res.activated === true) {
+    }).then((data: any) => {
+      if (data.activated === true) {
         alert("환영합니다!\n회원가입이 정상적으로 처리되었습니다.");
       }
     });
 
-    console.log(res);
     return { res };
   };
 
   const postLogin = async ({ email, password }: IPostLoginRequest) => {
-    const res = await post(`/login`, { email, password }).then((res: any) => {
-      if (res.token) {
+    let token = localStorage.getItem("user-token");
+    const login = await post(
+      `/login`,
+      { email, password },
+      {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    ).then((data: any) => {
+      if (data.token) {
         console.log("로그인 성공");
-        console.log(res.token);
 
         // localStorage 에 access token 저장.
-        localStorage.setItem("user-token", res.token);
+        localStorage.setItem("user-token", data.token);
+        console.log(data.token);
       }
     });
 
-    return { res };
+    return { login };
   };
 
   const deleteAuth = async (id: number) => {
