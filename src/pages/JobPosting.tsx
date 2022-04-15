@@ -4,8 +4,11 @@ import "react-tabulator/lib/styles.css"; // default theme
 import "react-tabulator/css/bootstrap/tabulator_bootstrap.min.css"; // use Theme(s)
 import { ReactTabulator } from "react-tabulator";
 import { ColumnDefinition, ReactTabulatorOptions } from "react-tabulator";
+import storage from "hooks/store";
 
 export const JobPosting = () => {
+  const token = storage.get("user-token");
+
   const columns: ColumnDefinition[] | any = [
     { formatter: "rownum", hozAlign: "center", width: 40 },
     { title: "회사이름", field: "name", width: 150 },
@@ -250,6 +253,8 @@ export const JobPosting = () => {
     paginationMode: "local",
     paginationSize: 10,
   };
+
+  if (!token) return <>접근 못함</>;
   return (
     <JobPostingWrapper>
       <MenuTitle

@@ -47,7 +47,6 @@ export default function App() {
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/mypage" element={<MyPage />} />
-
           {/* footer link */}
           <Route path="/noEmail" element={<NoEmail />}></Route>
           <Route path="/personalRule" element={<PersonalRule />}></Route>

@@ -16,7 +16,6 @@ export const useCommunity = () => {
     }).then((data: any) => {
       if (data.title) {
         console.log(JSON.stringify(data));
-        // alert("게시글이 성공적으로 작성되었습니다.");
       }
     });
 

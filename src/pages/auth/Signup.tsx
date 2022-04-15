@@ -67,9 +67,9 @@ export const Signup = ({
         email: emailForm,
         password: passwordForm,
       });
-    } else {
+    } else if (mismatchError === true) {
       window.confirm("회원 정보를 다시 확인해주시기 바랍니다.");
-    }
+    } else return;
   };
 
   return (

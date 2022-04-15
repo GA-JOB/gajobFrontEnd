@@ -4,6 +4,7 @@ import { MenuTitle } from "components/Menutitle";
 import { ButtonType } from "components/button/ButtonType";
 import styled from "styled-components";
 import { TextField } from "@material-ui/core";
+import storage from "hooks/store";
 
 interface ICommunityProps {
   title?: string;
@@ -16,6 +17,8 @@ export const Community = ({
   content = "",
   category = "",
 }: ICommunityProps) => {
+  const token = storage.get("user-token");
+
   const { postCommunity } = useCommunity();
   const [form, setForm] = useState({
     titleForm: title,
@@ -45,6 +48,8 @@ export const Community = ({
       });
     }
   };
+
+  if (!token) return <>접근 못함</>;
 
   return (
     <CommunityWrapper>
