@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { MenuTitle } from "components/Menutitle";
 import { ButtonType } from "components/button/ButtonType";
 import styled from "styled-components";
@@ -15,6 +16,7 @@ interface ILoginProps {
 }
 
 export const Login = ({ email = "", password = "" }: ILoginProps) => {
+  let navigate = useNavigate();
   const { postLogin } = useAuth();
 
   const [form, setForm] = useState({
@@ -40,7 +42,8 @@ export const Login = ({ email = "", password = "" }: ILoginProps) => {
       email: emailForm,
       password: passwordForm,
     });
-    console.log("로그인 성공");
+
+    navigate("/login");
   };
 
   return (
@@ -95,11 +98,11 @@ const InputLabel = styled.div`
   padding: 0.8vw 0;
   font-size: 10pt;
 `;
-const InputField = styled(TextField)({
-  width: "100%",
-  fontSize: "10pt",
-  marginBottom: "1vw",
-});
+const InputField = styled(TextField)`
+  width: 100%;
+  font-size: 10pt;
+  margin-bottom: 1vw;
+`;
 
 const LinkToLogin = styled.div`
   padding: 1vw 0;

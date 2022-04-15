@@ -1,4 +1,4 @@
-import React, { useState, MouseEvent } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { SidebarData } from "./SidebarData";
 import styled from "styled-components";
@@ -40,7 +40,6 @@ export const Header = () => {
     } else {
       setLogoName("GA-JOB");
     }
-    // history.push("/") 추가
   };
 
   return (
@@ -50,7 +49,7 @@ export const Header = () => {
           <Menu />
         </MenuIconOpen>
 
-        <Container>
+        <ContainerStyle>
           <LogoTitle>
             <Navbar.Brand
               id="logo-name"
@@ -76,20 +75,20 @@ export const Header = () => {
             <Nav.Link href="/gajob-study">
               <NavTitle> Study</NavTitle>
             </Nav.Link>
-            <Nav.Link href="/mypage">
+            <Nav.Link href="/join">
               <NavTitle> MyPage</NavTitle>
             </Nav.Link>
           </Nav>
 
           <Nav>
             <Nav.Link href="/login" style={signFontStyle}>
-              로그인
+              <NavTitle>로그인</NavTitle>
             </Nav.Link>
             <Nav.Link href="/signup" style={signFontStyle}>
-              회원가입
+              <NavTitle>회원가입</NavTitle>
             </Nav.Link>
           </Nav>
-        </Container>
+        </ContainerStyle>
       </Navbar>
 
       <SidebarMenu close={close}>
@@ -102,7 +101,9 @@ export const Header = () => {
             <MenuItems key={index}>
               <MenuItemLinks to={item.path}>
                 {item.icon}
-                <span style={{ marginLeft: "16px" }}>{item.title}</span>
+                <MenuTitle style={{ marginLeft: "16px" }}>
+                  {item.title}
+                </MenuTitle>
               </MenuItemLinks>
             </MenuItems>
           );
@@ -112,7 +113,18 @@ export const Header = () => {
   );
 };
 
-const LogoTitle = styled.div``;
+const ContainerStyle = styled(Container)`
+  @media screen and (max-width: 1000px) {
+    height: 5vw;
+  }
+`;
+const LogoTitle = styled.div`
+  @media screen and (max-width: 1000px) {
+    width: 100%;
+    margin-top: -3vw;
+    text-align: center;
+  }
+`;
 const NavTitle = styled.div`
   margin: 5px;
   color: white;
@@ -129,6 +141,10 @@ const NavTitle = styled.div`
     transform: scaleX(1);
     transform-origin: 0% 50%;
   }
+
+  @media screen and (max-width: 1000px) {
+    display: none;
+  }
 `;
 
 const MenuIconOpen = styled(Link)`
@@ -136,8 +152,13 @@ const MenuIconOpen = styled(Link)`
   justify-content: start;
   font-size: 2rem;
   margin-left: 3rem;
-  margin-top: -0.2vw;
+  margin-top: -0.3vw;
   color: #ffffff;
+
+  @media screen and (max-width: 900px) {
+    margin-top: 2vw;
+    margin-bottom: -2vw;
+  }
 `;
 
 const MenuIconClose = styled(Link)`
@@ -147,6 +168,11 @@ const MenuIconClose = styled(Link)`
   margin-top: 0.75rem;
   margin-right: 1rem;
   color: #ffffff;
+
+  @media screen and (max-width: 900px) {
+    margin-top: 2vw;
+    margin-bottom: -2vw;
+  }
 `;
 
 const SidebarMenu = styled.div<{ close: boolean }>`
@@ -174,7 +200,7 @@ const MenuItemLinks = styled(Link)`
   display: flex;
   align-items: center;
   padding: 0 3rem;
-  font-size: 20px;
+  font-size: 1.5vw;
   text-decoration: none;
   color: #ffffff;
 
@@ -189,5 +215,24 @@ const MenuItemLinks = styled(Link)`
     color: #000000;
     text-align: center;
     transition: 0.5s;
+  }
+
+  @media screen and (max-width: 900px) {
+    padding: 0 2rem;
+    &:hover {
+      margin: 0 1rem;
+      padding: 1rem;
+      border-radius: 100%;
+      background-color: var(--brand-color);
+
+      color: #000000;
+      text-align: center;
+      transition: 0.5s;
+    }
+  }
+`;
+const MenuTitle = styled.span`
+  @media screen and (max-width: 900px) {
+    display: none;
   }
 `;

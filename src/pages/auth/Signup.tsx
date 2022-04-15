@@ -1,5 +1,6 @@
 import { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { MenuTitle } from "components/Menutitle";
 import { ButtonType } from "components/button/ButtonType";
 import { useAuth } from "hooks/api/auth";
@@ -22,6 +23,7 @@ export const Signup = ({
   email = "",
   password = "",
 }: ISignupProps) => {
+  let navigate = useNavigate();
   const { postSignup } = useAuth();
 
   const [passwordCheck, setPasswordCheck] = useState<string>("");
@@ -57,13 +59,21 @@ export const Signup = ({
 
     console.log(form);
 
-    postSignup({
-      name: nameForm,
-      nickname: nicknameForm,
-      email: emailForm,
-      password: passwordForm,
-    });
-    window.alert("가입하시겠습니까?");
+    if (
+      window.confirm("회원가입을 하시겠습니까?") === true &&
+      mismatchError === false
+    ) {
+      postSignup({
+        name: nameForm,
+        nickname: nicknameForm,
+        email: emailForm,
+        password: passwordForm,
+      });
+
+      navigate("/login");
+    } else {
+      window.confirm("회원 정보를 다시 확인해주시기 바랍니다.");
+    }
   };
 
   return (
@@ -161,11 +171,11 @@ const InputLabel = styled.div`
   padding: 0.8vw 0;
   font-size: 10pt;
 `;
-const InputField = styled(TextField)({
-  width: "100%",
-  fontSize: "10pt",
-  marginBottom: "1vw",
-});
+const InputField = styled(TextField)`
+  width: 100%;
+  font-size: 10pt;
+  margin-bottom: 1vw;
+`;
 const Alert = styled.span`
   color: red;
 `;

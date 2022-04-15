@@ -79,6 +79,10 @@ export const NewsList = ({ searchedData }: INewsProps) => {
 
 const NewsListWrapper = styled.div`
   width: 100%;
+
+  @media screen and (max-width: 1000px) {
+    display: none;
+  }
 `;
 
 const TabulatorStyle = styled(ReactTabulator)`

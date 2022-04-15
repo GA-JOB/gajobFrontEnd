@@ -23,10 +23,12 @@ import { Sitemap } from "components/footer/Sitemap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styled from "styled-components";
 import useGetNews from "hooks/api/useGetNews";
+import useGetAuth from "hooks/api/auth/useGetAuth";
 
 export default function App() {
   // main 화면에서 component route시 데이터 불러오기 위함.
-  const { data } = useGetNews();
+  // const { data } = useGetNews();
+  const { data } = useGetAuth();
 
   return (
     <Router>
@@ -65,6 +67,7 @@ const HeaderStyle = styled.header`
   position: relative;
   z-index: 10;
   width: 100%;
+  height: 10vw;
   position: fixed;
 `;
 
@@ -75,6 +78,10 @@ const Layout = styled.div`
   align-items: center;
   justify-content: center;
   display: flex;
+
+  @media screen and (max-width: 900px) {
+    min-height: 80vw;
+  }
 `;
 
 const FooterStyle = styled(Footer)`
