@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { post, del } from "lib/api/client";
 import { IUserData } from "types";
 
@@ -8,6 +9,7 @@ interface IPostSignupRequest extends Omit<IUserData, ISignupType> {}
 interface IPostLoginRequest extends Omit<IUserData, ILoginType> {}
 
 export const useAuth = () => {
+  let navigate = useNavigate();
   const postSignup = async ({
     name,
     nickname,
@@ -22,6 +24,8 @@ export const useAuth = () => {
     }).then((data: any) => {
       if (data.activated === true) {
         alert("환영합니다!\n회원가입이 정상적으로 처리되었습니다.");
+
+        navigate("/login");
       }
     });
 
@@ -46,6 +50,8 @@ export const useAuth = () => {
         // localStorage 에 access token 저장.
         localStorage.setItem("user-token", data.token);
         console.log(data.token);
+
+        navigate("/");
       }
     });
 

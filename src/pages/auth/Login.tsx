@@ -6,6 +6,7 @@ import { ButtonType } from "components/button/ButtonType";
 import styled from "styled-components";
 import { TextField } from "@material-ui/core";
 import { useAuth } from "hooks/api/auth";
+import useGetAuth from "hooks/api/auth/useGetAuth";
 
 interface ILoginProps {
   id?: number;
@@ -18,6 +19,7 @@ interface ILoginProps {
 export const Login = ({ email = "", password = "" }: ILoginProps) => {
   let navigate = useNavigate();
   const { postLogin } = useAuth();
+  const { data } = useGetAuth();
 
   const [form, setForm] = useState({
     emailForm: email,
@@ -42,8 +44,7 @@ export const Login = ({ email = "", password = "" }: ILoginProps) => {
       email: emailForm,
       password: passwordForm,
     });
-
-    navigate("/login");
+    console.log(data);
   };
 
   return (

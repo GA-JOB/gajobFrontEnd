@@ -10,8 +10,8 @@ interface IGetUserRequest extends IUserType {
 
 function useGetAuth() {
   const { data } = useSWR<IGetUserRequest[]>("user", fetcher);
-  return { data };
+  // if (!localStorage.getItem("user-token")) return;
 
-  console.log(data);
+  return { data };
 }
 export default useGetAuth;
