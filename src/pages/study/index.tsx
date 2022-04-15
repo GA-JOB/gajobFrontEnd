@@ -107,16 +107,12 @@ const boxs: any = [
   },
 ];
 
-// const onClick=()=>{
-
-// }
-
 export const Study = () => {
   const [register, setRegister] = useState<Boolean>(false);
   return (
     <StudyWrapper>
       <MenuTitle
-        title={"스터디"}
+        title={"STUDY"}
         info={"원하는 스터디를 만들고 찾아보세요"}
       ></MenuTitle>
       <Button variant="contained" onClick={() => setRegister(true)}>

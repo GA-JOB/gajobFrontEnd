@@ -24,3 +24,29 @@ export interface IContestCrawling {
   url: string;
   imgUrl: string;
 }
+
+export interface IJobPostingCrawling {
+  id: number;
+  career: string;
+  employTypeCode: number;
+  lastModifyDate: number;
+  infoSource: string;
+  title: string;
+  closeDate: string;
+  basicAddress: string;
+  prefCd: string | any;
+  registrationDate: "22-04-12";
+  wantedMobileInfoUrl: string;
+  workType: string;
+  maxSalary: number;
+  wantedInfoUrl: string;
+  salaryType: string;
+  minEdu: string;
+  minSalary: number;
+  company: string;
+  streetNameAddress: number;
+  jobCode: string | null;
+  authNum: string;
+  region: string;
+  salary: string;
+}
