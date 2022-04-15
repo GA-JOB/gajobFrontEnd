@@ -1,16 +1,17 @@
 import useSWR from "swr";
 import { fetcher } from "lib/api/fetcher";
-import { IAuthData } from "types";
+import { IUserData } from "types";
 
-function useGetAuth() {
-  // localStorage 에 저장된 access token 접근
-  let token = localStorage.getItem("user-token") || "";
-
-  console.log(token);
-
-  const { data } = useSWR<IAuthData[]>("user", fetcher);
-
-  return { data };
+type IUserType = Omit<IUserData, "id">;
+interface IGetUserRequest extends IUserType {
+  activated: string;
+  authorities: string;
 }
 
+function useGetAuth() {
+  const { data } = useSWR<IGetUserRequest[]>("user", fetcher);
+  return { data };
+
+  console.log(data);
+}
 export default useGetAuth;

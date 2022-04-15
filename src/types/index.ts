@@ -1,4 +1,4 @@
-export interface IAuthData {
+export interface IUserData {
   id?: number;
   name?: string;
   nickname?: string;

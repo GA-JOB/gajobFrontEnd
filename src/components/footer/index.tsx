@@ -35,7 +35,7 @@ const FooterBox = styled.footer`
   }
 `;
 
-const FooterContents = styled.p`
+const FooterContents = styled.div`
   text-align: center;
   margin-top: 1vw;
   width: 90%;
@@ -55,7 +55,10 @@ const FooterLink = styled.a`
   text-decoration: none;
   color: var(--footer-text-color);
 `;
-const FooterLogo = styled.h5``;
+const FooterLogo = styled.div`
+  font-size: 15pt;
+  font-weight: bold;
+`;
 const FooterInfo = styled.div`
   font-size: 0.7rem;
 `;

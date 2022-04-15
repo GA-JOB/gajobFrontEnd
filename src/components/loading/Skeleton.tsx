@@ -16,15 +16,9 @@ export const SkeletonLoading = () => {
       </ImgBox>
       <TxtBox>
         {boxs.map((box: any, index: number) => (
-          <>
-            <Skeleton
-              variant="text"
-              animation="wave"
-              width={500}
-              height={40}
-              key={index}
-            />
-          </>
+          <div key={index}>
+            <Skeleton variant="text" animation="wave" width={500} height={40} />
+          </div>
         ))}
       </TxtBox>
     </LoadingWrapper>

@@ -59,7 +59,10 @@ export const Signup = ({
 
     console.log(form);
 
-    if (window.confirm("회원가입을 하시겠습니까?") === true) {
+    if (
+      window.confirm("회원가입을 하시겠습니까?") === true &&
+      mismatchError === false
+    ) {
       postSignup({
         name: nameForm,
         nickname: nicknameForm,
@@ -68,7 +71,9 @@ export const Signup = ({
       });
 
       navigate("/login");
-    } else return;
+    } else {
+      window.confirm("회원 정보를 다시 확인해주시기 바랍니다.");
+    }
   };
 
   return (
@@ -166,11 +171,11 @@ const InputLabel = styled.div`
   padding: 0.8vw 0;
   font-size: 10pt;
 `;
-const InputField = styled(TextField)({
-  width: "100%",
-  fontSize: "10pt",
-  marginBottom: "1vw",
-});
+const InputField = styled(TextField)`
+  width: 100%;
+  font-size: 10pt;
+  margin-bottom: 1vw;
+`;
 const Alert = styled.span`
   color: red;
 `;
