@@ -1,6 +1,5 @@
 import { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import { MenuTitle } from "components/Menutitle";
 import { ButtonType } from "components/button/ButtonType";
 import { useAuth } from "hooks/api/auth";
@@ -23,7 +22,6 @@ export const Signup = ({
   email = "",
   password = "",
 }: ISignupProps) => {
-  let navigate = useNavigate();
   const { postSignup } = useAuth();
 
   const [passwordCheck, setPasswordCheck] = useState<string>("");
@@ -69,11 +67,9 @@ export const Signup = ({
         email: emailForm,
         password: passwordForm,
       });
-
-      navigate("/login");
-    } else {
+    } else if (mismatchError === true) {
       window.confirm("회원 정보를 다시 확인해주시기 바랍니다.");
-    }
+    } else return;
   };
 
   return (

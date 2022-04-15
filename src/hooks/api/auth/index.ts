@@ -1,4 +1,6 @@
+import { useNavigate } from "react-router-dom";
 import { post, del } from "lib/api/client";
+import storage from "hooks/store";
 import { IUserData } from "types";
 
 type ISignupType = "id";
@@ -8,6 +10,7 @@ interface IPostSignupRequest extends Omit<IUserData, ISignupType> {}
 interface IPostLoginRequest extends Omit<IUserData, ILoginType> {}
 
 export const useAuth = () => {
+  let navigate = useNavigate();
   const postSignup = async ({
     name,
     nickname,
@@ -19,9 +22,10 @@ export const useAuth = () => {
       nickname,
       email,
       password,
-    }).then((data: any) => {
-      if (data.activated === true) {
+    }).then((res: any) => {
+      if (res.activated === true) {
         alert("환영합니다!\n회원가입이 정상적으로 처리되었습니다.");
+        window.location.replace("/login");
       }
     });
 
@@ -29,25 +33,20 @@ export const useAuth = () => {
   };
 
   const postLogin = async ({ email, password }: IPostLoginRequest) => {
-    let token = localStorage.getItem("user-token");
-    const login = await post(
-      `/login`,
-      { email, password },
-      {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    ).then((data: any) => {
-      if (data.token) {
-        console.log("로그인 성공");
+    const login = await post(`/login`, { email, password }).then(
+      (data: any) => {
+        if (data.token) {
+          console.log("로그인 성공");
 
-        // localStorage 에 access token 저장.
-        localStorage.setItem("user-token", data.token);
-        console.log(data.token);
+          // localStorage 에 access token 저장.
+          storage.set("user-token", data.token);
+
+          if (storage.get("user-token")) {
+            window.location.replace("/");
+          }
+        }
       }
-    });
+    );
 
     return { login };
   };

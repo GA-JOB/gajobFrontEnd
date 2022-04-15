@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import storage from "hooks/store";
 
 const PortfolioWrapper = styled.div`
   display: flex;
@@ -9,5 +10,8 @@ const PortfolioWrapper = styled.div`
 `;
 
 export const Portfolio = () => {
+  const token = storage.get("user-token");
+
+  if (!token) return <>접근 못함</>;
   return <PortfolioWrapper>Portfolio</PortfolioWrapper>;
 };

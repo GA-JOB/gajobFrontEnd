@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import { MenuTitle } from "components/Menutitle";
 import { ButtonType } from "components/button/ButtonType";
 import styled from "styled-components";
@@ -16,7 +15,6 @@ interface ILoginProps {
 }
 
 export const Login = ({ email = "", password = "" }: ILoginProps) => {
-  let navigate = useNavigate();
   const { postLogin } = useAuth();
 
   const [form, setForm] = useState({
@@ -42,8 +40,6 @@ export const Login = ({ email = "", password = "" }: ILoginProps) => {
       email: emailForm,
       password: passwordForm,
     });
-
-    navigate("/login");
   };
 
   return (
