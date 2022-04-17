@@ -27,7 +27,6 @@ const MainContainer = styled.div`
   z-index: 0;
   width: 100%;
   margin-top: -6vw;
-  margin-bottom: -10vw;
 
   text-align: center;
   font-weight: 20pt;

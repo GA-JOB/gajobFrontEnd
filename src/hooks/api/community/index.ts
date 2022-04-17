@@ -1,7 +1,15 @@
 import { post } from "lib/api/client";
 import { ICommunity } from "types";
 
-interface IPostCommunityRequest extends ICommunity {}
+type ICommunityPostType =
+  | "id"
+  | "postCategory"
+  | "writer"
+  | "view"
+  | "createdDate"
+  | "modifiedDate"
+  | "comments";
+interface IPostCommunityRequest extends Omit<ICommunity, ICommunityPostType> {}
 
 export const useCommunity = () => {
   const postCommunity = async ({

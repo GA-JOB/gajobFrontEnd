@@ -26,7 +26,23 @@ export interface IContestCrawling {
 }
 
 export interface ICommunity {
-  title: string;
-  content: string;
-  category: string;
+  id: number;
+  title: string | null;
+  content: string | null;
+  category: string | null;
+  postCategory?: string | null;
+  writer?: string;
+  view?: number;
+  createdDate?: Date;
+  modifiedDate?: Date;
+  comments?: ICommunityComment[];
 }
+
+type ICommunityComment = {
+  id?: number;
+  comment?: string;
+  createdDate?: Date;
+  modifiedDate?: Date;
+  nickname?: string;
+  postsId?: number;
+};

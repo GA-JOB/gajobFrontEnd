@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useCommunity } from "hooks/api/community/index";
-import { MenuTitle } from "components/Menutitle";
 import { ButtonType } from "components/button/ButtonType";
 import styled from "styled-components";
 import { TextField, MenuItem } from "@material-ui/core";
@@ -54,10 +53,6 @@ export const PostCommunity = ({
   return (
     <CommunityWrapper>
       <Form onSubmit={handleSubmit}>
-        <MenuTitle
-          title="JOB담"
-          info="취업 관련하여 꿀팁을 서로 공유해보세요!"
-        />
         <InputLabel>
           <span>제목</span>
           <InputField

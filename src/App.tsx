@@ -71,9 +71,8 @@ const HeaderStyle = styled.header`
 `;
 
 const Layout = styled.div`
-  min-height: 40vw;
+  height: 100%;
   padding-top: 3vw;
-  padding-bottom: 10vw;
   align-items: center;
   justify-content: center;
   display: flex;
@@ -85,5 +84,5 @@ const Layout = styled.div`
 
 const FooterStyle = styled(Footer)`
   position: relative;
-  z-index: 100;
+  z-index: 10;
 `;
