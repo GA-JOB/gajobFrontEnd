@@ -3,7 +3,7 @@ import { useCommunity } from "hooks/api/community/index";
 import { MenuTitle } from "components/Menutitle";
 import { ButtonType } from "components/button/ButtonType";
 import styled from "styled-components";
-import { TextField } from "@material-ui/core";
+import { TextField, MenuItem } from "@material-ui/core";
 import storage from "hooks/store";
 
 interface ICommunityProps {
@@ -12,7 +12,7 @@ interface ICommunityProps {
   category?: string;
 }
 
-export const Community = ({
+export const PostCommunity = ({
   title = "",
   content = "",
   category = "",
@@ -38,9 +38,9 @@ export const Community = ({
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    console.log(form);
-
     if (window.confirm("글을 등록하시겠습니까?") === true) {
+      console.log(form);
+
       postCommunity({
         title: titleForm,
         content: contentForm,
@@ -75,15 +75,23 @@ export const Community = ({
         <InputLabel>
           <span>카테고리</span>
           <InputField
-            variant="filled"
-            type="text"
+            select
+            variant="standard"
             name="categoryForm"
             value={categoryForm}
             onChange={onChange}
             size="small"
-            inputProps={{ style: { fontSize: 15, verticalAlign: "middle" } }}
-          />
+            // inputProps={{ style: { fontSize: 15 } }}
+          >
+            <MenuItem value="" selected>
+              ---선택---
+            </MenuItem>
+            <MenuItem value="취업고민">취업고민</MenuItem>
+            <MenuItem value="꿀팁">꿀팁</MenuItem>
+            <MenuItem value="일상">일상</MenuItem>
+          </InputField>
         </InputLabel>
+
         <InputLabel>
           <span>내용</span>
           <InputField

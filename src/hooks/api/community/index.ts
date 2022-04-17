@@ -16,6 +16,8 @@ export const useCommunity = () => {
     }).then((data: any) => {
       if (data.title) {
         console.log(JSON.stringify(data));
+
+        window.location.replace("/jobdam");
       }
     });
 
