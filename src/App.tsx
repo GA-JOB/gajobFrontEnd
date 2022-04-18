@@ -10,7 +10,8 @@ import { Signup } from "pages/auth/Signup";
 import { Login } from "pages/auth/Login";
 import { JobNews } from "pages/news/index";
 import { Contest } from "pages/contest/index";
-import { JobPosting } from "pages/JobPosting";
+import { JobPosting } from "pages/jobPosting/index";
+import { JobPostingDetail } from "./pages/jobPosting/JobPostingDetail";
 import { Community } from "pages/Community";
 import { Study } from "pages/study/index";
 import { Portfolio } from "pages/Portfolio";
@@ -42,12 +43,12 @@ export default function App() {
           <Route path="/job-news" element={<JobNews />} />
           <Route path="/contest" element={<Contest />} />
           <Route path="/job-posting" element={<JobPosting />} />
+          <Route path="/job-posting/:id" element={<JobPostingDetail />} />
           <Route path="/jobdam" element={<Community />} />
           <Route path="/gajob-study" element={<Study />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/mypage" element={<MyPage />} />
-
           {/* footer link */}
           <Route path="/noEmail" element={<NoEmail />}></Route>
           <Route path="/personalRule" element={<PersonalRule />}></Route>
@@ -65,6 +66,7 @@ const HeaderStyle = styled.header`
   position: relative;
   z-index: 10;
   width: 100%;
+  height: 10vw;
   position: fixed;
 `;
 
@@ -75,6 +77,10 @@ const Layout = styled.div`
   align-items: center;
   justify-content: center;
   display: flex;
+
+  @media screen and (max-width: 900px) {
+    min-height: 80vw;
+  }
 `;
 
 const FooterStyle = styled(Footer)`

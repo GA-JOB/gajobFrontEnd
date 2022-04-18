@@ -57,13 +57,19 @@ export const Signup = ({
 
     console.log(form);
 
-    postSignup({
-      name: nameForm,
-      nickname: nicknameForm,
-      email: emailForm,
-      password: passwordForm,
-    });
-    window.alert("가입하시겠습니까?");
+    if (
+      window.confirm("회원가입을 하시겠습니까?") === true &&
+      mismatchError === false
+    ) {
+      postSignup({
+        name: nameForm,
+        nickname: nicknameForm,
+        email: emailForm,
+        password: passwordForm,
+      });
+    } else if (mismatchError === true) {
+      window.confirm("회원 정보를 다시 확인해주시기 바랍니다.");
+    } else return;
   };
 
   return (
@@ -161,11 +167,11 @@ const InputLabel = styled.div`
   padding: 0.8vw 0;
   font-size: 10pt;
 `;
-const InputField = styled(TextField)({
-  width: "100%",
-  fontSize: "10pt",
-  marginBottom: "1vw",
-});
+const InputField = styled(TextField)`
+  width: 100%;
+  font-size: 10pt;
+  margin-bottom: 1vw;
+`;
 const Alert = styled.span`
   color: red;
 `;
