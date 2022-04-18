@@ -6,176 +6,9 @@ import styled from "styled-components";
 import { FormatListBulleted, GridView } from "@mui/icons-material";
 import useGetContests from "hooks/api/useGetContest";
 
-const boxs: any = [
-  {
-    id: 1,
-    category: "기획/아이디어",
-    title: "2022 환경창업대전 Eco + Start-up Challenge",
-    organization: "환경부",
-    state: "활동중",
-    todayState: "활동중",
-    url: "https://www.ecostartup.kr/ecostartup/2022challenge/2022/1",
-    imgUrl:
-      "http://file1.jobkorea.co.kr/contest/files/Banner1/202204/2867_2.jpg",
-  },
-  {
-    id: 2,
-    category: "취업/창업",
-    title: "2022 환경창업대전 Eco + Start-up Challenge",
-    organization: "환경부",
-    state: "활동중",
-    todayState: "활동중",
-    url: "https://www.ecostartup.kr/ecostartup/2022challenge/2022/1",
-    imgUrl:
-      "http://file1.jobkorea.co.kr/contest/files/Banner1/202204/2867_2.jpg",
-  },
-  {
-    id: 3,
-    category: "기획/아이디어",
-    title: "2022 환경창업대전 Eco + Start-up Challenge",
-    organization: "환경부",
-    state: "활동중",
-    todayState: "활동중",
-    url: "https://www.ecostartup.kr/ecostartup/2022challenge/2022/1",
-    imgUrl:
-      "http://file1.jobkorea.co.kr/contest/files/Banner1/202204/2867_2.jpg",
-  },
-  {
-    id: 4,
-    category: "취업/창업",
-    title: "2022 환경창업대전 Eco + Start-up Challenge",
-    organization: "환경부",
-    state: "활동중",
-    todayState: "활동중",
-    url: "https://www.ecostartup.kr/ecostartup/2022challenge/2022/1",
-    imgUrl:
-      "http://file1.jobkorea.co.kr/contest/files/Banner1/202204/2867_2.jpg",
-  },
-  {
-    id: 5,
-    category: "기획/아이디어",
-    title: "2022 환경창업대전 Eco + Start-up Challenge",
-    organization: "환경부",
-    state: "활동중",
-    todayState: "활동중",
-    url: "https://www.ecostartup.kr/ecostartup/2022challenge/2022/1",
-    imgUrl:
-      "http://file1.jobkorea.co.kr/contest/files/Banner1/202204/2867_2.jpg",
-  },
-  {
-    id: 6,
-    category: "취업/창업",
-    title: "2022 환경창업대전 Eco + Start-up Challenge",
-    organization: "환경부",
-    state: "활동중",
-    todayState: "활동중",
-    url: "https://www.ecostartup.kr/ecostartup/2022challenge/2022/1",
-    imgUrl:
-      "http://file1.jobkorea.co.kr/contest/files/Banner1/202204/2867_2.jpg",
-  },
-  {
-    id: 7,
-    category: "기획/아이디어",
-    title: "2022 환경창업대전 Eco + Start-up Challenge",
-    organization: "환경부",
-    state: "활동중",
-    todayState: "활동중",
-    url: "https://www.ecostartup.kr/ecostartup/2022challenge/2022/1",
-    imgUrl:
-      "http://file1.jobkorea.co.kr/contest/files/Banner1/202204/2867_2.jpg",
-  },
-  {
-    id: 8,
-    category: "취업/창업",
-    title: "2022 환경창업대전 Eco + Start-up Challenge",
-    organization: "환경부",
-    state: "활동중",
-    todayState: "활동중",
-    url: "https://www.ecostartup.kr/ecostartup/2022challenge/2022/1",
-    imgUrl:
-      "http://file1.jobkorea.co.kr/contest/files/Banner1/202204/2867_2.jpg",
-  },
-  {
-    id: 9,
-    category: "기획/아이디어",
-    title: "2022 환경창업대전 Eco + Start-up Challenge",
-    organization: "환경부",
-    state: "활동중",
-    todayState: "활동중",
-    url: "https://www.ecostartup.kr/ecostartup/2022challenge/2022/1",
-    imgUrl:
-      "http://file1.jobkorea.co.kr/contest/files/Banner1/202204/2867_2.jpg",
-  },
-  {
-    id: 10,
-    category: "취업/창업",
-    title: "2022 환경창업대전 Eco + Start-up Challenge",
-    organization: "환경부",
-    state: "활동중",
-    todayState: "활동중",
-    url: "https://www.ecostartup.kr/ecostartup/2022challenge/2022/1",
-    imgUrl:
-      "http://file1.jobkorea.co.kr/contest/files/Banner1/202204/2867_2.jpg",
-  },
-  {
-    id: 11,
-    category: "기획/아이디어",
-    title: "2022 환경창업대전 Eco + Start-up Challenge",
-    organization: "환경부",
-    state: "활동중",
-    todayState: "활동중",
-    url: "https://www.ecostartup.kr/ecostartup/2022challenge/2022/1",
-    imgUrl:
-      "http://file1.jobkorea.co.kr/contest/files/Banner1/202204/2867_2.jpg",
-  },
-  {
-    id: 12,
-    category: "취업/창업",
-    title: "2022 환경창업대전 Eco + Start-up Challenge",
-    organization: "환경부",
-    state: "활동중",
-    todayState: "활동중",
-    url: "https://www.ecostartup.kr/ecostartup/2022challenge/2022/1",
-    imgUrl:
-      "http://file1.jobkorea.co.kr/contest/files/Banner1/202204/2867_2.jpg",
-  },
-  {
-    id: 13,
-    category: "기획/아이디어",
-    title: "2022 환경창업대전 Eco + Start-up Challenge",
-    organization: "환경부",
-    state: "모집중",
-    todayState: "모집중",
-    url: "https://www.ecostartup.kr/ecostartup/2022challenge/2022/1",
-    imgUrl:
-      "http://file1.jobkorea.co.kr/contest/files/Banner1/202204/2867_2.jpg",
-  },
-  {
-    id: 14,
-    category: "기획/아이디어",
-    title: "2022 환경창업대전 Eco + Start-up Challenge",
-    organization: "환경부",
-    state: "모집중",
-    todayState: "모집중",
-    url: "https://www.ecostartup.kr/ecostartup/2022challenge/2022/1",
-    imgUrl:
-      "http://file1.jobkorea.co.kr/contest/files/Banner1/202204/2867_2.jpg",
-  },
-  {
-    id: 15,
-    category: "기획/아이디어",
-    title: "2022 환경창업대전 Eco + Start-up Challenge",
-    organization: "환경부",
-    state: "모집중",
-    todayState: "모집중",
-    url: "https://www.ecostartup.kr/ecostartup/2022challenge/2022/1",
-    imgUrl:
-      "http://file1.jobkorea.co.kr/contest/files/Banner1/202204/2867_2.jpg",
-  },
-];
-
 export const Contest = () => {
   const { data } = useGetContests();
+
   const [viewType, setViewType] = useState<string>("grid");
   let gridStyle,
     listStyle = {
@@ -211,8 +44,8 @@ export const Contest = () => {
       </SelectViewType>
 
       <ContentsTypeWrapper>
-        {viewType === "grid" && <ContestGallery data={boxs} />}
-        {viewType === "list" && <ContestList data={boxs} />}
+        {viewType === "grid" && <ContestGallery data={data} />}
+        {viewType === "list" && <ContestList data={data} />}
       </ContentsTypeWrapper>
     </ContestWrapper>
   );
@@ -225,6 +58,10 @@ const ContestWrapper = styled.div`
 const SelectViewType = styled.div`
   width: 100%;
   padding: 1vw;
+
+  @media screen and (max-width: 900px) {
+    display: none;
+  }
 `;
 const Button = styled.span`
   width: 100%;

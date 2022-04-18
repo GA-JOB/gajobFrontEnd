@@ -4,63 +4,68 @@ import "react-tabulator/lib/styles.css"; // default theme
 import "react-tabulator/css/bootstrap/tabulator_bootstrap.min.css"; // use Theme(s)
 import { ReactTabulator } from "react-tabulator";
 import { ColumnDefinition, ReactTabulatorOptions } from "react-tabulator";
-// import { IContestCrawling } from "types";
+import { IContestCrawling } from "types";
 
 interface IContestProps {
-  data: any;
+  data?: IContestCrawling[];
 }
 
 export const ContestList = ({ data }: IContestProps) => {
   const columns: ColumnDefinition[] | any = [
-    { formatter: "rownum", hozAlign: "center", width: 40 },
     {
-      title: "이미지",
-      field: "data.imgUrl",
-      formatter: "image",
-      formatterParams: {
-        height: "100px",
-        width: "150px",
-      },
-      width: 150,
+      title: "id",
+      field: "id",
+      hozAlign: "center",
+      width: 60,
+      fontSize: "10pt",
+      vertAlign: "middle",
     },
     {
       title: "제목",
       field: "title",
       hozAlign: "center",
       vertAlign: "middle",
+      height: 50,
     },
     {
       title: "주최기관",
       field: "organization",
-      hozAlign: "center",
+      // hozAlign: "center",
       vertAlign: "middle",
-      width: 120,
+      width: 200,
     },
-    {
-      title: "카테고리",
-      field: "category",
-      hozAlign: "center",
-      vertAlign: "middle",
-      width: 120,
-    },
+    // {
+    //   title: "카테고리",
+    //   field: "category",
+    //   hozAlign: "center",
+    //   vertAlign: "middle",
+    //   width: 100,
+    // },
     {
       title: "모집상태",
       field: "state",
       hozAlign: "center",
       vertAlign: "middle",
-      width: 120,
+      width: 100,
     },
     {
-      title: "상세페이지",
+      title: "현재상태",
+      field: "todayState",
+      hozAlign: "center",
+      vertAlign: "middle",
+      width: 100,
+    },
+    {
+      title: "바로가기",
       field: "url",
       formatter: "link",
       formatterParams: {
-        label: "바로가기",
-        urlPrefix: "", // tabulator link 적용하기.
+        label: "Click here",
+        urlPrefix: "https://" || "http://", // tabulator link 적용하기.
         urlField: "url",
         target: "_blank", // 새 탭에서 링크를 열기 위함.
       },
-      width: 150,
+      width: 100,
       hozAlign: "center",
       vertAlign: "middle",
     },
@@ -89,6 +94,10 @@ export const ContestList = ({ data }: IContestProps) => {
 
 const ContestListWrapper = styled.div`
   width: 100%;
+
+  @media screen and (max-width: 900px) {
+    display: none;
+  }
 `;
 
 const TabulatorStyle = styled(ReactTabulator)`
