@@ -4,18 +4,18 @@ import "react-tabulator/lib/styles.css"; // default theme
 import "react-tabulator/css/bootstrap/tabulator_bootstrap.min.css"; // use Theme(s)
 import { ReactTabulator } from "react-tabulator";
 import { ColumnDefinition, ReactTabulatorOptions } from "react-tabulator";
-// import { IContestCrawling } from "types";
+import { IStudy } from "types";
+import "styles/tabulator.scss";
 
-interface IContestProps {
-  data: any;
+interface IStudyProps {
+  data: IStudy[] | undefined;
 }
-
-export const StudyList = ({ data }: IContestProps) => {
+export const StudyList = ({ data }: IStudyProps) => {
   const columns: ColumnDefinition[] | any = [
     { formatter: "rownum", hozAlign: "center", width: 40 },
     {
       title: "카테고리",
-      field: "category",
+      field: "studyCategory",
       hozAlign: "center",
       vertAlign: "middle",
       display: "block",
@@ -34,7 +34,7 @@ export const StudyList = ({ data }: IContestProps) => {
     },
     {
       title: "인원제한",
-      field: "limit",
+      field: "maxPeople",
       hozAlign: "center",
       vertAlign: "middle",
       width: 120,
@@ -43,7 +43,7 @@ export const StudyList = ({ data }: IContestProps) => {
 
     {
       title: "모집상태",
-      field: "state",
+      field: "status",
       hozAlign: "center",
       vertAlign: "middle",
       width: 160,
@@ -71,12 +71,12 @@ export const StudyList = ({ data }: IContestProps) => {
   ];
 
   const options: ReactTabulatorOptions = {
-    height: "100px",
+    // height: "100px",
     layout: "fitColumns",
     pagination: true,
     paginationMode: "local",
     paginationSize: 10,
-    printAsHtml: true,
+    // printAsHtml: true,
   };
   const rowClickHandler = (e: any, data: any) => {
     console.log(data._row.data);

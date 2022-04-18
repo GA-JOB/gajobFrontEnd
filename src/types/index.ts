@@ -35,7 +35,7 @@ export interface IJobPostingCrawling {
   closeDate: string;
   basicAddress: string;
   prefCd: string | any;
-  registrationDate: "22-04-12";
+  registrationDate: string | Date;
   wantedMobileInfoUrl: string;
   workType: string;
   maxSalary: number;
@@ -55,4 +55,23 @@ export interface ICommunity {
   title: string;
   content: string;
   category: string;
+}
+
+export interface IStudy {
+  id: number;
+  title: string;
+  content: string;
+  studyCategory: string;
+  area: string;
+  maxPeople: number;
+  minPeople: number;
+  startDate: string | Date;
+  endDate: string | Date;
+  status: string;
+  writer: string;
+  view: number;
+  createdDate: string | Date;
+  modifiedDate: string | Date;
+  comments: string[];
+  likes: number;
 }

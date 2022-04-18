@@ -9,7 +9,6 @@ import styled from "styled-components";
 import { ReactTabulator } from "react-tabulator";
 import { ColumnDefinition, ReactTabulatorOptions } from "react-tabulator";
 import useGetJobPosting from "hooks/api/useGetJobPosting";
-import { IJobPostingCrawling } from "types";
 import storage from "hooks/store";
 
 export const JobPosting = () => {
