@@ -1,3 +1,4 @@
+import { useSWRConfig } from "swr";
 import { post } from "lib/api/client";
 import { ICommunity } from "types";
 
@@ -9,15 +10,22 @@ type ICommunityPostType =
   | "createdDate"
   | "modifiedDate"
   | "comments";
-interface IPostCommunityRequest extends Omit<ICommunity, ICommunityPostType> {}
+interface IPostCommunity extends Omit<ICommunity, ICommunityPostType> {}
+
+interface IPostComment {
+  id: number | null;
+  comment: string;
+}
 
 export const useCommunity = () => {
+  // 데이터 최신화
+  const { mutate } = useSWRConfig();
   const postCommunity = async ({
     title,
     content,
     category,
-  }: IPostCommunityRequest) => {
-    const res = await post(`/community/posts`, {
+  }: IPostCommunity) => {
+    await post(`/community/posts`, {
       title,
       content,
       category,
@@ -28,9 +36,19 @@ export const useCommunity = () => {
         window.location.replace("/jobdam");
       }
     });
-
-    return { res };
   };
 
-  return { postCommunity };
+  const postComment = async ({ id, comment }: IPostComment) => {
+    await post(`/community/comments/${id}`, {
+      comment,
+    }).then((data: any) => {
+      if (data.comment) {
+        console.log(JSON.stringify(data));
+      }
+    });
+
+    mutate(`/community/posts`);
+  };
+
+  return { postCommunity, postComment };
 };

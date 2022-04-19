@@ -17,7 +17,7 @@ function AccordionMenu(props: Props) {
   const [isCollapse, setIsCollapse] = React.useState(false);
 
   const MenuButtonHover = React.useCallback(
-    (e) => {
+    (e: any) => {
       e.stopPropagation();
       if (parentRef.current === null || childRef.current === null) {
         return;

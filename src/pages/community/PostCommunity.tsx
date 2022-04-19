@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { useCommunity } from "hooks/api/community/index";
 import { ButtonType } from "components/button/ButtonType";
 import styled from "styled-components";
 import { TextField, MenuItem } from "@material-ui/core";
+import { useCommunity } from "hooks/api/community/index";
 import storage from "hooks/store";
 
 interface ICommunityProps {
@@ -81,9 +81,10 @@ export const PostCommunity = ({
             <MenuItem value="" selected>
               ---선택---
             </MenuItem>
-            <MenuItem value="취업고민">취업고민</MenuItem>
-            <MenuItem value="꿀팁">꿀팁</MenuItem>
-            <MenuItem value="일상">일상</MenuItem>
+            <MenuItem value="취뽀">🥳 취뽀</MenuItem>
+            <MenuItem value="취업고민">💼 취업고민</MenuItem>
+            <MenuItem value="꿀팁">🍯 꿀팁</MenuItem>
+            <MenuItem value="일상">🌸 일상</MenuItem>
           </InputField>
         </InputLabel>
 

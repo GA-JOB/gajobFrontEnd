@@ -71,7 +71,7 @@ const HeaderStyle = styled.header`
 `;
 
 const Layout = styled.div`
-  height: 100%;
+  min-height: 45vw;
   padding-top: 3vw;
   align-items: center;
   justify-content: center;
