@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { Button } from "@mui/material";
 import storage from "hooks/store";
 import useGetStudy from "hooks/api/study/useGetStudy";
+import { StudyRegister } from "./StudyRegister";
 // const boxs: any = [
 //   {
 //     id: 1,
@@ -34,13 +35,13 @@ export const Study = () => {
       ></MenuTitle>
       <Button
         variant="contained"
-        onClick={() => setRegister(true)}
+        onClick={() => setRegister((prev) => !prev)}
         style={{ marginBottom: "10px" }}
       >
-        스터디 추가하기
+        {register ? <>스터디 목록 보러가기</> : <>스터디 추가하기</>}
       </Button>
       <StudyTypeWrapper>
-        {register || <StudyList data={data} />}
+        {register ? <StudyRegister /> : <StudyList data={data} />}
       </StudyTypeWrapper>
     </StudyWrapper>
   );
