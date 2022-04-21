@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+// import Slider from "rc-slider";
 import Slider, { Settings } from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";

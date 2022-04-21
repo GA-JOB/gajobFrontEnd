@@ -12,12 +12,12 @@ import { JobNews } from "pages/news/index";
 import { Contest } from "pages/contest/index";
 import { JobPosting } from "pages/jobPosting/index";
 import { JobPostingDetail } from "./pages/jobPosting/JobPostingDetail";
-import { Community } from "pages/Community";
+import { Community } from "pages/community";
+import { PostCommunity } from "pages/community/PostCommunity";
 import { Study } from "pages/study/index";
 import { Portfolio } from "pages/Portfolio";
 import { Calendar } from "pages/Calendar";
 import { MyPage } from "pages/MyPage";
-
 import { NoEmail } from "components/footer/NoEmail";
 import { PersonalRule } from "components/footer/PersonalRules";
 import { Sitemap } from "components/footer/Sitemap";
@@ -27,7 +27,6 @@ import useGetNews from "hooks/api/useGetNews";
 
 export default function App() {
   // main 화면에서 component route시 데이터 불러오기 위함.
-  const { data } = useGetNews();
 
   return (
     <Router>
@@ -45,6 +44,7 @@ export default function App() {
           <Route path="/job-posting" element={<JobPosting />} />
           <Route path="/job-posting/:id" element={<JobPostingDetail />} />
           <Route path="/jobdam" element={<Community />} />
+          <Route path="/jobdam-posting" element={<PostCommunity />} />
           <Route path="/gajob-study" element={<Study />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/calendar" element={<Calendar />} />
@@ -71,9 +71,8 @@ const HeaderStyle = styled.header`
 `;
 
 const Layout = styled.div`
-  min-height: 40vw;
+  min-height: 45vw;
   padding-top: 3vw;
-  padding-bottom: 10vw;
   align-items: center;
   justify-content: center;
   display: flex;
@@ -85,5 +84,5 @@ const Layout = styled.div`
 
 const FooterStyle = styled(Footer)`
   position: relative;
-  z-index: 100;
+  z-index: 10;
 `;

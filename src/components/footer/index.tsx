@@ -23,9 +23,8 @@ export const Footer = () => {
 };
 
 const FooterBox = styled.footer`
-  z-index: 0;
   width: 100%;
-  height: 10vw;
+  height: 100%;
   background-color: var(--footer-bg-color);
   color: var(--footer-text-color);
   padding: var(--layout-padding);
