@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import storage from "hooks/store";
+import useGetAuth from "hooks/api/auth/useGetAuth";
 
 const MyPageWrapper = styled.div`
   display: flex;
@@ -10,6 +11,9 @@ const MyPageWrapper = styled.div`
 `;
 
 export const MyPage = () => {
+  const { data } = useGetAuth();
+  console.log(data);
+
   const token = storage.get("user-token");
 
   if (!token) return <>접근 못함</>;
