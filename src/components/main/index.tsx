@@ -12,7 +12,7 @@ export const Home = () => {
       <MainContainer>
         <UpperContentStyle />
         <SliderStyle
-          title="JOB NEWS"
+          title="GA-JOB NEWS"
           info="실시간으로 제공되는 최신 취업 소식을 확인해보세요."
           data={data}
         />
@@ -27,7 +27,6 @@ const MainContainer = styled.div`
   z-index: 0;
   width: 100%;
   margin-top: -6vw;
-  margin-bottom: -10vw;
 
   text-align: center;
   font-weight: 20pt;

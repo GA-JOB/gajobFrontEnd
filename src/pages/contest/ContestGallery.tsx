@@ -11,21 +11,21 @@ export const ContestGallery = ({ data }: IContestProps) => {
   if (!data) return <Loading />;
   return (
     <GalleryWrapper>
-      {data.map((box: any, index: number) => (
+      {data.map((gallery: any, index: number) => (
         <ContentsBox key={index}>
           <ImgBox>
-            <Img src={box.imgUrl} alt="imgAlt" />
+            <Img src={gallery.imgUrl} alt="imgAlt" />
           </ImgBox>
           <InfoBox>
             <TextTitle>
-              <strong>{box.title}</strong>
+              <strong>{gallery.title}</strong>
             </TextTitle>
-            <Text>주최기관 {box.organization}</Text>
+            <Text>주최기관 {gallery.organization}</Text>
             <Text>
-              모집상태: {box.state} ({box.todayState})
+              모집상태: {gallery.state} ({gallery.todayState})
             </Text>
             {/* <Text>카테고리: {box.category}</Text> */}
-            <ButtonType link={"http://" + box.url} title={"바로가기"} />
+            <ButtonType link={"http://" + gallery.url} title={"바로가기"} />
           </InfoBox>
         </ContentsBox>
       ))}
