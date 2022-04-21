@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { Button } from "@mui/material";
 import storage from "hooks/store";
 import useGetStudy from "hooks/api/study/useGetStudy";
+import { StudyRegister } from "./StudyRegister";
 // const boxs: any = [
 //   {
 //     id: 1,
@@ -21,7 +22,7 @@ import useGetStudy from "hooks/api/study/useGetStudy";
 export const Study = () => {
   const token = storage.get("user-token");
   const { data } = useGetStudy();
-  const [register, setRegister] = useState<Boolean>(false);
+  const [register, setRegister] = useState<Boolean>(true);
 
   console.log(data);
   if (!token) return <>접근 못함</>;
@@ -34,13 +35,17 @@ export const Study = () => {
       ></MenuTitle>
       <Button
         variant="contained"
-        onClick={() => setRegister(true)}
+        onClick={() => setRegister((prev) => !prev)}
         style={{ marginBottom: "10px" }}
       >
-        스터디 추가하기
+        {register ? <>스터디 목록 보러가기</> : <>스터디 추가하기</>}
       </Button>
       <StudyTypeWrapper>
-        {register || <StudyList data={data} />}
+        {register ? (
+          <StudyRegister setRegister={setRegister} />
+        ) : (
+          <StudyList data={data} />
+        )}
       </StudyTypeWrapper>
     </StudyWrapper>
   );
