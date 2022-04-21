@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { MenuTitle } from "components/Menutitle";
 import { Loading } from "components/loading";
-import { PostList } from "./PostList";
+import { PostList } from "pages/community/PostList";
 import styled from "styled-components";
 import storage from "hooks/store";
 import useGetAuth from "hooks/api/auth/useGetAuth";
