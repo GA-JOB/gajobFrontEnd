@@ -16,13 +16,13 @@ export const ModalContent = ({
 }: IModalContentProps) => {
   return (
     <Wrapper>
-      {/* <Header>{title}</Header> */}
+      {/* <Header onClick={onClose}>{title}</Header> */}
 
       <CloseButton>
-        <Close onClick={onClose}></Close>
+        <Close />
       </CloseButton>
 
-      <Content>{children}</Content>
+      <Content onClick={onClose}>{children}</Content>
     </Wrapper>
   );
 };
@@ -39,13 +39,14 @@ const Wrapper = styled.div`
 `;
 
 // Modal title
-// const Header = styled.span`
-//   font-size: 15pt;
-//   margin-left: 4vw;
-// `;
+const Header = styled.span`
+  font-size: 15pt;
+  margin-left: 4vw;
+`;
 
 // modal close button
-const CloseButton = styled.span`
+const CloseButton = styled.div`
+  text-align: right;
   cursor: pointer;
   &:hover,
   &:active {
@@ -56,5 +57,4 @@ const CloseButton = styled.span`
 // Modal content
 const Content = styled.div`
   width: 100%;
-  height: 100%;
 `;

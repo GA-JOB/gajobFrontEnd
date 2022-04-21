@@ -33,19 +33,3 @@ const GoToPostStyle = styled(Button)({
   borderRadius: "5px",
   cursor: "pointer",
 });
-
-// const GoToPostStyle = styled(Button)`
-//   display: flex;
-//   align-items: center;
-//   width: 100%;
-//   margin-bottom: 2vw;
-//   padding: 1vw 2vw;
-//   text-decoration: none;
-//   font-weight: lighter;
-//   font-size: 13pt;
-//   color: black;
-
-//   border: 1px solid #eaeaea;
-//   border-radius: 5px;
-//   cursor: pointer;
-// `;

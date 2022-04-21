@@ -1,12 +1,11 @@
-import { useState } from "react";
 import { Loading } from "components/loading";
 import { ButtonType } from "components/button/ButtonType";
 import { PostEdit } from "./PostEdit";
 import { PostDelete } from "./PostDelete";
+import { CommentForm } from "components/common/CommentForm";
 import styled from "styled-components";
 import { Visibility, ChatBubble } from "@mui/icons-material";
 import useGetPieceCommunity from "hooks/api/community/useGetPieceCommunity";
-import { useCommunity } from "hooks/api/community/index";
 
 interface ICommunityListProps {
   id: number;
@@ -20,40 +19,11 @@ export const PostDetails = ({
   comment = "",
 }: ICommunityListProps) => {
   const { data } = useGetPieceCommunity(id ? id : 0);
-  const { postComment } = useCommunity();
 
   const IconStyle = {
     fontSize: 18,
     margin: "5px",
     color: "black",
-  };
-
-  const [form, setForm] = useState({
-    commentForm: comment,
-  });
-  const { commentForm } = form;
-
-  const onTextAreaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setForm({
-      ...form,
-      [name]: value,
-    });
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    // commentForm 비어있을 경우 disabled 되도록.
-    if (commentForm === "") return;
-    if (window.confirm("댓글을 등록하시겠습니까?") === true) {
-      console.log(form);
-
-      postComment({
-        id: id,
-        comment: commentForm,
-      });
-    }
   };
 
   if (!data) return <Loading />;
@@ -74,9 +44,9 @@ export const PostDetails = ({
           <Title>{data.title}</Title>
           <PostContent>{data.content}</PostContent>
 
-          {/* login uer === post user 일치할 경우 수정 or 삭제 가능하도록. */}
+          {/* login user === post writer일 경우 수정 or 삭제 */}
           {data.writer === nickname ? (
-            <div>
+            <ButtonTypeBox>
               <PostEdit
                 id={id}
                 title={data.title}
@@ -84,8 +54,8 @@ export const PostDetails = ({
                 postCategory={data.postCategory}
               />
 
-              <PostDelete id={id} />
-            </div>
+              <PostDelete postId={id} />
+            </ButtonTypeBox>
           ) : null}
         </ContentContainer>
         <IconWrapper>
@@ -114,37 +84,33 @@ export const PostDetails = ({
           </Writer>
           <PostContent>{comment.comment}</PostContent>
 
-          {comment.nickname === nickname ? <>수정</> : null}
+          {comment.nickname === nickname ? (
+            <ButtonTypeBox>
+              <PostEdit
+                id={id}
+                comment={comment.comment}
+                commentId={comment.id}
+              />
+
+              <PostDelete postId={id} commentId={comment.id} />
+            </ButtonTypeBox>
+          ) : null}
         </CommentWrapper>
       ))}
 
-      <CommentForm onSubmit={handleSubmit}>
-        <InputStyle
-          name="commentForm"
-          value={commentForm}
-          placeholder="댓글을 입력하세요."
-          onChange={onTextAreaChange}
-        ></InputStyle>
-        <ButtonStyle>
-          {commentForm === "" ? (
-            <ButtonType
-              disabled={true}
-              title={"등록"}
-              widthStyle={"50%"}
-              paddingStyle="1vw"
-            />
-          ) : (
-            <ButtonType title={"등록"} widthStyle={"50%"} paddingStyle="1vw" />
-          )}
-        </ButtonStyle>
-      </CommentForm>
+      {/* 댓글 */}
+      <CommentForm id={id} />
 
-      <ButtonType title={"목록으로"} link="/jobdam" buttonColor="black" />
+      <ButtonWrapper>
+        <ButtonType title={"목록으로"} link="/jobdam" buttonColor="black" />
+      </ButtonWrapper>
     </ViewDetailWrapper>
   );
 };
 
-const ViewDetailWrapper = styled.div``;
+const ViewDetailWrapper = styled.div`
+  width: 100%;
+`;
 const DetailContent = styled.div`
   padding: 2vw;
 `;
@@ -162,6 +128,10 @@ const Writer = styled.div`
 `;
 const ContentContainer = styled.div`
   margin: 3vw 0;
+`;
+const ButtonTypeBox = styled.div`
+  padding: 1vw;
+  text-align: right;
 `;
 const Title = styled.h4`
   color: #333;
@@ -187,25 +157,9 @@ const IconContent = styled.span`
   margin-right: 10px;
 `;
 
-const CommentForm = styled.form`
+const ButtonWrapper = styled.div`
+  width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 100%;
-  border-top: 1px solid #eaeaea;
-`;
-
-const InputStyle = styled.textarea`
-  width: 95%;
-  height: 4vw;
-  margin: 2vw 0 0 2vw;
-  padding: 1vw;
-  border: 1px solid lightgray;
-  border-radius: 5px;
-
-  font-size: 11pt;
-`;
-const ButtonStyle = styled.span`
-  width: 20%;
-  margin-left: 2vw;
+  padding-left: 85%;
 `;

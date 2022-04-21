@@ -31,7 +31,7 @@ export const ButtonType = ({
       disabled={disabled && disabled}
       variant="contained"
       href={link && link}
-      type="submit"
+      type="button"
       style={ButtonStyle}
       onClick={onClick}
     >

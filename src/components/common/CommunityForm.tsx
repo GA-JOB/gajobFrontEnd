@@ -59,6 +59,8 @@ export const CommunityForm = ({
           content: contentForm,
           postCategory: postCategoryForm,
         });
+
+        setIsOpenModal(false);
       } else {
         editPost({
           id: id,
@@ -66,6 +68,8 @@ export const CommunityForm = ({
           content: contentForm,
           postCategory: postCategoryForm,
         });
+
+        setIsOpenModal(false);
       }
     }
   };
@@ -146,11 +150,11 @@ export const CommunityForm = ({
 };
 
 const CommunityWrapper = styled.div`
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 50px;
-  height: 70vh;
 `;
 
 const Form = styled.form`
