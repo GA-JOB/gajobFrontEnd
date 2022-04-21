@@ -22,7 +22,7 @@ import { StudyRegister } from "./StudyRegister";
 export const Study = () => {
   const token = storage.get("user-token");
   const { data } = useGetStudy();
-  const [register, setRegister] = useState<Boolean>(false);
+  const [register, setRegister] = useState<Boolean>(true);
 
   console.log(data);
   if (!token) return <>접근 못함</>;
@@ -41,7 +41,11 @@ export const Study = () => {
         {register ? <>스터디 목록 보러가기</> : <>스터디 추가하기</>}
       </Button>
       <StudyTypeWrapper>
-        {register ? <StudyRegister /> : <StudyList data={data} />}
+        {register ? (
+          <StudyRegister setRegister={setRegister} />
+        ) : (
+          <StudyList data={data} />
+        )}
       </StudyTypeWrapper>
     </StudyWrapper>
   );
