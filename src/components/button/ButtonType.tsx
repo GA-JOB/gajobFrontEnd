@@ -7,6 +7,7 @@ interface IButtonProps {
   paddingStyle?: string;
   buttonColor?: string;
   disabled?: boolean;
+  onClick?: () => void;
 }
 
 export const ButtonType = ({
@@ -16,6 +17,7 @@ export const ButtonType = ({
   paddingStyle,
   buttonColor,
   disabled,
+  onClick,
 }: IButtonProps) => {
   const ButtonStyle = {
     marginTop: "2vw",
@@ -31,6 +33,7 @@ export const ButtonType = ({
       href={link && link}
       type="submit"
       style={ButtonStyle}
+      onClick={onClick}
     >
       {title}
     </Button>

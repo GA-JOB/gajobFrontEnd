@@ -1,16 +1,18 @@
 import { useSWRConfig } from "swr";
-import { post } from "lib/api/client";
+import { post, put, del } from "lib/api/client";
 import { ICommunity } from "types";
 
 type ICommunityPostType =
   | "id"
-  | "postCategory"
   | "writer"
   | "view"
   | "createdDate"
   | "modifiedDate"
   | "comments";
 interface IPostCommunity extends Omit<ICommunity, ICommunityPostType> {}
+interface IEditCommunity extends Omit<ICommunity, ICommunityPostType> {
+  id: number;
+}
 
 interface IPostComment {
   id: number | null;
@@ -20,17 +22,13 @@ interface IPostComment {
 export const useCommunity = () => {
   // 데이터 최신화
   const { mutate } = useSWRConfig();
-  const postCommunity = async ({
-    title,
-    content,
-    category,
-  }: IPostCommunity) => {
+  const postPost = async ({ title, content, postCategory }: IPostCommunity) => {
     await post(`/community/posts`, {
       title,
       content,
-      category,
+      postCategory,
     }).then((data: any) => {
-      if (data.title) {
+      if (data) {
         console.log(JSON.stringify(data));
 
         window.location.replace("/jobdam");
@@ -38,11 +36,18 @@ export const useCommunity = () => {
     });
   };
 
-  const postComment = async ({ id, comment }: IPostComment) => {
-    await post(`/community/comments/${id}`, {
-      comment,
+  const editPost = async ({
+    id,
+    title,
+    content,
+    postCategory,
+  }: IEditCommunity) => {
+    await put(`/community/posts/${id}`, {
+      title,
+      content,
+      postCategory,
     }).then((data: any) => {
-      if (data.comment) {
+      if (data) {
         console.log(JSON.stringify(data));
       }
     });
@@ -50,5 +55,23 @@ export const useCommunity = () => {
     mutate(`/community/posts`);
   };
 
-  return { postCommunity, postComment };
+  const deletePost = async (id: number) => {
+    await del(`/community/posts/${id}`);
+
+    mutate(`/community/posts`);
+  };
+
+  const postComment = async ({ id, comment }: IPostComment) => {
+    await post(`/community/comments/${id}`, {
+      comment,
+    }).then((data: any) => {
+      if (data) {
+        console.log(JSON.stringify(data));
+      }
+    });
+
+    mutate(`/community/posts`);
+  };
+
+  return { postPost, editPost, deletePost, postComment };
 };

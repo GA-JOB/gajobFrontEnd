@@ -1,19 +1,27 @@
 import { useState } from "react";
 import { Loading } from "components/loading";
 import { ButtonType } from "components/button/ButtonType";
+import { PostEdit } from "./PostEdit";
+import { PostDelete } from "./PostDelete";
 import styled from "styled-components";
 import { Visibility, ChatBubble } from "@mui/icons-material";
 import useGetPieceCommunity from "hooks/api/community/useGetPieceCommunity";
 import { useCommunity } from "hooks/api/community/index";
 
 interface ICommunityListProps {
-  id: number | null;
+  id: number;
+  nickname?: string;
   comment?: string;
 }
 
-export const ViewDetails = ({ id, comment = "" }: ICommunityListProps) => {
-  const { data } = useGetPieceCommunity(id ? id : null);
+export const PostDetails = ({
+  id,
+  nickname,
+  comment = "",
+}: ICommunityListProps) => {
+  const { data } = useGetPieceCommunity(id ? id : 0);
   const { postComment } = useCommunity();
+
   const IconStyle = {
     fontSize: 18,
     margin: "5px",
@@ -65,6 +73,20 @@ export const ViewDetails = ({ id, comment = "" }: ICommunityListProps) => {
         <ContentContainer>
           <Title>{data.title}</Title>
           <PostContent>{data.content}</PostContent>
+
+          {/* login uer === post user 일치할 경우 수정 or 삭제 가능하도록. */}
+          {data.writer === nickname ? (
+            <div>
+              <PostEdit
+                id={id}
+                title={data.title}
+                content={data.content}
+                postCategory={data.postCategory}
+              />
+
+              <PostDelete id={id} />
+            </div>
+          ) : null}
         </ContentContainer>
         <IconWrapper>
           <IconContent>
@@ -79,7 +101,6 @@ export const ViewDetails = ({ id, comment = "" }: ICommunityListProps) => {
 
       {/* 댓글 */}
       {data.comments?.map((comment: any, index: number) => (
-        // 댓글 개수, 조회수 등.
         <CommentWrapper key={index}>
           <Writer>
             {comment.nickname}{" "}
@@ -92,6 +113,8 @@ export const ViewDetails = ({ id, comment = "" }: ICommunityListProps) => {
             </CreateDate>
           </Writer>
           <PostContent>{comment.comment}</PostContent>
+
+          {comment.nickname === nickname ? <>수정</> : null}
         </CommentWrapper>
       ))}
 
@@ -131,11 +154,6 @@ const CommentWrapper = styled.div`
   height: 100%;
   padding: 2vw;
   border-top: 1px solid #eaeaea;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #f2f2f2;
-  }
 `;
 const Writer = styled.div`
   margin: 5px;

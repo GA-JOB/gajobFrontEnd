@@ -29,8 +29,7 @@ export interface ICommunity {
   id: number;
   title: string | null;
   content: string | null;
-  category: string | null;
-  postCategory?: string | null;
+  postCategory: string | null;
   writer?: string;
   view?: number;
   createdDate?: Date;

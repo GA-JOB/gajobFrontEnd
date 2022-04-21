@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import styled from "@emotion/styled";
-import CloseIcon from "@material-ui/icons/Close";
+import { Close } from "@mui/icons-material";
 
 interface IModalContentProps {
   title: ReactNode;
@@ -16,10 +16,10 @@ export const ModalContent = ({
 }: IModalContentProps) => {
   return (
     <Wrapper>
-      <Header>{title}</Header>
+      {/* <Header>{title}</Header> */}
 
       <CloseButton>
-        <CloseIcon onClick={onClose}></CloseIcon>
+        <Close onClick={onClose}></Close>
       </CloseButton>
 
       <Content>{children}</Content>
@@ -30,7 +30,7 @@ export const ModalContent = ({
 // 전체 Modal 창
 const Wrapper = styled.div`
   min-width: 400px;
-  max-height: 600px;
+  max-height: 500px;
   border-radius: 10px;
   padding: 20px;
   margin: 10px;
@@ -39,15 +39,14 @@ const Wrapper = styled.div`
 `;
 
 // Modal title
-const Header = styled.span`
-  font-size: 15pt;
-  margin-left: 4vw;
-`;
+// const Header = styled.span`
+//   font-size: 15pt;
+//   margin-left: 4vw;
+// `;
 
 // modal close button
 const CloseButton = styled.span`
   cursor: pointer;
-  float: right;
   &:hover,
   &:active {
     color: lightgray;
