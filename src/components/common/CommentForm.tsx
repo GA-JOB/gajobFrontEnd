@@ -38,7 +38,7 @@ export const CommentForm = ({ id, commentId, comment = "" }: ICommentProps) => {
           id: id,
           comment: commentForm,
         });
-      } else {
+      } else if (commentId) {
         editComment({
           postId: id,
           commentId: commentId,

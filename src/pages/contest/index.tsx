@@ -71,4 +71,5 @@ const Button = styled.span`
 
 const ContentsTypeWrapper = styled.div`
   width: 100%;
+  margin-bottom: 5vw;
 `;

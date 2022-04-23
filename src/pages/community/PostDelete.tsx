@@ -26,6 +26,7 @@ export const PostDelete = ({ postId, commentId }: IDeleteProps) => {
   const onClickDeleteBtn = () => {
     if (!commentId) {
       deletePost(postId);
+      window.location.replace("/jobdam");
     } else {
       deleteComment(postId, commentId);
     }
@@ -39,11 +40,12 @@ export const PostDelete = ({ postId, commentId }: IDeleteProps) => {
       <Delete style={IconStyle} />
       <Modal
         show={openModal}
-        onClose={() => setOpenModal((openModal) => !openModal)}
+        onClose={() => setOpenModal((openModal) => openModal)}
       >
         <ModalContent
           title=""
-          onClose={() => setOpenModal((openModal) => !openModal)}
+          onClose={() => setOpenModal((openModal) => openModal)}
+          kind="post"
         >
           <ModalTxt>
             {commentId ? "댓글" : "게시글"}을 정말로 삭제하시겠습니까?

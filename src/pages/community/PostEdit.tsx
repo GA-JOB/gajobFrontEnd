@@ -30,8 +30,6 @@ export const PostEdit = ({
     opacity: "0.8",
   };
 
-  console.log(commentId);
-
   return (
     <EditWrapper onClick={() => setOpenModal((openModal) => !openModal)}>
       수정

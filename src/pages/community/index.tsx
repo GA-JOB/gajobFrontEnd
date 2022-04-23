@@ -33,6 +33,9 @@ export const Community = () => {
               <SideNavWrapper>
                 <SideNav>
                   <NavTitle>category</NavTitle>
+                  <NavList onClick={() => setCategory(null)}>
+                    📍 전체보기
+                  </NavList>
                   <NavList onClick={() => setCategory("취뽀")}>🥳 취뽀</NavList>
                   <NavList onClick={() => setCategory("취업고민")}>
                     💼 취업고민
@@ -88,18 +91,18 @@ const SideNav = styled.div`
 `;
 const NavTitle = styled.div`
   font-weight: lighter;
-  margin: 0.5vw;
+  margin: 0.3vw 0.5vw;
 `;
 const NavList = styled.div`
   list-style: none;
   margin: 0.6vw;
-  padding: 0.5vw;
+  padding: 0.3vw;
   font-size: 12pt;
   letter-spacing: 1px;
   cursor: pointer;
 
   &:hover {
-    padding: 0.5vw 1vw;
+    padding: 0.3vw 1vw;
     background-color: #eaeaea;
     border-radius: 5px;
     transition: 0.5s;
