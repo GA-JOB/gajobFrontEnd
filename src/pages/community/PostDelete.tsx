@@ -29,22 +29,24 @@ export const PostDelete = ({ postId, commentId }: IDeleteProps) => {
       window.location.replace("/jobdam");
     } else {
       deleteComment(postId, commentId);
+      setOpenModal(false);
+      window.confirm("댓글이 삭제되었습니다.");
     }
-
-    setOpenModal(false);
   };
 
   return (
-    <DeleteWrapper onClick={() => setOpenModal((openModal) => !openModal)}>
-      삭제
-      <Delete style={IconStyle} />
+    <DeleteWrapper>
+      <span onClick={() => setOpenModal((openModal) => !openModal)}>
+        삭제
+        <Delete style={IconStyle} />
+      </span>
       <Modal
         show={openModal}
-        onClose={() => setOpenModal((openModal) => openModal)}
+        onClose={() => setOpenModal((openModal) => !openModal)}
       >
         <ModalContent
           title=""
-          onClose={() => setOpenModal((openModal) => openModal)}
+          onClose={() => setOpenModal((openModal) => !openModal)}
           kind="post"
         >
           <ModalTxt>

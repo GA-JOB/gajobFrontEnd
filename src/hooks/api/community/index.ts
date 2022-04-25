@@ -39,6 +39,8 @@ export const useCommunity = () => {
         window.location.replace("/jobdam");
       }
     });
+
+    mutate(`/community/posts`);
   };
 
   const editPost = async ({
@@ -75,7 +77,7 @@ export const useCommunity = () => {
       }
     });
 
-    mutate(`/community/posts`);
+    mutate(`/community/posts/${id}`);
   };
 
   const editComment = async ({ postId, commentId, comment }: IEditComment) => {
@@ -87,14 +89,14 @@ export const useCommunity = () => {
       }
     });
 
-    mutate(`/community/posts`);
+    mutate(`/community/posts/${postId}`);
   };
 
   const deleteComment = async (postId: number, commentId: number) => {
     await del(`/community/comments/${commentId}`);
 
     // del mutate 적용 안됨.
-    mutate(`/community/posts`);
+    mutate(`/community/posts/${postId}`);
   };
 
   return {

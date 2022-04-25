@@ -1,26 +1,16 @@
 import { useState } from "react";
 import { CommunityForm } from "components/common/CommunityForm";
-import { CommentForm } from "components/common/CommentForm";
 import styled from "styled-components";
 import { Edit } from "@mui/icons-material";
 
 interface IEditProps {
   id: number;
-  commentId?: number;
   title?: string | null;
   content?: string | null;
   postCategory?: string | null;
-  comment?: string;
 }
 
-export const PostEdit = ({
-  id,
-  commentId,
-  title,
-  content,
-  postCategory,
-  comment,
-}: IEditProps) => {
+export const PostEdit = ({ id, title, content, postCategory }: IEditProps) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
 
   const IconStyle = {
@@ -34,10 +24,7 @@ export const PostEdit = ({
     <EditWrapper onClick={() => setOpenModal((openModal) => !openModal)}>
       수정
       <Edit style={IconStyle} />
-      {comment && openModal && (
-        <CommentForm id={id} comment={comment} commentId={commentId} />
-      )}
-      {!comment && openModal && (
+      {openModal && (
         <CommunityForm
           isOpenModal={openModal}
           setIsOpenModal={setOpenModal}

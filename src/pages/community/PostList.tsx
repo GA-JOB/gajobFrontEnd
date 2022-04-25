@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { PostDetails } from "./PostDetails";
-import { PostEdit } from "./PostEdit";
-import { PostDelete } from "./PostDelete";
 import { PostCommunity } from "./PostCommunity";
 import styled from "styled-components";
 import { Visibility, ChatBubble } from "@mui/icons-material";
