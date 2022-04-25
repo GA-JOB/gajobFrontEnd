@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import { post, del } from "lib/api/client";
 import storage from "hooks/store";
 import { IUserData } from "types";
@@ -10,7 +9,6 @@ interface IPostSignupRequest extends Omit<IUserData, ISignupType> {}
 interface IPostLoginRequest extends Omit<IUserData, ILoginType> {}
 
 export const useAuth = () => {
-  let navigate = useNavigate();
   const postSignup = async ({
     name,
     nickname,

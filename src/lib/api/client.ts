@@ -43,8 +43,8 @@ export function post<T>(...args: Parameters<typeof instance.post>) {
   return instance.post<T, T>(...args);
 }
 
-export function put<T>(...args: Parameters<typeof instance.patch>) {
-  return instance.patch<T, T>(...args);
+export function put<T>(...args: Parameters<typeof instance.put>) {
+  return instance.put<T, T>(...args);
 }
 
 export function del<T>(...args: Parameters<typeof instance.delete>) {
