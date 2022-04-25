@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { PostDetails } from "./PostDetails";
-import { PostCommunity } from "./PostCommunity";
+import { PostDetails } from "pages/community/PostDetails";
+import { PostCommunity } from "pages/community/PostCommunity";
 import styled from "styled-components";
 import { Visibility, ChatBubble } from "@mui/icons-material";
 import useGetCommunity from "hooks/api/community/useGetCommunity";
@@ -29,8 +29,10 @@ export const PostList = ({ postCategory, nickname }: IPostListProps) => {
 
           {data?.map((list: any, index: number) => (
             <div key={index}>
-              {postCategory === list.postCategory && (
-                <>
+              {(postCategory === null ||
+                (postCategory !== null &&
+                  postCategory === list.postCategory)) && (
+                <div>
                   <PostWrapper
                     onClick={() => {
                       setViewId(list.id);
@@ -60,7 +62,7 @@ export const PostList = ({ postCategory, nickname }: IPostListProps) => {
                       </IconContent>
                     </IconWrapper>
                   </PostWrapper>
-                </>
+                </div>
               )}
             </div>
           ))}

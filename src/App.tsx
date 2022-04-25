@@ -10,14 +10,14 @@ import { Signup } from "pages/auth/Signup";
 import { Login } from "pages/auth/Login";
 import { JobNews } from "pages/news/index";
 import { Contest } from "pages/contest/index";
-import { JobPosting } from "pages/JobPosting";
+import { JobPosting } from "pages/jobPosting/index";
+import { JobPostingDetail } from "./pages/jobPosting/JobPostingDetail";
 import { Community } from "pages/community";
-import { PostCommunity } from "pages/community/PostCommunity";
+import { PostDetails } from "pages/community/PostDetails";
 import { Study } from "pages/study/index";
 import { Portfolio } from "pages/Portfolio";
 import { Calendar } from "pages/Calendar";
 import { MyPage } from "pages/MyPage";
-
 import { NoEmail } from "components/footer/NoEmail";
 import { PersonalRule } from "components/footer/PersonalRules";
 import { Sitemap } from "components/footer/Sitemap";
@@ -27,7 +27,6 @@ import useGetNews from "hooks/api/useGetNews";
 
 export default function App() {
   // main 화면에서 component route시 데이터 불러오기 위함.
-  const { data } = useGetNews();
 
   return (
     <Router>
@@ -43,8 +42,9 @@ export default function App() {
           <Route path="/job-news" element={<JobNews />} />
           <Route path="/contest" element={<Contest />} />
           <Route path="/job-posting" element={<JobPosting />} />
+          <Route path="/job-posting/:id" element={<JobPostingDetail />} />
           <Route path="/jobdam" element={<Community />} />
-          <Route path="/jobdam-posting" element={<PostCommunity />} />
+          <Route path="/jobdam-detail" element={<PostDetails id={0} />} />
           <Route path="/gajob-study" element={<Study />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/calendar" element={<Calendar />} />

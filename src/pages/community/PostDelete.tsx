@@ -26,17 +26,20 @@ export const PostDelete = ({ postId, commentId }: IDeleteProps) => {
   const onClickDeleteBtn = () => {
     if (!commentId) {
       deletePost(postId);
+      window.location.replace("/jobdam");
     } else {
       deleteComment(postId, commentId);
+      setOpenModal(false);
+      window.confirm("댓글이 삭제되었습니다.");
     }
-
-    setOpenModal(false);
   };
 
   return (
-    <DeleteWrapper onClick={() => setOpenModal((openModal) => !openModal)}>
-      삭제
-      <Delete style={IconStyle} />
+    <DeleteWrapper>
+      <span onClick={() => setOpenModal((openModal) => !openModal)}>
+        삭제
+        <Delete style={IconStyle} />
+      </span>
       <Modal
         show={openModal}
         onClose={() => setOpenModal((openModal) => !openModal)}
@@ -44,6 +47,7 @@ export const PostDelete = ({ postId, commentId }: IDeleteProps) => {
         <ModalContent
           title=""
           onClose={() => setOpenModal((openModal) => !openModal)}
+          kind="post"
         >
           <ModalTxt>
             {commentId ? "댓글" : "게시글"}을 정말로 삭제하시겠습니까?

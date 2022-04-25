@@ -6,6 +6,7 @@ interface IModalContentProps {
   title: ReactNode;
   children: ReactNode;
   onClose: () => void;
+  kind: string;
 }
 
 // Modal 창 open 시 title, content
@@ -13,16 +14,20 @@ export const ModalContent = ({
   title,
   children,
   onClose,
+  kind,
 }: IModalContentProps) => {
   return (
     <Wrapper>
-      {/* <Header onClick={onClose}>{title}</Header> */}
-
       <CloseButton>
-        <Close />
+        <Close onClick={kind === "post" ? onClose : () => {}} />
       </CloseButton>
 
-      <Content onClick={onClose}>{children}</Content>
+      <HeaderWrapper>
+        <div onClick={kind === "post" ? () => {} : onClose}>{title}</div>
+      </HeaderWrapper>
+      <Content onClick={kind === "post" ? () => {} : onClose}>
+        {children}
+      </Content>
     </Wrapper>
   );
 };
@@ -39,9 +44,10 @@ const Wrapper = styled.div`
 `;
 
 // Modal title
-const Header = styled.span`
+const HeaderWrapper = styled.div`
+  width: 100%;
+  text-align: center;
   font-size: 15pt;
-  margin-left: 4vw;
 `;
 
 // modal close button

@@ -9,8 +9,13 @@ interface ICommentProps {
   comment?: string;
 }
 
-export const CommentForm = ({ id, commentId, comment = "" }: ICommentProps) => {
+export const CommentForm = ({
+  id,
+  commentId = 0,
+  comment = "",
+}: ICommentProps) => {
   const { postComment, editComment } = useCommunity();
+  const isComment = commentId > 0;
 
   const [form, setForm] = useState({
     commentForm: comment,
@@ -30,10 +35,13 @@ export const CommentForm = ({ id, commentId, comment = "" }: ICommentProps) => {
 
     // commentForm 비어있을 경우 disabled 되도록.
     if (commentForm === "") return;
-    if (window.confirm("댓글을 등록하시겠습니까?") === true) {
+    if (
+      window.confirm(`댓글을 ${isComment ? "수정" : "등록"}하시겠습니까?`) ===
+      true
+    ) {
       console.log(form);
 
-      if (!commentId) {
+      if (!isComment) {
         postComment({
           id: id,
           comment: commentForm,
@@ -44,6 +52,8 @@ export const CommentForm = ({ id, commentId, comment = "" }: ICommentProps) => {
           commentId: commentId,
           comment: commentForm,
         });
+
+        setForm({ commentForm: "" });
       }
     }
   };
@@ -60,7 +70,7 @@ export const CommentForm = ({ id, commentId, comment = "" }: ICommentProps) => {
         <ButtonStyle>
           <ButtonType
             disabled={commentForm === "" ? true : false}
-            title={"등록"}
+            title={isComment ? "수정" : "등록"}
             widthStyle={"50%"}
             paddingStyle="1vw"
           />
