@@ -99,7 +99,7 @@ export const Header = () => {
                   <NavTitle>MyPage</NavTitle>
                 </Nav.Link>
                 <Nav.Link
-                  href="/mypage"
+                  href="/"
                   style={signFontStyle}
                   onClick={() => storage.remove("user-token")}
                 >

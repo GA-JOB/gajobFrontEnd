@@ -29,6 +29,7 @@ export const JobNews = () => {
 const JobNewsWrapper = styled.div`
   height: 100%;
   width: 80%;
+  margin-bottom: 5vw;
   align-items: center;
   justify-content: center;
   text-align: center;
