@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Loading } from "components/loading";
 import { ButtonType } from "components/button/ButtonType";
-import { PostEdit } from "./PostEdit";
-import { PostDelete } from "./PostDelete";
+import { PostEdit } from "pages/community/PostEdit";
+import { PostDelete } from "pages/community/PostDelete";
 import { CommentForm } from "components/common/CommentForm";
 import styled from "styled-components";
 import { Visibility, ChatBubble, Edit } from "@mui/icons-material";

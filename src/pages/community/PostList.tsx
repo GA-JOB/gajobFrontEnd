@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { PostDetails } from "./PostDetails";
-import { PostCommunity } from "./PostCommunity";
+import { PostDetails } from "pages/community/PostDetails";
+import { PostCommunity } from "pages/community/PostCommunity";
 import styled from "styled-components";
 import { Visibility, ChatBubble } from "@mui/icons-material";
 import useGetCommunity from "hooks/api/community/useGetCommunity";

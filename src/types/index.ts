@@ -25,6 +25,32 @@ export interface IContestCrawling {
   imgUrl: string;
 }
 
+export interface IJobPostingCrawling {
+  id: number;
+  career: string;
+  employTypeCode: number;
+  lastModifyDate: number;
+  infoSource: string;
+  title: string;
+  closeDate: string;
+  basicAddress: string;
+  prefCd: string | any;
+  registrationDate: string | Date;
+  wantedMobileInfoUrl: string;
+  workType: string;
+  maxSalary: number;
+  wantedInfoUrl: string;
+  salaryType: string;
+  minEdu: string;
+  minSalary: number;
+  company: string;
+  streetNameAddress: number;
+  jobCode: string | null;
+  authNum: string;
+  region: string;
+  salary: string;
+}
+
 export interface ICommunity {
   id: number;
   title: string | null;
@@ -35,6 +61,25 @@ export interface ICommunity {
   createdDate?: Date;
   modifiedDate?: Date;
   comments?: ICommunityComment[];
+}
+
+export interface IStudy {
+  id: number;
+  title: string;
+  content: string;
+  studyCategory: string;
+  area: string;
+  maxPeople: number;
+  minPeople: number;
+  startDate: string | Date;
+  endDate: string | Date;
+  status: string;
+  writer: string;
+  view: number;
+  createdDate: string | Date;
+  modifiedDate: string | Date;
+  comments: string[];
+  likes: number;
 }
 
 type ICommunityComment = {
