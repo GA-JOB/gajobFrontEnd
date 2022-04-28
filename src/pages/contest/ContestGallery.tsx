@@ -24,7 +24,7 @@ export const ContestGallery = ({ data }: IContestProps) => {
             <Text>
               모집상태: {gallery.state} ({gallery.todayState})
             </Text>
-            {/* <Text>카테고리: {box.category}</Text> */}
+            <HashBox> # {gallery.category}</HashBox>
             <ButtonType link={"http://" + gallery.url} title={"바로가기"} />
           </InfoBox>
         </ContentsBox>
@@ -45,7 +45,7 @@ const GalleryWrapper = styled.div`
 
 const ContentsBox = styled.div`
   display: inline-block;
-  width: 17%;
+  width: 25%;
   height: 100%;
   margin: 1vw;
 
@@ -70,4 +70,11 @@ const TextTitle = styled.div`
 `;
 const Text = styled.div`
   font-size: 11pt;
+`;
+const HashBox = styled.div`
+  padding: 5px;
+  margin: 5px;
+  background-color: #ffd8d8;
+  border-radius: 10px;
+  font-size: 10pt;
 `;
