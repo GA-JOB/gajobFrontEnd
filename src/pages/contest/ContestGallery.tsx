@@ -45,7 +45,7 @@ const GalleryWrapper = styled.div`
 
 const ContentsBox = styled.div`
   display: inline-block;
-  width: 17%;
+  width: 25%;
   height: 100%;
   margin: 1vw;
 
@@ -73,6 +73,7 @@ const Text = styled.div`
 `;
 const HashBox = styled.div`
   padding: 5px;
+  margin: 5px;
   background-color: #ffd8d8;
   border-radius: 10px;
   font-size: 10pt;

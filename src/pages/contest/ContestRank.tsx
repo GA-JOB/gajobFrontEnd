@@ -1,3 +1,3 @@
 export const ContestRank = () => {
-  return;
+  return <>공모전 랭킹에 대한 내용.</>;
 };
