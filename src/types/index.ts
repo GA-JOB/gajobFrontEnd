@@ -19,10 +19,25 @@ export interface IContestCrawling {
   id: number;
   title: string;
   organization: string;
+  category: string;
   state: string;
   todayState: string;
   url: string;
   imgUrl: string;
+}
+
+export interface IContestRankingCrawling {
+  id: number;
+  title: string;
+  ranking: string;
+  rankingState: string;
+  host: string;
+  perks: string;
+  category: string;
+  target: string;
+  url: string;
+  imgUrl: string;
+  dday: string;
 }
 
 export interface IJobPostingCrawling {

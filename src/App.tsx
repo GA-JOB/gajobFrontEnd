@@ -27,6 +27,7 @@ import useGetNews from "hooks/api/useGetNews";
 
 export default function App() {
   // main 화면에서 component route시 데이터 불러오기 위함.
+  const { data } = useGetNews();
 
   return (
     <Router>

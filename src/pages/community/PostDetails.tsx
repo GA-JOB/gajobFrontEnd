@@ -72,7 +72,9 @@ export const PostDetails = ({ id = 0, nickname }: ICommunityListProps) => {
       {data.comments?.map((comment: any, index: number) => (
         <CommentWrapper key={index}>
           <Writer>
-            {comment.nickname}{" "}
+            {data.writer === comment.nickname
+              ? "작성자"
+              : comment.nickname + " "}
             <CreateDate>
               {comment.createdDate === comment.modifiedDate ? (
                 <>{comment.createdDate}</>
