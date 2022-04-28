@@ -5,21 +5,16 @@ import { SkeletonLoading } from "components/loading/Skeleton";
 import { IUpperSlideProps } from "components/UpperContent";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { INewsCrawling } from "types";
+import useGetNews from "hooks/api/useGetNews";
 
 interface ISlideTitlerops {
   title: string;
   info: string;
-  data?: INewsCrawling[]; // news banner slide item
   upper_data?: IUpperSlideProps[]; // upper content slide item
 }
 
-export const SlideItem = ({
-  title,
-  info,
-  data,
-  upper_data,
-}: ISlideTitlerops) => {
+export const SlideItem = ({ title, info, upper_data }: ISlideTitlerops) => {
+  const { data } = useGetNews();
   const SlideWidth = title === "" ? { width: "60%" } : { width: "80%" };
 
   if (title === "") {

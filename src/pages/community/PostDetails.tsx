@@ -1,29 +1,28 @@
+import { useState } from "react";
 import { Loading } from "components/loading";
 import { ButtonType } from "components/button/ButtonType";
 import { PostEdit } from "pages/community/PostEdit";
 import { PostDelete } from "pages/community/PostDelete";
 import { CommentForm } from "components/common/CommentForm";
 import styled from "styled-components";
-import { Visibility, ChatBubble } from "@mui/icons-material";
+import { Visibility, ChatBubble, Edit } from "@mui/icons-material";
 import useGetPieceCommunity from "hooks/api/community/useGetPieceCommunity";
 
 interface ICommunityListProps {
   id: number;
   nickname?: string;
-  comment?: string;
 }
 
-export const PostDetails = ({
-  id,
-  nickname,
-  comment = "",
-}: ICommunityListProps) => {
+export const PostDetails = ({ id, nickname }: ICommunityListProps) => {
   const { data } = useGetPieceCommunity(id ? id : 0);
+  const [commentId, setCommentId] = useState<number>(0);
+  const isEditComment = commentId > 0;
 
   const IconStyle = {
-    fontSize: 18,
+    fontSize: 15,
     margin: "5px",
     color: "black",
+    opacity: "0.8",
   };
 
   if (!data) return <Loading />;
@@ -44,7 +43,7 @@ export const PostDetails = ({
           <Title>{data.title}</Title>
           <PostContent>{data.content}</PostContent>
 
-          {/* login user === post writer일 경우 수정 or 삭제 */}
+          {/* login uer === post writer일 경우 수정 or 삭제 */}
           {data.writer === nickname ? (
             <ButtonTypeBox>
               <PostEdit
@@ -86,13 +85,27 @@ export const PostDetails = ({
 
           {comment.nickname === nickname ? (
             <ButtonTypeBox>
-              <PostEdit
-                id={id}
-                comment={comment.comment}
-                commentId={comment.id}
-              />
+              <EditWrapper
+                onClick={() => {
+                  setCommentId(comment.id);
 
+                  if (isEditComment) {
+                    setCommentId(0);
+                  }
+                }}
+              >
+                수정
+                <Edit style={IconStyle} />
+              </EditWrapper>
               <PostDelete postId={id} commentId={comment.id} />
+
+              {commentId === comment.id ? (
+                <CommentForm
+                  id={id}
+                  comment={comment.comment}
+                  commentId={comment.id}
+                />
+              ) : null}
             </ButtonTypeBox>
           ) : null}
         </CommentWrapper>
@@ -162,4 +175,11 @@ const ButtonWrapper = styled.div`
   display: flex;
   align-items: center;
   padding-left: 85%;
+`;
+
+const EditWrapper = styled.span`
+  margin: 1vw;
+  font-size: 10pt;
+  opacity: 0.8;
+  cursor: pointer;
 `;

@@ -59,17 +59,13 @@ export const CommunityForm = ({
           content: contentForm,
           postCategory: postCategoryForm,
         });
-
-        setIsOpenModal(false);
-      } else {
+      } else if (!isPostCommunity) {
         editPost({
           id: id,
           title: titleForm,
           content: contentForm,
           postCategory: postCategoryForm,
         });
-
-        setIsOpenModal(false);
       }
     }
   };
@@ -81,7 +77,11 @@ export const CommunityForm = ({
   return (
     <>
       <Modal show={isOpenModal} onClose={onCloseModal}>
-        <ModalContent title="" onClose={onCloseModal}>
+        <ModalContent
+          title={"게시글 " + (isPostCommunity ? "등록" : "수정")}
+          kind={isPostCommunity ? "post" : "edit"}
+          onClose={onCloseModal}
+        >
           <CommunityWrapper>
             <Form onSubmit={handleSubmit}>
               <InputLabel>
