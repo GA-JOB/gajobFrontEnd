@@ -1,3 +1,4 @@
+import { useSWRConfig } from "swr";
 import { post } from "lib/api/client";
 import { IStudy } from "types";
 
@@ -15,6 +16,9 @@ type IOmitStudyPost =
 interface IStudyRequest extends Omit<IStudy, IOmitStudyPost> {}
 
 export const useStudy = () => {
+  // 데이터 최신화
+  const { mutate } = useSWRConfig();
+
   const postStudy = async ({
     title,
     content,
@@ -39,6 +43,8 @@ export const useStudy = () => {
         console.log(JSON.stringify(data));
       }
     });
+
+    mutate(`/study/posts`);
     return { res };
   };
   return { postStudy };

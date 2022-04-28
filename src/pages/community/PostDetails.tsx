@@ -9,11 +9,11 @@ import { Visibility, ChatBubble, Edit } from "@mui/icons-material";
 import useGetPieceCommunity from "hooks/api/community/useGetPieceCommunity";
 
 interface ICommunityListProps {
-  id: number;
+  id?: number;
   nickname?: string;
 }
 
-export const PostDetails = ({ id, nickname }: ICommunityListProps) => {
+export const PostDetails = ({ id = 0, nickname }: ICommunityListProps) => {
   const { data } = useGetPieceCommunity(id ? id : 0);
   const [commentId, setCommentId] = useState<number>(0);
   const isEditComment = commentId > 0;
@@ -74,10 +74,10 @@ export const PostDetails = ({ id, nickname }: ICommunityListProps) => {
           <Writer>
             {comment.nickname}{" "}
             <CreateDate>
-              {data.createdDate === data.modifiedDate ? (
-                <>{data.createdDate}</>
+              {comment.createdDate === comment.modifiedDate ? (
+                <>{comment.createdDate}</>
               ) : (
-                <>{data.modifiedDate} 수정됨.</>
+                <>{comment.modifiedDate} 수정됨.</>
               )}
             </CreateDate>
           </Writer>

@@ -46,6 +46,8 @@ export const CommentForm = ({
           id: id,
           comment: commentForm,
         });
+
+        setForm({ commentForm: "" });
       } else {
         editComment({
           postId: id,

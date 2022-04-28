@@ -30,7 +30,6 @@ export const PostDelete = ({ postId, commentId }: IDeleteProps) => {
     } else {
       deleteComment(postId, commentId);
       setOpenModal(false);
-      window.confirm("댓글이 삭제되었습니다.");
     }
   };
 
