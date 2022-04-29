@@ -9,8 +9,8 @@ interface IGetUserRequest extends IUserType {
 }
 
 function useGetAuth() {
-  const { data } = useSWR<IGetUserRequest>("/user", fetcher);
+  const { data, error } = useSWR<IGetUserRequest>("/user", fetcher);
 
-  return { data };
+  return { data, error };
 }
 export default useGetAuth;

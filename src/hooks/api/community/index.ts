@@ -77,7 +77,7 @@ export const useCommunity = () => {
       }
     });
 
-    mutate(`/community/posts/${id}`);
+    mutate(`/community/comments/${id}`, false);
   };
 
   const editComment = async ({ postId, commentId, comment }: IEditComment) => {
@@ -89,14 +89,14 @@ export const useCommunity = () => {
       }
     });
 
-    mutate(`/community/posts/${postId}`);
+    mutate(`/community/posts/${postId}/comments/${commentId}`, false);
   };
 
   const deleteComment = async (postId: number, commentId: number) => {
-    await del(`/community/comments/${commentId}`);
-
-    // del mutate 적용 안됨.
-    mutate(`/community/posts/${postId}`);
+    await del(`/community/comments/${commentId}`).then(() => {
+      window.confirm("댓글이 삭제되었습니다.");
+      mutate(`/community/comments/${commentId}`, false);
+    });
   };
 
   return {

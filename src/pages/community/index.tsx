@@ -69,6 +69,7 @@ const CommuContainer = styled.div`
 `;
 const SideNavWrapper = styled.div`
   width: 30%;
+  height: 100%;
 `;
 const SideNav = styled.div`
   position: fixed;
@@ -77,7 +78,6 @@ const SideNav = styled.div`
   right: 0;
 
   width: 15%;
-  height: 39%;
   margin-top: 17vw;
   margin-left: 10vw;
   padding: 1vw;

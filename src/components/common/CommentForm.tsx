@@ -46,6 +46,8 @@ export const CommentForm = ({
           id: id,
           comment: commentForm,
         });
+
+        setForm({ commentForm: "" });
       } else {
         editComment({
           postId: id,
@@ -85,7 +87,7 @@ const Form = styled.form`
   align-items: center;
   justify-content: center;
   width: 100%;
-  border-top: 1px solid #eaeaea;
+  /* border-top: 1px solid #eaeaea; */
 `;
 
 const InputStyle = styled.textarea`
