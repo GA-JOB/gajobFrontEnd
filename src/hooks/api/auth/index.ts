@@ -1,6 +1,7 @@
 import { post, del } from "lib/api/client";
 import storage from "hooks/store";
 import { IUserData } from "types";
+import useGetAuth from "./useGetAuth";
 
 type ISignupType = "id";
 type ILoginType = "id" | "name" | "nickname";
@@ -31,20 +32,18 @@ export const useAuth = () => {
   };
 
   const postLogin = async ({ email, password }: IPostLoginRequest) => {
-    const login = await post(`/login`, { email, password }).then(
-      (data: any) => {
-        if (data.token) {
-          console.log("로그인 성공");
+    const login = await post(`/login`, { email, password }).then((res: any) => {
+      if (res.token) {
+        console.log("로그인 성공");
 
-          // localStorage 에 access token 저장.
-          storage.set("user-token", data.token);
+        // localStorage 에 access token 저장.
+        storage.set("user-token", res.token);
 
-          if (storage.get("user-token")) {
-            window.location.replace("/");
-          }
+        if (storage.get("user-token")) {
+          window.location.replace("/");
         }
       }
-    );
+    });
 
     return { login };
   };

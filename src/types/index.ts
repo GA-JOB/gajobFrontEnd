@@ -73,6 +73,7 @@ export interface ICommunity {
   postCategory: string | null;
   writer?: string;
   view?: number;
+  commentsCnt?: number;
   createdDate?: Date;
   modifiedDate?: Date;
   comments?: ICommunityComment[];

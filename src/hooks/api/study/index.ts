@@ -2,7 +2,6 @@ import { useSWRConfig } from "swr";
 import { post } from "lib/api/client";
 import { IStudy } from "types";
 
-// 이렇게 타입 명 쓰는게 더 낫지 않나?
 type IOmitStudyPost =
   | "id"
   | "status"

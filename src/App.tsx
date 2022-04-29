@@ -46,11 +46,10 @@ export default function App() {
           <Route path="/contest" element={<Contest />} />
           <Route path="/contest/rank" element={<ContestRank />} />
           <Route path="/job-posting" element={<JobPosting />} />
-          <Route path="/job-posting/:id" element={<JobPostingDetails />} />
+          <Route path="/job-posting/:postId" element={<JobPostingDetails />} />
           <Route path="/jobdam" element={<Community />} />
-          <Route path="/study" element={<Study />} />
-          <Route path="/study-detail/:id" element={<StudyDetails />} />
-          <Route path="/post-detail/:id" element={<PostDetails />} />
+          <Route path="/jobdam/:viewId" element={<PostDetails />} />
+          <Route path="/gajob-study" element={<Study />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/mypage" element={<MyPage />} />
