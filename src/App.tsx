@@ -11,10 +11,11 @@ import { Login } from "pages/auth/Login";
 import { JobNews } from "pages/news/index";
 import { Contest } from "pages/contest/index";
 import { JobPosting } from "pages/jobPosting/index";
-import { JobPostingDetail } from "./pages/jobPosting/JobPostingDetail";
+import { JobPostingDetails } from "./pages/jobPosting/JobPostingDetails";
 import { Community } from "pages/community";
 import { PostDetails } from "pages/community/PostDetails";
 import { Study } from "pages/study/index";
+import { StudyDetails } from "pages/study/StudyDetails";
 import { Portfolio } from "pages/Portfolio";
 import { Calendar } from "pages/Calendar";
 import { MyPage } from "pages/MyPage";
@@ -42,10 +43,11 @@ export default function App() {
           <Route path="/job-news" element={<JobNews />} />
           <Route path="/contest" element={<Contest />} />
           <Route path="/job-posting" element={<JobPosting />} />
-          <Route path="/job-posting/:id" element={<JobPostingDetail />} />
+          <Route path="/job-posting/:id" element={<JobPostingDetails />} />
           <Route path="/jobdam" element={<Community />} />
           <Route path="/jobdam-detail" element={<PostDetails id={0} />} />
-          <Route path="/gajob-study" element={<Study />} />
+          <Route path="/study" element={<Study />} />
+          <Route path="/study-detail/:id" element={<StudyDetails />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/mypage" element={<MyPage />} />

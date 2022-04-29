@@ -78,7 +78,7 @@ export const Header = () => {
             <Nav.Link href="/jobdam">
               <NavTitle>JOB담</NavTitle>
             </Nav.Link>
-            <Nav.Link href="/gajob-study">
+            <Nav.Link href="/study">
               <NavTitle>Study</NavTitle>
             </Nav.Link>
           </Nav>
