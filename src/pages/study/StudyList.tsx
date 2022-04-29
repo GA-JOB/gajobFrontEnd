@@ -6,11 +6,13 @@ import { ReactTabulator } from "react-tabulator";
 import { ColumnDefinition, ReactTabulatorOptions } from "react-tabulator";
 import { IStudy } from "types";
 import "styles/tabulator.scss";
+import { useNavigate } from "react-router-dom";
 
 interface IStudyProps {
   data: IStudy[] | undefined;
 }
 export const StudyList = ({ data }: IStudyProps) => {
+  const navigate = useNavigate();
   const columns: ColumnDefinition[] | any = [
     { formatter: "rownum", hozAlign: "center", width: 40 },
     {
@@ -79,7 +81,10 @@ export const StudyList = ({ data }: IStudyProps) => {
     // printAsHtml: true,
   };
   const rowClickHandler = (e: any, data: any) => {
-    console.log(data._row.data);
+    console.log(data._row.data.id); // 선택했을 때 id값
+    const id = data._row.data.id;
+    navigate(`/study-detail/${id}`);
+    // console.log(data[0].id);
   };
   if (!data) return <Loading />;
   return (
