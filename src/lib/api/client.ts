@@ -1,9 +1,10 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
+import { useNavigate } from "react-router-dom";
 
 const instance = axios.create({ baseURL: process.env.REACT_APP_API_URL });
 
 // Request interceptor
-function interceptorRequestFulfilled(config: AxiosRequestConfig) {
+const interceptorRequestFulfilled = (config: AxiosRequestConfig) => {
   let token = localStorage.getItem("user-token");
   return {
     ...config,
@@ -12,7 +13,7 @@ function interceptorRequestFulfilled(config: AxiosRequestConfig) {
       Authorization: `Bearer ${token}`,
     },
   };
-}
+};
 
 instance.interceptors.request.use(interceptorRequestFulfilled);
 

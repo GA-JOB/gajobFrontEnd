@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import { MenuTitle } from "components/Menutitle";
 import { Loading } from "components/loading";
 import { PostList } from "pages/community/PostList";
@@ -9,6 +10,7 @@ import useGetAuth from "hooks/api/auth/useGetAuth";
 export const Community = () => {
   const token = storage.get("user-token");
   const { data } = useGetAuth();
+  storage.set("user-nickname", data?.nickname);
 
   const [category, setCategory] = useState<string | null>(null);
 
@@ -46,7 +48,7 @@ export const Community = () => {
               </SideNavWrapper>
 
               <ContentWrapper>
-                <PostList postCategory={category} nickname={data.nickname} />
+                <PostList postCategory={category} />
               </ContentWrapper>
             </CommuContainer>
           </CommunityWrapper>

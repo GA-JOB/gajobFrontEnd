@@ -1,83 +1,85 @@
-import { useState } from "react";
-import { PostDetails } from "pages/community/PostDetails";
+import { Loading } from "components/loading";
 import { PostCommunity } from "pages/community/PostCommunity";
 import styled from "styled-components";
 import { Visibility, ChatBubble } from "@mui/icons-material";
 import useGetCommunity from "hooks/api/community/useGetCommunity";
+import { Link } from "react-router-dom";
+import storage from "hooks/store";
 
 interface IPostListProps {
   postCategory: string | null;
-  nickname?: string;
 }
 
-export const PostList = ({ postCategory, nickname }: IPostListProps) => {
+export const PostList = ({ postCategory }: IPostListProps) => {
   const { data } = useGetCommunity();
+  const nickname = storage.get("user-nickname");
+  const arrLength = data?.length;
 
-  const [viewId, setViewId] = useState<number | null>(null);
   const IconStyle = {
     fontSize: 15,
     margin: "5px",
     color: "black",
   };
 
+  if (!data) return <Loading />;
   return (
     <>
-      {viewId === null ? (
-        <>
-          <JobdamPick></JobdamPick>
-          <PostCommunity />
+      <JobdamPick></JobdamPick>
+      <PostCommunity />
 
-          {data?.map((list: any, index: number) => (
-            <div key={index}>
-              {(postCategory === null ||
-                (postCategory !== null &&
-                  postCategory === list.postCategory)) && (
-                <div>
-                  <PostWrapper
-                    onClick={() => {
-                      setViewId(list.id);
-                    }}
-                  >
-                    <Writer>
-                      {list.writer}{" "}
-                      <CreateDate>
-                        {list.createdDate === list.modifiedDate ? (
-                          <>{list.createdDate}</>
-                        ) : (
-                          <>{list.modifiedDate} 수정됨.</>
-                        )}
-                      </CreateDate>
-                    </Writer>
-                    <ContentContainer>
-                      <Title>{list.title}</Title>
-                      <PostContent>{list.content}</PostContent>
-                    </ContentContainer>
-                    <IconWrapper>
-                      <IconContent>
-                        <Visibility style={IconStyle} />
-                        {list.view}
-                      </IconContent>
-                      <IconContent>
-                        <ChatBubble style={IconStyle} />
-                      </IconContent>
-                    </IconWrapper>
-                  </PostWrapper>
-                </div>
-              )}
-            </div>
-          ))}
-        </>
-      ) : (
-        <>
-          <PostDetails id={viewId} nickname={nickname} />
-        </>
-      )}
+      {data?.map((list: any, index: number) => (
+        <div key={index}>
+          {/* 클릭헤 해당하는 카테고리 별 리스트 출력 */}
+          {(postCategory === null ||
+            (postCategory !== null && postCategory === list.postCategory)) && (
+            // viewId를 params로 넘기며 details url로 이동.
+            <LinkStyle
+              to={`${list.id}`}
+              state={{ nickname: nickname, arrLength: arrLength }}
+            >
+              <PostWrapper>
+                <Writer>
+                  {list.writer}{" "}
+                  <CreateDate>
+                    {list.createdDate === list.modifiedDate ? (
+                      <>{list.createdDate}</>
+                    ) : (
+                      <>{list.modifiedDate} 수정됨.</>
+                    )}
+                  </CreateDate>
+                </Writer>
+                <ContentContainer>
+                  <Title>{list.title}</Title>
+                  <PostContent>{list.content}</PostContent>
+                </ContentContainer>
+                <IconWrapper>
+                  <IconContent>
+                    <Visibility style={IconStyle} />
+                    {list.view}
+                  </IconContent>
+                  <IconContent>
+                    <ChatBubble style={IconStyle} />
+                    {list.commentsCnt}
+                  </IconContent>
+                </IconWrapper>
+              </PostWrapper>
+            </LinkStyle>
+          )}
+        </div>
+      ))}
     </>
   );
 };
 
 const JobdamPick = styled.div``;
+const LinkStyle = styled(Link)`
+  text-decoration: none;
+  color: black;
 
+  &:hover {
+    color: black;
+  }
+`;
 const PostWrapper = styled.div`
   width: 100%;
   height: 100%;
