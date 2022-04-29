@@ -12,10 +12,11 @@ import { JobNews } from "pages/news/index";
 import { Contest } from "pages/contest/index";
 import { ContestRank } from "pages/contest/ContestRank";
 import { JobPosting } from "pages/jobPosting/index";
-import { JobPostingDetail } from "./pages/jobPosting/JobPostingDetail";
+import { JobPostingDetails } from "./pages/jobPosting/JobPostingDetails";
 import { Community } from "pages/community";
 import { PostDetails } from "pages/community/PostDetails";
 import { Study } from "pages/study/index";
+import { StudyDetails } from "pages/study/StudyDetails";
 import { Portfolio } from "pages/Portfolio";
 import { Calendar } from "pages/Calendar";
 import { MyPage } from "pages/MyPage";
@@ -45,7 +46,7 @@ export default function App() {
           <Route path="/contest" element={<Contest />} />
           <Route path="/contest/rank" element={<ContestRank />} />
           <Route path="/job-posting" element={<JobPosting />} />
-          <Route path="/job-posting/:postId" element={<JobPostingDetail />} />
+          <Route path="/job-posting/:postId" element={<JobPostingDetails />} />
           <Route path="/jobdam" element={<Community />} />
           <Route path="/jobdam/:viewId" element={<PostDetails />} />
           <Route path="/gajob-study" element={<Study />} />

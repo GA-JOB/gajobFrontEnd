@@ -51,7 +51,7 @@ export const ShortcutItem = [
   },
   {
     title: "GA-JOB STUDY",
-    path: "/gajob-study",
+    path: "/study",
     icon: <GroupAdd sx={IconStyle} />,
     description: (
       <>

@@ -22,7 +22,7 @@ import { StudyRegister } from "./StudyRegister";
 export const Study = () => {
   const token = storage.get("user-token");
   const { data } = useGetStudy();
-  const [register, setRegister] = useState<Boolean>(true);
+  const [register, setRegister] = useState<Boolean>(false);
 
   console.log(data);
   if (!token) return <>접근 못함</>;
