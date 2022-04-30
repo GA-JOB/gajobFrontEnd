@@ -16,31 +16,31 @@ export const ContestList = ({ data }: IContestProps) => {
       title: "id",
       field: "id",
       hozAlign: "center",
-      width: 60,
       fontSize: "10pt",
       vertAlign: "middle",
+      width: 10,
     },
     {
       title: "제목",
       field: "title",
       hozAlign: "center",
       vertAlign: "middle",
-      height: 50,
+      width: 80,
     },
     {
       title: "주최기관",
       field: "organization",
-      // hozAlign: "center",
+      hozAlign: "center",
       vertAlign: "middle",
-      width: 200,
+      width: 80,
     },
-    // {
-    //   title: "카테고리",
-    //   field: "category",
-    //   hozAlign: "center",
-    //   vertAlign: "middle",
-    //   width: 100,
-    // },
+    {
+      title: "카테고리",
+      field: "category",
+      hozAlign: "center",
+      vertAlign: "middle",
+      width: 120,
+    },
     {
       title: "모집상태",
       field: "state",
@@ -93,7 +93,7 @@ export const ContestList = ({ data }: IContestProps) => {
 };
 
 const ContestListWrapper = styled.div`
-  width: 100%;
+  width: 80%;
 
   @media screen and (max-width: 900px) {
     display: none;

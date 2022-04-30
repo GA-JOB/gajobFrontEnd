@@ -33,10 +33,7 @@ export const PostList = ({ postCategory }: IPostListProps) => {
           {(postCategory === null ||
             (postCategory !== null && postCategory === list.postCategory)) && (
             // viewId를 params로 넘기며 details url로 이동.
-            <LinkStyle
-              to={`${list.id}`}
-              state={{ nickname: nickname, arrLength: arrLength }}
-            >
+            <LinkStyle to={`${list.id}`}>
               <PostWrapper>
                 <Writer>
                   {list.writer}{" "}

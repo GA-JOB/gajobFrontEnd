@@ -1,5 +1,4 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
-import { useNavigate } from "react-router-dom";
 
 const instance = axios.create({ baseURL: process.env.REACT_APP_API_URL });
 
@@ -26,8 +25,13 @@ const responseInterceptorFulfilled = (res: AxiosResponse) => {
 
 const responseInterceptorRejected = (error: AxiosError) => {
   const errorMsg = error.response?.data?.message ?? "에러입니다";
-  console.log(error);
+  // const errorStatus = error.response?.status;
+  // const errorUrl = error.response?.config.url;
+  console.log(error.response);
   alert(errorMsg);
+  // if (window.confirm(errorMsg) === true) {
+  //   window.location.replace("/");
+  // }
   return new Error(error.response?.data?.message ?? error);
 };
 

@@ -3,7 +3,11 @@ import { fetcher } from "lib/api/fetcher";
 import { ICommunity } from "types";
 
 function useGetPieceCommunity(id: number) {
-  const { data, error } = useSWR<ICommunity>(`/community/posts/${id}`, fetcher);
+  const { data, error } = useSWR<ICommunity>(
+    `/community/posts/${id}`,
+    fetcher,
+    { refreshInterval: 500 }
+  );
 
   return { data, error };
 }

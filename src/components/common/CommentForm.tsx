@@ -83,7 +83,7 @@ export const CommentForm = ({
 };
 
 const Form = styled.form`
-  width: 100%;
+  width: 90%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -91,7 +91,7 @@ const Form = styled.form`
 `;
 
 const InputStyle = styled.textarea`
-  width: 90%;
+  width: 100%;
   height: 4vw;
   margin: 2vw 0 0 2vw;
   padding: 1vw;
@@ -103,5 +103,5 @@ const InputStyle = styled.textarea`
 
 const ButtonStyle = styled.span`
   width: 20%;
-  margin-left: 2vw;
+  margin-left: 1vw;
 `;
