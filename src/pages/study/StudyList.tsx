@@ -84,7 +84,6 @@ export const StudyList = ({ data }: IStudyProps) => {
     console.log(data._row.data.id); // 선택했을 때 id값
     const id = data._row.data.id;
     navigate(`/study-detail/${id}`);
-    // console.log(data[0].id);
   };
   if (!data) return <Loading />;
   return (

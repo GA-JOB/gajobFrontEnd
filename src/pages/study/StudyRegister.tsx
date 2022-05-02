@@ -84,9 +84,6 @@ export const StudyRegister = ({
     "세종",
     "제주",
   ];
-
-  const [value, setValue] = useState<Date | null>(null);
-
   const onChange = (
     e:
       | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -123,74 +120,79 @@ export const StudyRegister = ({
   return (
     <StudyRegisterWrapper>
       <Form onSubmit={handleSubmit}>
-        <InputTextField
-          label="제목을 입력하세요."
-          variant="filled"
-          type="text"
-          name="titleForm"
-          value={titleForm}
-          onChange={onChange}
-          inputProps={{ style: { fontSize: 15, verticalAlign: "middle" } }}
-        />
-        <InputTextField
-          label="내용을 입력하세요."
-          variant="filled"
-          type="text"
-          name="contentForm"
-          value={contentForm}
-          onChange={onChange}
-          inputProps={{ style: { fontSize: 15, verticalAlign: "middle" } }}
-        />
-
-        <InputSelectField variant="filled" sx={{ m: 0, minWidth: "100%" }}>
-          <InputLabel>카테고리</InputLabel>
-          <Select
-            id="demo-simple-select-filled"
-            name="studyCategoryForm"
-            value={studyCategoryForm}
+        <SmallInput>
+          <InputSelectField variant="filled" sx={{ m: 0, minWidth: "100%" }}>
+            <InputLabel>카테고리</InputLabel>
+            <Select
+              id="demo-simple-select-filled"
+              name="studyCategoryForm"
+              value={studyCategoryForm}
+              onChange={onChange}
+            >
+              {studyCategoryValue.map((studyCategory) => (
+                <MenuItem value={studyCategory}>{studyCategory}</MenuItem>
+              ))}
+            </Select>
+          </InputSelectField>
+          <InputSelectField variant="filled" sx={{ m: 0, minWidth: "100%" }}>
+            <InputLabel>지역</InputLabel>
+            <Select
+              id="demo-simple-select-filled"
+              name="areaForm"
+              value={areaForm}
+              onChange={onChange}
+            >
+              {areaValue.map((area) => (
+                <MenuItem value={area}>{area}</MenuItem>
+              ))}
+            </Select>
+          </InputSelectField>
+          <InputTextField
+            label="최대 인원"
+            variant="filled"
+            type="number"
+            name="maxPeopleForm"
+            value={maxPeopleForm}
             onChange={onChange}
-          >
-            {studyCategoryValue.map((studyCategory) => (
-              <MenuItem value={studyCategory}>{studyCategory}</MenuItem>
-            ))}
-          </Select>
-        </InputSelectField>
-        <InputSelectField variant="filled" sx={{ m: 0, minWidth: "100%" }}>
-          <InputLabel>지역을 고르세요</InputLabel>
-          <Select
-            id="demo-simple-select-filled"
-            name="areaForm"
-            value={areaForm}
-            onChange={onChange}
-          >
-            {areaValue.map((area) => (
-              <MenuItem value={area}>{area}</MenuItem>
-            ))}
-          </Select>
-        </InputSelectField>
-        <InputTextField
-          label="최대 인원을 입력하세요."
-          variant="filled"
-          type="number"
-          name="maxPeopleForm"
-          value={maxPeopleForm}
-          onChange={onChange}
-          // inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
-        />
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <DatePicker
-            label="모집 마감일"
-            value={endDateForm}
-            onChange={(newValue) => {
-              console.log(newValue);
-              setForm({ ...form, endDateForm: newValue });
-              console.log(form);
-            }}
-            renderInput={(params) => (
-              <TextField {...params} variant="filled" fullWidth></TextField>
-            )}
+            // inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
           />
-        </LocalizationProvider>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <DatePicker
+              label="모집 마감일"
+              value={endDateForm}
+              onChange={(newValue) => {
+                console.log(newValue);
+                setForm({ ...form, endDateForm: newValue });
+                console.log(form);
+              }}
+              renderInput={(params) => (
+                <TextField {...params} variant="filled" fullWidth></TextField>
+              )}
+            />
+          </LocalizationProvider>
+        </SmallInput>
+        <MainInput>
+          <InputTextField
+            label="제목을 입력하세요."
+            variant="filled"
+            type="text"
+            name="titleForm"
+            value={titleForm}
+            onChange={onChange}
+            inputProps={{ style: { fontSize: 15, verticalAlign: "middle" } }}
+          />
+          <InputTextField
+            label="내용을 입력하세요."
+            variant="filled"
+            type="text"
+            multiline
+            name="contentForm"
+            value={contentForm}
+            onChange={onChange}
+            rows={10}
+            inputProps={{ style: { fontSize: 15, verticalAlign: "middle" } }}
+          />
+        </MainInput>
         <ButtonType title={"등록하기"} widthStyle={"100%"} />
       </Form>
     </StudyRegisterWrapper>
@@ -212,13 +214,22 @@ const Form = styled.form`
 const InputTextField = styled(TextField)`
   width: 100%;
   font-size: 10pt;
-  margin-bottom: 1vw;
 `;
-//
+// margin-bottom: 1vh;
 const InputSelectField = styled(FormControl)`
   width: 100%;
   font-size: 10pt;
-  margin: 0 0 1vw 0;
+`;
+// margin: 0 0 1vh 0;
+const SmallInput = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;
+  margin-bottom: 1vh;
+`;
+const MainInput = styled.div`
+  display: grid;
+  grid-gap: 1vh;
 `;
 // max-width: 100%;
 // title?: string;
