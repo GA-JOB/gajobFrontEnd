@@ -3,11 +3,9 @@ import { fetcher } from "lib/api/fetcher";
 import { ICommunity } from "types";
 
 function useGetCommunity() {
-  const { data, error } = useSWR<ICommunity[]>("/community/posts", fetcher, {
-    refreshInterval: 500,
-  });
+  const { data } = useSWR<ICommunity[]>("/community/posts", fetcher);
 
-  return { data, error };
+  return { data };
 }
 
 export default useGetCommunity;

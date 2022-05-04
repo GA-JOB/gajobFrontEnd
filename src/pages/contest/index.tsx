@@ -1,27 +1,11 @@
-import { useState } from "react";
 import { MenuTitle } from "components/Menutitle";
-import { ContestGallery } from "./ContestGallery";
 import { ContestList } from "./ContestList";
+import { ContestRank } from "./ContestRank";
 import styled from "styled-components";
-import { FormatListBulleted, GridView } from "@mui/icons-material";
 import useGetContests from "hooks/api/useGetContest";
 
 export const Contest = () => {
   const { data } = useGetContests();
-
-  const [viewType, setViewType] = useState<string>("grid");
-  let gridStyle,
-    listStyle = {
-      opacity: 0.5,
-    };
-
-  if (viewType === "grid") {
-    listStyle = { opacity: 0.5 };
-    gridStyle = { opacity: 1 };
-  } else if (viewType === "list") {
-    gridStyle = { opacity: 0.5 };
-    listStyle = { opacity: 1 };
-  }
 
   return (
     <ContestWrapper>
@@ -34,31 +18,21 @@ export const Contest = () => {
         <SideNavWrapper>
           <SideNav>
             <NavTitle>category</NavTitle>
-            <NavList onClick={() => window.location.replace("/contest/rank")}>
-              🔥 Hot Ranking
+            <NavList>
+              <NavLink onClick={() => window.scrollTo(0, 0)}>
+                🔥 Hot Ranking
+              </NavLink>
             </NavList>
-            <NavList onClick={() => window.location.replace("/contest")}>
-              📒 공모전 전체
+            <NavList>
+              <NavLink href="#rank">📒 공모전 전체</NavLink>
             </NavList>
           </SideNav>
         </SideNavWrapper>
 
         <ContentsTypeWrapper>
-          <SelectViewType>
-            <Button style={gridStyle}>
-              <GridView onClick={() => setViewType("grid")} />
-            </Button>
-            <Button style={listStyle}>
-              <FormatListBulleted
-                onClick={() => {
-                  setViewType("list");
-                }}
-              />
-            </Button>
-          </SelectViewType>
-
-          {viewType === "grid" && <ContestGallery data={data} />}
-          {viewType === "list" && <ContestList data={data} />}
+          <ContestRank />
+          <br id="rank" />
+          <ContestList data={data} />
         </ContentsTypeWrapper>
       </ContestContainer>
     </ContestWrapper>
@@ -67,7 +41,7 @@ export const Contest = () => {
 
 const ContestWrapper = styled.div`
   height: 100%;
-  width: 90%;
+  width: 85%;
 `;
 
 const ContestContainer = styled.div`
@@ -80,6 +54,8 @@ const ContestContainer = styled.div`
 const SideNavWrapper = styled.div`
   width: 30%;
   height: 100%;
+
+  vertical-align: baseline;
 `;
 const SideNav = styled.div`
   position: fixed;
@@ -118,19 +94,11 @@ const NavList = styled.div`
     transition: 0.5s;
   }
 `;
-const SelectViewType = styled.div`
-  width: 100%;
-  padding: 1vw;
+const NavLink = styled.a`
+  text-decoration: none;
+  color: black;
+`;
 
-  @media screen and (max-width: 900px) {
-    display: none;
-  }
-`;
-const Button = styled.span`
-  width: 100%;
-  padding: 0.5vw;
-  cursor: pointer;
-`;
 const ContentsTypeWrapper = styled.div`
   width: 90%;
   margin-bottom: 5vw;

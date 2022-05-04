@@ -44,7 +44,6 @@ export default function App() {
           <Route path="/" element={<Home />}></Route>
           <Route path="/job-news" element={<JobNews />} />
           <Route path="/contest" element={<Contest />} />
-          <Route path="/contest/rank" element={<ContestRank />} />
           <Route path="/job-posting" element={<JobPosting />} />
           <Route path="/job-posting/:postId" element={<JobPostingDetails />} />
           <Route path="/jobdam" element={<Community />} />
