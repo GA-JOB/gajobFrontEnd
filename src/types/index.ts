@@ -38,6 +38,7 @@ export interface IContestRankingCrawling {
   url: string;
   imgUrl: string;
   dday: string;
+  state: string;
 }
 
 export interface IJobPostingCrawling {

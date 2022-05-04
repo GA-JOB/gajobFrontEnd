@@ -18,21 +18,17 @@ export const ContestList = ({ data }: IContestProps) => {
       hozAlign: "center",
       fontSize: "10pt",
       vertAlign: "middle",
-      width: 10,
+      width: 1,
     },
     {
       title: "제목",
       field: "title",
-      hozAlign: "center",
-      vertAlign: "middle",
-      width: 80,
+      width: 300,
     },
     {
       title: "주최기관",
       field: "organization",
-      hozAlign: "center",
-      vertAlign: "middle",
-      width: 80,
+      width: 100,
     },
     {
       title: "카테고리",
@@ -93,7 +89,7 @@ export const ContestList = ({ data }: IContestProps) => {
 };
 
 const ContestListWrapper = styled.div`
-  width: 80%;
+  width: 95%;
 
   @media screen and (max-width: 900px) {
     display: none;

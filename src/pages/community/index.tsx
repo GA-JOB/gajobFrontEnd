@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 import { MenuTitle } from "components/Menutitle";
 import { Loading } from "components/loading";
 import { PostList } from "pages/community/PostList";
@@ -8,7 +7,6 @@ import storage from "hooks/store";
 import useGetAuth from "hooks/api/auth/useGetAuth";
 
 export const Community = () => {
-  const token = storage.get("user-token");
   const { data } = useGetAuth();
   storage.set("user-nickname", data?.nickname);
 
