@@ -25,6 +25,7 @@ const responseInterceptorFulfilled = (res: AxiosResponse) => {
 
 const responseInterceptorRejected = (error: AxiosError) => {
   const errorMsg = error.response?.data?.message ?? "에러입니다";
+  console.log(error);
   // const errorStatus = error.response?.status;
   // const errorUrl = error.response?.config.url;
   console.log(error.response);

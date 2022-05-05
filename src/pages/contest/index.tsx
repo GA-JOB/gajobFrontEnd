@@ -20,18 +20,24 @@ export const Contest = () => {
             <NavTitle>category</NavTitle>
             <NavList>
               <NavLink onClick={() => window.scrollTo(0, 0)}>
-                🔥 Hot Ranking
+                🔥 실시간 HOT
               </NavLink>
             </NavList>
             <NavList>
-              <NavLink href="#rank">📒 공모전 전체</NavLink>
+              <NavLink onClick={() => window.scrollTo(5500, 5500)}>
+                📒 공모전 전체
+              </NavLink>
+            </NavList>
+            <NavList>
+              <NavLink onClick={() => window.scrollTo(5500, 5500)}>
+                ❤️ 관심 공모전
+              </NavLink>
             </NavList>
           </SideNav>
         </SideNavWrapper>
 
         <ContentsTypeWrapper>
           <ContestRank />
-          <br id="rank" />
           <ContestList data={data} />
         </ContentsTypeWrapper>
       </ContestContainer>
@@ -100,6 +106,8 @@ const NavLink = styled.a`
 `;
 
 const ContentsTypeWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 90%;
-  margin-bottom: 5vw;
+  margin-bottom: 3vw;
 `;

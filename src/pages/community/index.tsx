@@ -1,18 +1,14 @@
 import { useState } from "react";
 import { MenuTitle } from "components/Menutitle";
-import { Loading } from "components/loading";
 import { PostList } from "pages/community/PostList";
 import styled from "styled-components";
 import storage from "hooks/store";
-import useGetAuth from "hooks/api/auth/useGetAuth";
 
 export const Community = () => {
-  const { data } = useGetAuth();
-  storage.set("user-nickname", data?.nickname);
-
+  const token = storage.get("user-token");
   const [category, setCategory] = useState<string | null>(null);
 
-  if (!data) return <Loading />;
+  if (!token) return <>접근 못함</>;
   return (
     <>
       <CommunityWrapper>

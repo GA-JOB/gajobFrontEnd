@@ -38,6 +38,7 @@ export const useAuth = () => {
 
         // localStorage 에 access token 저장.
         storage.set("user-token", res.token);
+        storage.set("user-nickname", res.nickname);
 
         if (storage.get("user-token")) {
           window.location.replace("/");

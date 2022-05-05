@@ -1,33 +1,38 @@
 import { useState } from "react";
 import { Loading } from "components/loading/index";
 import styled from "styled-components";
+import { EmojiEventsTwoTone } from "@mui/icons-material";
 import useGetContestRank from "hooks/api/useGetContestRank";
 
 export const ContestRank = () => {
   const { data } = useGetContestRank();
 
   const [state, setState] = useState<string | null>(null);
-  const [color, setColor] = useState("red");
+  //   const [color, setColor] = useState("red");
   //   const onChangeBtnColor = () => {
   //     color === "red" ? setColor("yellow") : setColor("red");
   //   };
+
+  const IconStyle = {
+    fontSize: 50,
+    color: "white",
+  };
 
   if (!data) return <Loading />;
   return (
     <>
       <GalleryWrapper>
-        <h2>🔥 실시간 HOT 공모전</h2>
+        <SubTitle>🔥 실시간 HOT 공모전</SubTitle>
 
         <StateTag>
-          <ListStyle color={color} onClick={() => setState(null)}>
-            # 전체
-          </ListStyle>
+          <ListStyle onClick={() => setState(null)}># 전체</ListStyle>
           <ListStyle onClick={() => setState("접수예정")}># 접수예정</ListStyle>
           <ListStyle onClick={() => setState("접수중")}># 접수중</ListStyle>
           <ListStyle onClick={() => setState("마감임박")}># 마감임박</ListStyle>
           <ListStyle onClick={() => setState("마감")}># 마감</ListStyle>
         </StateTag>
 
+        {/* 1, 2, 3랭킹 상단에 보이기 */}
         {data.map((gallery: any, index: number) => (
           <>
             {(state === null ||
@@ -36,6 +41,16 @@ export const ContestRank = () => {
                 <LinkStyle href={gallery.url} target="_blank">
                   <ContentsBox key={index}>
                     <ImgBox>
+                      <Ranking>
+                        {(gallery.ranking === "1" ||
+                          gallery.ranking === "2" ||
+                          gallery.ranking === "3") && (
+                          <>
+                            {gallery.ranking}
+                            <EmojiEventsTwoTone style={IconStyle} />
+                          </>
+                        )}
+                      </Ranking>
                       <img
                         src={gallery.imgUrl}
                         alt="이미지 준비중 .."
@@ -58,7 +73,7 @@ export const ContestRank = () => {
                   </TextBox>
                 </LinkStyle>
               </Box>
-            )}{" "}
+            )}
           </>
         ))}
       </GalleryWrapper>
@@ -70,22 +85,33 @@ const GalleryWrapper = styled.div`
   width: 100%;
   position: relative;
 `;
+const SubTitle = styled.div`
+  margin: 1vw 0;
+  font-size: 15pt;
+  font-weight: lighter;
+`;
 const StateTag = styled.div`
-  width: 90%;
-  text-align: center;
+  width: 100%;
 `;
 const ListStyle = styled.li`
   list-style: none;
   display: inline-block;
-  border: 2px solid black;
+  background-color: #eaeaea;
   border-radius: 10px;
   font-size: 10pt;
-  opacity: 0.5;
+  opacity: 0.7;
 
-  margin: 0.5vw 2vw;
-  padding: 0.3vw 0.8vw;
+  margin: 1vw;
+  padding: 0.5vw 1vw;
   cursor: pointer;
-  background-color: ${(props) => props.color};
+  transition: 0.1s;
+
+  &:hover {
+    background-color: white;
+    border: 1px solid black;
+    opacity: 1;
+    transition: 0.1s;
+  }
 `;
 const Box = styled.li`
   width: 30%;
@@ -104,7 +130,15 @@ const LinkStyle = styled.a`
   text-decoration: none;
 `;
 const ContentsBox = styled.div`
+  position: relative;
   height: 100%;
+`;
+const Ranking = styled.div`
+  position: absolute;
+  right: 0;
+  margin: 1vw;
+  color: white;
+  font-size: 23pt;
 `;
 const ImgBox = styled.div`
   width: 100%;

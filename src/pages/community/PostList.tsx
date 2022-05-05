@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { Visibility, ChatBubble } from "@mui/icons-material";
 import useGetCommunity from "hooks/api/community/useGetCommunity";
 import { Link } from "react-router-dom";
-import storage from "hooks/store";
 
 interface IPostListProps {
   postCategory: string | null;
@@ -12,8 +11,6 @@ interface IPostListProps {
 
 export const PostList = ({ postCategory }: IPostListProps) => {
   const { data } = useGetCommunity();
-  const nickname = storage.get("user-nickname");
-  const arrLength = data?.length;
 
   const IconStyle = {
     fontSize: 15,

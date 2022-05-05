@@ -9,7 +9,7 @@ interface IGetUserRequest extends IOmitUserId {
 }
 
 function useGetAuth() {
-  const { data } = useSWR<IGetUserRequest>("user", fetcher);
+  const { data, mutate } = useSWR<IGetUserRequest>("user", fetcher);
 
   return { data };
 }
