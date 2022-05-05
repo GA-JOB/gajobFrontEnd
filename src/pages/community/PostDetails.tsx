@@ -1,11 +1,11 @@
-import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Loading } from "components/loading";
 import { PostEdit } from "pages/community/PostEdit";
 import { PostDelete } from "pages/community/PostDelete";
+import { CommentList } from "pages/community/CommentList";
 import { CommentForm } from "components/common/CommentForm";
 import styled from "styled-components";
-import { Visibility, ChatBubble, Edit } from "@mui/icons-material";
+import { Visibility, ChatBubble } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import storage from "hooks/store";
 import useGetPieceCommunity from "hooks/api/community/useGetPieceCommunity";
@@ -13,14 +13,11 @@ import useGetPieceCommunity from "hooks/api/community/useGetPieceCommunity";
 interface ICommunityListProps {}
 
 export const PostDetails = () => {
+  const nickname = storage.get("user-nickname");
   const { viewId } = useParams();
   const navigate = useNavigate();
-  const nickname = storage.get("user-nickname");
-
   // 커뮤니티 낱개 조회
   const { data } = useGetPieceCommunity(viewId ? parseInt(viewId) : 0);
-  const [commentId, setCommentId] = useState<number>(0);
-  const isEditComment = commentId > 0;
 
   const IconStyle = {
     fontSize: 15,
@@ -74,56 +71,15 @@ export const PostDetails = () => {
           </IconWrapper>
         </DetailContent>
 
-        {/* 댓글 */}
-        {data.comments?.map((comment: any, index: number) => (
-          <CommentWrapper key={index}>
-            <Writer>
-              {data.writer === comment.nickname
-                ? "작성자"
-                : comment.nickname + " "}
-              <CreateDate>
-                {comment.createdDate === comment.modifiedDate ? (
-                  <>{comment.createdDate}</>
-                ) : (
-                  <>{comment.modifiedDate} 수정됨.</>
-                )}
-              </CreateDate>
-            </Writer>
-            <PostContent>{comment.comment}</PostContent>
+        {/* 댓글 리스트 */}
+        <CommentList
+          postId={viewId ? parseInt(viewId) : 0}
+          postWriter={data?.writer}
+        />
 
-            {comment.nickname === nickname ? (
-              <ButtonTypeBox>
-                <EditWrapper
-                  onClick={() => {
-                    setCommentId(comment.id);
-
-                    if (isEditComment) {
-                      setCommentId(0);
-                    }
-                  }}
-                >
-                  수정
-                  <Edit style={IconStyle} />
-                </EditWrapper>
-                <PostDelete
-                  postId={viewId ? parseInt(viewId) : 0}
-                  commentId={comment.id}
-                />
-
-                {commentId === comment.id ? (
-                  <CommentForm
-                    id={viewId ? parseInt(viewId) : 0}
-                    comment={comment.comment}
-                    commentId={comment.id}
-                  />
-                ) : null}
-              </ButtonTypeBox>
-            ) : null}
-          </CommentWrapper>
-        ))}
-
-        {/* 댓글 */}
+        {/* 댓글 등록 */}
         <CommentForm id={viewId ? parseInt(viewId) : 0} />
+
         <ButtonWrapper>
           {viewId && viewId !== "1" ? (
             <Button
@@ -171,12 +127,6 @@ const DetailContent = styled.div`
   padding: 2vw;
 `;
 
-const CommentWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  padding: 3vw;
-  border-top: 1px solid #eaeaea;
-`;
 const Writer = styled.div`
   margin: 5px;
   font-size: 12pt;
@@ -211,12 +161,6 @@ const IconWrapper = styled.div`
 `;
 const IconContent = styled.span`
   margin-right: 10px;
-`;
-const EditWrapper = styled.span`
-  margin: 1vw;
-  font-size: 10pt;
-  opacity: 0.8;
-  cursor: pointer;
 `;
 const ButtonWrapper = styled.div`
   margin: 2vw;

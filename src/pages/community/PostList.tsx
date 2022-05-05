@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { Visibility, ChatBubble } from "@mui/icons-material";
 import useGetCommunity from "hooks/api/community/useGetCommunity";
 import { Link } from "react-router-dom";
-import storage from "hooks/store";
 
 interface IPostListProps {
   postCategory: string | null;
@@ -12,8 +11,6 @@ interface IPostListProps {
 
 export const PostList = ({ postCategory }: IPostListProps) => {
   const { data } = useGetCommunity();
-  const nickname = storage.get("user-nickname");
-  const arrLength = data?.length;
 
   const IconStyle = {
     fontSize: 15,
@@ -33,10 +30,7 @@ export const PostList = ({ postCategory }: IPostListProps) => {
           {(postCategory === null ||
             (postCategory !== null && postCategory === list.postCategory)) && (
             // viewId를 params로 넘기며 details url로 이동.
-            <LinkStyle
-              to={`${list.id}`}
-              state={{ nickname: nickname, arrLength: arrLength }}
-            >
+            <LinkStyle to={`${list.id}`}>
               <PostWrapper>
                 <Writer>
                   {list.writer}{" "}
