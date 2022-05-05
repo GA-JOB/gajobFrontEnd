@@ -93,7 +93,6 @@ export const ContestList = ({ data }: IContestProps) => {
 
 const ContestListWrapper = styled.div`
   width: 95%;
-  margin: 2vw 0;
 
   @media screen and (max-width: 900px) {
     display: none;

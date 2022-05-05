@@ -2,13 +2,10 @@ import { useState } from "react";
 import { MenuTitle } from "components/Menutitle";
 import { PostList } from "pages/community/PostList";
 import styled from "styled-components";
-import storage from "hooks/store";
 
 export const Community = () => {
-  const token = storage.get("user-token");
   const [category, setCategory] = useState<string | null>(null);
 
-  if (!token) return <>접근 못함</>;
   return (
     <>
       <CommunityWrapper>
