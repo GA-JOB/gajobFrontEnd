@@ -38,6 +38,7 @@ export interface IContestRankingCrawling {
   url: string;
   imgUrl: string;
   dday: string;
+  state: string;
 }
 
 export interface IJobPostingCrawling {
@@ -73,6 +74,7 @@ export interface ICommunity {
   postCategory: string | null;
   writer?: string;
   view?: number;
+  commentsCnt?: number;
   createdDate?: Date;
   modifiedDate?: Date;
   comments?: ICommunityComment[];

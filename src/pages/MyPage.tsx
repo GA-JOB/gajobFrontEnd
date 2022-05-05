@@ -12,7 +12,6 @@ const MyPageWrapper = styled.div`
 
 export const MyPage = () => {
   const { data } = useGetAuth();
-  console.log(data);
 
   const token = storage.get("user-token");
 
