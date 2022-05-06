@@ -13,6 +13,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import TextField from "@mui/material/TextField";
 
 interface IStudyProps {
+  id?: number;
   title?: string;
   content?: string;
   studyCategory?: string;
@@ -21,9 +22,12 @@ interface IStudyProps {
   maxPeople?: number | any;
   startDate?: Date;
   endDate?: string | Date | null;
+  status?: string;
+  openTalkUrl?: string | null;
 }
 
 export const StudyRegister = ({
+  id = 0,
   title = "",
   content = "",
   studyCategory = "",
@@ -32,10 +36,13 @@ export const StudyRegister = ({
   maxPeople = "",
   startDate = new Date(),
   endDate = null,
+  status = "모집중",
   setRegister,
+  openTalkUrl = null,
 }: IStudyProps | any) => {
-  const { postStudy } = useStudy();
-
+  const { postStudy, editStudy } = useStudy();
+  //id !== 0 수정
+  const isEditStudy = id !== 0;
   const [form, setForm] = useState({
     titleForm: title,
     contentForm: content,
@@ -45,6 +52,8 @@ export const StudyRegister = ({
     maxPeopleForm: maxPeople,
     startDateForm: startDate,
     endDateForm: endDate,
+    statusForm: status,
+    openTalkUrlForm: openTalkUrl,
   });
 
   const {
@@ -56,6 +65,8 @@ export const StudyRegister = ({
     maxPeopleForm,
     startDateForm,
     endDateForm,
+    openTalkUrlForm,
+    statusForm,
   } = form;
 
   const studyCategoryValue = [
@@ -84,6 +95,7 @@ export const StudyRegister = ({
     "세종",
     "제주",
   ];
+  const statusCategory = [" 모집중", "모집종료"];
   const onChange = (
     e:
       | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -102,17 +114,37 @@ export const StudyRegister = ({
 
     console.log(form);
 
-    if (window.confirm("글을 등록하시겠습니까?") === true) {
-      postStudy({
-        title: titleForm,
-        content: contentForm,
-        studyCategory: studyCategoryForm,
-        area: areaForm,
-        minPeople: minPeopleForm,
-        maxPeople: maxPeopleForm,
-        startDate: startDateForm,
-        endDate: endDateForm,
-      });
+    if (
+      window.confirm(`글을 ${isEditStudy ? "수정" : "등록"}하시겠습니까?`) ===
+      true
+    ) {
+      if (!isEditStudy) {
+        postStudy({
+          title: titleForm,
+          content: contentForm,
+          studyCategory: studyCategoryForm,
+          area: areaForm,
+          minPeople: minPeopleForm,
+          maxPeople: maxPeopleForm,
+          startDate: startDateForm,
+          endDate: endDateForm,
+          openTalkUrl: openTalkUrlForm,
+        });
+      } else {
+        editStudy({
+          id: id,
+          title: titleForm,
+          content: contentForm,
+          studyCategory: studyCategoryForm,
+          area: areaForm,
+          minPeople: minPeopleForm,
+          maxPeople: maxPeopleForm,
+          startDate: startDateForm,
+          endDate: endDateForm,
+          status: statusForm,
+          openTalkUrl: openTalkUrlForm,
+        });
+      }
     }
     setRegister(false);
   };
@@ -190,6 +222,15 @@ export const StudyRegister = ({
             value={contentForm}
             onChange={onChange}
             rows={10}
+            inputProps={{ style: { fontSize: 15, verticalAlign: "middle" } }}
+          />
+          <InputTextField
+            label="오픈카톡 링크가 있다면 남겨주세요"
+            variant="filled"
+            type="text"
+            name="openTalkUrlForm"
+            value={openTalkUrlForm}
+            onChange={onChange}
             inputProps={{ style: { fontSize: 15, verticalAlign: "middle" } }}
           />
         </MainInput>

@@ -95,6 +95,7 @@ export interface IStudy {
   modifiedDate: string | Date;
   comments: string[];
   likes: number;
+  openTalkUrl: string | null;
 }
 
 type ICommunityComment = {
