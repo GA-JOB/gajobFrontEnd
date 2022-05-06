@@ -37,7 +37,7 @@ export const SidebarData = [
   },
   {
     title: "GaJob-study",
-    path: "/gajob-study",
+    path: "/study",
     icon: <GroupAdd />,
   },
   {
