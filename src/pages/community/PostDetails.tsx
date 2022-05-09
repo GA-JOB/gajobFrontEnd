@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Loading } from "components/loading";
 import { PostEdit } from "pages/community/PostEdit";
@@ -5,12 +6,16 @@ import { PostDelete } from "pages/community/PostDelete";
 import { CommentList } from "pages/community/CommentList";
 import { CommentForm } from "components/common/CommentForm";
 import styled from "styled-components";
-import { Visibility, ChatBubble } from "@mui/icons-material";
+import {
+  Visibility,
+  ChatBubble,
+  BookmarkBorder,
+  BookmarkAdded,
+} from "@mui/icons-material";
 import { Button } from "@mui/material";
 import storage from "hooks/store";
+import { post } from "lib/api/client";
 import useGetPieceCommunity from "hooks/api/community/useGetPieceCommunity";
-
-interface ICommunityListProps {}
 
 export const PostDetails = () => {
   const nickname = storage.get("user-nickname");
@@ -18,7 +23,23 @@ export const PostDetails = () => {
   const navigate = useNavigate();
   // 커뮤니티 낱개 조회
   const { data } = useGetPieceCommunity(viewId ? parseInt(viewId) : 0);
+  const [scrapState, setScrapState] = useState<boolean>();
 
+  const onClickBtn = async (e: any) => {
+    e.preventDefault();
+    await post(`/community/scrap/${viewId ? parseInt(viewId) : 0}`).then(
+      (res) => {
+        console.log(res);
+        res === "scrap-success" ? setScrapState(true) : setScrapState(false);
+      }
+    );
+  };
+
+  const ScrapIconStyle = {
+    fontSize: 25,
+    cursor: "pointer",
+    color: "#980000",
+  };
   const IconStyle = {
     fontSize: 15,
     margin: "5px",
@@ -32,7 +53,8 @@ export const PostDetails = () => {
       <DetailContainer>
         <DetailContent>
           <Writer>
-            {data.writer}{" "}
+            {data.writer}
+
             <CreateDate>
               {data.createdDate === data.modifiedDate ? (
                 <>{data.createdDate}</>
@@ -40,7 +62,16 @@ export const PostDetails = () => {
                 <>{data.modifiedDate} 수정됨.</>
               )}
             </CreateDate>
+
+            <Bookmark>
+              {scrapState !== true ? (
+                <BookmarkBorder onClick={onClickBtn} style={ScrapIconStyle} />
+              ) : (
+                <BookmarkAdded onClick={onClickBtn} style={ScrapIconStyle} />
+              )}
+            </Bookmark>
           </Writer>
+
           <ContentContainer>
             <Title>{data.title}</Title>
             <PostContent>{data.content}</PostContent>
@@ -131,6 +162,9 @@ const Writer = styled.div`
   margin: 5px;
   font-size: 12pt;
   font-weight: bold;
+`;
+const Bookmark = styled.div`
+  float: right;
 `;
 const ContentContainer = styled.div`
   margin: 3vw 0;

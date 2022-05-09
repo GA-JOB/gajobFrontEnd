@@ -66,7 +66,6 @@ export default function App() {
 }
 
 const HeaderStyle = styled.header`
-  position: relative;
   z-index: 10;
   width: 100%;
   height: 10vw;
