@@ -14,7 +14,7 @@ interface IStudyProps {
 export const StudyList = ({ data }: IStudyProps) => {
   const navigate = useNavigate();
   const columns: ColumnDefinition[] | any = [
-    { formatter: "rownum", hozAlign: "center", width: 40 },
+    { formatter: "rownum", hozAlign: "center", width: 40, headerSort: false },
     {
       title: "카테고리",
       field: "studyCategory",
@@ -22,6 +22,7 @@ export const StudyList = ({ data }: IStudyProps) => {
       vertAlign: "middle",
       display: "block",
       width: 120,
+      headerSort: false, //sorting안함
     },
 
     {
@@ -48,43 +49,50 @@ export const StudyList = ({ data }: IStudyProps) => {
       field: "status",
       hozAlign: "center",
       vertAlign: "middle",
-      width: 160,
+      width: 100,
+      headerSort: false,
     },
     {
       title: "상세내용",
       field: "content",
+      width: 300,
       headerSort: false, //sorting안함
     },
     {
-      title: "오픈카톡",
-      field: "url",
-      formatter: "link",
-      formatterParams: {
-        label: "오픈카톡 링크로 바로가기",
-        urlPrefix: "", // tabulator link 적용하기.
-        urlField: "url",
-        target: "_blank", // 새 탭에서 링크를 열기 위함.
-      },
-      width: 150,
-      hozAlign: "center",
-      vertAlign: "middle",
-      headerSort: false,
+      title: "모집마감일",
+      field: "endDate",
+      width: 100,
+      headerSort: false, //sorting안함
     },
+    // {
+    //   title: "오픈카톡",
+    //   field: "openTalkUrl",
+    //   formatter: "link",
+    //   formatterParams: {
+    //     label: "오픈카톡 링크로 바로가기",
+    //     urlPrefix: "", // tabulator link 적용하기.
+    //     urlField: "openTalkUrl",
+    //     target: "_blank", // 새 탭에서 링크를 열기 위함.
+    //   },
+    //   width: 150,
+    //   hozAlign: "center",
+    //   vertAlign: "middle",
+    //   headerSort: false,
+    // },
   ];
 
   const options: ReactTabulatorOptions = {
     // height: "100px",
-    layout: "fitColumns",
+    // layout: "fitColumns",
     pagination: true,
     paginationMode: "local",
-    paginationSize: 10,
+    paginationSize: 8,
     // printAsHtml: true,
   };
   const rowClickHandler = (e: any, data: any) => {
     console.log(data._row.data.id); // 선택했을 때 id값
     const id = data._row.data.id;
     navigate(`/study-detail/${id}`);
-    // console.log(data[0].id);
   };
   if (!data) return <Loading />;
   return (

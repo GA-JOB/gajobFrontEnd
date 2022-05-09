@@ -7,12 +7,17 @@ import { Visibility, ChatBubble, Edit } from "@mui/icons-material";
 import useGetAuth from "hooks/api/auth/useGetAuth";
 import { CommentForm } from "components/common/CommentForm";
 import { ButtonType } from "components/button/ButtonType";
+import { StudyDelete } from "pages/study/StudyDetele";
+import { StudyRegister } from "./StudyRegister";
+
 export const StudyDetails = () => {
   const { id } = useParams(); // id
   const { data } = useGetPieceStudy(Number(id));
   const user = useGetAuth();
   const nickname = user.data?.nickname;
   const [commentId, setCommentId] = useState<number>(0);
+  const [register, setRegister] = useState<Boolean>(false);
+
   const isEditComment = commentId > 0;
   const IconStyle = {
     fontSize: 15,
@@ -27,7 +32,7 @@ export const StudyDetails = () => {
     <ViewDetailWrapper>
       <DetailContent>
         <Writer>
-          {data.writer}{" "}
+          {data.writer}
           <CreateDate>
             {data.createdDate === data.modifiedDate ? (
               <>{data.createdDate}</>
@@ -36,24 +41,47 @@ export const StudyDetails = () => {
             )}
           </CreateDate>
         </Writer>
-        <ContentContainer>
-          <Title>{data.title}</Title>
-          <PostContent>{data.content}</PostContent>
+        {register ? (
+          <ContentContainer>
+            <StudyRegister
+              id={data.id}
+              title={data.title}
+              content={data.content}
+              studyCategory={data.studyCategory}
+              area={data.area}
+              minPeople={data.minPeople}
+              maxPeople={data.maxPeople}
+              startDate={data.startDate}
+              endDate={data.endDate}
+              status={data.status}
+              setRegister={setRegister}
+            />
+          </ContentContainer>
+        ) : (
+          <ContentContainer>
+            <Title>{data.title}</Title>
+            {data.openTalkUrl && (
+              <a href={data.openTalkUrl} target="_blank" rel="noreferrer">
+                {data.openTalkUrl}
+              </a>
+            )}
+            <PostContent>{data.content}</PostContent>
 
-          {/* login uer === post writer일 경우 수정 or 삭제 */}
-          {/* {data.writer === nickname ? (
-            <ButtonTypeBox>
-              <PostEdit
-                id={id}
-                title={data.title}
-                content={data.content}
-                postCategory={data.postCategory}
-              />
+            {/* login uer === post writer일 경우 수정 or 삭제 */}
+            {data.writer === nickname ? (
+              <ButtonTypeBox>
+                {console.log(data)}
 
-              <PostDelete postId={id} />
-            </ButtonTypeBox>
-          ) : null} */}
-        </ContentContainer>
+                <span onClick={() => setRegister(true)}>
+                  수정
+                  <Edit style={IconStyle} />
+                </span>
+                <StudyDelete studyId={Number(id)} />
+              </ButtonTypeBox>
+            ) : null}
+          </ContentContainer>
+        )}
+
         <IconWrapper>
           <IconContent>
             <Visibility style={IconStyle} />
@@ -79,8 +107,8 @@ export const StudyDetails = () => {
             </CreateDate>
           </Writer>
           <PostContent>{comment.comment}</PostContent>
-
-          {/* {comment.nickname === nickname ? (
+          {/* 댓글 수정 */}
+          {comment.nickname === nickname ? (
             <ButtonTypeBox>
               <EditWrapper
                 onClick={() => {
@@ -94,23 +122,22 @@ export const StudyDetails = () => {
                 수정
                 <Edit style={IconStyle} />
               </EditWrapper>
-              <PostDelete postId={id} commentId={comment.id} />
-
+              <StudyDelete studyId={Number(id)} commentId={comment.id} />
               {commentId === comment.id ? (
                 <CommentForm
-                  id={id}
+                  id={Number(id)}
                   comment={comment.comment}
                   commentId={comment.id}
+                  fromStudy={true}
                 />
               ) : null}
             </ButtonTypeBox>
-          ) : null} */}
+          ) : null}
         </CommentWrapper>
       ))}
 
       {/* 댓글 */}
       <CommentForm id={data.id} />
-
       <ButtonWrapper>
         <ButtonType title={"목록으로"} link="/study" buttonColor="black" />
       </ButtonWrapper>
