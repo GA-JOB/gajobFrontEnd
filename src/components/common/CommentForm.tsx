@@ -2,18 +2,24 @@ import { useState } from "react";
 import { ButtonType } from "components/button/ButtonType";
 import styled from "styled-components";
 import { useCommunity } from "hooks/api/community/index";
-
+// import { useStudy } from "hooks/api/study/index";
 interface ICommentProps {
   id: number;
   commentId?: number;
   comment?: string;
+  fromStudy?: boolean;
 }
 
+//study랑 community랑 같은 form 쓰고싶어서 if문 넣어 봤더니 실패 저것만 해결 한다면 스터디 댓글 가능
 export const CommentForm = ({
   id,
   commentId = 0,
   comment = "",
+  fromStudy,
 }: ICommentProps) => {
+  // if (fromStudy) {
+  //   const { postComment } = useStudy();
+  // }
   const { postComment, editComment } = useCommunity();
   const isComment = commentId > 0;
 
