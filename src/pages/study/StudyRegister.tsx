@@ -95,7 +95,6 @@ export const StudyRegister = ({
     "세종",
     "제주",
   ];
-  const statusCategory = [" 모집중", "모집종료"];
   const onChange = (
     e:
       | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -241,6 +240,8 @@ export const StudyRegister = ({
 };
 
 const StudyRegisterWrapper = styled.div`
+  width: 100%;
+  padding: 1vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -251,22 +252,23 @@ const Form = styled.form`
   position: relative;
   z-index: 5;
   width: 100%;
+  margin: 1vw;
 `;
 const InputTextField = styled(TextField)`
   width: 100%;
   font-size: 10pt;
 `;
-// margin-bottom: 1vh;
+
 const InputSelectField = styled(FormControl)`
   width: 100%;
   font-size: 10pt;
 `;
-// margin: 0 0 1vh 0;
+
 const SmallInput = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-gap: 10px;
-  margin-bottom: 1vh;
+  grid-gap: 12px;
+  margin-bottom: 2vh;
 `;
 const MainInput = styled.div`
   display: grid;
