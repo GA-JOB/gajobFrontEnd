@@ -99,6 +99,22 @@ export const useCommunity = () => {
     });
   };
 
+  const postScrap = async (postId: number) => {
+    await post(`/community/scrap/${postId}`).then((res) => {
+      console.log(res);
+    });
+
+    mutate(`/community/scrap/${postId}`);
+  };
+
+  const postLikes = async (postId: number) => {
+    await post(`/community/likes/${postId}`).then((res) => {
+      console.log(res);
+    });
+
+    mutate(`/community/likes/${postId}`);
+  };
+
   return {
     postPost,
     editPost,
@@ -106,5 +122,7 @@ export const useCommunity = () => {
     postComment,
     editComment,
     deleteComment,
+    postScrap,
+    postLikes,
   };
 };

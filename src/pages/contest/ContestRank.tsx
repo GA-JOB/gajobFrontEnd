@@ -8,10 +8,6 @@ export const ContestRank = () => {
   const { data } = useGetContestRank();
 
   const [state, setState] = useState<string | null>(null);
-  const [color, setColor] = useState("red");
-  //   const onChangeBtnColor = () => {
-  //     color === "red" ? setColor("yellow") : setColor("red");
-  //   };
 
   const IconStyle = {
     fontSize: 50,
