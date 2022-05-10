@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { SidebarData } from "./SidebarData";
 import styled from "styled-components";
 import { Navbar, Nav, Container } from "react-bootstrap";
-import { Menu, MenuOpen, AccountCircle } from "@mui/icons-material";
+import { Menu, MenuOpen } from "@mui/icons-material";
 import storage from "hooks/store";
 
 export const Header = () => {
@@ -12,10 +12,6 @@ export const Header = () => {
 
   const [close, setClose] = useState(false);
   const showSidebar = () => setClose(!close);
-
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(null);
-  const toggling = () => setIsOpen(!isOpen);
 
   const [logoName, setLogoName] = useState<String>("GA-JOB");
   const defaultLogoStyle = {
@@ -37,14 +33,6 @@ export const Header = () => {
     color: "white",
     fontSize: 13,
   };
-
-  // const options = ["Mangoes", "Apples", "Oranges"];
-
-  // const onOptionClicked = (value: any) => () => {
-  //   setSelectedOption(value);
-  //   setIsOpen(false);
-  //   console.log(selectedOption);
-  // };
 
   // MouseHover 이벤트에 의한 logo 상태 변화.
   const onHoverLogo = (e: any) => {
@@ -102,32 +90,6 @@ export const Header = () => {
                 <Nav.Link style={signFontStyle}>
                   <strong>{nickname} 님</strong>
                 </Nav.Link>
-
-                {/* <DropTitle>
-                  <Nav.Link href="">
-                    <AccountCircle style={iconStyle} />
-                  </Nav.Link>
-                </DropTitle> */}
-
-                {/* <DropDownContainer>
-                  <div onClick={toggling}>
-                    {selectedOption || <AccountCircle style={iconStyle} />}
-                  </div>
-                  {isOpen && (
-                    <DropDownListContainer>
-                      <DropDownList>
-                        {options.map((option: any) => (
-                          <ListItem
-                            onClick={onOptionClicked(option)}
-                            key={Math.random()}
-                          >
-                            {option}
-                          </ListItem>
-                        ))}
-                      </DropDownList>
-                    </DropDownListContainer>
-                  )}
-                </DropDownContainer> */}
 
                 <Nav.Link href="/mypage" style={signFontStyle}>
                   마이페이지
@@ -300,40 +262,3 @@ const MenuTitle = styled.span`
     display: none;
   }
 `;
-
-const DropDownContainer = styled.div`
-  margin: 0 auto;
-  z-index: 1;
-`;
-
-// const DropDownHeader = styled.div`
-//   margin-bottom: 0.8em;
-//   padding: 0.4em 2em 0.4em 1em;
-//   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
-//   font-weight: 500;
-//   font-size: 1.3rem;
-//   color: #3faffa;
-//   background: #ffffff;
-// `;
-
-// const DropDownListContainer = styled.div``;
-
-// const DropDownList = styled.ul`
-//   padding: 0;
-//   margin: 0;
-//   padding-left: 1em;
-//   background: #ffffff;
-//   border: 2px solid #e5e5e5;
-//   box-sizing: border-box;
-//   color: #3faffa;
-//   font-size: 1.3rem;
-//   font-weight: 500;
-//   &:first-child {
-//     padding-top: 0.8em;
-//   }
-// `;
-
-// const ListItem = styled.li`
-//   list-style: none;
-//   margin-bottom: 0.8em;
-// `;

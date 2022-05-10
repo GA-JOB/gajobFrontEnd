@@ -19,7 +19,7 @@ import { Study } from "pages/study/index";
 import { StudyDetails } from "pages/study/StudyDetails";
 import { Portfolio } from "pages/Portfolio";
 import { Calendar } from "pages/Calendar";
-import { MyPage } from "pages/MyPage";
+import { MyPage } from "pages/mypage";
 import { NoEmail } from "components/footer/NoEmail";
 import { PersonalRule } from "components/footer/PersonalRules";
 import { Sitemap } from "components/footer/Sitemap";
