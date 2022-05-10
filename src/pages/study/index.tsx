@@ -21,10 +21,32 @@ import { StudyRegister } from "./StudyRegister";
 
 export const Study = () => {
   const token = storage.get("user-token");
+  const nickname = storage.get("user-nickname");
+
   const { data } = useGetStudy();
   const [register, setRegister] = useState<Boolean>(false);
   const [category, setCategory] = useState<string | null>(null);
-  console.log(data);
+
+  const todayTime = () => {
+    let date = new Date();
+    let todayYear = date.getFullYear();
+    let todayMonth = date.getMonth() + 1;
+    let todayDate = date.getDate();
+    const week = ["일", "월", "화", "수", "목", "금", "토"];
+    let dayOfWeek = week[date.getDay()];
+
+    return (
+      todayYear +
+      "년 " +
+      todayMonth +
+      "월 " +
+      todayDate +
+      "일, " +
+      dayOfWeek +
+      "요일 "
+    );
+  };
+
   if (!token) {
     window.confirm("로그인 후 이용가능합니다.") === true
       ? window.location.replace("/login")
@@ -39,19 +61,29 @@ export const Study = () => {
       <StudyContainer>
         <SideNavWrapper>
           <SideNav>
-            <NavTitle>category</NavTitle>
-            <NavList onClick={() => setCategory(null)}>📍 전체보기</NavList>
-            <NavList onClick={() => setCategory("어학")}>어학</NavList>
-            <NavList onClick={() => setCategory("취업")}>취업</NavList>
-            <NavList onClick={() => setCategory("공무원")}> 공무원</NavList>
-            <NavList onClick={() => setCategory("취미")}>취미</NavList>
-            <NavList onClick={() => setCategory("프로그래밍")}>
-              프로그래밍
-            </NavList>
-            <NavList onClick={() => setCategory("자율")}>자율</NavList>
-            <NavList onClick={() => setCategory("기타")}>기타</NavList>
+            <NavTitle> {!register ? "category" : "user info"}</NavTitle>
+            {!register ? (
+              <>
+                <NavList onClick={() => setCategory(null)}>📍 전체보기</NavList>
+                <NavList onClick={() => setCategory("어학")}>어학</NavList>
+                <NavList onClick={() => setCategory("취업")}>취업</NavList>
+                <NavList onClick={() => setCategory("공무원")}> 공무원</NavList>
+                <NavList onClick={() => setCategory("취미")}>취미</NavList>
+                <NavList onClick={() => setCategory("프로그래밍")}>
+                  프로그래밍
+                </NavList>
+                <NavList onClick={() => setCategory("자율")}>자율</NavList>
+                <NavList onClick={() => setCategory("기타")}>기타</NavList>
+              </>
+            ) : (
+              <>
+                <NavList>✍🏻 작성자</NavList> <NavInfo>{nickname}</NavInfo>
+                <NavList>📆 작성일</NavList> <NavInfo>{todayTime()}</NavInfo>
+              </>
+            )}
           </SideNav>
         </SideNavWrapper>
+
         <StudyTypeWrapper>
           <RegisterBtn
             variant="text"
@@ -84,14 +116,12 @@ export const Study = () => {
 
 const StudyWrapper = styled.div`
   width: 100%;
-  height: 80%;
+  min-height: 50vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 50px;
 
-  min-height: 45vw;
   background-color: #eaeaea;
 `;
 const StudyContainer = styled.div`
@@ -99,8 +129,8 @@ const StudyContainer = styled.div`
   display: flex;
 `;
 const StudyTypeWrapper = styled.div`
-  width: 70%;
-  margin-bottom: 3vw;
+  width: 100%;
+  margin-bottom: 5vw;
   padding: 2vw;
   background-color: white;
   border: 1px solid #eaeaea;
@@ -108,12 +138,9 @@ const StudyTypeWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
-// const Button = styled.div`
-//   paddingbottom: 10px;
-// `;
+
 const SideNavWrapper = styled.div`
   width: 30%;
-  height: 100%;
 `;
 const SideNav = styled.div`
   position: fixed;
@@ -122,8 +149,10 @@ const SideNav = styled.div`
   right: 0;
 
   width: 15%;
+  height: 35%;
+  overflow: scroll;
   margin-top: 17vw;
-  margin-left: 10vw;
+  margin-left: 6vw;
   padding: 1vw;
   border: 1px solid lightgray;
   background-color: white;
@@ -141,7 +170,7 @@ const NavList = styled.div`
   list-style: none;
   margin: 0.6vw;
   padding: 0.3vw;
-  font-size: 12pt;
+  font-size: 11pt;
   letter-spacing: 1px;
   cursor: pointer;
 
@@ -152,21 +181,26 @@ const NavList = styled.div`
     transition: 0.5s;
   }
 `;
+const NavInfo = styled.div`
+  font-size: 11pt;
+  font-weight: lighter;
+  padding: 0.3vw 1vw;
+`;
 
 const RegisterBtn = styled(Button)`
   display: flex;
-  justify-content:center;
-  align-item:center
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  marginbottom: 2vw;
+  margin-bottom: 2vw;
   padding: 1vw 2vw;
-  textdecoration: none;
-  fontweight: lighter;
+  text-decoration: none;
+  font-weight: lighter;
   font-size: small;
   color: black;
 
   border: 1px solid #eaeaea;
-  borderradius: 5px;
+  border-radius: 5px;
   cursor: pointer;
-  margin-bottom:10px;
+  margin-bottom: 10px;
 `;
