@@ -1,15 +1,18 @@
+import { Link } from "react-router-dom";
 import { Loading } from "components/loading";
 import { PostCommunity } from "pages/community/PostCommunity";
 import styled from "styled-components";
 import { Visibility, ChatBubble } from "@mui/icons-material";
 import useGetCommunity from "hooks/api/community/useGetCommunity";
-import { Link } from "react-router-dom";
+import storage from "hooks/store";
 
 interface IPostListProps {
-  postCategory: string | null;
+  isMypage: boolean;
+  postCategory?: string | null;
 }
 
-export const PostList = ({ postCategory }: IPostListProps) => {
+export const PostList = ({ isMypage, postCategory }: IPostListProps) => {
+  const nickname = storage.get("user-nickname");
   const { data } = useGetCommunity();
 
   const IconStyle = {
@@ -20,17 +23,23 @@ export const PostList = ({ postCategory }: IPostListProps) => {
 
   if (!data) return <Loading />;
   return (
-    <>
-      <JobdamPick></JobdamPick>
-      <PostCommunity />
-
+    <PostListWrapper>
+      {!isMypage && (
+        <>
+          <JobdamPick></JobdamPick>
+          <PostCommunity />
+        </>
+      )}
       {data?.map((list: any, index: number) => (
         <div key={index}>
           {/* 클릭헤 해당하는 카테고리 별 리스트 출력 */}
-          {(postCategory === null ||
-            (postCategory !== null && postCategory === list.postCategory)) && (
+          {(isMypage === true && nickname === list.writer) ||
+          (isMypage === false &&
+            (postCategory === null ||
+              (postCategory !== null &&
+                postCategory === list.postCategory))) ? (
             // viewId를 params로 넘기며 details url로 이동.
-            <LinkStyle to={`${list.id}`}>
+            <LinkStyle to={`/jobdam/${list.id}`}>
               <PostWrapper>
                 <Writer>
                   {list.writer}{" "}
@@ -58,13 +67,17 @@ export const PostList = ({ postCategory }: IPostListProps) => {
                 </IconWrapper>
               </PostWrapper>
             </LinkStyle>
-          )}
+          ) : null}
         </div>
       ))}
-    </>
+    </PostListWrapper>
   );
 };
 
+const PostListWrapper = styled.div`
+  background-color: white;
+  border-radius: 5px;
+`;
 const JobdamPick = styled.div``;
 const LinkStyle = styled(Link)`
   text-decoration: none;

@@ -1,6 +1,7 @@
 import { Button } from "@mui/material";
 
 interface IButtonProps {
+  variants?: string;
   link?: string;
   title: string;
   widthStyle?: string;
@@ -11,6 +12,7 @@ interface IButtonProps {
 }
 
 export const ButtonType = ({
+  variants,
   link,
   title,
   widthStyle,
@@ -29,11 +31,11 @@ export const ButtonType = ({
   return (
     <Button
       disabled={disabled && disabled}
-      variant="contained"
+      variant={variants ? "text" : "contained"}
       href={link && link}
       type="submit"
       style={ButtonStyle}
-      onClick={onClick}
+      onClick={onClick || undefined}
     >
       {title}
     </Button>

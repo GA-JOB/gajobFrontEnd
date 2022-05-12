@@ -13,6 +13,8 @@ interface ISignupProps {
   nickname?: string;
   email?: string;
   password?: string;
+  studentId?: string;
+  studentEmail?: string;
 }
 
 export const Signup = ({
@@ -21,6 +23,8 @@ export const Signup = ({
   nickname = "",
   email = "",
   password = "",
+  studentId = "",
+  studentEmail = "",
 }: ISignupProps) => {
   const { postSignup } = useAuth();
 
@@ -32,8 +36,17 @@ export const Signup = ({
     nicknameForm: nickname,
     emailForm: email,
     passwordForm: password,
+    studentIdForm: studentId,
+    studentEmailForm: studentEmail,
   });
-  const { nameForm, nicknameForm, emailForm, passwordForm } = form;
+  const {
+    nameForm,
+    nicknameForm,
+    emailForm,
+    passwordForm,
+    studentIdForm,
+    studentEmailForm,
+  } = form;
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -66,6 +79,8 @@ export const Signup = ({
         nickname: nicknameForm,
         email: emailForm,
         password: passwordForm,
+        studentId: studentIdForm,
+        studentEmail: studentEmailForm,
       });
     } else if (mismatchError === true) {
       window.confirm("회원 정보를 다시 확인해주시기 바랍니다.");
@@ -98,6 +113,32 @@ export const Signup = ({
             type="text"
             name="nicknameForm"
             value={nicknameForm}
+            onChange={onChange}
+            size="small"
+            inputProps={{ style: { fontSize: 15, verticalAlign: "middle" } }}
+          />
+        </InputLabel>
+        <InputLabel>
+          <span>학번</span>
+          <InputField
+            label="학번을 입력하세요."
+            variant="filled"
+            type="text"
+            name="studentIdForm"
+            value={studentIdForm}
+            onChange={onChange}
+            size="small"
+            inputProps={{ style: { fontSize: 15, verticalAlign: "middle" } }}
+          />
+        </InputLabel>
+        <InputLabel>
+          <span>학교 계정</span>
+          <InputField
+            label="학교 계정을 입력하세요."
+            variant="filled"
+            type="email"
+            name="studentEmailForm"
+            value={studentEmailForm}
             onChange={onChange}
             size="small"
             inputProps={{ style: { fontSize: 15, verticalAlign: "middle" } }}
@@ -160,17 +201,17 @@ const SignForm = styled.form`
   position: relative;
   z-index: 5;
   width: 25%;
+  margin-bottom: 2vw;
 `;
 
 const InputLabel = styled.div`
   width: 100%;
-  padding: 0.8vw 0;
+  padding: 0.5vw 0;
   font-size: 10pt;
 `;
 const InputField = styled(TextField)`
   width: 100%;
   font-size: 10pt;
-  margin-bottom: 1vw;
 `;
 const Alert = styled.span`
   color: red;

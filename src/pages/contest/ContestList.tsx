@@ -75,7 +75,7 @@ export const ContestList = ({ data }: IContestProps) => {
     paginationSize: 10,
   };
 
-  if (!data) return <Loading />;
+  if (!data) return <></>;
   return (
     <>
       <ContestListWrapper>
