@@ -7,10 +7,10 @@ export const Loading = () => {
     <LoadingWrapper>
       <Text>loading ...</Text>
       <Container>
-        {boxs.map((box: any, index: number) => (
-          <>
-            <LoadingIcon key={index} />
-          </>
+        {boxs.map((index: number) => (
+          <div key={index}>
+            <LoadingIcon />
+          </div>
         ))}
       </Container>
     </LoadingWrapper>

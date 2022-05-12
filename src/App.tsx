@@ -10,13 +10,16 @@ import { Signup } from "pages/auth/Signup";
 import { Login } from "pages/auth/Login";
 import { JobNews } from "pages/news/index";
 import { Contest } from "pages/contest/index";
-import { JobPosting } from "pages/JobPosting";
-import { Community } from "pages/Community";
+import { ContestRank } from "pages/contest/ContestRank";
+import { JobPosting } from "pages/jobPosting/index";
+import { JobPostingDetails } from "./pages/jobPosting/JobPostingDetails";
+import { Community } from "pages/community";
+import { PostDetails } from "pages/community/PostDetails";
 import { Study } from "pages/study/index";
+import { StudyDetails } from "pages/study/StudyDetails";
 import { Portfolio } from "pages/Portfolio";
 import { Calendar } from "pages/Calendar";
-import { MyPage } from "pages/MyPage";
-
+import { MyPage } from "pages/mypage";
 import { NoEmail } from "components/footer/NoEmail";
 import { PersonalRule } from "components/footer/PersonalRules";
 import { Sitemap } from "components/footer/Sitemap";
@@ -42,7 +45,9 @@ export default function App() {
           <Route path="/job-news" element={<JobNews />} />
           <Route path="/contest" element={<Contest />} />
           <Route path="/job-posting" element={<JobPosting />} />
+          <Route path="/job-posting/:postId" element={<JobPostingDetails />} />
           <Route path="/jobdam" element={<Community />} />
+          <Route path="/jobdam/:viewId" element={<PostDetails />} />
           <Route path="/gajob-study" element={<Study />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/calendar" element={<Calendar />} />
@@ -61,17 +66,15 @@ export default function App() {
 }
 
 const HeaderStyle = styled.header`
-  position: relative;
-  z-index: 10;
+  z-index: 100;
   width: 100%;
   height: 10vw;
   position: fixed;
 `;
 
 const Layout = styled.div`
-  min-height: 40vw;
+  min-height: 45vw;
   padding-top: 3vw;
-  padding-bottom: 10vw;
   align-items: center;
   justify-content: center;
   display: flex;
@@ -83,5 +86,5 @@ const Layout = styled.div`
 
 const FooterStyle = styled(Footer)`
   position: relative;
-  z-index: 100;
+  z-index: 10;
 `;

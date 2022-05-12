@@ -1,11 +1,12 @@
 import { ReactNode } from "react";
 import styled from "@emotion/styled";
-import CloseIcon from "@material-ui/icons/Close";
+import { Close } from "@mui/icons-material";
 
 interface IModalContentProps {
   title: ReactNode;
   children: ReactNode;
   onClose: () => void;
+  kind: string;
 }
 
 // Modal 창 open 시 title, content
@@ -13,16 +14,20 @@ export const ModalContent = ({
   title,
   children,
   onClose,
+  kind,
 }: IModalContentProps) => {
   return (
     <Wrapper>
-      <Header>{title}</Header>
-
       <CloseButton>
-        <CloseIcon onClick={onClose}></CloseIcon>
+        <Close onClick={kind === "post" ? onClose : () => {}} />
       </CloseButton>
 
-      <Content>{children}</Content>
+      <HeaderWrapper>
+        <div onClick={kind === "post" ? () => {} : onClose}>{title}</div>
+      </HeaderWrapper>
+      <Content onClick={kind === "post" ? () => {} : onClose}>
+        {children}
+      </Content>
     </Wrapper>
   );
 };
@@ -30,7 +35,7 @@ export const ModalContent = ({
 // 전체 Modal 창
 const Wrapper = styled.div`
   min-width: 400px;
-  max-height: 600px;
+  max-height: 500px;
   border-radius: 10px;
   padding: 20px;
   margin: 10px;
@@ -39,15 +44,16 @@ const Wrapper = styled.div`
 `;
 
 // Modal title
-const Header = styled.span`
+const HeaderWrapper = styled.div`
+  width: 100%;
+  text-align: center;
   font-size: 15pt;
-  margin-left: 4vw;
 `;
 
 // modal close button
-const CloseButton = styled.span`
+const CloseButton = styled.div`
+  text-align: right;
   cursor: pointer;
-  float: right;
   &:hover,
   &:active {
     color: lightgray;
@@ -57,5 +63,4 @@ const CloseButton = styled.span`
 // Modal content
 const Content = styled.div`
   width: 100%;
-  height: 100%;
 `;

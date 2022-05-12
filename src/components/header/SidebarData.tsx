@@ -7,7 +7,6 @@ import {
   GroupAdd,
   Assignment,
   CalendarMonth,
-  ContactPage,
 } from "@mui/icons-material";
 
 export const SidebarData = [
@@ -38,7 +37,7 @@ export const SidebarData = [
   },
   {
     title: "GaJob-study",
-    path: "/gajob-study",
+    path: "/study",
     icon: <GroupAdd />,
   },
   {
@@ -50,10 +49,5 @@ export const SidebarData = [
     title: "Calendar",
     path: "/calendar",
     icon: <CalendarMonth />,
-  },
-  {
-    title: "MyPage",
-    path: "/mypage",
-    icon: <ContactPage />,
   },
 ];

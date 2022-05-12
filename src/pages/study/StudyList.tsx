@@ -4,75 +4,96 @@ import "react-tabulator/lib/styles.css"; // default theme
 import "react-tabulator/css/bootstrap/tabulator_bootstrap.min.css"; // use Theme(s)
 import { ReactTabulator } from "react-tabulator";
 import { ColumnDefinition, ReactTabulatorOptions } from "react-tabulator";
-// import { IContestCrawling } from "types";
+import { IStudy } from "types";
+import "styles/tabulator.scss";
+import { useNavigate } from "react-router-dom";
 
-interface IContestProps {
-  data: any;
+interface IStudyProps {
+  data: IStudy[] | undefined;
 }
-
-export const StudyList = ({ data }: IContestProps) => {
+export const StudyList = ({ data }: IStudyProps) => {
+  const navigate = useNavigate();
   const columns: ColumnDefinition[] | any = [
-    { formatter: "rownum", hozAlign: "center", width: 40 },
+    { formatter: "rownum", hozAlign: "center", width: 40, headerSort: false },
     {
       title: "카테고리",
-      field: "category",
+      field: "studyCategory",
       hozAlign: "center",
       vertAlign: "middle",
+      display: "block",
       width: 120,
+      headerSort: false, //sorting안함
     },
 
     {
       title: "제목",
       field: "title",
-      hozAlign: "center",
-      vertAlign: "middle",
-      width: 120,
+      width: 180,
+      // text-overflow: ellipsis; 사용을 위해 주석처리
+      //   hozAlign: "center",
+      //   vertAlign: "middle",
+
+      headerSort: false, //sorting안함
     },
     {
       title: "인원제한",
-      field: "limit",
+      field: "maxPeople",
       hozAlign: "center",
       vertAlign: "middle",
       width: 120,
+      headerSort: false,
     },
 
     {
       title: "모집상태",
-      field: "state",
+      field: "status",
       hozAlign: "center",
       vertAlign: "middle",
-      width: 160,
+      width: 100,
+      headerSort: false,
     },
     {
       title: "상세내용",
       field: "content",
-      hozAlign: "center",
-      vertAlign: "middle",
+      width: 300,
+      headerSort: false, //sorting안함
     },
     {
-      title: "오픈카톡",
-      field: "url",
-      formatter: "link",
-      formatterParams: {
-        label: "오픈카톡 링크로 바로가기",
-        urlPrefix: "", // tabulator link 적용하기.
-        urlField: "url",
-        target: "_blank", // 새 탭에서 링크를 열기 위함.
-      },
-      width: 150,
-      hozAlign: "center",
-      vertAlign: "middle",
+      title: "모집마감일",
+      field: "endDate",
+      width: 100,
+      headerSort: false, //sorting안함
     },
+    // {
+    //   title: "오픈카톡",
+    //   field: "openTalkUrl",
+    //   formatter: "link",
+    //   formatterParams: {
+    //     label: "오픈카톡 링크로 바로가기",
+    //     urlPrefix: "", // tabulator link 적용하기.
+    //     urlField: "openTalkUrl",
+    //     target: "_blank", // 새 탭에서 링크를 열기 위함.
+    //   },
+    //   width: 150,
+    //   hozAlign: "center",
+    //   vertAlign: "middle",
+    //   headerSort: false,
+    // },
   ];
 
   const options: ReactTabulatorOptions = {
-    height: "100%",
-    layout: "fitColumns",
+    // height: "100px",
+    // layout: "fitColumns",
     pagination: true,
     paginationMode: "local",
-    paginationSize: 10,
+    paginationSize: 8,
+    // printAsHtml: true,
   };
-
+  const rowClickHandler = (e: any, data: any) => {
+    console.log(data._row.data.id); // 선택했을 때 id값
+    const id = data._row.data.id;
+    navigate(`/study-detail/${id}`);
+  };
   if (!data) return <Loading />;
   return (
     <StudyListWrapper>
@@ -81,6 +102,7 @@ export const StudyList = ({ data }: IContestProps) => {
         columns={columns}
         data={data}
         options={options}
+        events={{ rowClick: rowClickHandler }}
       />
     </StudyListWrapper>
   );
@@ -91,28 +113,11 @@ const StudyListWrapper = styled.div`
 `;
 
 const TabulatorStyle = styled(ReactTabulator)`
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-
-  .tabulator-row table {
-    vertical-align: middle;
-    border-collapse: collapse;
-  }
-
-  .tabulator-row table img {
-    border: 2px solid #ccc;
-  }
-
-  .tabulator-row table tr td {
-    border: none;
-  }
-
-  .tabulator-row table tr td:first-of-type {
-    width: 60px;
-  }
-
-  .tabulator-row table tr td div {
-    padding: 5px;
+  .tabulator .tabulator-tableHolder {
+    position: relative;
+    width: 100%;
+    white-space: nowrap;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
   }
 `;

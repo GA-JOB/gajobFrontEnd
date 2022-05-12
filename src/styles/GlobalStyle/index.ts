@@ -1,6 +1,11 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
+html {
+  scroll-behavior: smooth;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
 body {
   font-family: 'Noto Sans KR', sans-serif;
   --brand-color: #c9ae00;
