@@ -1,12 +1,11 @@
 import styled from "styled-components";
-import { Button } from "@material-ui/core";
+// import { Button } from "@material-ui/core";
 import useGetAuth from "hooks/api/auth/useGetAuth";
 import { ButtonType } from "components/button/ButtonType";
 
 export const UserInfo = () => {
   const { data } = useGetAuth();
   const studentID = data?.studentId?.substring(2, 4);
-  console.log(data);
 
   if (!data) return <></>;
   return (
@@ -25,10 +24,11 @@ export const UserInfo = () => {
         <Title>학교 / 학번</Title> 성공회대학교 {studentID}학번
       </InfoWrapper>
       <InfoWrapper>
-        <Title>학교 계정</Title> 201814105@office.skhu.ac.kr{data.studentEmail}
+        <Title>학교 계정</Title>
+        {data.studentEmail}
       </InfoWrapper>
       <InfoWrapper>
-        <Title>학과/학부</Title> IT융합자율학부
+        <Title>학과/학부</Title> {data.department}
       </InfoWrapper>
     </>
   );

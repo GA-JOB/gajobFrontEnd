@@ -8,9 +8,10 @@ import { Footer } from "components/footer";
 // menu
 import { Signup } from "pages/auth/Signup";
 import { Login } from "pages/auth/Login";
+import { FindAccount } from "pages/auth/FindAccount";
+import { EditAccount } from "pages/auth/EditAccount";
 import { JobNews } from "pages/news/index";
 import { Contest } from "pages/contest/index";
-import { ContestRank } from "pages/contest/ContestRank";
 import { JobPosting } from "pages/jobPosting/index";
 import { JobPostingDetails } from "./pages/jobPosting/JobPostingDetails";
 import { Community } from "pages/community";
@@ -41,6 +42,8 @@ export default function App() {
         <Routes>
           <Route path="/signup" element={<Signup />}></Route>
           <Route path="/login" element={<Login />}></Route>
+          <Route path="/find-account" element={<FindAccount />}></Route>
+          <Route path="/change-pwd" element={<EditAccount />}></Route>
           <Route path="/" element={<Home />}></Route>
           <Route path="/job-news" element={<JobNews />} />
           <Route path="/contest" element={<Contest />} />
