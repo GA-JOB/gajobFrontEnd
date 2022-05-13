@@ -1,10 +1,8 @@
 import { ButtonType } from "components/button/ButtonType";
 import styled from "styled-components";
-import storage from "hooks/store";
 import { useAuth } from "hooks/api/auth";
 
 export const UserInfoSettings = () => {
-  const email = storage.get("user-email");
   const { deleteAuth } = useAuth();
   const list = [
     {
@@ -27,11 +25,9 @@ export const UserInfoSettings = () => {
     },
   ];
 
-  console.log(email);
-
   const deleteAccount = () => {
     if (window.confirm("계정을 삭제하시겠습니까?") === true) {
-      deleteAuth(email);
+      deleteAuth();
       window.location.replace("/");
     }
   };

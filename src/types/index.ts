@@ -4,8 +4,10 @@ export interface IUserData {
   nickname?: string;
   email?: string;
   password?: string;
+  newPassword?: string;
   studentId?: string;
   studentEmail: string;
+  department?: string;
 }
 
 export interface INewsCrawling {

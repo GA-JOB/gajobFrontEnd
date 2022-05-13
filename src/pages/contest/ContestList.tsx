@@ -1,4 +1,3 @@
-import { Loading } from "components/loading";
 import styled from "styled-components";
 import "react-tabulator/lib/styles.css"; // default theme
 import "react-tabulator/css/bootstrap/tabulator_bootstrap.min.css"; // use Theme(s)
