@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { UserInfo } from "./UserInfo";
+import { UserInfoSettings } from "./UserInfoSettings";
+import { PostList } from "pages/community/PostList";
 import styled from "styled-components";
 import storage from "hooks/store";
-import { UserInfo } from "./UserInfo";
 
 export const MyPage = () => {
   const token = storage.get("user-token");
@@ -9,7 +11,7 @@ export const MyPage = () => {
 
   const selectBtn = {
     color: "white",
-    backgroundColor: "#6cc0ff",
+    backgroundColor: "#F2BA49",
   };
   const noSelectBtn = {
     color: "black",
@@ -34,7 +36,7 @@ export const MyPage = () => {
             style={category === "게시물" ? selectBtn : noSelectBtn}
             onClick={() => setCategory("게시물")}
           >
-            게시물
+            내 게시물
           </Categories>
           <Categories
             style={category === "스크랩" ? selectBtn : noSelectBtn}
@@ -42,15 +44,12 @@ export const MyPage = () => {
           >
             스크랩
           </Categories>
-          <Categories
-            style={category === "좋아요" ? selectBtn : noSelectBtn}
-            onClick={() => setCategory("좋아요")}
-          >
-            좋아요
-          </Categories>
         </CategoryWrapper>
 
-        <Containers></Containers>
+        <Containers>
+          {category === "개인정보설정" && <UserInfoSettings></UserInfoSettings>}
+          {category === "게시물" && <PostList isMypage={true} />}
+        </Containers>
       </ContentContainer>
     </MyPageWrapper>
   );
@@ -77,9 +76,11 @@ const InfoWrapper = styled.div`
 `;
 const ContentContainer = styled.div`
   width: 60%;
+  margin-top: 2vw;
+`;
+const CategoryWrapper = styled.div`
   text-align: center;
 `;
-const CategoryWrapper = styled.div``;
 const Categories = styled.span`
   margin: 0 1.5vw;
   padding: 0.6vw 1.5vw;
@@ -91,7 +92,6 @@ const Categories = styled.span`
 `;
 const Containers = styled.div`
   width: 100%;
-  min-height: 50vw;
-  margin-top: 3vw;
-  background-color: white;
+  min-height: 40vw;
+  margin: 3vw 1vw;
 `;
