@@ -29,7 +29,7 @@ export const Community = () => {
           </SideNavWrapper>
 
           <ContentWrapper>
-            <PostList postCategory={category} />
+            <PostList isMypage={false} postCategory={category} />
           </ContentWrapper>
         </CommuContainer>
       </CommunityWrapper>
