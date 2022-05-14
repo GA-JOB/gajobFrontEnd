@@ -51,7 +51,8 @@ export default function App() {
           <Route path="/job-posting/:postId" element={<JobPostingDetails />} />
           <Route path="/jobdam" element={<Community />} />
           <Route path="/jobdam/:viewId" element={<PostDetails />} />
-          <Route path="/gajob-study" element={<Study />} />
+          <Route path="/study" element={<Study />} />
+          <Route path="/study-detail/:id" element={<StudyDetails />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/mypage" element={<MyPage />} />
