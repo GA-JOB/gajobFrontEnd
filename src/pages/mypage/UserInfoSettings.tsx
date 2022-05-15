@@ -1,9 +1,7 @@
 import { ButtonType } from "components/button/ButtonType";
 import styled from "styled-components";
-import { useAuth } from "hooks/api/auth";
 
 export const UserInfoSettings = () => {
-  const { deleteAuth } = useAuth();
   const list = [
     {
       id: 0,
@@ -21,16 +19,10 @@ export const UserInfoSettings = () => {
       id: 2,
       title: "계정 삭제",
       info: "계정을 삭제하실 경우 GA-JOB의 모든 서비스와 사용자의 데이터를 완전히 삭제할 수 있습니다.",
-      link: "",
+      link: "/delete-account",
     },
   ];
 
-  const deleteAccount = () => {
-    if (window.confirm("계정을 삭제하시겠습니까?") === true) {
-      deleteAuth();
-      window.location.replace("/");
-    }
-  };
   return (
     <>
       {list.map((item, index) => {
@@ -46,7 +38,6 @@ export const UserInfoSettings = () => {
                 variants="text"
                 title={item.id !== 2 ? "수정" : "삭제"}
                 link={item.link && item.link}
-                onClick={item.id === 2 ? deleteAccount : undefined}
               />
             </ButtonWrapper>
           </ContentBox>

@@ -44,6 +44,12 @@ export const MyPage = () => {
           >
             스크랩
           </Categories>
+          <Categories
+            style={category === "포트폴리오" ? selectBtn : noSelectBtn}
+            onClick={() => setCategory("포트폴리오")}
+          >
+            포트폴리오
+          </Categories>
         </CategoryWrapper>
 
         <Containers>

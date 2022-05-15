@@ -36,18 +36,39 @@ export const FindAccount = ({ name = "", email = "" }: IFindAccountProps) => {
   };
 
   return (
-    <>
-      <MenuTitle
-        title={isFindEmail ? "아이디 찾기" : "비밀번호 찾기"}
-        info={
-          (isFindEmail ? "아이디" : "비밀번호") +
-          " 찾기를 위해 아래의 정보를 입력해주세요."
-        }
-      />
-      <button onClick={() => setIsFindEmail(true)}>아이디 찾기</button>
-      <button onClick={() => setIsFindEmail(false)}>비밀번호 찾기</button>
-
+    <FindAccountWrapper>
       <SignForm onSubmit={handleSubmit}>
+        <MenuTitle
+          title={isFindEmail ? "아이디 찾기" : "비밀번호 찾기"}
+          info={
+            (isFindEmail ? "아이디" : "비밀번호") +
+            " 찾기를 위해 아래의 정보를 입력해주세요."
+          }
+        />
+
+        <SelectBtn>
+          <FindTypeBtn onClick={() => setIsFindEmail(true)}>
+            아이디 찾기
+          </FindTypeBtn>
+          <FindTypeBtn onClick={() => setIsFindEmail(false)}>
+            비밀번호 찾기
+          </FindTypeBtn>
+        </SelectBtn>
+
+        <TypeInfo>
+          {isFindEmail ? (
+            <>
+              회원가입 시 등록한 이름과 학교계정을 입력하시면 <br /> 해당
+              학교계정으로 아이디 E-mail을 보내드립니다.
+            </>
+          ) : (
+            <>
+              사용중인 아이디 E-mail을 입력하시면 <br /> 해당 아이디 E-mail으로
+              초기화된 비밀번호 보내드립니다.
+            </>
+          )}
+        </TypeInfo>
+
         {isFindEmail ? (
           <InputLabel>
             <span>이름</span>
@@ -87,9 +108,33 @@ export const FindAccount = ({ name = "", email = "" }: IFindAccountProps) => {
           widthStyle={"100%"}
         />
       </SignForm>
-    </>
+    </FindAccountWrapper>
   );
 };
+
+const FindAccountWrapper = styled.div`
+  width: 100%;
+  margin-bottom: 3vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const SelectBtn = styled.div`
+  text-align: center;
+`;
+const FindTypeBtn = styled.span`
+  margin: 1vw;
+  padding: 1vw;
+
+  font-size: 13pt;
+  cursor: pointer;
+`;
+const TypeInfo = styled.div`
+  width: 100%;
+  margin-top: 1vw;
+  font-size: 11pt;
+  opacity: 0.6;
+`;
 
 const SignForm = styled.form`
   position: relative;

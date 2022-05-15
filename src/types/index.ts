@@ -8,6 +8,7 @@ export interface IUserData {
   studentId?: string;
   studentEmail: string;
   department?: string;
+  introduction?: string;
 }
 
 export interface INewsCrawling {
