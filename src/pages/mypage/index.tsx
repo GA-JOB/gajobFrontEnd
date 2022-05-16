@@ -54,7 +54,12 @@ export const MyPage = () => {
 
         <Containers>
           {category === "개인정보설정" && <UserInfoSettings></UserInfoSettings>}
-          {category === "게시물" && <PostList isMypage={true} />}
+
+          {category === "게시물" && (
+            <MypagePostWrapper>
+              <PostList isMypage={true} />
+            </MypagePostWrapper>
+          )}
         </Containers>
       </ContentContainer>
     </MyPageWrapper>
@@ -82,13 +87,13 @@ const InfoWrapper = styled.div`
 `;
 const ContentContainer = styled.div`
   width: 60%;
-  margin-top: 2vw;
+  margin-top: 3vw;
 `;
 const CategoryWrapper = styled.div`
   text-align: center;
 `;
 const Categories = styled.span`
-  margin: 0 1.5vw;
+  margin: 0 2vw;
   padding: 0.6vw 1.5vw;
   border: none;
   background-color: none;
@@ -99,5 +104,14 @@ const Categories = styled.span`
 const Containers = styled.div`
   width: 100%;
   min-height: 40vw;
-  margin: 3vw 1vw;
+  max-height: 45vw;
+  margin: 2vw 1vw;
+  overflow: scroll;
+`;
+const MypagePostWrapper = styled.div`
+  margin-bottom: 3vw;
+  padding: 2vw;
+  background-color: white;
+  border: 1px solid #eaeaea;
+  border-radius: 5px;
 `;

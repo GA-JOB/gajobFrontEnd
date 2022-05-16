@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useSWRConfig } from "swr";
 import { post, put, del } from "lib/api/client";
 import { ICommunity } from "types";
@@ -27,6 +28,7 @@ interface IPostComment {
 export const useCommunity = () => {
   // 데이터 최신화
   const { mutate } = useSWRConfig();
+  const navigate = useNavigate();
   const postPost = async ({ title, content, postCategory }: IPostCommunity) => {
     await post(`/community/posts`, {
       title,
@@ -36,7 +38,7 @@ export const useCommunity = () => {
       if (data) {
         console.log(JSON.stringify(data));
 
-        window.location.replace("/jobdam");
+        navigate(0);
       }
     });
 
@@ -64,6 +66,7 @@ export const useCommunity = () => {
 
   const deletePost = async (id: number) => {
     await del(`/community/posts/${id}`);
+    navigate(-1);
 
     mutate(`/community/posts`);
   };

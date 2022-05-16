@@ -24,16 +24,19 @@ export const PostList = ({ isMypage, postCategory }: IPostListProps) => {
   if (!data) return <Loading />;
   return (
     <PostListWrapper>
-      {!isMypage && (
-        <>
-          <JobdamPick></JobdamPick>
-          <PostCommunity />
-        </>
+      {!isMypage ? (
+        <JobdamPick></JobdamPick>
+      ) : (
+        <BlankTxt>⭐ 내 게시물 ⭐</BlankTxt>
       )}
+      <PostCommunity />
+
       {data?.length === 0 ? (
-        <BlankTxt>
-          {isMypage ? "회원님이 작성한" : "전체"} 게시글이 존재하지 않습니다.
-        </BlankTxt>
+        <>
+          <BlankTxt>
+            {isMypage ? "회원님이 작성한" : "전체"} 게시글이 존재하지 않습니다.
+          </BlankTxt>
+        </>
       ) : (
         <>
           {data?.map((list: any, index: number) => (
@@ -89,6 +92,8 @@ const PostListWrapper = styled.div`
 const BlankTxt = styled.div`
   text-align: center;
   font-weight: lighter;
+  font-size: 13pt;
+  padding-bottom: 1vw;
 `;
 const JobdamPick = styled.div``;
 const LinkStyle = styled(Link)`
