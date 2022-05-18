@@ -3,7 +3,7 @@ import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 const instance = axios.create({ baseURL: process.env.REACT_APP_API_URL });
 
 // Request interceptor
-function interceptorRequestFulfilled(config: AxiosRequestConfig) {
+const interceptorRequestFulfilled = (config: AxiosRequestConfig) => {
   let token = localStorage.getItem("user-token");
   return {
     ...config,
@@ -12,7 +12,7 @@ function interceptorRequestFulfilled(config: AxiosRequestConfig) {
       Authorization: `Bearer ${token}`,
     },
   };
-}
+};
 
 instance.interceptors.request.use(interceptorRequestFulfilled);
 
@@ -26,7 +26,13 @@ const responseInterceptorFulfilled = (res: AxiosResponse) => {
 const responseInterceptorRejected = (error: AxiosError) => {
   const errorMsg = error.response?.data?.message ?? "에러입니다";
   console.log(error);
+  // const errorStatus = error.response?.status;
+  // const errorUrl = error.response?.config.url;
+  console.log(error.response);
   alert(errorMsg);
+  // if (window.confirm(errorMsg) === true) {
+  //   window.location.replace("/");
+  // }
   return new Error(error.response?.data?.message ?? error);
 };
 

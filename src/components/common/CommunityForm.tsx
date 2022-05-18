@@ -11,6 +11,7 @@ interface ICommunityProps {
   title?: string | null;
   content?: string | null;
   postCategory?: string | null;
+  jobCategory?: string | null;
   isOpenModal: boolean;
   setIsOpenModal: Dispatch<SetStateAction<boolean>>;
 }
@@ -20,6 +21,7 @@ export const CommunityForm = ({
   title = "",
   content = "",
   postCategory = "",
+  jobCategory = "",
   isOpenModal,
   setIsOpenModal,
 }: ICommunityProps) => {
@@ -32,8 +34,10 @@ export const CommunityForm = ({
     titleForm: title,
     contentForm: content,
     postCategoryForm: postCategory,
+    postJobCategoryForm: jobCategory,
   });
-  const { titleForm, contentForm, postCategoryForm } = form;
+  const { titleForm, contentForm, postCategoryForm, postJobCategoryForm } =
+    form;
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -58,6 +62,7 @@ export const CommunityForm = ({
           title: titleForm,
           content: contentForm,
           postCategory: postCategoryForm,
+          jobCategory: postJobCategoryForm,
         });
       } else if (!isPostCommunity) {
         editPost({
@@ -65,6 +70,7 @@ export const CommunityForm = ({
           title: titleForm,
           content: contentForm,
           postCategory: postCategoryForm,
+          jobCategory: postJobCategoryForm,
         });
       }
     }
@@ -117,6 +123,25 @@ export const CommunityForm = ({
                   <MenuItem value="취업고민">💼 취업고민</MenuItem>
                   <MenuItem value="꿀팁">🍯 꿀팁</MenuItem>
                   <MenuItem value="일상">🌸 일상</MenuItem>
+                </InputField>
+              </InputLabel>
+
+              <InputLabel>
+                <span>직업군 카테고리</span>
+                <InputField
+                  select
+                  variant="standard"
+                  name="postJobCategoryForm"
+                  value={postJobCategoryForm}
+                  onChange={onChange}
+                  size="small"
+                >
+                  <MenuItem value="" selected>
+                    ---선택---
+                  </MenuItem>
+                  <MenuItem value="IT">👩🏻‍💻 IT / Programming</MenuItem>
+                  <MenuItem value="인문">👩🏻‍💼 인문 / 사회</MenuItem>
+                  <MenuItem value="마케팅">💁🏻‍♀️ 마케팅</MenuItem>
                 </InputField>
               </InputLabel>
 

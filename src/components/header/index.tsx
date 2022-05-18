@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { SidebarData } from "./SidebarData";
 import styled from "styled-components";
@@ -8,6 +8,7 @@ import storage from "hooks/store";
 
 export const Header = () => {
   const token = storage.get("user-token");
+  const nickname = storage.get("user-nickname");
 
   const [close, setClose] = useState(false);
   const showSidebar = () => setClose(!close);
@@ -30,7 +31,7 @@ export const Header = () => {
   const signFontStyle = {
     margin: "5px",
     color: "white",
-    fontSize: "10pt",
+    fontSize: 13,
   };
 
   // MouseHover 이벤트에 의한 logo 상태 변화.
@@ -78,32 +79,36 @@ export const Header = () => {
             <Nav.Link href="/jobdam">
               <NavTitle>JOB담</NavTitle>
             </Nav.Link>
-            <Nav.Link href="/gajob-study">
+            <Nav.Link href="/study">
               <NavTitle>Study</NavTitle>
             </Nav.Link>
           </Nav>
 
           <Nav>
-            {!token ? (
+            {token ? (
               <>
-                <Nav.Link href="/login" style={signFontStyle}>
-                  <NavTitle>로그인</NavTitle>
+                <Nav.Link style={signFontStyle}>
+                  <strong>{nickname} 님</strong>
                 </Nav.Link>
-                <Nav.Link href="/signup" style={signFontStyle}>
-                  <NavTitle>회원가입</NavTitle>
-                </Nav.Link>
-              </>
-            ) : (
-              <>
+
                 <Nav.Link href="/mypage" style={signFontStyle}>
-                  <NavTitle>MyPage</NavTitle>
+                  마이페이지
                 </Nav.Link>
                 <Nav.Link
                   href="/"
                   style={signFontStyle}
                   onClick={() => storage.remove("user-token")}
                 >
-                  <NavTitle>로그아웃</NavTitle>
+                  로그아웃
+                </Nav.Link>
+              </>
+            ) : (
+              <>
+                <Nav.Link href="/login" style={signFontStyle}>
+                  로그인
+                </Nav.Link>
+                <Nav.Link href="/signup" style={signFontStyle}>
+                  회원가입
                 </Nav.Link>
               </>
             )}
@@ -134,6 +139,7 @@ export const Header = () => {
 };
 
 const ContainerStyle = styled(Container)`
+  z-index: 10;
   @media screen and (max-width: 1000px) {
     height: 5vw;
   }
@@ -146,7 +152,7 @@ const LogoTitle = styled.div`
   }
 `;
 const NavTitle = styled.div`
-  margin: 5px;
+  margin-left: 10px;
   color: white;
 
   &:after {

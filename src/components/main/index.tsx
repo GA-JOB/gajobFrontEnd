@@ -2,7 +2,6 @@ import { UpperContent } from "components/UpperContent";
 import { SlideItem } from "components/slider/SlideItem";
 import { ShortcutMenu } from "components/shortcuts";
 import styled from "styled-components";
-import useGetNews from "hooks/api/useGetNews";
 
 export const Home = () => {
   return (

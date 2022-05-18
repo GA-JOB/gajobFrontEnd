@@ -4,14 +4,14 @@ import { Modal } from "components/common/Modal";
 import { ModalContent } from "components/common/Modal/ModalContent";
 import styled from "styled-components";
 import { Delete } from "@mui/icons-material";
-import { useCommunity } from "hooks/api/community";
+import { useStudy } from "hooks/api/study";
 
 interface IDeleteProps {
-  postId: number;
+  studyId: number;
   commentId?: number;
 }
 
-export const PostDelete = ({ postId, commentId }: IDeleteProps) => {
+export const StudyDelete = ({ studyId, commentId }: IDeleteProps) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
 
   const IconStyle = {
@@ -22,12 +22,13 @@ export const PostDelete = ({ postId, commentId }: IDeleteProps) => {
   };
 
   // 해당 id delete
-  const { deletePost, deleteComment } = useCommunity();
+  const { deleteStudy, deleteComment } = useStudy();
   const onClickDeleteBtn = () => {
     if (!commentId) {
-      deletePost(postId);
+      deleteStudy(studyId);
+      window.location.replace("/study");
     } else {
-      deleteComment(postId, commentId);
+      deleteComment(studyId, commentId);
       setOpenModal(false);
     }
   };

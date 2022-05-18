@@ -1,4 +1,3 @@
-import { Loading } from "components/loading";
 import styled from "styled-components";
 import "react-tabulator/lib/styles.css"; // default theme
 import "react-tabulator/css/bootstrap/tabulator_bootstrap.min.css"; // use Theme(s)
@@ -16,31 +15,27 @@ export const ContestList = ({ data }: IContestProps) => {
       title: "id",
       field: "id",
       hozAlign: "center",
-      width: 60,
       fontSize: "10pt",
       vertAlign: "middle",
+      width: 1,
     },
     {
       title: "제목",
       field: "title",
-      hozAlign: "center",
-      vertAlign: "middle",
-      height: 50,
+      width: 300,
     },
     {
       title: "주최기관",
       field: "organization",
-      // hozAlign: "center",
-      vertAlign: "middle",
-      width: 200,
+      width: 100,
     },
-    // {
-    //   title: "카테고리",
-    //   field: "category",
-    //   hozAlign: "center",
-    //   vertAlign: "middle",
-    //   width: 100,
-    // },
+    {
+      title: "카테고리",
+      field: "category",
+      hozAlign: "center",
+      vertAlign: "middle",
+      width: 120,
+    },
     {
       title: "모집상태",
       field: "state",
@@ -79,25 +74,33 @@ export const ContestList = ({ data }: IContestProps) => {
     paginationSize: 10,
   };
 
-  if (!data) return <Loading />;
+  if (!data) return <></>;
   return (
-    <ContestListWrapper>
-      <TabulatorStyle
-        className="Table"
-        columns={columns}
-        data={data}
-        options={options}
-      />
-    </ContestListWrapper>
+    <>
+      <ContestListWrapper>
+        <SubTitle>⭐️ 공모전 전체</SubTitle>
+        <TabulatorStyle
+          className="Table"
+          columns={columns}
+          data={data}
+          options={options}
+        />
+      </ContestListWrapper>
+    </>
   );
 };
 
 const ContestListWrapper = styled.div`
-  width: 100%;
+  width: 95%;
 
   @media screen and (max-width: 900px) {
     display: none;
   }
+`;
+const SubTitle = styled.div`
+  margin: 1vw 0;
+  font-size: 15pt;
+  font-weight: lighter;
 `;
 
 const TabulatorStyle = styled(ReactTabulator)`

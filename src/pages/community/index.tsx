@@ -1,57 +1,38 @@
 import { useState } from "react";
 import { MenuTitle } from "components/Menutitle";
-import { Loading } from "components/loading";
 import { PostList } from "pages/community/PostList";
 import styled from "styled-components";
-import storage from "hooks/store";
-import useGetAuth from "hooks/api/auth/useGetAuth";
 
 export const Community = () => {
-  const token = storage.get("user-token");
-  const { data } = useGetAuth();
-
   const [category, setCategory] = useState<string | null>(null);
 
-  if (!data) return <Loading />;
   return (
     <>
-      {!token ? (
-        window.confirm("로그인 후 이용가능합니다.") === true ? (
-          window.location.replace("/login")
-        ) : (
-          window.location.replace("/")
-        )
-      ) : (
-        <>
-          <CommunityWrapper>
-            <MenuTitle
-              title="JOB담"
-              info="취업 관련하여 꿀팁을 서로 공유해보세요!"
-            />
+      <CommunityWrapper>
+        <MenuTitle
+          title="JOB담"
+          info="취업 관련하여 꿀팁을 서로 공유해보세요!"
+        />
 
-            <CommuContainer>
-              <SideNavWrapper>
-                <SideNav>
-                  <NavTitle>category</NavTitle>
-                  <NavList onClick={() => setCategory(null)}>
-                    📍 전체보기
-                  </NavList>
-                  <NavList onClick={() => setCategory("취뽀")}>🥳 취뽀</NavList>
-                  <NavList onClick={() => setCategory("취업고민")}>
-                    💼 취업고민
-                  </NavList>
-                  <NavList onClick={() => setCategory("꿀팁")}>🍯 꿀팁</NavList>
-                  <NavList onClick={() => setCategory("일상")}>🌸 일상</NavList>
-                </SideNav>
-              </SideNavWrapper>
+        <CommuContainer>
+          <SideNavWrapper>
+            <SideNav>
+              <NavTitle>category</NavTitle>
+              <NavList onClick={() => setCategory(null)}>📍 전체보기</NavList>
+              <NavList onClick={() => setCategory("취뽀")}>🥳 취뽀</NavList>
+              <NavList onClick={() => setCategory("취업고민")}>
+                💼 취업고민
+              </NavList>
+              <NavList onClick={() => setCategory("꿀팁")}>🍯 꿀팁</NavList>
+              <NavList onClick={() => setCategory("일상")}>🌸 일상</NavList>
+            </SideNav>
+          </SideNavWrapper>
 
-              <ContentWrapper>
-                <PostList postCategory={category} nickname={data.nickname} />
-              </ContentWrapper>
-            </CommuContainer>
-          </CommunityWrapper>
-        </>
-      )}
+          <ContentWrapper>
+            <PostList isMypage={false} postCategory={category} />
+          </ContentWrapper>
+        </CommuContainer>
+      </CommunityWrapper>
     </>
   );
 };
