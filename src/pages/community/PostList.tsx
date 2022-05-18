@@ -31,56 +31,59 @@ export const PostList = ({ isMypage, postCategory }: IPostListProps) => {
       )}
       <PostCommunity />
 
-      {data?.length === 0 ? (
-        <>
-          <BlankTxt>
-            {isMypage ? "회원님이 작성한" : "전체"} 게시글이 존재하지 않습니다.
-          </BlankTxt>
-        </>
-      ) : (
-        <>
-          {data?.map((list: any, index: number) => (
-            <div key={index}>
-              {/* 클릭헤 해당하는 카테고리 별 리스트 출력 */}
-              {(isMypage === true && nickname === list.writer) ||
-              (isMypage === false &&
-                (postCategory === null ||
-                  (postCategory !== null &&
-                    postCategory === list.postCategory))) ? (
-                // viewId를 params로 넘기며 details url로 이동.
-                <LinkStyle to={`/jobdam/${list.id}`}>
-                  <PostWrapper>
-                    <Writer>
-                      {list.writer}{" "}
-                      <CreateDate>
-                        {list.createdDate === list.modifiedDate ? (
-                          <>{list.createdDate}</>
-                        ) : (
-                          <>{list.modifiedDate} 수정됨.</>
-                        )}
-                      </CreateDate>
-                    </Writer>
-                    <ContentContainer>
-                      <Title>{list.title}</Title>
-                      <PostContent>{list.content}</PostContent>
-                    </ContentContainer>
-                    <IconWrapper>
-                      <IconContent>
-                        <Visibility style={IconStyle} />
-                        {list.view}
-                      </IconContent>
-                      <IconContent>
-                        <ChatBubble style={IconStyle} />
-                        {list.commentsCnt}
-                      </IconContent>
-                    </IconWrapper>
-                  </PostWrapper>
-                </LinkStyle>
-              ) : null}
-            </div>
-          ))}
-        </>
-      )}
+      <PostListContents>
+        {data?.length === 0 ? (
+          <>
+            <BlankTxt>
+              {isMypage ? "회원님이 작성한" : "전체"} 게시글이 존재하지
+              않습니다.
+            </BlankTxt>
+          </>
+        ) : (
+          <>
+            {data?.map((list: any, index: number) => (
+              <div key={index}>
+                {/* 클릭헤 해당하는 카테고리 별 리스트 출력 */}
+                {(isMypage === true && nickname === list.writer) ||
+                (isMypage === false &&
+                  (postCategory === null ||
+                    (postCategory !== null &&
+                      postCategory === list.postCategory))) ? (
+                  // viewId를 params로 넘기며 details url로 이동.
+                  <LinkStyle to={`/jobdam/${list.id}`} state={list.likeList}>
+                    <PostWrapper>
+                      <Writer>
+                        {list.writer}{" "}
+                        <CreateDate>
+                          {list.createdDate === list.modifiedDate ? (
+                            <>{list.createdDate}</>
+                          ) : (
+                            <>{list.modifiedDate} 수정됨.</>
+                          )}
+                        </CreateDate>
+                      </Writer>
+                      <ContentContainer>
+                        <Title>{list.title}</Title>
+                        <PostContent>{list.content}</PostContent>
+                      </ContentContainer>
+                      <IconWrapper>
+                        <IconContent>
+                          <Visibility style={IconStyle} />
+                          {list.view}
+                        </IconContent>
+                        <IconContent>
+                          <ChatBubble style={IconStyle} />
+                          {list.commentsCnt}
+                        </IconContent>
+                      </IconWrapper>
+                    </PostWrapper>
+                  </LinkStyle>
+                ) : null}
+              </div>
+            ))}
+          </>
+        )}
+      </PostListContents>
     </PostListWrapper>
   );
 };
@@ -88,6 +91,9 @@ export const PostList = ({ isMypage, postCategory }: IPostListProps) => {
 const PostListWrapper = styled.div`
   background-color: white;
   border-radius: 5px;
+`;
+const PostListContents = styled.div`
+  height: 100%;
 `;
 const BlankTxt = styled.div`
   text-align: center;

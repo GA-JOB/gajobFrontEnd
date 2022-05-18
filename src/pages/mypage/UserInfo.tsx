@@ -41,13 +41,13 @@ const InfoTitle = styled.h4`
   justify-content: center;
 
   font-weight: bold;
-  padding: 1vw;
+  padding: 1vw 0;
 `;
 const TitleWrapper = styled.span`
   width: 75%;
 `;
 const ButtonWrapper = styled.span`
-  width: 20%;
+  width: 15%;
   margin-top: -2vw;
 `;
 const InfoWrapper = styled.div`

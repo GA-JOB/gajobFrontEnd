@@ -77,12 +77,16 @@ export interface ICommunity {
   title: string | null;
   content: string | null;
   postCategory: string | null;
+  jobCategory: string | null;
   writer?: string;
   view?: number;
+  comments?: ICommunityComment[];
   commentsCnt?: number;
+  likes?: number;
+  likesList?: ICommunityLikes[];
+  scrap?: number;
   createdDate?: Date;
   modifiedDate?: Date;
-  comments?: ICommunityComment[];
 }
 
 export interface IStudy {
@@ -104,6 +108,10 @@ export interface IStudy {
   likes: number;
   openTalkUrl: string | null;
 }
+type ICommunityLikes = {
+  id?: number;
+  nickname?: string;
+};
 
 type ICommunityComment = {
   id?: number;

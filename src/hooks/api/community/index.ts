@@ -29,11 +29,17 @@ export const useCommunity = () => {
   // 데이터 최신화
   const { mutate } = useSWRConfig();
   const navigate = useNavigate();
-  const postPost = async ({ title, content, postCategory }: IPostCommunity) => {
+  const postPost = async ({
+    title,
+    content,
+    postCategory,
+    jobCategory,
+  }: IPostCommunity) => {
     await post(`/community/posts`, {
       title,
       content,
       postCategory,
+      jobCategory,
     }).then((data: any) => {
       if (data) {
         console.log(JSON.stringify(data));
@@ -50,11 +56,13 @@ export const useCommunity = () => {
     title,
     content,
     postCategory,
+    jobCategory,
   }: IEditCommunity) => {
     await put(`/community/posts/${id}`, {
       title,
       content,
       postCategory,
+      jobCategory,
     }).then((data: any) => {
       if (data) {
         console.log(JSON.stringify(data));
@@ -103,17 +111,21 @@ export const useCommunity = () => {
   };
 
   const postScrap = async (postId: number) => {
-    await post(`/community/scrap/${postId}`).then((res) => {
-      console.log(res);
-    });
+    await post(`/community/scrap/${postId}`, { refreshInterval: 500 }).then(
+      (res) => {
+        console.log(res);
+      }
+    );
 
     mutate(`/community/scrap/${postId}`);
   };
 
   const postLikes = async (postId: number) => {
-    await post(`/community/likes/${postId}`).then((res) => {
-      console.log(res);
-    });
+    await post(`/community/likes/${postId}`, { refreshInterval: 500 }).then(
+      (res) => {
+        console.log(res);
+      }
+    );
 
     mutate(`/community/likes/${postId}`);
   };

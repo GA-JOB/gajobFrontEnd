@@ -52,7 +52,7 @@ const ContentBox = styled.div`
   justify-content: center;
   align-items: center;
   background-color: white;
-  margin: 2vw;
+  margin: 3vw;
   padding: 3vw 0;
   border: 1px solid lightgray;
   border-radius: 15px;
