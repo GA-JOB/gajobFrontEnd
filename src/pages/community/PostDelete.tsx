@@ -26,7 +26,6 @@ export const PostDelete = ({ postId, commentId }: IDeleteProps) => {
   const onClickDeleteBtn = () => {
     if (!commentId) {
       deletePost(postId);
-      window.location.replace("/jobdam");
     } else {
       deleteComment(postId, commentId);
       setOpenModal(false);

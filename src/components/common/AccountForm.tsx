@@ -2,13 +2,16 @@ import { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { MenuTitle } from "components/Menutitle";
 import { ButtonType } from "components/button/ButtonType";
-import { useAuth } from "hooks/api/auth";
+
 import styled from "styled-components";
 import { TextField, MenuItem } from "@material-ui/core";
 import { Done } from "@mui/icons-material";
+import storage from "hooks/store";
+import { useAuth } from "hooks/api/auth";
 
 interface IAccountProps {
   title: string;
+  info: string;
   id?: number;
   name?: string;
   nickname?: string;
@@ -22,6 +25,7 @@ interface IAccountProps {
 
 export const AccountForm = ({
   title,
+  info,
   id = 0,
   name = "",
   nickname = "",
@@ -32,10 +36,12 @@ export const AccountForm = ({
   studentEmail = "",
   department = "",
 }: IAccountProps) => {
-  const { postSignup, postLogin, EditAccountPwd } = useAuth();
+  const userEmail = storage.get("user-email");
+  const { postSignup, postLogin, editAccountPwd, deleteAuth } = useAuth();
 
   const isSignup = title === "회원가입" ? true : false;
   const isEdit = title === "비밀번호 변경" ? true : false;
+  const isDeleteAccount = title === "계정 삭제" ? true : false;
 
   const [passwordCheck, setPasswordCheck] = useState<string>("");
   const [mismatchError, setMismatchError] = useState(false);
@@ -99,23 +105,33 @@ export const AccountForm = ({
       } else if (mismatchError === true) {
         window.confirm("회원 정보를 다시 확인해주시기 바랍니다.");
       } else return;
-    } else if (!isSignup && !isEdit) {
+    } else if (!isSignup && !isEdit && !isDeleteAccount) {
       postLogin({
         email: emailForm,
         password: passwordForm,
       });
     } else if (isEdit) {
-      EditAccountPwd({
+      editAccountPwd({
         oldPassword: passwordForm,
         newPassword: newPasswordForm,
       });
+    } else if (isDeleteAccount) {
+      if (window.confirm("계정을 삭제하시겠습니까?") === true) {
+        deleteAuth({ password: passwordForm });
+      }
     }
   };
 
   return (
     <>
       <SignForm onSubmit={handleSubmit}>
-        <MenuTitle title={title} info="" />
+        <MenuTitle title={title} info={info} />
+        {(isDeleteAccount || isEdit) && (
+          <>
+            <AccountInfo>계정 {userEmail}</AccountInfo>
+            <div>계속하려면 먼저 본인임을 인증하세요.</div>
+          </>
+        )}
         {isSignup ? (
           <>
             <InputLabel>
@@ -204,11 +220,11 @@ export const AccountForm = ({
           </>
         ) : null}
 
-        {!isEdit ? (
+        {!isEdit && !isDeleteAccount ? (
           <InputLabel>
             <span>E-mail</span>
             <InputField
-              label="E-mail을 입력하세요."
+              label="E-mail을 입력"
               variant="filled"
               type="email"
               name="emailForm"
@@ -221,10 +237,10 @@ export const AccountForm = ({
         ) : null}
 
         <InputLabel>
-          <span>비밀번호</span>
+          {!isDeleteAccount ? <span>비밀번호</span> : null}
           <InputField
-            label="비밀번호를 입력하세요."
-            variant="filled"
+            label="비밀번호 입력"
+            variant={isDeleteAccount ? "standard" : "filled"}
             type="password"
             name="passwordForm"
             value={passwordForm}
@@ -239,7 +255,7 @@ export const AccountForm = ({
             <InputLabel>
               <span>비밀번호 확인</span>
               <InputField
-                label="비밀번호를 확인하세요."
+                label="비밀번호를 확인"
                 variant="filled"
                 type="password"
                 name="passwordCheck"
@@ -278,7 +294,7 @@ export const AccountForm = ({
         <ButtonType title={title} widthStyle={"100%"} />
 
         <LinkToLogin>
-          {!isEdit && (
+          {!isEdit && !isDeleteAccount ? (
             <>
               {isSignup ? (
                 <>
@@ -295,6 +311,8 @@ export const AccountForm = ({
                 </>
               )}
             </>
+          ) : (
+            <LinkStyle to="/find-account">비밀번호를 잊으셨나요?</LinkStyle>
           )}
         </LinkToLogin>
       </SignForm>
@@ -307,6 +325,18 @@ const SignForm = styled.form`
   z-index: 5;
   width: 25%;
   margin-bottom: 2vw;
+`;
+
+const AccountInfo = styled.div`
+  margin-bottom: 2vw;
+  padding: 0.5vw 0;
+  border: 1px solid lightgray;
+  border-radius: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+
+  font-size: 14pt;
+  font-weight: lighter;
+  text-align: center;
 `;
 
 const InputLabel = styled.div`
