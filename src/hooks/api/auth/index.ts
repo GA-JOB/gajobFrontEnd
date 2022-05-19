@@ -3,7 +3,7 @@ import { post, del, put } from "lib/api/client";
 import storage from "hooks/store";
 import { IUserData } from "types";
 
-type ISignupType = "id";
+type ISignupType = "id" | "newPassword" | "introduction";
 type IAuthType =
   | "id"
   | "name"
@@ -12,16 +12,20 @@ type IAuthType =
   | "newPassword"
   | "studentId"
   | "studentEmail"
-  | "department";
+  | "department"
+  | "introduction";
 
 interface IPostSignupRequest extends Omit<IUserData, ISignupType> {}
 interface IPostLoginRequest extends Omit<IUserData, IAuthType> {
   password: string;
 }
 interface IEditAccountRequest extends Omit<IUserData, IAuthType> {
-  name: string;
   nickname: string;
   department: string;
+  introduction: string;
+}
+interface IDeleteAccountRequest {
+  password: string;
 }
 interface IPostFindIdRequest extends Omit<IUserData, IAuthType> {
   name: string;
@@ -84,26 +88,38 @@ export const useAuth = () => {
   };
 
   // 회원 정보 수정
-  const EditAccount = async ({
+  const editAccount = async ({
     email,
-    name,
     nickname,
     department,
+    introduction,
   }: IEditAccountRequest) => {
-    await put(`/update-password`, { email, name, nickname, department }).then(
-      (res: any) => {}
-    );
+    await put(`/update-password`, {
+      email,
+      nickname,
+      department,
+      introduction,
+    }).then((res: any) => {
+      console.log(res);
+    });
   };
 
   // 계정 삭제
-  const deleteAuth = async () => {
-    await del(`/user`).then((_res: any) => {
-      window.confirm("계정이 삭제되었습니다.");
+  const deleteAuth = async ({ password }: IDeleteAccountRequest) => {
+    await del(`/user`, { data: { password } }).then((res: any) => {
+      console.log(JSON.stringify(res));
+      if (res === "delete-user") {
+        if (window.confirm("계정을 정말로 삭제하시겠습니까?") === true) {
+          alert(
+            "계정이 삭제되었습니다.\n 언제든 다시 돌아오세요. GA-JOB은 항상 열려있습니다!"
+          );
 
-      storage.remove("user-token");
-      storage.remove("user-email");
-      storage.remove("user-email");
-      window.location.replace("/");
+          storage.remove("user-token");
+          storage.remove("user-email");
+          storage.remove("user-email");
+          window.location.replace("/");
+        } else return;
+      }
     });
 
     mutate(`/user`);
@@ -113,7 +129,7 @@ export const useAuth = () => {
   const findAccountId = async ({ name, email }: IPostFindIdRequest) => {
     await post(`/find-id`, { name, email }).then((res: any) => {});
   };
-  //PW 찾기
+  // PW 찾기
   const findAccountPwd = async ({ email }: IPostFindPwdRequest) => {
     await post(`/find-password`, { email }).then((res: any) => {
       window.location.replace("/login");
@@ -121,22 +137,32 @@ export const useAuth = () => {
   };
 
   // PW 변경
-  const EditAccountPwd = async ({
+  const editAccountPwd = async ({
     oldPassword,
     newPassword,
   }: IEditPwdRequest) => {
     await put(`/update-password`, { oldPassword, newPassword }).then(
-      (res: any) => {}
+      (res: any) => {
+        console.log(res);
+        if (res === "password-change-successful") {
+          if (
+            window.confirm("입력하신 비밀번호로 수정하시겠습니까?") === true
+          ) {
+            alert("비밀번호 수정이 정상적으로 완료되었습니다.");
+            window.location.replace("/mypage");
+          }
+        } else return;
+      }
     );
   };
 
   return {
     postSignup,
     postLogin,
-    EditAccount,
+    editAccount,
     deleteAuth,
     findAccountId,
     findAccountPwd,
-    EditAccountPwd,
+    editAccountPwd,
   };
 };

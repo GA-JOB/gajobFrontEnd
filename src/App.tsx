@@ -10,6 +10,7 @@ import { Signup } from "pages/auth/Signup";
 import { Login } from "pages/auth/Login";
 import { FindAccount } from "pages/auth/FindAccount";
 import { EditAccount } from "pages/auth/EditAccount";
+import { DeleteAccount } from "pages/auth/DeleteAccount";
 import { JobNews } from "pages/news/index";
 import { Contest } from "pages/contest/index";
 import { JobPosting } from "pages/jobPosting/index";
@@ -21,6 +22,7 @@ import { StudyDetails } from "pages/study/StudyDetails";
 import { Portfolio } from "pages/Portfolio";
 import { Calendar } from "pages/Calendar";
 import { MyPage } from "pages/mypage";
+import { EditUserInfo } from "pages/mypage/EditUserInfo";
 import { NoEmail } from "components/footer/NoEmail";
 import { PersonalRule } from "components/footer/PersonalRules";
 import { Sitemap } from "components/footer/Sitemap";
@@ -44,6 +46,7 @@ export default function App() {
           <Route path="/login" element={<Login />}></Route>
           <Route path="/find-account" element={<FindAccount />}></Route>
           <Route path="/change-pwd" element={<EditAccount />}></Route>
+          <Route path="/delete-account" element={<DeleteAccount />}></Route>
           <Route path="/" element={<Home />}></Route>
           <Route path="/job-news" element={<JobNews />} />
           <Route path="/contest" element={<Contest />} />
@@ -51,10 +54,12 @@ export default function App() {
           <Route path="/job-posting/:postId" element={<JobPostingDetails />} />
           <Route path="/jobdam" element={<Community />} />
           <Route path="/jobdam/:viewId" element={<PostDetails />} />
-          <Route path="/gajob-study" element={<Study />} />
+          <Route path="/study" element={<Study />} />
+          <Route path="/study-detail/:id" element={<StudyDetails />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/mypage" element={<MyPage />} />
+          <Route path="/personal-info" element={<EditUserInfo />} />
           {/* footer link */}
           <Route path="/noEmail" element={<NoEmail />}></Route>
           <Route path="/personalRule" element={<PersonalRule />}></Route>

@@ -44,11 +44,23 @@ export const MyPage = () => {
           >
             스크랩
           </Categories>
+          <Categories
+            style={category === "포트폴리오" ? selectBtn : noSelectBtn}
+            onClick={() => setCategory("포트폴리오")}
+          >
+            포트폴리오
+          </Categories>
         </CategoryWrapper>
 
         <Containers>
           {category === "개인정보설정" && <UserInfoSettings></UserInfoSettings>}
-          {category === "게시물" && <PostList isMypage={true} />}
+
+          {(category === "게시물" || category === "포트폴리오") && (
+            <MypagePostWrapper>
+              {category === "게시물" ? <PostList isMypage={true} /> : null}
+              {category === "포트폴리오" ? <>서비스 준비 중입니다.</> : null}
+            </MypagePostWrapper>
+          )}
         </Containers>
       </ContentContainer>
     </MyPageWrapper>
@@ -57,8 +69,8 @@ export const MyPage = () => {
 
 const MyPageWrapper = styled.div`
   width: 100%;
-  padding: 3vw;
-  min-height: 50vw;
+  padding: 2vw;
+  min-height: 65vw;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -76,13 +88,13 @@ const InfoWrapper = styled.div`
 `;
 const ContentContainer = styled.div`
   width: 60%;
-  margin-top: 2vw;
+  margin-top: 3vw;
 `;
 const CategoryWrapper = styled.div`
   text-align: center;
 `;
 const Categories = styled.span`
-  margin: 0 1.5vw;
+  margin: 0 2vw;
   padding: 0.6vw 1.5vw;
   border: none;
   background-color: none;
@@ -94,4 +106,13 @@ const Containers = styled.div`
   width: 100%;
   min-height: 40vw;
   margin: 3vw 1vw;
+`;
+const MypagePostWrapper = styled.div`
+  margin-bottom: 3vw;
+  height: 48vw;
+  padding: 2vw;
+  background-color: white;
+  border: 1px solid #eaeaea;
+  border-radius: 5px;
+  overflow: scroll;
 `;

@@ -71,7 +71,6 @@ export const StudyDetails = () => {
             {data.writer === nickname ? (
               <ButtonTypeBox>
                 {console.log(data)}
-
                 <span onClick={() => setRegister(true)}>
                   수정
                   <Edit style={IconStyle} />

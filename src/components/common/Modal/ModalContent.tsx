@@ -35,7 +35,7 @@ export const ModalContent = ({
 // 전체 Modal 창
 const Wrapper = styled.div`
   min-width: 400px;
-  max-height: 500px;
+  max-height: 100%;
   border-radius: 10px;
   padding: 20px;
   margin: 10px;
@@ -45,7 +45,7 @@ const Wrapper = styled.div`
 
 // Modal title
 const HeaderWrapper = styled.div`
-  width: 100%;
+  width: 80%;
   text-align: center;
   font-size: 15pt;
 `;

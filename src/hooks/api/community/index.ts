@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useSWRConfig } from "swr";
 import { post, put, del } from "lib/api/client";
 import { ICommunity } from "types";
@@ -27,16 +28,23 @@ interface IPostComment {
 export const useCommunity = () => {
   // 데이터 최신화
   const { mutate } = useSWRConfig();
-  const postPost = async ({ title, content, postCategory }: IPostCommunity) => {
+  const navigate = useNavigate();
+  const postPost = async ({
+    title,
+    content,
+    postCategory,
+    jobCategory,
+  }: IPostCommunity) => {
     await post(`/community/posts`, {
       title,
       content,
       postCategory,
+      jobCategory,
     }).then((data: any) => {
       if (data) {
         console.log(JSON.stringify(data));
 
-        window.location.replace("/jobdam");
+        navigate(0);
       }
     });
 
@@ -48,11 +56,13 @@ export const useCommunity = () => {
     title,
     content,
     postCategory,
+    jobCategory,
   }: IEditCommunity) => {
     await put(`/community/posts/${id}`, {
       title,
       content,
       postCategory,
+      jobCategory,
     }).then((data: any) => {
       if (data) {
         console.log(JSON.stringify(data));
@@ -64,6 +74,7 @@ export const useCommunity = () => {
 
   const deletePost = async (id: number) => {
     await del(`/community/posts/${id}`);
+    navigate(-1);
 
     mutate(`/community/posts`);
   };
@@ -100,17 +111,21 @@ export const useCommunity = () => {
   };
 
   const postScrap = async (postId: number) => {
-    await post(`/community/scrap/${postId}`).then((res) => {
-      console.log(res);
-    });
+    await post(`/community/scrap/${postId}`, { refreshInterval: 500 }).then(
+      (res) => {
+        console.log(res);
+      }
+    );
 
     mutate(`/community/scrap/${postId}`);
   };
 
   const postLikes = async (postId: number) => {
-    await post(`/community/likes/${postId}`).then((res) => {
-      console.log(res);
-    });
+    await post(`/community/likes/${postId}`, { refreshInterval: 500 }).then(
+      (res) => {
+        console.log(res);
+      }
+    );
 
     mutate(`/community/likes/${postId}`);
   };
