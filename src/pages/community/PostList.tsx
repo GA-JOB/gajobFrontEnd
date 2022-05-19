@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Loading } from "components/loading";
 import { PostCommunity } from "pages/community/PostCommunity";
 import styled from "styled-components";
-import { Visibility, ChatBubble } from "@mui/icons-material";
+import { Visibility, Chat, Favorite } from "@mui/icons-material";
 import useGetCommunity from "hooks/api/community/useGetCommunity";
 import storage from "hooks/store";
 
@@ -72,8 +72,12 @@ export const PostList = ({ isMypage, postCategory }: IPostListProps) => {
                           {list.view}
                         </IconContent>
                         <IconContent>
-                          <ChatBubble style={IconStyle} />
+                          <Chat style={IconStyle} />
                           {list.commentsCnt}
+                        </IconContent>
+                        <IconContent>
+                          <Favorite style={IconStyle} />
+                          {list.likes}
                         </IconContent>
                       </IconWrapper>
                     </PostWrapper>

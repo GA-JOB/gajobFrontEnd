@@ -105,7 +105,6 @@ const Categories = styled.span`
 const Containers = styled.div`
   width: 100%;
   min-height: 40vw;
-  /* max-height: 40vw; */
   margin: 3vw 1vw;
 `;
 const MypagePostWrapper = styled.div`
@@ -115,6 +114,5 @@ const MypagePostWrapper = styled.div`
   background-color: white;
   border: 1px solid #eaeaea;
   border-radius: 5px;
-  font-weight: lighter;
   overflow: scroll;
 `;

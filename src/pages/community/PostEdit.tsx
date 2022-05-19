@@ -8,9 +8,16 @@ interface IEditProps {
   title?: string | null;
   content?: string | null;
   postCategory?: string | null;
+  jobCategory?: string | null;
 }
 
-export const PostEdit = ({ id, title, content, postCategory }: IEditProps) => {
+export const PostEdit = ({
+  id,
+  title,
+  content,
+  postCategory,
+  jobCategory,
+}: IEditProps) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
 
   const IconStyle = {
@@ -32,6 +39,7 @@ export const PostEdit = ({ id, title, content, postCategory }: IEditProps) => {
           title={title}
           content={content}
           postCategory={postCategory}
+          jobCategory={jobCategory}
         />
       )}
     </EditWrapper>
@@ -40,7 +48,7 @@ export const PostEdit = ({ id, title, content, postCategory }: IEditProps) => {
 
 const EditWrapper = styled.span`
   margin: 0 0.5vw;
-  font-size: 10pt;
+  font-size: 9pt;
   opacity: 0.8;
   cursor: pointer;
 `;
