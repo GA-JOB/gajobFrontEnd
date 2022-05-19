@@ -66,7 +66,7 @@ export const PostDelete = ({ postId, commentId }: IDeleteProps) => {
 
 const DeleteWrapper = styled.span`
   margin: 0 0.5vw;
-  font-size: 10pt;
+  font-size: 9pt;
   opacity: 0.8;
   cursor: pointer;
 `;

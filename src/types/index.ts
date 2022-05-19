@@ -84,6 +84,7 @@ export interface ICommunity {
   commentsCnt?: number;
   likes?: number;
   likesList?: ICommunityLikes[];
+  likeStatus?: boolean;
   scrap?: number;
   createdDate?: Date;
   modifiedDate?: Date;
