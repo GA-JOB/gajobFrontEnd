@@ -118,6 +118,6 @@ const ViewAllLink = styled(Link)`
   font-size: 10pt;
 `;
 const NewsContents = styled.div`
-  padding: 0 8vw;
+  padding: 1vw 8vw;
   text-align: left;
 `;

@@ -2,7 +2,6 @@ import { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { MenuTitle } from "components/Menutitle";
 import { ButtonType } from "components/button/ButtonType";
-
 import styled from "styled-components";
 import { TextField, MenuItem } from "@material-ui/core";
 import { Done } from "@mui/icons-material";
@@ -291,7 +290,9 @@ export const AccountForm = ({
           </>
         ) : null}
 
-        <ButtonType title={title} widthStyle={"100%"} />
+        <ButtonWrapper>
+          <ButtonType title={title} widthStyle={"100%"} />
+        </ButtonWrapper>
 
         <LinkToLogin>
           {!isEdit && !isDeleteAccount ? (
@@ -350,6 +351,9 @@ const InputField = styled(TextField)`
 `;
 const Alert = styled.span`
   color: red;
+`;
+const ButtonWrapper = styled.div`
+  margin-top: 1vw;
 `;
 
 const LinkToLogin = styled.div`

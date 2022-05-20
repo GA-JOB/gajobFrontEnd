@@ -19,16 +19,17 @@ interface IPostSignupRequest extends Omit<IUserData, ISignupType> {}
 interface IPostLoginRequest extends Omit<IUserData, IAuthType> {
   password: string;
 }
-interface IEditAccountRequest extends Omit<IUserData, IAuthType> {
-  nickname: string;
-  department: string;
-  introduction: string;
+interface IEditAccountRequest {
+  nickname?: string;
+  department?: string;
+  introduction?: string;
 }
 interface IDeleteAccountRequest {
   password: string;
 }
-interface IPostFindIdRequest extends Omit<IUserData, IAuthType> {
+interface IPostFindIdRequest {
   name: string;
+  studentEmail: string;
 }
 interface IPostFindPwdRequest extends Omit<IUserData, IAuthType> {}
 interface IEditPwdRequest extends Omit<IUserData, IAuthType> {
@@ -89,19 +90,31 @@ export const useAuth = () => {
 
   // 회원 정보 수정
   const editAccount = async ({
-    email,
     nickname,
     department,
     introduction,
   }: IEditAccountRequest) => {
-    await put(`/update-password`, {
-      email,
+    await put(`/user`, {
       nickname,
       department,
       introduction,
     }).then((res: any) => {
       console.log(res);
+      if (res.activated === true) {
+        if (window.confirm("회원 정보를 수정하시겠습니까?") === true) {
+          alert("회원 정보가 수정되었습니다.");
+
+          if (storage.get("user-nickname") === res.nickname) {
+          } else {
+            storage.remove("user-nickname");
+            storage.set("user-nickname", res.nickname);
+          }
+
+          window.location.replace("/personal-info");
+        } else return;
+      }
     });
+    mutate(`/user`);
   };
 
   // 계정 삭제
@@ -126,8 +139,8 @@ export const useAuth = () => {
   };
 
   // ID 찾기
-  const findAccountId = async ({ name, email }: IPostFindIdRequest) => {
-    await post(`/find-id`, { name, email }).then((res: any) => {});
+  const findAccountId = async ({ name, studentEmail }: IPostFindIdRequest) => {
+    await post(`/find-id`, { name, studentEmail }).then((res: any) => {});
   };
   // PW 찾기
   const findAccountPwd = async ({ email }: IPostFindPwdRequest) => {

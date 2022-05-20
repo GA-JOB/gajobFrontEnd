@@ -11,7 +11,7 @@ interface IFindAccountProps {
 }
 
 export const FindAccount = ({ name = "", email = "" }: IFindAccountProps) => {
-  const { findAccountPwd } = useAuth();
+  const { findAccountId, findAccountPwd } = useAuth();
   const [isFindEmail, setIsFindEmail] = useState<boolean>(true);
 
   const [form, setForm] = useState({
@@ -32,6 +32,7 @@ export const FindAccount = ({ name = "", email = "" }: IFindAccountProps) => {
     e.preventDefault();
     console.log(form);
 
+    if (isFindEmail) findAccountId({ name: nameForm, studentEmail: emailForm });
     findAccountPwd({ email: emailForm });
   };
 

@@ -1,6 +1,6 @@
 import { AccountForm } from "components/common/AccountForm";
 
-export const EditAccount = () => {
+export const EditPassword = () => {
   return (
     <>
       <AccountForm

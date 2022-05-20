@@ -91,13 +91,13 @@ const Form = styled.form`
   align-items: center;
   justify-content: center;
   margin: auto;
+  padding: 1vw;
 `;
 
 const InputStyle = styled.textarea`
   width: 100%;
   height: 4vw;
   padding: 1vw;
-  margin-top: 1vw;
   margin-left: 1vw;
   border: 1px solid lightgray;
   border-radius: 5px;
@@ -108,5 +108,4 @@ const InputStyle = styled.textarea`
 const ButtonStyle = styled.span`
   width: 20%;
   margin-left: 2vw;
-  margin-top: -1vw;
 `;
