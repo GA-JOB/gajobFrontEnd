@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { UserInfo } from "./UserInfo";
+import { UserProfile } from "./UserProfile";
 import { UserInfoSettings } from "./UserInfoSettings";
 import { PostList } from "pages/community/PostList";
 import styled from "styled-components";
@@ -21,7 +21,7 @@ export const MyPage = () => {
   return (
     <MyPageWrapper>
       <InfoWrapper>
-        <UserInfo />
+        <UserProfile />
       </InfoWrapper>
 
       <ContentContainer>

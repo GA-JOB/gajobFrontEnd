@@ -70,5 +70,4 @@ const InfoBox = styled.div`
 `;
 const ButtonWrapper = styled.div`
   width: 20%;
-  margin-top: -2vw;
 `;

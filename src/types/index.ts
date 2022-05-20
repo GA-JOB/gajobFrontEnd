@@ -109,11 +109,11 @@ export interface IStudy {
   likes: number;
   openTalkUrl: string | null;
 }
+
 type ICommunityLikes = {
   id?: number;
   nickname?: string;
 };
-
 type ICommunityComment = {
   id?: number;
   comment?: string;

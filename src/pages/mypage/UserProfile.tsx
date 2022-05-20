@@ -1,9 +1,8 @@
 import styled from "styled-components";
-// import { Button } from "@material-ui/core";
 import useGetAuth from "hooks/api/auth/useGetAuth";
 import { ButtonType } from "components/button/ButtonType";
 
-export const UserInfo = () => {
+export const UserProfile = () => {
   const { data } = useGetAuth();
   const studentID = data?.studentId?.substring(2, 4);
 
@@ -48,7 +47,6 @@ const TitleWrapper = styled.span`
 `;
 const ButtonWrapper = styled.span`
   width: 15%;
-  margin-top: -2vw;
 `;
 const InfoWrapper = styled.div`
   width: 100%;
@@ -66,6 +64,7 @@ const InfoWrapper = styled.div`
 const ProfileImg = styled.img`
   width: 50%;
   margin: 2vw 5vw;
+  border-radius: 100%;
 `;
 const Title = styled.div`
   font-weight: bold;
