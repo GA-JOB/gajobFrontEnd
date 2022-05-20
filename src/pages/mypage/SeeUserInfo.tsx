@@ -1,13 +1,58 @@
 import { useState } from "react";
 import { ButtonType } from "components/button/ButtonType";
 import { UserForm } from "components/common/UserForm";
+import { Modal } from "components/common/Modal";
+import { ModalContent } from "components/common/Modal/ModalContent";
 import styled from "styled-components";
 import useGetAuth from "hooks/api/auth/useGetAuth";
+import { useAuth } from "hooks/api/auth";
 import { EditUserInfo } from "./EditUserInfo";
 
-export const SeeUserInfo = () => {
+interface IImageFormProps {
+  imageUrl?: string;
+}
+
+export const SeeUserInfo = ({ imageUrl = "" }: IImageFormProps) => {
   const { data } = useGetAuth();
+  const { postProfileImg } = useAuth();
   const [isEditInfo, setIsEditInfo] = useState<boolean>(false);
+  const [openModal, setOpenModal] = useState<boolean>(false);
+
+  const [imageRecord, setImageRecord] = useState<File | null>(null); // also tried <string | Blob>
+  const [imagePreview, setImagePreview] = useState<string>(imageUrl); // also tried <string | Blob>
+
+  const onChangeFile = function (e: React.ChangeEvent<HTMLInputElement>) {
+    const { files } = e.target;
+
+    // 이미지 파일이 존재할 경우 fileList[0]으로 값 변경.
+    if (!files) {
+      alert("이미지 파일을 선택해주세요");
+      return;
+    }
+    setImageRecord(files[0]);
+
+    const targetImage = files[0];
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      setImagePreview(reader.result as string);
+    };
+    reader.readAsDataURL(targetImage as Blob);
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (imageRecord !== null) {
+      if (window.confirm("프로필 이미지를 등록하시겠습니까?")) {
+        postProfileImg({ image: imageRecord });
+      }
+    }
+  };
+
+  const onCloseModal = () => {
+    setOpenModal((prev) => !prev);
+  };
 
   return (
     <EditInfoWrapper>
@@ -15,16 +60,59 @@ export const SeeUserInfo = () => {
         <Title>프로필</Title>
         <Contents>
           <Image>
-            <DefaultImg
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0H3GENf6227cAk6PeE331-BJqovCV0RyNCg&usqp=CAU"
-              width={"80%"}
-            />
+            <ImgWrapper>
+              <Img
+                src={
+                  imageRecord === null
+                    ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0H3GENf6227cAk6PeE331-BJqovCV0RyNCg&usqp=CAU"
+                    : imagePreview
+                }
+              />
+            </ImgWrapper>
             <ButtonType
               variants="text"
               title="이미지 수정하기"
-              link={`/personal-info/edit`}
+              link=""
+              onClick={() => setOpenModal((openModal) => !openModal)}
             />
           </Image>
+
+          {openModal && (
+            <Modal show={openModal} onClose={onCloseModal}>
+              <ModalContent
+                title={"이미지 등록"}
+                kind={"post"}
+                onClose={onCloseModal}
+              >
+                <form onSubmit={handleSubmit} encType="multipart/form-data">
+                  <div>
+                    <label className="input-file-button" htmlFor="input-file">
+                      이미지 등록
+                    </label>
+                    <input
+                      id="input-file"
+                      type="file"
+                      accept="image/*"
+                      name="imageUrl"
+                      onChange={onChangeFile}
+                      style={{ display: "none" }}
+                    />
+                  </div>
+
+                  <ImgWrapper>
+                    <Img
+                      src={
+                        imageRecord === null
+                          ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0H3GENf6227cAk6PeE331-BJqovCV0RyNCg&usqp=CAU"
+                          : imagePreview
+                      }
+                      alt="posting preivew"
+                    />
+                  </ImgWrapper>
+                </form>
+              </ModalContent>
+            </Modal>
+          )}
 
           <ProfileInfo>
             {data?.email}
@@ -119,45 +207,26 @@ const Contents = styled.div`
   line-height: 2vw;
 `;
 const Image = styled.div`
-  width: 20%;
-  margin-right: 2vw;
-  text-align: center;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 5vw;
 `;
-const DefaultImg = styled.img`
-  border-radius: 100%;
-  margin: 0.5vw 0;
+const ImgWrapper = styled.div`
+  align-items: center;
+  width: 180px;
+  height: 180px;
+  border-radius: 70%;
+  margin: 1vw;
+  overflow: hidden;
+`;
+const Img = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 `;
 const ProfileInfo = styled.div`
   width: 60%;
-`;
-
-const InfoContents = styled.div`
-  font-weight: lighter;
-  line-height: 4vw;
-  padding: 0.5vw;
-  font-size: 11pt;
-`;
-const Infos = styled.div`
-  width: 100%;
-  padding: 0.1vw 3vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  &:hover {
-    border-radius: 10px;
-    background-color: #eaeaea;
-  }
-`;
-const InfoTitle = styled.div`
-  width: 30%;
-  font-weight: normal;
-`;
-const InfoContent = styled.div`
-  width: 70%;
-`;
-const AlertTxt = styled.span`
-  font-size: 10pt;
-  font-weight: normal;
-  color: red;
 `;

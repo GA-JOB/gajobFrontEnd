@@ -37,7 +37,7 @@ export const ContestRank = () => {
                 <LinkStyle href={gallery.url} target="_blank">
                   <ContentsBox key={index}>
                     <ImgBox>
-                      <Ranking>
+                      {/* <Ranking>
                         {(gallery.ranking === "1" ||
                           gallery.ranking === "2" ||
                           gallery.ranking === "3") && (
@@ -46,7 +46,7 @@ export const ContestRank = () => {
                             <EmojiEventsTwoTone style={IconStyle} />
                           </>
                         )}
-                      </Ranking>
+                      </Ranking> */}
                       <img
                         src={gallery.imgUrl}
                         alt="이미지 준비중 .."

@@ -35,6 +35,7 @@ const BackDrop = styled.div`
   position: fixed;
   top: 0;
   left: 0;
+  margin-top: 2vw;
   background-color: rgba(0, 0, 0, 0.4);
   transition: opacity 0.2s;
   display: flex;

@@ -19,6 +19,9 @@ interface IPostSignupRequest extends Omit<IUserData, ISignupType> {}
 interface IPostLoginRequest extends Omit<IUserData, IAuthType> {
   password: string;
 }
+interface IPostProfileImgRequest {
+  image: File;
+}
 interface IEditAccountRequest {
   nickname?: string;
   department?: string;
@@ -88,6 +91,18 @@ export const useAuth = () => {
     return { login };
   };
 
+  // 회원 프로필 이미지 등록
+  const postProfileImg = async ({ image }: IPostProfileImgRequest) => {
+    const formData = new FormData();
+    formData.append("file", image);
+
+    await post(`/profile`, formData).then((res: any) => {
+      console.log(res);
+    });
+
+    mutate(`/profile`);
+  };
+
   // 회원 정보 수정
   const editAccount = async ({
     nickname,
@@ -114,6 +129,7 @@ export const useAuth = () => {
         } else return;
       }
     });
+
     mutate(`/user`);
   };
 
@@ -172,6 +188,7 @@ export const useAuth = () => {
   return {
     postSignup,
     postLogin,
+    postProfileImg,
     editAccount,
     deleteAuth,
     findAccountId,

@@ -158,6 +158,8 @@ export const CommunityForm = ({
                   inputProps={{
                     style: { fontSize: 15, verticalAlign: "middle" },
                   }}
+                  multiline
+                  rows={5}
                 />
               </InputLabel>
 

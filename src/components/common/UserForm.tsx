@@ -74,6 +74,8 @@ export const UserForm = ({
                   inputProps={{
                     style: { fontSize: 15, verticalAlign: "middle" },
                   }}
+                  multiline
+                  rows={5}
                 />
               </InputLabel>
             ) : (
@@ -184,13 +186,6 @@ const InfoTitle = styled.div`
 const InfoContent = styled.div`
   width: 70%;
 `;
-const AlertTxt = styled.span`
-  margin-left: 5px;
-  font-size: 10pt;
-  font-weight: normal;
-  color: red;
-`;
-
 const InputLabel = styled.div`
   width: 100%;
   font-size: 9pt;
