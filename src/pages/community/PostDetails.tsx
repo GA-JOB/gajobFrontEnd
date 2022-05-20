@@ -1,80 +1,101 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Loading } from "components/loading";
 import { PostEdit } from "pages/community/PostEdit";
 import { PostDelete } from "pages/community/PostDelete";
 import { CommentList } from "pages/community/CommentList";
 import { CommentForm } from "components/common/CommentForm";
 import styled from "styled-components";
 import {
+  Markunread,
   Visibility,
-  ChatBubble,
+  Chat,
+  ChatBubbleOutline,
   BookmarkBorder,
-  BookmarkAdded,
+  Bookmark,
+  FavoriteBorder,
+  Favorite,
 } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import storage from "hooks/store";
-import { post } from "lib/api/client";
 import useGetPieceCommunity from "hooks/api/community/useGetPieceCommunity";
+import { useCommunity } from "hooks/api/community";
 
 export const PostDetails = () => {
   const nickname = storage.get("user-nickname");
   const { viewId } = useParams();
   const navigate = useNavigate();
+  const { postScrap, postLikes } = useCommunity();
   // 커뮤니티 낱개 조회
   const { data } = useGetPieceCommunity(viewId ? parseInt(viewId) : 0);
-  const [scrapState, setScrapState] = useState<boolean>();
+  const [isOpenChat, setIsOpenChat] = useState<boolean>(true);
+  const [isOpenLikesList, setIsOpenLikesList] = useState<boolean>(false);
 
-  const onClickBtn = async (e: any) => {
+  // 좋아요, 스크랩
+  const [scrapState, setScrapState] = useState<boolean | undefined>(false);
+  const [likesState, setLikesState] = useState<boolean | undefined>(
+    data?.likeStatus
+  );
+
+  // 스크랩
+  const onClickScrapBtn = async (e: any) => {
     e.preventDefault();
-    await post(`/community/scrap/${viewId ? parseInt(viewId) : 0}`).then(
-      (res) => {
-        console.log(res);
-        res === "scrap-success" ? setScrapState(true) : setScrapState(false);
-      }
-    );
+
+    setScrapState(!scrapState);
+    postScrap(viewId ? parseInt(viewId) : 0);
   };
 
-  const ScrapIconStyle = {
+  // 좋아요
+  const onClickFavoritBtn = async (e: any) => {
+    e.preventDefault();
+
+    if (data?.likeStatus === false) {
+      if (window.confirm("게시글에 공감하시겠습니까?") === true) {
+        setLikesState(!likesState);
+        postLikes(viewId ? parseInt(viewId) : 0);
+      }
+    } else if (data?.likeStatus === true) {
+      setLikesState(!likesState);
+      postLikes(viewId ? parseInt(viewId) : 0);
+      window.location.reload();
+    }
+  };
+
+  const clickIconStyle = {
     fontSize: 25,
     cursor: "pointer",
-    color: "#980000",
+    color: "black",
+    margin: "0 0.5vw",
   };
   const IconStyle = {
     fontSize: 15,
-    margin: "5px",
+    marginRight: "5px",
+    marginTop: "-3px",
     color: "black",
-    opacity: "0.8",
+    opacity: "0.6",
   };
-
-  if (!data) return <Loading />;
+  if (!data || data === undefined) return <></>;
   return (
-    <ViewDetailWrapper>
-      <DetailContainer>
-        <DetailContent>
-          <Writer>
-            {data.writer}
-
-            <CreateDate>
-              {data.createdDate === data.modifiedDate ? (
-                <>{data.createdDate}</>
-              ) : (
-                <>{data.modifiedDate} 수정됨.</>
-              )}
-            </CreateDate>
-
-            <Bookmark>
-              {scrapState !== true ? (
-                <BookmarkBorder onClick={onClickBtn} style={ScrapIconStyle} />
-              ) : (
-                <BookmarkAdded onClick={onClickBtn} style={ScrapIconStyle} />
-              )}
-            </Bookmark>
-          </Writer>
-
-          <ContentContainer>
-            <Title>{data.title}</Title>
-            <PostContent>{data.content}</PostContent>
+    <>
+      <ViewDetailWrapper>
+        <WriterInfoWrapper>
+          <WriterInfo>
+            <strong> 🔎 게시글 정보</strong>
+            <Info>
+              <div>
+                작성자: {data.writer + " "} <Markunread style={IconStyle} />
+              </div>
+              <div>
+                카테고리: {data.postCategory ? data.postCategory : "선택 안함"}
+              </div>
+              <div>
+                전공별: {data.jobCategory ? data.jobCategory : "선택 안함"}
+              </div>
+              <br />
+              <Visibility style={IconStyle} />
+              <span>{data.view}</span> <Chat style={IconStyle} />
+              <span>{data.commentsCnt}</span> <Favorite style={IconStyle} />
+              <span>{data.likes}</span>
+            </Info>
 
             {/* login user === post writer일 경우 수정 or 삭제 */}
             {data.writer === nickname ? (
@@ -84,54 +105,85 @@ export const PostDetails = () => {
                   title={data.title}
                   content={data.content}
                   postCategory={data.postCategory}
+                  jobCategory={data.jobCategory}
                 />
-
                 <PostDelete postId={viewId ? parseInt(viewId) : 0} />
               </ButtonTypeBox>
             ) : null}
-          </ContentContainer>
-          <IconWrapper>
-            <IconContent>
-              <Visibility style={IconStyle} />
-              {data.view}
-            </IconContent>
-            <IconContent>
-              <ChatBubble style={IconStyle} />
-              {data.commentsCnt}
-            </IconContent>
-          </IconWrapper>
-        </DetailContent>
+          </WriterInfo>
+        </WriterInfoWrapper>
 
-        {/* 댓글 리스트 */}
-        <CommentList
-          postId={viewId ? parseInt(viewId) : 0}
-          postWriter={data?.writer}
-        />
+        <DetailContainer>
+          <DetailContent>
+            <Writer>
+              {data.writer}
 
-        {/* 댓글 등록 */}
-        <CommentForm id={viewId ? parseInt(viewId) : 0} />
+              <CreateDate>
+                {data.createdDate === data.modifiedDate ? (
+                  <>{data.createdDate}</>
+                ) : (
+                  <>{data.modifiedDate} 수정됨.</>
+                )}
+              </CreateDate>
+            </Writer>
+            <ContentContainer>
+              <Title>{data.title}</Title>
+              <PostContent>{data.content}</PostContent>
+            </ContentContainer>
 
-        <ButtonWrapper>
-          {viewId && viewId !== "1" ? (
-            <Button
-              onClick={() =>
-                navigate(viewId ? `/jobdam/${parseInt(viewId) - 1}` : "/jobdam")
-              }
-            >
-              이전
-            </Button>
+            <IconWrapper>
+              {data.likeStatus === true && (
+                <Favorite onClick={onClickFavoritBtn} style={clickIconStyle} />
+              )}
+              {data.likeStatus === false && (
+                <FavoriteBorder
+                  onClick={onClickFavoritBtn}
+                  style={clickIconStyle}
+                />
+              )}
+
+              <ChatBubbleOutline
+                onClick={() => {
+                  setIsOpenChat(!isOpenChat);
+                }}
+                style={clickIconStyle}
+              />
+
+              {scrapState !== true ? (
+                <BookmarkBorder
+                  onClick={onClickScrapBtn}
+                  style={clickIconStyle}
+                />
+              ) : (
+                <Bookmark onClick={onClickScrapBtn} style={clickIconStyle} />
+              )}
+
+              <br />
+            </IconWrapper>
+
+            <IconCnt>좋아요 {data.likes}개 </IconCnt>
+            <IconCnt>댓글 {data.commentsCnt}개 </IconCnt>
+          </DetailContent>
+
+          {isOpenChat ? (
+            <>
+              {/* 댓글 리스트 */}
+              <CommentList
+                postId={viewId ? parseInt(viewId) : 0}
+                postWriter={data?.writer}
+              />
+
+              {/* 댓글 등록 */}
+              <CommentForm id={viewId ? parseInt(viewId) : 0} />
+            </>
           ) : null}
-          <Button onClick={() => navigate("/jobdam")}>목록으로</Button>
-          <Button
-            onClick={() =>
-              navigate(viewId ? `/jobdam/${parseInt(viewId) + 1}` : "/jobdam")
-            }
-          >
-            다음
-          </Button>
-        </ButtonWrapper>
-      </DetailContainer>
-    </ViewDetailWrapper>
+
+          <ButtonWrapper>
+            <Button onClick={() => navigate("/jobdam")}>목록으로</Button>
+          </ButtonWrapper>
+        </DetailContainer>
+      </ViewDetailWrapper>
+    </>
   );
 };
 
@@ -146,9 +198,39 @@ const ViewDetailWrapper = styled.div`
   padding: 5vw 0;
   background-color: #eaeaea;
 `;
+const WriterInfoWrapper = styled.div`
+  width: 20%;
+  height: 100%;
+`;
+const WriterInfo = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  width: 20%;
+  margin: 13vw 8vw;
+  padding: 2vw;
+  background-color: white;
+  border: 1px solid #eaeaea;
+  border-radius: 10px;
+  font-size: 13pt;
+`;
+const Info = styled.div`
+  padding: 1vw;
+  font-size: 11pt;
+  font-weight: lighter;
+`;
+const ButtonTypeBox = styled.div`
+  border-top: 1px solid #eaeaea;
+  padding-top: 0.5vw;
+  text-align: right;
+`;
+
 const DetailContainer = styled.div`
   width: 60%;
   padding: 2vw;
+  margin: 1vw;
 
   background-color: white;
   border: 1px solid #eaeaea;
@@ -163,15 +245,9 @@ const Writer = styled.div`
   font-size: 12pt;
   font-weight: bold;
 `;
-const Bookmark = styled.div`
-  float: right;
-`;
+
 const ContentContainer = styled.div`
-  margin: 3vw 0;
-`;
-const ButtonTypeBox = styled.div`
-  padding: 1vw;
-  text-align: right;
+  margin: 3vw 2vw;
 `;
 const Title = styled.h4`
   color: #333;
@@ -192,9 +268,12 @@ const CreateDate = styled.span`
 const IconWrapper = styled.div`
   font-size: 11pt;
   opacity: 0.8;
+  padding-bottom: 1vw;
+  opacity: 0.8;
 `;
-const IconContent = styled.span`
-  margin-right: 10px;
+const IconCnt = styled.span`
+  font-size: 11pt;
+  margin-left: 0.5vw;
 `;
 const ButtonWrapper = styled.div`
   margin: 2vw;

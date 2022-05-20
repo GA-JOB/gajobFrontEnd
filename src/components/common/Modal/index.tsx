@@ -31,10 +31,11 @@ export const Modal = ({ show, children, onClose }: IModalProps) => {
 // Modal 창 위치 및 style
 const BackDrop = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   position: fixed;
   top: 0;
   left: 0;
+  margin-top: 2vw;
   background-color: rgba(0, 0, 0, 0.4);
   transition: opacity 0.2s;
   display: flex;

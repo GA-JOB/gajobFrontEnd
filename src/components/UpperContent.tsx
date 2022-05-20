@@ -45,7 +45,9 @@ export const UpperContent = () => {
           <br />
           관심 분야 STUDY 매칭까지 <Highlight>GA-JOB</Highlight> 에서
           체험하세요. <br />
-          <ButtonType title={"가입하기"} link={"/signup"} />
+          <ButtonStyle>
+            <ButtonType title={"가입하기"} link={"/signup"} />
+          </ButtonStyle>
         </Description>
 
         <SlideItemStyle>
@@ -76,7 +78,9 @@ const ContentsTitle = styled.div`
 const SubTitle = styled.h2`
   margin: 1vw 0;
 `;
-
+const ButtonStyle = styled.div`
+  padding-top: 1vw;
+`;
 const Description = styled.div`
   float: left;
   width: 30%;

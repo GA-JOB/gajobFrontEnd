@@ -1,9 +1,8 @@
 import styled from "styled-components";
-// import { Button } from "@material-ui/core";
 import useGetAuth from "hooks/api/auth/useGetAuth";
 import { ButtonType } from "components/button/ButtonType";
 
-export const UserInfo = () => {
+export const UserProfile = () => {
   const { data } = useGetAuth();
   const studentID = data?.studentId?.substring(2, 4);
 
@@ -18,7 +17,10 @@ export const UserInfo = () => {
       </InfoTitle>
       <InfoWrapper>
         <ProfileImg src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0H3GENf6227cAk6PeE331-BJqovCV0RyNCg&usqp=CAU" />
-        <Title>소개글</Title> 본인의 관심 분야나 전공을 소개해주세요 !
+        <Title>소개글</Title>
+        {data.introduction
+          ? data.introduction
+          : "본인의 관심 분야나 전공을 소개해주세요 !"}
       </InfoWrapper>
       <InfoWrapper>
         <Title>학교 / 학번</Title> 성공회대학교 {studentID}학번
@@ -41,14 +43,13 @@ const InfoTitle = styled.h4`
   justify-content: center;
 
   font-weight: bold;
-  padding: 1vw;
+  padding: 1vw 0;
 `;
 const TitleWrapper = styled.span`
   width: 75%;
 `;
 const ButtonWrapper = styled.span`
-  width: 20%;
-  margin-top: -2vw;
+  width: 15%;
 `;
 const InfoWrapper = styled.div`
   width: 100%;
@@ -66,6 +67,7 @@ const InfoWrapper = styled.div`
 const ProfileImg = styled.img`
   width: 50%;
   margin: 2vw 5vw;
+  border-radius: 100%;
 `;
 const Title = styled.div`
   font-weight: bold;

@@ -17,9 +17,6 @@ export const CommentForm = ({
   comment = "",
   fromStudy,
 }: ICommentProps) => {
-  // if (fromStudy) {
-  //   const { postComment } = useStudy();
-  // }
   const { postComment, editComment } = useCommunity();
   const isComment = commentId > 0;
 
@@ -94,13 +91,14 @@ const Form = styled.form`
   align-items: center;
   justify-content: center;
   margin: auto;
+  padding: 1vw;
 `;
 
 const InputStyle = styled.textarea`
   width: 100%;
   height: 4vw;
-  margin: 2vw 0 0 2vw;
   padding: 1vw;
+  margin-left: 1vw;
   border: 1px solid lightgray;
   border-radius: 5px;
 
@@ -109,5 +107,5 @@ const InputStyle = styled.textarea`
 
 const ButtonStyle = styled.span`
   width: 20%;
-  margin-left: 1vw;
+  margin-left: 2vw;
 `;

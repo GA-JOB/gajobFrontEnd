@@ -22,7 +22,6 @@ export const ButtonType = ({
   onClick,
 }: IButtonProps) => {
   const ButtonStyle = {
-    marginTop: "2vw",
     padding: paddingStyle,
     width: widthStyle,
     backgroundColor: buttonColor,
@@ -35,7 +34,7 @@ export const ButtonType = ({
       href={link && link}
       type="submit"
       style={ButtonStyle}
-      onClick={onClick || undefined}
+      onClick={onClick}
     >
       {title}
     </Button>
