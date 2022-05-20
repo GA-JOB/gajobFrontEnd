@@ -17,7 +17,10 @@ export const UserProfile = () => {
       </InfoTitle>
       <InfoWrapper>
         <ProfileImg src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0H3GENf6227cAk6PeE331-BJqovCV0RyNCg&usqp=CAU" />
-        <Title>소개글</Title> 본인의 관심 분야나 전공을 소개해주세요 !
+        <Title>소개글</Title>
+        {data.introduction
+          ? data.introduction
+          : "본인의 관심 분야나 전공을 소개해주세요 !"}
       </InfoWrapper>
       <InfoWrapper>
         <Title>학교 / 학번</Title> 성공회대학교 {studentID}학번

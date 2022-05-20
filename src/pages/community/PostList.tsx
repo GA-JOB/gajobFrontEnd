@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Loading } from "components/loading";
 import { PostCommunity } from "pages/community/PostCommunity";
+import { PostDetails } from "pages/community/PostDetails";
 import styled from "styled-components";
 import { Visibility, Chat, Favorite } from "@mui/icons-material";
 import useGetCommunity from "hooks/api/community/useGetCommunity";
