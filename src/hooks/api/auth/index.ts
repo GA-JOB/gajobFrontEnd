@@ -19,6 +19,12 @@ interface IPostSignupRequest extends Omit<IUserData, ISignupType> {}
 interface IPostLoginRequest extends Omit<IUserData, IAuthType> {
   password: string;
 }
+interface IPostCerifyEmailRequest {
+  email: string;
+}
+interface IPostVerifyEmailRequest {
+  code: string;
+}
 interface IPostProfileImgRequest {
   image: File;
 }
@@ -89,6 +95,32 @@ export const useAuth = () => {
     });
 
     return { login };
+  };
+
+  // 교내 인증 코드 발송
+  const postCertifyStudentEmail = async ({
+    email,
+  }: IPostCerifyEmailRequest) => {
+    await post(`/student-email`, { email }).then((res: any) => {
+      if (res === "send-mail-successful") {
+        alert(
+          "학교 메일으로 인증번호를 발송했습니다. \n 메일 확인 후 인증코드를 입력해주세요 !"
+        );
+      }
+    });
+  };
+
+  // 교내 인증 코드 확인
+  const postVertifyStudentEmail = async ({ code }: IPostVerifyEmailRequest) => {
+    await post(`/studen-email-verify`, { code }).then((res: any) => {
+      console.log(res);
+      storage.set("code-verify", res);
+      if (res === "authentication-success") {
+        alert("메일 인증이 완료되었습니다.");
+      } else {
+        alert("인증에 실패하였습니다.\n인증번호를 다시 확인해주시기 바랍니다.");
+      }
+    });
   };
 
   // 회원 프로필 이미지 등록
@@ -188,6 +220,8 @@ export const useAuth = () => {
   return {
     postSignup,
     postLogin,
+    postCertifyStudentEmail,
+    postVertifyStudentEmail,
     postProfileImg,
     editAccount,
     deleteAuth,

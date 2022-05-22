@@ -19,6 +19,7 @@ interface IAccountProps {
   newPassword?: string;
   studentId?: string;
   studentEmail?: string;
+  verifyCode?: string;
   department?: string;
 }
 
@@ -33,15 +34,27 @@ export const AccountForm = ({
   newPassword = "",
   studentId = "",
   studentEmail = "",
+  verifyCode = "",
   department = "",
 }: IAccountProps) => {
   const userEmail = storage.get("user-email");
-  const { postSignup, postLogin, editAccountPwd, deleteAuth } = useAuth();
+  const EmailVerify = storage.get("code-verify");
+
+  console.log(EmailVerify);
+  const {
+    postSignup,
+    postLogin,
+    postCertifyStudentEmail,
+    postVertifyStudentEmail,
+    editAccountPwd,
+    deleteAuth,
+  } = useAuth();
 
   const isSignup = title === "회원가입" ? true : false;
   const isEdit = title === "비밀번호 변경" ? true : false;
   const isDeleteAccount = title === "계정 삭제" ? true : false;
 
+  const [isEmailCodeVerify, setIsEmailCodeVerify] = useState<boolean>(false);
   const [passwordCheck, setPasswordCheck] = useState<string>("");
   const [mismatchError, setMismatchError] = useState(false);
 
@@ -53,6 +66,7 @@ export const AccountForm = ({
     newPasswordForm: newPassword,
     studentIdForm: studentId,
     studentEmailForm: studentEmail,
+    verifyCodeForm: verifyCode,
     departmentForm: department,
   });
   const {
@@ -63,6 +77,7 @@ export const AccountForm = ({
     newPasswordForm,
     studentIdForm,
     studentEmailForm,
+    verifyCodeForm,
     departmentForm,
   } = form;
 
@@ -87,9 +102,11 @@ export const AccountForm = ({
     e.preventDefault();
 
     console.log(form);
+
     if (isSignup) {
       if (
         window.confirm("회원가입을 하시겠습니까?") === true &&
+        verifyCodeForm !== "" &&
         mismatchError === false
       ) {
         postSignup({
@@ -103,7 +120,9 @@ export const AccountForm = ({
         });
       } else if (mismatchError === true) {
         window.confirm("회원 정보를 다시 확인해주시기 바랍니다.");
-      } else return;
+      } else if (verifyCodeForm === "") {
+        window.confirm("인증코드를 다시 확인해주시기 바랍니다.");
+      }
     } else if (!isSignup && !isEdit && !isDeleteAccount) {
       postLogin({
         email: emailForm,
@@ -179,8 +198,8 @@ export const AccountForm = ({
               >
                 <MenuItem value="">---필수---</MenuItem>
                 <MenuItem value="IT융합자율학부">IT융합자율학부</MenuItem>
-                <MenuItem value="미디어컨텐츠융합자율학부">
-                  미디어컨텐츠융합자율학부
+                <MenuItem value="미디어콘텐츠융합자율학부">
+                  미디어콘텐츠융합자율학부
                 </MenuItem>
                 <MenuItem value="인문융합자율학부">인문융합자율학부</MenuItem>
                 <MenuItem value="사회융합자율학부">사회융합자율학부</MenuItem>
@@ -216,9 +235,47 @@ export const AccountForm = ({
                 }}
               />
             </InputLabel>
+
+            <EmailCodeBtn
+              onClick={() =>
+                postCertifyStudentEmail({ email: studentEmailForm })
+              }
+            >
+              발송
+            </EmailCodeBtn>
+
+            <InputLabel>
+              <span>인증 코드</span>
+              <InputField
+                label="인증코드를 입력하세요."
+                variant="filled"
+                type="text"
+                name="verifyCodeForm"
+                value={verifyCodeForm}
+                onChange={onChange}
+                size="small"
+                inputProps={{
+                  style: { fontSize: 15, verticalAlign: "middle" },
+                }}
+              />
+            </InputLabel>
+
+            <EmailCodeBtn
+              onClick={() => {
+                postVertifyStudentEmail({ code: verifyCodeForm });
+                if (EmailVerify) {
+                  if (EmailVerify === "authentication-success") {
+                    setIsEmailCodeVerify(true);
+                  } else {
+                    setIsEmailCodeVerify(false);
+                  }
+                }
+              }}
+            >
+              인증
+            </EmailCodeBtn>
           </>
         ) : null}
-
         {!isEdit && !isDeleteAccount ? (
           <InputLabel>
             <span>E-mail</span>
@@ -234,7 +291,6 @@ export const AccountForm = ({
             />
           </InputLabel>
         ) : null}
-
         <InputLabel>
           {!isDeleteAccount ? <span>비밀번호</span> : null}
           <InputField
@@ -248,7 +304,6 @@ export const AccountForm = ({
             inputProps={{ style: { fontSize: 15, verticalAlign: "middle" } }}
           />
         </InputLabel>
-
         {isEdit || isSignup ? (
           <>
             <InputLabel>
@@ -291,9 +346,13 @@ export const AccountForm = ({
         ) : null}
 
         <ButtonWrapper>
-          <ButtonType title={title} widthStyle={"100%"} />
+          <ButtonType
+            disabled={isSignup && !isEmailCodeVerify ? true : false}
+            title={title}
+            widthStyle={"100%"}
+            onClick={() => storage.remove("code-verify")}
+          />
         </ButtonWrapper>
-
         <LinkToLogin>
           {!isEdit && !isDeleteAccount ? (
             <>
@@ -355,7 +414,13 @@ const Alert = styled.span`
 const ButtonWrapper = styled.div`
   margin-top: 1vw;
 `;
-
+const EmailCodeBtn = styled.div`
+  padding: 5px;
+  border-radius: 5px;
+  background-color: gray;
+  text-align: center;
+  cursor: pointer;
+`;
 const LinkToLogin = styled.div`
   padding: 1vw 0;
   text-align: center;

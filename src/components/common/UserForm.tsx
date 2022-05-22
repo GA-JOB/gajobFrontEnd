@@ -74,8 +74,6 @@ export const UserForm = ({
                   inputProps={{
                     style: { fontSize: 15, verticalAlign: "middle" },
                   }}
-                  multiline
-                  rows={5}
                 />
               </InputLabel>
             ) : (
@@ -140,6 +138,8 @@ export const UserForm = ({
                   inputProps={{
                     style: { fontSize: 15, verticalAlign: "middle" },
                   }}
+                  multiline
+                  rows={5}
                 />
               </InputLabel>
             ) : (

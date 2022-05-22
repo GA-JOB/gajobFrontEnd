@@ -109,6 +109,8 @@ export const SeeUserInfo = ({ imageUrl = "" }: IImageFormProps) => {
                       alt="posting preivew"
                     />
                   </ImgWrapper>
+
+                  <ButtonType variants="text" title="수정" link="" />
                 </form>
               </ModalContent>
             </Modal>
