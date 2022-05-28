@@ -5,59 +5,118 @@ import { useLocation } from "react-router";
 import { ButtonType } from "components/button/ButtonType";
 export const JobPostingDetails = () => {
   const { state: data }: any = useLocation();
-  // console.log("detailpage", state);
+
   if (!data) return <Loading />;
   return (
-    <div>
-      <ContentContainer>
-        <Title>{data.title}</Title>
-        <p>
-          {data.basicAddress} | {data.company}
-        </p>
-        <p>지역:{data.region}</p>
-        경력: {data.career}
-        마감일:{data.closeDate}
-        <p>
-          급여:{data.salaryType}({data.salary})
-        </p>
-        <PostContent>{data.content}</PostContent>
-        <div>
-          <a href={data.wantedInfoUrl} target="_blank.">
-            링크로 확인하기
-          </a>
-          {/* <a href={data.wantedMobileInfoUrl} target="_blank.">
-            모바일 링크로 확인하기
-          </a> */}
-        </div>
-      </ContentContainer>
-      <ButtonWrapper>
-        <ButtonType
-          title={"목록으로"}
-          link="/job-posting"
-          buttonColor="black"
-        />
-      </ButtonWrapper>
-    </div>
+    <JobPostingDetailWrapper>
+      <ContentWrapper>
+        <Title>
+          {data.title} <SubTitle>{data.company}</SubTitle>
+        </Title>
+        <DateStyle>
+          최종수정일: {data.lastModifyDate} (표기: 년월일시분)
+        </DateStyle>
+        <hr />
+
+        <Content>
+          <ContentTitle>기업 정보</ContentTitle>
+          <ContentWrapper>
+            <div>- 기업명: {data.company}</div>
+            <div>- 근무 지역: {data.region}</div>
+            <div>- 상세 주소: {data.basicAddress}</div>
+          </ContentWrapper>
+        </Content>
+
+        <Content>
+          <ContentTitle>채용 부문</ContentTitle>
+          <LinkToDetail href={data.wantedInfoUrl} target="_blank.">
+            모집요강 상세보기
+          </LinkToDetail>
+
+          <ContentWrapper>
+            <div>- 직무 분야: {data.title}</div>
+            <div>- 경력: {data.career}</div>
+            <div>- 학력: {data.minEdu}</div>
+            <div>- 근무 형태: {data.workType}</div>
+            <div>
+              - 급여: {data.salaryType} {data.salary}
+            </div>
+          </ContentWrapper>
+        </Content>
+
+        <Content>
+          <ContentTitle>모집 기간</ContentTitle>
+          <ContentWrapper>
+            <div>- 모집 시작일: {data.registrationDate} </div>
+            <div>- 모집 마감일: {data.closeDate} </div>
+          </ContentWrapper>
+        </Content>
+
+        <ButtonWrapper>
+          <ButtonType
+            variants="standard"
+            title={"목록으로"}
+            link="/job-posting"
+          />
+        </ButtonWrapper>
+      </ContentWrapper>
+
+      {/* 우하단에 스크랩, 좋아요 기능 추가 position: absolute -> 아이콘처럼 표시 */}
+    </JobPostingDetailWrapper>
   );
 };
 
-const ButtonWrapper = styled.div`
+const JobPostingDetailWrapper = styled.div`
+  background-color: #eaeaea;
   width: 100%;
+  padding: 5vw;
+
   display: flex;
   align-items: center;
-  padding-left: 85%;
+  justify-content: center;
+  flex-direction: column;
 `;
-const ContentContainer = styled.div`
-  margin: 3vw 0;
+const ContentWrapper = styled.div`
+  width: 70%;
+  margin: 1vw 0;
+  padding: 3vw;
+  background-color: white;
+  border: 1px solid #eaeaea;
+  border-radius: 10px;
 `;
-const Title = styled.h4`
-  color: #333;
-  letter-spacing: 1px;
+const Title = styled.h3`
+  letter-spacing: 3px;
+  font-weight: 600;
 `;
-const PostContent = styled.div`
-  font-size: 12pt;
-  padding-top: 1vw;
+const SubTitle = styled.span`
+  font-size: 11pt;
   font-weight: lighter;
+  margin: 1vw;
+  opacity: 0.6;
+`;
+const DateStyle = styled.div`
+  letter-spacing: 1px;
+  margin: 1vw 0.5vw;
+  font-size: 9pt;
+`;
+const ContentTitle = styled.div`
+  width: 10%;
+  text-align: left;
+  font-weight: bold;
+  font-size: 15pt;
+  border-bottom: 2px solid darkblue;
+`;
+const Content = styled.div`
+  margin: 2vw 0;
+  line-height: 2vw;
+`;
+const LinkToDetail = styled.a`
+  font-size: 10pt;
+  text-decoration: none;
+`;
+
+const ButtonWrapper = styled.div`
+  text-align: center;
 `;
 // authNum: "K151152205130096"
 // basicAddress: "경기도 화성시 팔탄면 터넉골로 202-7"
