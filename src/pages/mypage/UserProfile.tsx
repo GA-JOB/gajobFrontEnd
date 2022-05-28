@@ -5,6 +5,7 @@ import { ButtonType } from "components/button/ButtonType";
 export const UserProfile = () => {
   const { data } = useGetAuth();
   const studentID = data?.studentId?.substring(2, 4);
+  console.log(data);
 
   if (!data) return <></>;
   return (
@@ -16,7 +17,14 @@ export const UserProfile = () => {
         </ButtonWrapper>
       </InfoTitle>
       <InfoWrapper>
-        <ProfileImg src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0H3GENf6227cAk6PeE331-BJqovCV0RyNCg&usqp=CAU" />
+        <ProfileImg
+          src={
+            data?.profileFilePath === null
+              ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0H3GENf6227cAk6PeE331-BJqovCV0RyNCg&usqp=CAU"
+              : "Users/shinsuyeon/Desktop/1_스크린샷 2022-05-26 14.01.10.png"
+          }
+        />
+        {console.log(data.profileFilePath)}
         <Title>소개글</Title>
         {data.introduction
           ? data.introduction

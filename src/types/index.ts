@@ -9,6 +9,7 @@ export interface IUserData {
   studentEmail: string;
   department?: string;
   introduction?: string;
+  profileFilePath?: string;
 }
 
 export interface INewsCrawling {

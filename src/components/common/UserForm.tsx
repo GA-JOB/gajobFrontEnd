@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ButtonType } from "components/button/ButtonType";
 import styled from "styled-components";
-import { TextField, MenuItem } from "@material-ui/core";
+import { TextField, MenuItem, Button } from "@material-ui/core";
 import { useAuth } from "hooks/api/auth/index";
 
 interface IUserInfoProps {
@@ -25,7 +25,7 @@ export const UserForm = ({
   department,
   introduction,
 }: IUserInfoProps) => {
-  const { editAccount } = useAuth();
+  const { editAccount, editNickname } = useAuth();
   const [form, setForm] = useState({
     nicknameForm: nickname,
     departmentForm: department,
@@ -44,8 +44,8 @@ export const UserForm = ({
     e.preventDefault();
 
     console.log(form);
+
     editAccount({
-      nickname: nicknameForm,
       department: departmentForm,
       introduction: introductionForm,
     });
@@ -74,9 +74,16 @@ export const UserForm = ({
                   inputProps={{
                     style: { fontSize: 15, verticalAlign: "middle" },
                   }}
-                  multiline
-                  rows={5}
                 />
+                <Button
+                  onClick={() => {
+                    editNickname({
+                      nickname: nicknameForm,
+                    });
+                  }}
+                >
+                  수정
+                </Button>
               </InputLabel>
             ) : (
               <>{nickname}</>
@@ -112,8 +119,8 @@ export const UserForm = ({
                 >
                   <MenuItem value="">---필수---</MenuItem>
                   <MenuItem value="IT융합자율학부">IT융합자율학부</MenuItem>
-                  <MenuItem value="미디어컨텐츠융합자율학부">
-                    미디어컨텐츠융합자율학부
+                  <MenuItem value="미디어콘텐츠융합자율학부">
+                    미디어콘텐츠융합자율학부
                   </MenuItem>
                   <MenuItem value="인문융합자율학부">인문융합자율학부</MenuItem>
                   <MenuItem value="사회융합자율학부">사회융합자율학부</MenuItem>
@@ -140,6 +147,8 @@ export const UserForm = ({
                   inputProps={{
                     style: { fontSize: 15, verticalAlign: "middle" },
                   }}
+                  multiline
+                  rows={5}
                 />
               </InputLabel>
             ) : (

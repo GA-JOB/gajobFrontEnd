@@ -37,13 +37,18 @@ export const JobPosting = () => {
     "세종",
     "제주",
   ];
+
+  if (!token) {
+    window.confirm("로그인 후 이용가능합니다.") === true
+      ? window.location.replace("/login")
+      : window.location.replace("/");
+  }
   if (!data) return <Loading />;
-  if (!token) return <>접근 못함</>;
   return (
     <JobPostingWrapper>
       <MenuTitle
-        title="공고"
-        info="카테고리 별 채용 공고 소식을 한눈에 확인하세요."
+        title="채용공고"
+        info="카테고리 별 채용공고 소식을 한눈에 확인하세요."
       />
       <InputSelectField variant="filled" sx={{ m: 0, minWidth: "100%" }}>
         <Select

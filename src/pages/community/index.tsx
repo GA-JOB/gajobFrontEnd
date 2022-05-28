@@ -2,10 +2,17 @@ import { useState } from "react";
 import { MenuTitle } from "components/Menutitle";
 import { PostList } from "pages/community/PostList";
 import styled from "styled-components";
+import storage from "hooks/store";
 
 export const Community = () => {
+  const token = storage.get("user-token");
   const [category, setCategory] = useState<string | null>(null);
 
+  if (!token) {
+    window.confirm("로그인 후 이용가능합니다.") === true
+      ? window.location.replace("/login")
+      : window.location.replace("/");
+  }
   return (
     <>
       <CommunityWrapper>
