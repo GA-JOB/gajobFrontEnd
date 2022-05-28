@@ -6,6 +6,7 @@ import { TopButton } from "components/button/TopButton";
 import { Footer } from "components/footer";
 
 // menu
+import { VerifyEmailCode } from "pages/auth/VerifyEmailCode";
 import { Signup } from "pages/auth/Signup";
 import { Login } from "pages/auth/Login";
 import { FindAccount } from "pages/auth/FindAccount";
@@ -42,6 +43,10 @@ export default function App() {
 
       <Layout>
         <Routes>
+          <Route
+            path="/signup/email-verify"
+            element={<VerifyEmailCode />}
+          ></Route>
           <Route path="/signup" element={<Signup />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/find-account" element={<FindAccount />}></Route>

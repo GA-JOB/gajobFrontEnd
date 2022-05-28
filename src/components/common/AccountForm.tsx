@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { MenuTitle } from "components/Menutitle";
 import { ButtonType } from "components/button/ButtonType";
 import styled from "styled-components";
-import { TextField, MenuItem } from "@material-ui/core";
-import { Done } from "@mui/icons-material";
+import { TextField, MenuItem, Button, InputAdornment } from "@mui/material";
+import { Done, Forward, Check } from "@mui/icons-material";
 import storage from "hooks/store";
 import { useAuth } from "hooks/api/auth";
 
@@ -233,16 +233,20 @@ export const AccountForm = ({
                 inputProps={{
                   style: { fontSize: 15, verticalAlign: "middle" },
                 }}
+                InputProps={{
+                  endAdornment: (
+                    <IconSubmit
+                      position="end"
+                      onClick={() =>
+                        postCertifyStudentEmail({ email: studentEmailForm })
+                      }
+                    >
+                      <Forward />
+                    </IconSubmit>
+                  ),
+                }}
               />
             </InputLabel>
-
-            <EmailCodeBtn
-              onClick={() =>
-                postCertifyStudentEmail({ email: studentEmailForm })
-              }
-            >
-              발송
-            </EmailCodeBtn>
 
             <InputLabel>
               <span>인증 코드</span>
@@ -257,23 +261,27 @@ export const AccountForm = ({
                 inputProps={{
                   style: { fontSize: 15, verticalAlign: "middle" },
                 }}
+                InputProps={{
+                  endAdornment: (
+                    <IconSubmit
+                      position="end"
+                      onClick={() => {
+                        postVertifyStudentEmail({ code: verifyCodeForm });
+                        if (EmailVerify) {
+                          if (EmailVerify === "authentication-success") {
+                            setIsEmailCodeVerify(true);
+                          } else {
+                            setIsEmailCodeVerify(false);
+                          }
+                        }
+                      }}
+                    >
+                      {isEmailCodeVerify ? <Done /> : <Forward />}
+                    </IconSubmit>
+                  ),
+                }}
               />
             </InputLabel>
-
-            <EmailCodeBtn
-              onClick={() => {
-                postVertifyStudentEmail({ code: verifyCodeForm });
-                if (EmailVerify) {
-                  if (EmailVerify === "authentication-success") {
-                    setIsEmailCodeVerify(true);
-                  } else {
-                    setIsEmailCodeVerify(false);
-                  }
-                }
-              }}
-            >
-              인증
-            </EmailCodeBtn>
           </>
         ) : null}
         {!isEdit && !isDeleteAccount ? (
@@ -347,7 +355,13 @@ export const AccountForm = ({
 
         <ButtonWrapper>
           <ButtonType
-            disabled={isSignup && !isEmailCodeVerify ? true : false}
+            disabled={
+              (isSignup &&
+                storage.get("code-verify") === "authentication-success") ||
+              !isSignup
+                ? false
+                : true
+            }
             title={title}
             widthStyle={"100%"}
             onClick={() => storage.remove("code-verify")}
@@ -408,18 +422,14 @@ const InputField = styled(TextField)`
   width: 100%;
   font-size: 10pt;
 `;
+const IconSubmit = styled(InputAdornment)`
+  cursor: pointer;
+`;
 const Alert = styled.span`
   color: red;
 `;
 const ButtonWrapper = styled.div`
   margin-top: 1vw;
-`;
-const EmailCodeBtn = styled.div`
-  padding: 5px;
-  border-radius: 5px;
-  background-color: gray;
-  text-align: center;
-  cursor: pointer;
 `;
 const LinkToLogin = styled.div`
   padding: 1vw 0;

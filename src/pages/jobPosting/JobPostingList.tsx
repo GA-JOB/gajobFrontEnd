@@ -15,7 +15,7 @@ export const JobPostingList = ({ data }: IJobPostingProps) => {
   const navigate = useNavigate();
   const columns: ColumnDefinition[] | any = [
     { formatter: "rownum", hozAlign: "center", width: 40, headerSort: false },
-    { title: "채용공고 제목", field: "title", width: 150, headerSort: false },
+    { title: "채용공고명", field: "title", width: 150, headerSort: false },
     { title: "회사명", field: "company", headerSort: false },
     { title: "급여타입", field: "salaryType", headerSort: false },
     { title: "급여", field: "salary", headerSort: false },
