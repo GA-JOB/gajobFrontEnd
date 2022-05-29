@@ -8,7 +8,7 @@ import "react-tabulator/css/bootstrap/tabulator_bootstrap.min.css"; // use Theme
 import styled from "styled-components";
 import { ReactTabulator } from "react-tabulator";
 import { ColumnDefinition, ReactTabulatorOptions } from "react-tabulator";
-import useGetJobPosting from "hooks/api/useGetJobPosting";
+import useGetJobPosting from "hooks/api/jobPosting/useGetJobPosting";
 import storage from "hooks/store";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
@@ -81,6 +81,7 @@ export const JobPosting = () => {
           }
           careerState={state}
         />
+        {/* 직종별 카테고리 분류 추가 필요. */}
       </ContentWrapper>
     </JobPostingWrapper>
   );
@@ -122,12 +123,10 @@ const ListStyle = styled.li`
   margin: 1vw;
   padding: 0.5vw 1vw;
   cursor: pointer;
-  transition: 0.1s;
 
   &:hover {
     background-color: white;
     border: 1px solid black;
     opacity: 1;
-    transition: 0.1s;
   }
 `;

@@ -111,21 +111,30 @@ export const useCommunity = () => {
   };
 
   const postScrap = async (postId: number) => {
-    await post(`/community/scrap/${postId}`, { refreshInterval: 500 }).then(
-      (res) => {
-        console.log(res);
+    await post(`/community/scrap/${postId}`).then((res) => {
+      if (res === "scrap-success") {
+        alert(
+          "해당 게시글 스크랩이 완료되었습니다.\n스크랩 목록은 마이페이지에서 조회 가능합니다."
+        );
+      } else {
+        alert("해당 게시글 스크랩이 취소되었습니다.");
       }
-    );
+      console.log(res);
+      window.location.reload();
+    });
 
     mutate(`/community/scrap/${postId}`);
   };
 
   const postLikes = async (postId: number) => {
-    await post(`/community/likes/${postId}`, { refreshInterval: 500 }).then(
-      (res) => {
-        console.log(res);
+    await post(`/community/likes/${postId}`).then((res) => {
+      if (res === "increase-likes") {
+        alert("게시글에 공감하셨습니다.");
+      } else {
+        alert("게시글에 공감을 취소하셨습니다.");
       }
-    );
+      window.location.reload();
+    });
 
     mutate(`/community/likes/${postId}`);
   };

@@ -3,8 +3,21 @@ import { Loading } from "components/loading";
 import styled from "styled-components";
 import { useLocation } from "react-router";
 import { ButtonType } from "components/button/ButtonType";
+import { BookmarkBorder, Bookmark } from "@mui/icons-material";
+import { useJobPosting } from "hooks/api/jobPosting";
+
 export const JobPostingDetails = () => {
   const { state: data }: any = useLocation();
+  const { postScrap } = useJobPosting();
+
+  const IconStyle = {
+    fontSize: 26,
+    cursor: "pointer",
+  };
+
+  const onClickScrap = () => {
+    postScrap(data.id);
+  };
 
   if (!data) return <Loading />;
   return (
@@ -60,8 +73,10 @@ export const JobPostingDetails = () => {
           />
         </ButtonWrapper>
       </ContentWrapper>
-
-      {/* 우하단에 스크랩, 좋아요 기능 추가 position: absolute -> 아이콘처럼 표시 */}
+      <ScrapRound>
+        <BookmarkBorder style={IconStyle} onClick={() => postScrap(data.id)} />
+        <IconTxt>scrap</IconTxt>
+      </ScrapRound>
     </JobPostingDetailWrapper>
   );
 };
@@ -117,6 +132,19 @@ const LinkToDetail = styled.a`
 
 const ButtonWrapper = styled.div`
   text-align: center;
+`;
+const ScrapRound = styled.div`
+  position: fixed;
+  top: 400px;
+  right: 180px;
+  padding: 0.8vw;
+  border-radius: 50px;
+  background-color: white;
+`;
+const IconTxt = styled.div`
+  text-align: center;
+  font-size: 8pt;
+  font-weight: bold;
 `;
 // authNum: "K151152205130096"
 // basicAddress: "경기도 화성시 팔탄면 터넉골로 202-7"
