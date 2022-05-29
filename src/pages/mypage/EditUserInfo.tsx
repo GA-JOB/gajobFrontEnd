@@ -1,9 +1,39 @@
-import useGetAuth from "hooks/api/auth/useGetAuth";
+import { UserForm } from "components/common/UserForm";
 
-export const EditUserInfo = () => {
-  const { data } = useGetAuth();
+interface IUserInfoProps {
+  title?: string;
+  name?: string;
+  nickname?: string;
+  email?: string;
+  studentId?: string;
+  studentEmail?: string;
+  department?: string;
+  introduction?: string;
+  profileFilePath?: string;
+}
 
-  console.log(data);
-
-  return <>프로필 등록. 선택, 수정 가능 정보와 필수, 수정 불가 정보 나누기.</>;
+export const EditUserInfo = ({
+  title,
+  name,
+  nickname,
+  email,
+  studentId,
+  studentEmail,
+  department,
+  introduction,
+}: IUserInfoProps) => {
+  return (
+    <>
+      <UserForm
+        isEdit={title === "수정" ? true : false}
+        name={name}
+        nickname={nickname}
+        email={email}
+        studentId={studentId}
+        studentEmail={studentEmail}
+        department={department}
+        introduction={introduction}
+      />
+    </>
+  );
 };

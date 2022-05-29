@@ -11,12 +11,12 @@ import {
 
 export const SidebarData = [
   {
-    title: "Home",
+    title: "HOME",
     path: "/",
     icon: <Home />,
   },
   {
-    title: "News",
+    title: "NEWS",
     path: "/job-news",
     icon: <Newspaper />,
   },
@@ -36,17 +36,17 @@ export const SidebarData = [
     icon: <Chat />,
   },
   {
-    title: "GaJob-study",
+    title: "JOB STUDY",
     path: "/study",
     icon: <GroupAdd />,
   },
   {
-    title: "Portfolio",
+    title: "PORTFOLIO",
     path: "/portfolio",
     icon: <Assignment />,
   },
   {
-    title: "Calendar",
+    title: "CALENDAR",
     path: "/calendar",
     icon: <CalendarMonth />,
   },

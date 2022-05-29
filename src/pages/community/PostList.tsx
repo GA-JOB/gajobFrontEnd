@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import { Loading } from "components/loading";
 import { PostCommunity } from "pages/community/PostCommunity";
+import { PostDetails } from "pages/community/PostDetails";
 import styled from "styled-components";
-import { Visibility, ChatBubble } from "@mui/icons-material";
+import { Visibility, Chat, Favorite } from "@mui/icons-material";
 import useGetCommunity from "hooks/api/community/useGetCommunity";
 import storage from "hooks/store";
 
@@ -50,7 +51,7 @@ export const PostList = ({ isMypage, postCategory }: IPostListProps) => {
                     (postCategory !== null &&
                       postCategory === list.postCategory))) ? (
                   // viewId를 params로 넘기며 details url로 이동.
-                  <LinkStyle to={`/jobdam/${list.id}`} state={list.likeList}>
+                  <LinkStyle to={`/jobdam/${list.id}`}>
                     <PostWrapper>
                       <Writer>
                         {list.writer}{" "}
@@ -72,8 +73,12 @@ export const PostList = ({ isMypage, postCategory }: IPostListProps) => {
                           {list.view}
                         </IconContent>
                         <IconContent>
-                          <ChatBubble style={IconStyle} />
+                          <Chat style={IconStyle} />
                           {list.commentsCnt}
+                        </IconContent>
+                        <IconContent>
+                          <Favorite style={IconStyle} />
+                          {list.likes}
                         </IconContent>
                       </IconWrapper>
                     </PostWrapper>

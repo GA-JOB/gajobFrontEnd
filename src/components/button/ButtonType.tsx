@@ -22,7 +22,6 @@ export const ButtonType = ({
   onClick,
 }: IButtonProps) => {
   const ButtonStyle = {
-    marginTop: "2vw",
     padding: paddingStyle,
     width: widthStyle,
     backgroundColor: buttonColor,

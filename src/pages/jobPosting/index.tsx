@@ -8,7 +8,7 @@ import "react-tabulator/css/bootstrap/tabulator_bootstrap.min.css"; // use Theme
 import styled from "styled-components";
 import { ReactTabulator } from "react-tabulator";
 import { ColumnDefinition, ReactTabulatorOptions } from "react-tabulator";
-import useGetJobPosting from "hooks/api/useGetJobPosting";
+import useGetJobPosting from "hooks/api/jobPosting/useGetJobPosting";
 import storage from "hooks/store";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
@@ -16,9 +16,9 @@ import FormControl from "@mui/material/FormControl";
 export const JobPosting = () => {
   const token = storage.get("user-token");
   const { data } = useGetJobPosting();
-  const [area, setArea] = useState<string>("전체보기");
+  const [area, setArea] = useState<string>("지역 전체보기");
   const areaValue = [
-    "전체보기",
+    "지역 전체보기",
     "경기",
     "강원",
     "충북",
@@ -37,68 +37,96 @@ export const JobPosting = () => {
     "세종",
     "제주",
   ];
+  const [state, setState] = useState<string | null>(null);
+
+  if (!token) {
+    window.confirm("로그인 후 이용가능합니다.") === true
+      ? window.location.replace("/login")
+      : window.location.replace("/");
+  }
   if (!data) return <Loading />;
-  if (!token) return <>접근 못함</>;
   return (
     <JobPostingWrapper>
       <MenuTitle
-        title="공고"
-        info="카테고리 별 채용 공고 소식을 한눈에 확인하세요."
+        title="채용공고"
+        info="카테고리 별 채용공고 소식을 한눈에 확인하세요."
       />
-      <InputSelectField variant="filled" sx={{ m: 0, minWidth: "100%" }}>
-        <Select
-          name="area"
-          value={area}
-          onChange={(e) => setArea(e.target.value)}
-        >
-          {areaValue.map((area) => (
-            <MenuItem value={area}>{area}</MenuItem>
-          ))}
-        </Select>
-      </InputSelectField>
-      <JobPostingList
-        data={
-          area === "전체보기"
-            ? data
-            : data?.filter((data) => data.region.startsWith(area))
-        }
-      />
+
+      <ContentWrapper>
+        <InputSelectField variant="filled" sx={{ m: 2, minWidth: "15%" }}>
+          <Select
+            variant="standard"
+            name="area"
+            value={area}
+            onChange={(e) => setArea(e.target.value)}
+          >
+            {areaValue.map((area) => (
+              <MenuItem value={area}>{area}</MenuItem>
+            ))}
+          </Select>
+        </InputSelectField>
+
+        <StateTag>
+          <ListStyle onClick={() => setState(null)}># 전체</ListStyle>
+          <ListStyle onClick={() => setState("관계없음")}># 관계없음</ListStyle>
+          <ListStyle onClick={() => setState("경력")}># 경력</ListStyle>
+          <ListStyle onClick={() => setState("신입")}># 신입</ListStyle>
+        </StateTag>
+
+        <JobPostingList
+          data={
+            area === "지역 전체보기"
+              ? data
+              : data?.filter((data) => data.region.startsWith(area))
+          }
+          careerState={state}
+        />
+        {/* 직종별 카테고리 분류 추가 필요. */}
+      </ContentWrapper>
     </JobPostingWrapper>
   );
 };
 
 const JobPostingWrapper = styled.div`
-  height: 100%;
-  width: 80%;
+  min-height: 50vw;
+  width: 100%;
+  padding-bottom: 5vw;
+
+  display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
+  flex-direction: column;
 `;
-const NavTitle = styled.div`
-  font-weight: lighter;
-  margin: 0.3vw 0.5vw;
+const ContentWrapper = styled.div`
+  width: 80%;
+  background-color: white;
+  border-radius: 5px;
 `;
-const NavList = styled.div`
+
+const InputSelectField = styled(FormControl)`
+  float: left;
+  font-size: 8pt;
+  text-align: left;
+`;
+
+const StateTag = styled.div`
+  width: 100%;
+`;
+const ListStyle = styled.li`
   list-style: none;
-  margin: 0.6vw;
-  padding: 0.3vw;
-  font-size: 11pt;
-  letter-spacing: 1px;
+  display: inline-block;
+  background-color: #eaeaea;
+  border-radius: 15px;
+  font-size: 9pt;
+  opacity: 0.7;
+
+  margin: 1vw;
+  padding: 0.5vw 1vw;
   cursor: pointer;
 
   &:hover {
-    padding: 0.3vw 1vw;
-    background-color: #eaeaea;
-    border-radius: 5px;
-    transition: 0.5s;
+    background-color: white;
+    border: 1px solid black;
+    opacity: 1;
   }
-`;
-const NavInfo = styled.div`
-  font-size: 11pt;
-  font-weight: lighter;
-  padding: 0.3vw 1vw;
-`;
-const InputSelectField = styled(FormControl)`
-  width: 100%;
-  font-size: 10pt;
 `;

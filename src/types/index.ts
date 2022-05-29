@@ -9,6 +9,7 @@ export interface IUserData {
   studentEmail: string;
   department?: string;
   introduction?: string;
+  profileFilePath?: string;
 }
 
 export interface INewsCrawling {
@@ -84,6 +85,7 @@ export interface ICommunity {
   commentsCnt?: number;
   likes?: number;
   likesList?: ICommunityLikes[];
+  likeStatus?: boolean;
   scrap?: number;
   createdDate?: Date;
   modifiedDate?: Date;
@@ -108,11 +110,11 @@ export interface IStudy {
   likes: number;
   openTalkUrl: string | null;
 }
+
 type ICommunityLikes = {
   id?: number;
   nickname?: string;
 };
-
 type ICommunityComment = {
   id?: number;
   comment?: string;

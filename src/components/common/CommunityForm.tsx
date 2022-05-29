@@ -103,6 +103,7 @@ export const CommunityForm = ({
                   inputProps={{
                     style: { fontSize: 15, verticalAlign: "middle" },
                   }}
+                  required
                 />
               </InputLabel>
 
@@ -115,6 +116,7 @@ export const CommunityForm = ({
                   value={postCategoryForm}
                   onChange={onChange}
                   size="small"
+                  required
                 >
                   <MenuItem value="" selected>
                     ---선택---
@@ -135,6 +137,7 @@ export const CommunityForm = ({
                   value={postJobCategoryForm}
                   onChange={onChange}
                   size="small"
+                  required
                 >
                   <MenuItem value="" selected>
                     ---선택---
@@ -158,6 +161,9 @@ export const CommunityForm = ({
                   inputProps={{
                     style: { fontSize: 15, verticalAlign: "middle" },
                   }}
+                  multiline
+                  rows={5}
+                  required
                 />
               </InputLabel>
 
