@@ -28,7 +28,7 @@ const Info = styled.div`
   opacity: 0.6;
 `;
 const HrLine = styled.hr`
-  width: 10%;
+  width: 10vw;
 
   margin: 2vw auto;
 `;

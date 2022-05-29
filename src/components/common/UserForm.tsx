@@ -74,6 +74,7 @@ export const UserForm = ({
                   inputProps={{
                     style: { fontSize: 15, verticalAlign: "middle" },
                   }}
+                  required
                 />
                 <Button
                   onClick={() => {
@@ -116,6 +117,7 @@ export const UserForm = ({
                   onChange={onChange}
                   size="small"
                   inputProps={{ style: { fontSize: 15 } }}
+                  required
                 >
                   <MenuItem value="">---필수---</MenuItem>
                   <MenuItem value="IT융합자율학부">IT융합자율학부</MenuItem>

@@ -31,6 +31,7 @@ export const PostDetails = () => {
   const [isOpenLikesList, setIsOpenLikesList] = useState<boolean>(false);
 
   // 좋아요, 스크랩
+  // scrapState 넣을 예정.
   const [scrapState, setScrapState] = useState<boolean | undefined>(false);
   const [likesState, setLikesState] = useState<boolean | undefined>(
     data?.likeStatus
@@ -40,40 +41,29 @@ export const PostDetails = () => {
   const onClickScrapBtn = async (e: any) => {
     e.preventDefault();
 
-    setScrapState(!scrapState);
     postScrap(viewId ? parseInt(viewId) : 0);
+    setScrapState((prev) => !prev);
   };
 
   // 좋아요
   const onClickFavoritBtn = async (e: any) => {
     e.preventDefault();
 
-    if (data?.likeStatus === false) {
-      if (window.confirm("게시글에 공감하시겠습니까?") === true) {
-        setLikesState(!likesState);
-        postLikes(viewId ? parseInt(viewId) : 0);
-      }
-    } else if (data?.likeStatus === true) {
-      setLikesState(!likesState);
-      postLikes(viewId ? parseInt(viewId) : 0);
-      window.location.reload();
-    }
+    postLikes(viewId ? parseInt(viewId) : 0);
+    setLikesState((prev) => !prev);
   };
 
   const clickIconStyle = {
-    fontSize: 25,
     cursor: "pointer",
-    color: "black",
-    margin: "0 0.5vw",
   };
   const IconStyle = {
-    fontSize: 15,
+    fontSize: 18,
     marginRight: "5px",
-    marginTop: "-3px",
     color: "black",
-    opacity: "0.6",
+    opacity: "0.8",
+    cursor: "pointer",
   };
-  if (!data || data === undefined) return <></>;
+  if (!data) return <></>;
   return (
     <>
       <ViewDetailWrapper>
@@ -90,11 +80,6 @@ export const PostDetails = () => {
               <div>
                 전공별: {data.jobCategory ? data.jobCategory : "선택 안함"}
               </div>
-              <br />
-              <Visibility style={IconStyle} />
-              <span>{data.view}</span> <Chat style={IconStyle} />
-              <span>{data.commentsCnt}</span> <Favorite style={IconStyle} />
-              <span>{data.likes}</span>
             </Info>
 
             {/* login user === post writer일 경우 수정 or 삭제 */}
@@ -132,38 +117,35 @@ export const PostDetails = () => {
             </ContentContainer>
 
             <IconWrapper>
-              {data.likeStatus === true && (
-                <Favorite onClick={onClickFavoritBtn} style={clickIconStyle} />
-              )}
-              {data.likeStatus === false && (
-                <FavoriteBorder
-                  onClick={onClickFavoritBtn}
-                  style={clickIconStyle}
+              <IconContent>
+                <Chat
+                  style={IconStyle}
+                  onClick={() => {
+                    setIsOpenChat((prev) => !prev);
+                  }}
                 />
-              )}
-
-              <ChatBubbleOutline
-                onClick={() => {
-                  setIsOpenChat(!isOpenChat);
-                }}
-                style={clickIconStyle}
-              />
-
-              {scrapState !== true ? (
-                <BookmarkBorder
-                  onClick={onClickScrapBtn}
-                  style={clickIconStyle}
+                {data.commentsCnt}
+              </IconContent>
+              <IconContent>
+                <Favorite
+                  style={IconStyle}
+                  onClick={() => {
+                    setIsOpenLikesList((prev) => !prev);
+                  }}
                 />
-              ) : (
-                <Bookmark onClick={onClickScrapBtn} style={clickIconStyle} />
-              )}
-
-              <br />
+                {data.likes}
+              </IconContent>
             </IconWrapper>
-
-            <IconCnt>좋아요 {data.likes}개 </IconCnt>
-            <IconCnt>댓글 {data.commentsCnt}개 </IconCnt>
           </DetailContent>
+
+          {isOpenLikesList ? (
+            <>
+              {/* 좋아요 리스트 */}
+              {data?.likesList?.map((list: any, index: number) => (
+                <div>{list.nickname}</div>
+              ))}
+            </>
+          ) : null}
 
           {isOpenChat ? (
             <>
@@ -182,6 +164,27 @@ export const PostDetails = () => {
             <Button onClick={() => navigate("/jobdam")}>목록으로</Button>
           </ButtonWrapper>
         </DetailContainer>
+
+        <LikesRound>
+          {data.likeStatus === true && (
+            <Favorite style={clickIconStyle} onClick={onClickFavoritBtn} />
+          )}
+          {data.likeStatus === false && (
+            <FavoriteBorder
+              style={clickIconStyle}
+              onClick={onClickFavoritBtn}
+            />
+          )}
+          <IconTxt>likes</IconTxt>
+        </LikesRound>
+        <ScrapRound>
+          {scrapState === true ? (
+            <Bookmark style={clickIconStyle} onClick={onClickScrapBtn} />
+          ) : (
+            <BookmarkBorder style={clickIconStyle} onClick={onClickScrapBtn} />
+          )}
+          <IconTxt>scrap</IconTxt>
+        </ScrapRound>
       </ViewDetailWrapper>
     </>
   );
@@ -199,7 +202,7 @@ const ViewDetailWrapper = styled.div`
   background-color: #eaeaea;
 `;
 const WriterInfoWrapper = styled.div`
-  width: 20%;
+  width: 12%;
   height: 100%;
 `;
 const WriterInfo = styled.div`
@@ -208,8 +211,8 @@ const WriterInfo = styled.div`
   left: 0;
   right: 0;
 
-  width: 20%;
-  margin: 13vw 8vw;
+  width: 18%;
+  margin: 12vw 8vw;
   padding: 2vw;
   background-color: white;
   border: 1px solid #eaeaea;
@@ -228,7 +231,7 @@ const ButtonTypeBox = styled.div`
 `;
 
 const DetailContainer = styled.div`
-  width: 60%;
+  width: 55%;
   padding: 2vw;
   margin: 1vw;
 
@@ -268,15 +271,35 @@ const CreateDate = styled.span`
 const IconWrapper = styled.div`
   font-size: 11pt;
   opacity: 0.8;
-  padding-bottom: 1vw;
-  opacity: 0.8;
 `;
-const IconCnt = styled.span`
-  font-size: 11pt;
-  margin-left: 0.5vw;
+const IconContent = styled.span`
+  margin-right: 10px;
 `;
 const ButtonWrapper = styled.div`
   margin: 2vw;
   text-align: center;
   color: black;
+`;
+
+const LikesRound = styled.div`
+  position: fixed;
+  top: 320px;
+  right: 150px;
+  padding: 0.8vw;
+  border-radius: 50px;
+  background-color: white;
+`;
+const ScrapRound = styled.div`
+  position: fixed;
+  top: 400px;
+  right: 150px;
+  padding: 0.8vw;
+  border-radius: 50px;
+  background-color: white;
+`;
+
+const IconTxt = styled.div`
+  text-align: center;
+  font-size: 8pt;
+  font-weight: bold;
 `;

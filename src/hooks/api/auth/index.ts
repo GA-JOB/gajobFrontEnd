@@ -75,6 +75,7 @@ export const useAuth = () => {
       if (res.activated === true) {
         alert("환영합니다!\n회원가입이 정상적으로 처리되었습니다.");
         window.location.replace("/login");
+        storage.remove("code-verify");
       }
     });
 

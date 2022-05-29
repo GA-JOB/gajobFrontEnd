@@ -120,7 +120,7 @@ export const Header = () => {
         <MenuIconClose to="#" onClick={showSidebar}>
           <MenuOpen />
         </MenuIconClose>
-
+        {/* MENU */}
         {SidebarData.map((item, index) => {
           return (
             <MenuItems key={index}>
@@ -202,6 +202,7 @@ const MenuIconClose = styled(Link)`
 `;
 
 const SidebarMenu = styled.div<{ close: boolean }>`
+  z-index: 100;
   width: 20vw;
   height: 100vh;
   background-color: #000000;
@@ -218,44 +219,36 @@ const MenuItems = styled.li`
   align-items: center;
   justify-content: start;
   width: 100%;
-  height: 90px;
-  padding: 1rem 0 1rem;
+  height: 6vw;
 `;
 
 const MenuItemLinks = styled(Link)`
   display: flex;
   align-items: center;
-  padding: 0 3rem;
+  padding: 2rem;
   font-size: 1.5vw;
   text-decoration: none;
   color: #ffffff;
+  opacity: 0.6;
 
   &:hover {
-    width: 100%;
-    height: 45px;
-    margin: 0 2rem;
-    padding: 2rem;
-    border-radius: 10px;
-    background-color: var(--brand-color);
+    padding: 0 3rem;
+    opacity: 1;
 
-    color: #000000;
-    text-align: center;
-    transition: 0.5s;
+    color: white;
+    transition: 0.3s;
   }
 
-  @media screen and (max-width: 900px) {
+  /* @media screen and (max-width: 900px) {
     padding: 0 2rem;
     &:hover {
-      margin: 0 1rem;
-      padding: 1rem;
       border-radius: 100%;
       background-color: var(--brand-color);
 
       color: #000000;
       text-align: center;
-      transition: 0.5s;
     }
-  }
+  } */
 `;
 const MenuTitle = styled.span`
   @media screen and (max-width: 800px) {

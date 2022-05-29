@@ -9,23 +9,56 @@ import "styles/tabulator.scss";
 import { useNavigate } from "react-router-dom";
 interface IJobPostingProps {
   data: IJobPostingCrawling[];
+  careerState: string | null;
 }
 
-export const JobPostingList = ({ data }: IJobPostingProps) => {
+export const JobPostingList = ({ data, careerState }: IJobPostingProps) => {
   const navigate = useNavigate();
+
   const columns: ColumnDefinition[] | any = [
-    { formatter: "rownum", hozAlign: "center", width: 40, headerSort: false },
-    { title: "채용공고명", field: "title", width: 150, headerSort: false },
-    { title: "회사명", field: "company", headerSort: false },
-    { title: "급여타입", field: "salaryType", headerSort: false },
-    { title: "급여", field: "salary", headerSort: false },
+    {
+      formatter: "rownum",
+      hozAlign: "center",
+      width: 40,
+      headerSort: false,
+    },
+    {
+      title: "채용공고명",
+      field: "title",
+      width: 250,
+      hozAlign: "left",
+      headerSort: false,
+    },
+    { title: "회사명", field: "company", hozAlign: "left", headerSort: false },
+    {
+      title: "급여형태",
+      field: "salaryType",
+      width: 100,
+      hozAlign: "left",
+      headerSort: false,
+    },
+    { title: "급여", field: "salary", hozAlign: "left", headerSort: false },
     {
       title: "마감일",
       field: "closeDate",
+      hozAlign: "left",
+      width: 150,
       headerSort: false,
     },
-    { title: "경력", field: "career", headerSort: false },
-    { title: "지역", field: "region", headerSort: false },
+    {
+      title: "경력",
+      field: "career",
+      hozAlign: "left",
+      width: 100,
+      headerSort: false,
+    },
+    {
+      title: "지역",
+      field: "region",
+      hozAlign: "left",
+      width: 150,
+      headerSort: false,
+    },
   ];
   const options: ReactTabulatorOptions = {
     pagination: true,
@@ -33,16 +66,20 @@ export const JobPostingList = ({ data }: IJobPostingProps) => {
     paginationSize: 10,
   };
   const rowClickHandler = (e: any, data: any) => {
-    console.log(data._row.data.id); // 선택했을 때 id값
-    const id = data._row.data.id;
-    console.log(data._row.data);
+    const id = data._row.data.id; // 선택한 id 값
     navigate(`/job-posting/${id}`, { state: data._row.data });
   };
+
   return (
     <JobPostingWrapper className="JobPostingWrapper">
       <TabulatorStyle
         columns={columns}
-        data={data}
+        data={
+          careerState === null
+            ? data
+            : data?.filter((data) => data.career.startsWith(careerState))
+        }
+        // data={data}
         options={options}
         events={{ rowClick: rowClickHandler }}
       />

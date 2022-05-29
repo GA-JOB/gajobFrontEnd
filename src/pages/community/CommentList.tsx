@@ -79,7 +79,7 @@ export const CommentList = ({ postId, postWriter }: ICommentProps) => {
         <BlankInfo>
           <ImgStyle
             src="https://png.pngtree.com/png-vector/20191024/ourlarge/pngtree-comment-icon-isolated-on-background-png-image_1861070.jpg"
-            width={"8%"}
+            width={"6%"}
           />
           첫 댓글을 남겨주세요 !
         </BlankInfo>

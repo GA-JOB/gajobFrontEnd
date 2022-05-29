@@ -129,13 +129,7 @@ const ContentsBox = styled.div`
   position: relative;
   height: 100%;
 `;
-const Ranking = styled.div`
-  position: absolute;
-  right: 0;
-  margin: 1vw;
-  color: white;
-  font-size: 23pt;
-`;
+
 const ImgBox = styled.div`
   width: 100%;
   height: 180px;

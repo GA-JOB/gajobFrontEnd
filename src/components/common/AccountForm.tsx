@@ -165,6 +165,7 @@ export const AccountForm = ({
                 inputProps={{
                   style: { fontSize: 15, verticalAlign: "middle" },
                 }}
+                required
               />
             </InputLabel>
 
@@ -181,6 +182,7 @@ export const AccountForm = ({
                 inputProps={{
                   style: { fontSize: 15, verticalAlign: "middle" },
                 }}
+                required
               />
             </InputLabel>
             {/* 학번과 학교 계정은 추후 수정이 불가합니다. 제대로 입력해주세요. */}
@@ -195,6 +197,7 @@ export const AccountForm = ({
                 onChange={onChange}
                 size="small"
                 inputProps={{ style: { fontSize: 15 } }}
+                required
               >
                 <MenuItem value="">---필수---</MenuItem>
                 <MenuItem value="IT융합자율학부">IT융합자율학부</MenuItem>
@@ -218,6 +221,7 @@ export const AccountForm = ({
                 inputProps={{
                   style: { fontSize: 15, verticalAlign: "middle" },
                 }}
+                required
               />
             </InputLabel>
             <InputLabel>
@@ -245,6 +249,7 @@ export const AccountForm = ({
                     </IconSubmit>
                   ),
                 }}
+                required
               />
             </InputLabel>
 
@@ -280,6 +285,7 @@ export const AccountForm = ({
                     </IconSubmit>
                   ),
                 }}
+                required
               />
             </InputLabel>
           </>
@@ -296,6 +302,7 @@ export const AccountForm = ({
               onChange={onChange}
               size="small"
               inputProps={{ style: { fontSize: 15, verticalAlign: "middle" } }}
+              required
             />
           </InputLabel>
         ) : null}
@@ -310,6 +317,7 @@ export const AccountForm = ({
             onChange={onChange}
             size="small"
             inputProps={{ style: { fontSize: 15, verticalAlign: "middle" } }}
+            required
           />
         </InputLabel>
         {isEdit || isSignup ? (
@@ -327,6 +335,7 @@ export const AccountForm = ({
                 inputProps={{
                   style: { fontSize: 15, verticalAlign: "middle" },
                 }}
+                required
               >
                 <Done />
               </InputField>
@@ -347,6 +356,7 @@ export const AccountForm = ({
                   inputProps={{
                     style: { fontSize: 15, verticalAlign: "middle" },
                   }}
+                  required
                 />
               </InputLabel>
             ) : null}
@@ -364,7 +374,6 @@ export const AccountForm = ({
             }
             title={title}
             widthStyle={"100%"}
-            onClick={() => storage.remove("code-verify")}
           />
         </ButtonWrapper>
         <LinkToLogin>
