@@ -149,7 +149,7 @@ export const PostDetails = () => {
               />
 
               {/* 댓글 등록 */}
-              <CommentForm id={viewId ? parseInt(viewId) : 0} />
+              <CommentForm id={viewId ? parseInt(viewId) : 0} isStudy={false} />
             </>
           ) : null}
 

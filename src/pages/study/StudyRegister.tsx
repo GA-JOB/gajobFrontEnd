@@ -238,7 +238,12 @@ export const StudyRegister = ({
             inputProps={{ style: { fontSize: 15, verticalAlign: "middle" } }}
           />
         </MainInput>
-        <ButtonType title={"등록하기"} widthStyle={"100%"} />
+        <ButtonWrapper>
+          <ButtonType
+            title={!isEditStudy ? "등록하기" : "수정하기"}
+            widthStyle={"100%"}
+          />
+        </ButtonWrapper>
       </Form>
     </StudyRegisterWrapper>
   );
@@ -278,4 +283,10 @@ const SmallInput = styled.div`
 const MainInput = styled.div`
   display: grid;
   grid-gap: 1vh;
+`;
+
+const ButtonWrapper = styled.div`
+  margin: 2vw 0;
+  text-align: center;
+  color: black;
 `;

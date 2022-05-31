@@ -104,7 +104,7 @@ export const useStudy = () => {
   };
 
   // post comment
-  const postComment = async ({ id, comment }: IPostComment) => {
+  const postStudyComment = async ({ id, comment }: IPostComment) => {
     await post(`/study/comments/${id}`, {
       comment,
     }).then((data: any) => {
@@ -115,7 +115,11 @@ export const useStudy = () => {
 
     mutate(`/study/comments/${id}`, false);
   };
-  const editComment = async ({ postId, commentId, comment }: IEditComment) => {
+  const editStudyComment = async ({
+    postId,
+    commentId,
+    comment,
+  }: IEditComment) => {
     await put(`/study/posts/${postId}/comments/${commentId}`, {
       comment,
     }).then((data: any) => {
@@ -126,19 +130,50 @@ export const useStudy = () => {
 
     mutate(`/study/posts/${postId}/comments/${commentId}`, false);
   };
-  const deleteComment = async (studyId: number, commentId: number) => {
+  const deleteStudyComment = async (studyId: number, commentId: number) => {
     await del(`/study/comments/${commentId}`).then(() => {
       window.confirm("댓글이 삭제되었습니다.");
       mutate(`/study/comments/${commentId}`, false);
     });
   };
 
+  const postScrap = async (postId: number) => {
+    await post(`/study/scrap/${postId}`).then((res) => {
+      if (res === "scrap-success") {
+        alert(
+          "해당 게시글 스크랩이 완료되었습니다.\n스크랩 목록은 마이페이지에서 조회 가능합니다."
+        );
+      } else {
+        alert("해당 게시글 스크랩이 취소되었습니다.");
+      }
+      console.log(res);
+      window.location.reload();
+    });
+
+    mutate(`/study/scrap/${postId}`);
+  };
+
+  const postLikes = async (postId: number) => {
+    await post(`/study/likes/${postId}`).then((res) => {
+      if (res === "increase-likes") {
+        alert("스터디에 공감하셨습니다.");
+      } else {
+        alert("스터디 공감을 취소하셨습니다.");
+      }
+      window.location.reload();
+    });
+
+    mutate(`/study/likes/${postId}`);
+  };
+
   return {
     postStudy,
     editStudy,
     deleteStudy,
-    postComment,
-    editComment,
-    deleteComment,
+    postStudyComment,
+    editStudyComment,
+    deleteStudyComment,
+    postScrap,
+    postLikes,
   };
 };
