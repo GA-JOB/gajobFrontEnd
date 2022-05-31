@@ -3,9 +3,11 @@ import { MenuTitle } from "components/Menutitle";
 import { PostList } from "pages/community/PostList";
 import styled from "styled-components";
 import storage from "hooks/store";
+import useGetCommunity from "hooks/api/community/useGetCommunity";
 
 export const Community = () => {
   const token = storage.get("user-token");
+  const { data } = useGetCommunity();
   const [category, setCategory] = useState<string | null>(null);
 
   if (!token) {
@@ -37,10 +39,10 @@ export const Community = () => {
 
           <ContentWrapper>
             <Category>
-              <strong>✔️ JOB담 </strong>
-              {category === null ? "| 전체보기" : "| " + category}
+              <strong>✔️ JOB담 | </strong>
+              {category === null ? "전체보기" : category}
             </Category>
-            <PostList isMypage={false} postCategory={category} />
+            <PostList isMypage={false} data={data} postCategory={category} />
           </ContentWrapper>
         </CommuContainer>
       </CommunityWrapper>

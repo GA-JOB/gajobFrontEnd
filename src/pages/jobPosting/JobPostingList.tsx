@@ -1,12 +1,12 @@
 import React from "react";
-import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import { ReactTabulator } from "react-tabulator";
-import { IJobPostingCrawling } from "types";
 import { ColumnDefinition, ReactTabulatorOptions } from "react-tabulator";
 import "react-tabulator/lib/styles.css"; // default theme
 import "react-tabulator/css/bootstrap/tabulator_bootstrap.min.css"; // use Theme(s)
 import "styles/tabulator.scss";
-import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import { IJobPostingCrawling } from "types";
 interface IJobPostingProps {
   data: IJobPostingCrawling[];
   careerState: string | null;

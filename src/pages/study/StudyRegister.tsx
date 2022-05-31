@@ -1,16 +1,19 @@
 import { useState } from "react";
-import { useStudy } from "hooks/api/study";
-import styled from "styled-components";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { MenuTitle } from "components/Menutitle";
 import { ButtonType } from "components/button/ButtonType";
-// import { TextField } from "@material-ui/core";
+import styled from "styled-components";
+import {
+  InputLabel,
+  MenuItem,
+  FormControl,
+  Select,
+  SelectChangeEvent,
+} from "@mui/material";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import TextField from "@mui/material/TextField";
+import { useStudy } from "hooks/api/study";
 
 interface IStudyProps {
   id?: number;
@@ -151,6 +154,10 @@ export const StudyRegister = ({
 
   return (
     <StudyRegisterWrapper>
+      <MenuTitle
+        title="STUDY 등록"
+        info="STUDY 등록에 필요한 정보를 입력해주세요!"
+      ></MenuTitle>
       <Form onSubmit={handleSubmit}>
         <SmallInput>
           <InputSelectField variant="filled" sx={{ m: 0, minWidth: "100%" }}>
@@ -160,6 +167,7 @@ export const StudyRegister = ({
               name="studyCategoryForm"
               value={studyCategoryForm}
               onChange={onChange}
+              required
             >
               {studyCategoryValue.map((studyCategory) => (
                 <MenuItem value={studyCategory}>{studyCategory}</MenuItem>
@@ -173,6 +181,7 @@ export const StudyRegister = ({
               name="areaForm"
               value={areaForm}
               onChange={onChange}
+              required
             >
               {areaValue.map((area) => (
                 <MenuItem value={area}>{area}</MenuItem>
@@ -186,6 +195,7 @@ export const StudyRegister = ({
             name="maxPeopleForm"
             value={maxPeopleForm}
             onChange={onChange}
+            required
             // inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
           />
           <LocalizationProvider
@@ -216,6 +226,7 @@ export const StudyRegister = ({
             value={titleForm}
             onChange={onChange}
             inputProps={{ style: { fontSize: 15, verticalAlign: "middle" } }}
+            required
           />
           <InputTextField
             label="내용을 입력하세요."
@@ -227,6 +238,7 @@ export const StudyRegister = ({
             onChange={onChange}
             rows={10}
             inputProps={{ style: { fontSize: 15, verticalAlign: "middle" } }}
+            required
           />
           <InputTextField
             label="오픈카톡 링크가 있다면 남겨주세요"
@@ -250,7 +262,7 @@ export const StudyRegister = ({
 };
 
 const StudyRegisterWrapper = styled.div`
-  width: 100%;
+  width: 80%;
   padding: 1vw;
   display: flex;
   flex-direction: column;

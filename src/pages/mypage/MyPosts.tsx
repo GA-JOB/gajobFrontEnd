@@ -3,9 +3,11 @@ import { PostList } from "pages/community/PostList";
 import { StudyList } from "pages/study/StudyList";
 import styled from "styled-components";
 import useGetMyStudyPosts from "hooks/api/study/useGetMyStudyPosts";
+import useGetMyCommunityPosts from "hooks/api/community/useGetMyCommunityPosts";
 
 export const MyPosts = () => {
-  const { data } = useGetMyStudyPosts();
+  const study = useGetMyStudyPosts();
+  const community = useGetMyCommunityPosts();
   const [postType, setPostType] = useState<string>("커뮤니티");
 
   // 상태 표시 style
@@ -38,10 +40,14 @@ export const MyPosts = () => {
       <ContentWrapper>
         {postType === "커뮤니티" ? (
           // 커뮤니티
-          <PostList isMypage={true} />
+          <PostList
+            data={community?.data}
+            isMypage={true}
+            postCategory={null}
+          />
         ) : (
           // 스터디
-          <StudyList data={data} isMypage={true} />
+          <StudyList data={study?.data} isMypage={true} />
         )}
       </ContentWrapper>
     </MyPostsWrapper>
