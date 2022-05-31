@@ -22,13 +22,13 @@ export const StudyDelete = ({ studyId, commentId }: IDeleteProps) => {
   };
 
   // 해당 id delete
-  const { deleteStudy, deleteComment } = useStudy();
+  const { deleteStudy, deleteStudyComment } = useStudy();
   const onClickDeleteBtn = () => {
     if (!commentId) {
       deleteStudy(studyId);
       window.location.replace("/study");
     } else {
-      deleteComment(studyId, commentId);
+      deleteStudyComment(studyId, commentId);
       setOpenModal(false);
     }
   };
@@ -66,8 +66,7 @@ export const StudyDelete = ({ studyId, commentId }: IDeleteProps) => {
 };
 
 const DeleteWrapper = styled.span`
-  margin: 0 0.5vw;
-  font-size: 10pt;
+  font-size: 9pt;
   opacity: 0.8;
   cursor: pointer;
 `;

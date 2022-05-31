@@ -9,6 +9,7 @@ export const Study = () => {
   const token = storage.get("user-token");
 
   const { data } = useGetStudy();
+
   const [category, setCategory] = useState<string | null>(null);
 
   // const todayTime = () => {
@@ -57,16 +58,13 @@ export const Study = () => {
             </NavList>
             <NavList onClick={() => setCategory("자율")}>자율</NavList>
             <NavList onClick={() => setCategory("기타")}>기타</NavList>
-
-            {/* <NavList>✍🏻 작성자</NavList> <NavInfo>{nickname}</NavInfo>
-                <NavList>📆 작성일</NavList> <NavInfo>{todayTime()}</NavInfo> */}
           </SideNav>
         </SideNavWrapper>
 
         <StudyTypeWrapper>
           <Category>
-            <strong>✔️ STUDY </strong>
-            {category === null ? "| 전체보기" : "| " + category}
+            <strong>✔️ STUDY | </strong>
+            {category === null ? "전체보기" : category}
           </Category>
           <StudyList
             data={
