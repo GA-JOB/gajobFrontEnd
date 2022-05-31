@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useSWRConfig } from "swr";
 import { post, put, del } from "lib/api/client";
 import { IStudy } from "types";
@@ -27,6 +28,7 @@ interface IEditComment {
   comment: string;
 }
 export const useStudy = () => {
+  const navigate = useNavigate();
   // 데이터 최신화
   const { mutate } = useSWRConfig();
 
@@ -54,7 +56,8 @@ export const useStudy = () => {
       openTalkUrl,
     }).then((data: any) => {
       if (data.title) {
-        console.log(JSON.stringify(data));
+        alert("글을 등록하였습니다.");
+        navigate(-1);
       }
     });
 
@@ -72,7 +75,6 @@ export const useStudy = () => {
     maxPeople,
     startDate,
     endDate,
-    status,
     openTalkUrl,
   }: IEditStudy) => {
     await put(`/study/posts/${id}`, {
@@ -94,7 +96,7 @@ export const useStudy = () => {
     mutate(`/stduy/posts`);
   };
 
-  //스터디 삭제
+  // 스터디 삭제
   const deleteStudy = async (id: number) => {
     await del(`/study/posts/${id}`);
 

@@ -39,6 +39,16 @@ export const JobPosting = () => {
   ];
   const [state, setState] = useState<string | null>(null);
 
+  // 상태 표시 style
+  const selectBtn = {
+    backgroundColor: "white",
+    border: "1px solid black",
+    opacity: "1",
+  };
+  const noSelectBtn = {
+    color: "black",
+  };
+
   if (!token) {
     window.confirm("로그인 후 이용가능합니다.") === true
       ? window.location.replace("/login")
@@ -67,10 +77,30 @@ export const JobPosting = () => {
         </InputSelectField>
 
         <StateTag>
-          <ListStyle onClick={() => setState(null)}># 전체</ListStyle>
-          <ListStyle onClick={() => setState("관계없음")}># 관계없음</ListStyle>
-          <ListStyle onClick={() => setState("경력")}># 경력</ListStyle>
-          <ListStyle onClick={() => setState("신입")}># 신입</ListStyle>
+          <ListStyle
+            style={state === null ? selectBtn : noSelectBtn}
+            onClick={() => setState(null)}
+          >
+            # 전체
+          </ListStyle>
+          <ListStyle
+            style={state === "관계없음" ? selectBtn : noSelectBtn}
+            onClick={() => setState("관계없음")}
+          >
+            # 관계없음
+          </ListStyle>
+          <ListStyle
+            style={state === "경력" ? selectBtn : noSelectBtn}
+            onClick={() => setState("경력")}
+          >
+            # 경력
+          </ListStyle>
+          <ListStyle
+            style={state === "신입" ? selectBtn : noSelectBtn}
+            onClick={() => setState("신입")}
+          >
+            # 신입
+          </ListStyle>
         </StateTag>
 
         <JobPostingList

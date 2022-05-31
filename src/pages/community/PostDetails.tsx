@@ -7,9 +7,7 @@ import { CommentForm } from "components/common/CommentForm";
 import styled from "styled-components";
 import {
   Markunread,
-  Visibility,
   Chat,
-  ChatBubbleOutline,
   BookmarkBorder,
   Bookmark,
   FavoriteBorder,
@@ -134,6 +132,10 @@ export const PostDetails = () => {
                   }}
                 />
                 {data.likes}
+              </IconContent>
+              <IconContent>
+                <Bookmark style={IconStyle} />
+                {data.scrap}
               </IconContent>
             </IconWrapper>
           </DetailContent>

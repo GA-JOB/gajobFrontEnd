@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { MenuTitle } from "components/Menutitle";
 import { ButtonType } from "components/button/ButtonType";
 import styled from "styled-components";
-import { TextField, MenuItem, Button, InputAdornment } from "@mui/material";
-import { Done, Forward, Check } from "@mui/icons-material";
+import { TextField, MenuItem, InputAdornment } from "@mui/material";
+import { Done, Forward } from "@mui/icons-material";
 import storage from "hooks/store";
 import { useAuth } from "hooks/api/auth";
 
