@@ -45,7 +45,7 @@ export const SeeUserInfo = ({ imageUrl = "" }: IImageFormProps) => {
 
     if (imageRecord !== null) {
       if (window.confirm("프로필 이미지를 등록하시겠습니까?")) {
-        postProfileImg({ image: imageRecord });
+        postProfileImg({ profileImg: imageRecord });
       }
     }
   };
@@ -53,6 +53,8 @@ export const SeeUserInfo = ({ imageUrl = "" }: IImageFormProps) => {
   const onCloseModal = () => {
     setOpenModal((prev) => !prev);
   };
+
+  console.log(imageRecord);
 
   return (
     <EditInfoWrapper>
@@ -65,7 +67,8 @@ export const SeeUserInfo = ({ imageUrl = "" }: IImageFormProps) => {
                 src={
                   imageRecord === null
                     ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0H3GENf6227cAk6PeE331-BJqovCV0RyNCg&usqp=CAU"
-                    : imagePreview
+                    : `/Users/shinsuyeon/Desktop/${data?.profileFilePath}`
+                  // imagePreview
                 }
               />
             </ImgWrapper>
@@ -109,6 +112,8 @@ export const SeeUserInfo = ({ imageUrl = "" }: IImageFormProps) => {
                       alt="posting preivew"
                     />
                   </ImgWrapper>
+
+                  <ButtonType variants="text" title="수정" link="" />
                 </form>
               </ModalContent>
             </Modal>

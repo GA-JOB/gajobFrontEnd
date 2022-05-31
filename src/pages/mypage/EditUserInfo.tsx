@@ -9,6 +9,7 @@ interface IUserInfoProps {
   studentEmail?: string;
   department?: string;
   introduction?: string;
+  profileFilePath?: string;
 }
 
 export const EditUserInfo = ({

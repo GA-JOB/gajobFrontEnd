@@ -2,10 +2,19 @@ import { useState } from "react";
 import { MenuTitle } from "components/Menutitle";
 import { PostList } from "pages/community/PostList";
 import styled from "styled-components";
+import storage from "hooks/store";
+import useGetCommunity from "hooks/api/community/useGetCommunity";
 
 export const Community = () => {
+  const token = storage.get("user-token");
+  const { data } = useGetCommunity();
   const [category, setCategory] = useState<string | null>(null);
 
+  if (!token) {
+    window.confirm("로그인 후 이용가능합니다.") === true
+      ? window.location.replace("/login")
+      : window.location.replace("/");
+  }
   return (
     <>
       <CommunityWrapper>
@@ -29,7 +38,11 @@ export const Community = () => {
           </SideNavWrapper>
 
           <ContentWrapper>
-            <PostList isMypage={false} postCategory={category} />
+            <Category>
+              <strong>✔️ JOB담 | </strong>
+              {category === null ? "전체보기" : category}
+            </Category>
+            <PostList isMypage={false} data={data} postCategory={category} />
           </ContentWrapper>
         </CommuContainer>
       </CommunityWrapper>
@@ -97,4 +110,9 @@ const ContentWrapper = styled.div`
   background-color: white;
   border: 1px solid #eaeaea;
   border-radius: 5px;
+`;
+const Category = styled.div`
+  margin: 0.5vw;
+  font-weight: lighter;
+  letter-spacing: 1px;
 `;

@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { MenuTitle } from "components/Menutitle";
 import { ButtonType } from "components/button/ButtonType";
 import styled from "styled-components";
-import { TextField, MenuItem } from "@material-ui/core";
-import { Done } from "@mui/icons-material";
+import { TextField, MenuItem, InputAdornment } from "@mui/material";
+import { Done, Forward } from "@mui/icons-material";
 import storage from "hooks/store";
 import { useAuth } from "hooks/api/auth";
 
@@ -19,6 +19,7 @@ interface IAccountProps {
   newPassword?: string;
   studentId?: string;
   studentEmail?: string;
+  verifyCode?: string;
   department?: string;
 }
 
@@ -33,15 +34,27 @@ export const AccountForm = ({
   newPassword = "",
   studentId = "",
   studentEmail = "",
+  verifyCode = "",
   department = "",
 }: IAccountProps) => {
   const userEmail = storage.get("user-email");
-  const { postSignup, postLogin, editAccountPwd, deleteAuth } = useAuth();
+  const EmailVerify = storage.get("code-verify");
+
+  console.log(EmailVerify);
+  const {
+    postSignup,
+    postLogin,
+    postCertifyStudentEmail,
+    postVertifyStudentEmail,
+    editAccountPwd,
+    deleteAuth,
+  } = useAuth();
 
   const isSignup = title === "회원가입" ? true : false;
   const isEdit = title === "비밀번호 변경" ? true : false;
   const isDeleteAccount = title === "계정 삭제" ? true : false;
 
+  const [isEmailCodeVerify, setIsEmailCodeVerify] = useState<boolean>(false);
   const [passwordCheck, setPasswordCheck] = useState<string>("");
   const [mismatchError, setMismatchError] = useState(false);
 
@@ -53,6 +66,7 @@ export const AccountForm = ({
     newPasswordForm: newPassword,
     studentIdForm: studentId,
     studentEmailForm: studentEmail,
+    verifyCodeForm: verifyCode,
     departmentForm: department,
   });
   const {
@@ -63,6 +77,7 @@ export const AccountForm = ({
     newPasswordForm,
     studentIdForm,
     studentEmailForm,
+    verifyCodeForm,
     departmentForm,
   } = form;
 
@@ -87,9 +102,11 @@ export const AccountForm = ({
     e.preventDefault();
 
     console.log(form);
+
     if (isSignup) {
       if (
         window.confirm("회원가입을 하시겠습니까?") === true &&
+        verifyCodeForm !== "" &&
         mismatchError === false
       ) {
         postSignup({
@@ -103,7 +120,9 @@ export const AccountForm = ({
         });
       } else if (mismatchError === true) {
         window.confirm("회원 정보를 다시 확인해주시기 바랍니다.");
-      } else return;
+      } else if (verifyCodeForm === "") {
+        window.confirm("인증코드를 다시 확인해주시기 바랍니다.");
+      }
     } else if (!isSignup && !isEdit && !isDeleteAccount) {
       postLogin({
         email: emailForm,
@@ -146,6 +165,7 @@ export const AccountForm = ({
                 inputProps={{
                   style: { fontSize: 15, verticalAlign: "middle" },
                 }}
+                required
               />
             </InputLabel>
 
@@ -162,6 +182,7 @@ export const AccountForm = ({
                 inputProps={{
                   style: { fontSize: 15, verticalAlign: "middle" },
                 }}
+                required
               />
             </InputLabel>
             {/* 학번과 학교 계정은 추후 수정이 불가합니다. 제대로 입력해주세요. */}
@@ -176,11 +197,12 @@ export const AccountForm = ({
                 onChange={onChange}
                 size="small"
                 inputProps={{ style: { fontSize: 15 } }}
+                required
               >
                 <MenuItem value="">---필수---</MenuItem>
                 <MenuItem value="IT융합자율학부">IT융합자율학부</MenuItem>
-                <MenuItem value="미디어컨텐츠융합자율학부">
-                  미디어컨텐츠융합자율학부
+                <MenuItem value="미디어콘텐츠융합자율학부">
+                  미디어콘텐츠융합자율학부
                 </MenuItem>
                 <MenuItem value="인문융합자율학부">인문융합자율학부</MenuItem>
                 <MenuItem value="사회융합자율학부">사회융합자율학부</MenuItem>
@@ -199,6 +221,7 @@ export const AccountForm = ({
                 inputProps={{
                   style: { fontSize: 15, verticalAlign: "middle" },
                 }}
+                required
               />
             </InputLabel>
             <InputLabel>
@@ -214,11 +237,59 @@ export const AccountForm = ({
                 inputProps={{
                   style: { fontSize: 15, verticalAlign: "middle" },
                 }}
+                InputProps={{
+                  endAdornment: (
+                    <IconSubmit
+                      position="end"
+                      onClick={() =>
+                        postCertifyStudentEmail({ email: studentEmailForm })
+                      }
+                    >
+                      <Forward />
+                    </IconSubmit>
+                  ),
+                }}
+                required
+              />
+            </InputLabel>
+
+            <InputLabel>
+              <span>인증 코드</span>
+              <InputField
+                label="인증코드를 입력하세요."
+                variant="filled"
+                type="text"
+                name="verifyCodeForm"
+                value={verifyCodeForm}
+                onChange={onChange}
+                size="small"
+                inputProps={{
+                  style: { fontSize: 15, verticalAlign: "middle" },
+                }}
+                InputProps={{
+                  endAdornment: (
+                    <IconSubmit
+                      position="end"
+                      onClick={() => {
+                        postVertifyStudentEmail({ code: verifyCodeForm });
+                        if (EmailVerify) {
+                          if (EmailVerify === "authentication-success") {
+                            setIsEmailCodeVerify(true);
+                          } else {
+                            setIsEmailCodeVerify(false);
+                          }
+                        }
+                      }}
+                    >
+                      {isEmailCodeVerify ? <Done /> : <Forward />}
+                    </IconSubmit>
+                  ),
+                }}
+                required
               />
             </InputLabel>
           </>
         ) : null}
-
         {!isEdit && !isDeleteAccount ? (
           <InputLabel>
             <span>E-mail</span>
@@ -231,10 +302,10 @@ export const AccountForm = ({
               onChange={onChange}
               size="small"
               inputProps={{ style: { fontSize: 15, verticalAlign: "middle" } }}
+              required
             />
           </InputLabel>
         ) : null}
-
         <InputLabel>
           {!isDeleteAccount ? <span>비밀번호</span> : null}
           <InputField
@@ -246,9 +317,9 @@ export const AccountForm = ({
             onChange={onChange}
             size="small"
             inputProps={{ style: { fontSize: 15, verticalAlign: "middle" } }}
+            required
           />
         </InputLabel>
-
         {isEdit || isSignup ? (
           <>
             <InputLabel>
@@ -264,6 +335,7 @@ export const AccountForm = ({
                 inputProps={{
                   style: { fontSize: 15, verticalAlign: "middle" },
                 }}
+                required
               >
                 <Done />
               </InputField>
@@ -284,6 +356,7 @@ export const AccountForm = ({
                   inputProps={{
                     style: { fontSize: 15, verticalAlign: "middle" },
                   }}
+                  required
                 />
               </InputLabel>
             ) : null}
@@ -291,9 +364,18 @@ export const AccountForm = ({
         ) : null}
 
         <ButtonWrapper>
-          <ButtonType title={title} widthStyle={"100%"} />
+          <ButtonType
+            disabled={
+              (isSignup &&
+                storage.get("code-verify") === "authentication-success") ||
+              !isSignup
+                ? false
+                : true
+            }
+            title={title}
+            widthStyle={"100%"}
+          />
         </ButtonWrapper>
-
         <LinkToLogin>
           {!isEdit && !isDeleteAccount ? (
             <>
@@ -349,13 +431,15 @@ const InputField = styled(TextField)`
   width: 100%;
   font-size: 10pt;
 `;
+const IconSubmit = styled(InputAdornment)`
+  cursor: pointer;
+`;
 const Alert = styled.span`
   color: red;
 `;
 const ButtonWrapper = styled.div`
   margin-top: 1vw;
 `;
-
 const LinkToLogin = styled.div`
   padding: 1vw 0;
   text-align: center;

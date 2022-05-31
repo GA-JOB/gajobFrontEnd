@@ -1,9 +1,10 @@
-// // .tabulator-tableholder {
-// //   background-color: "blue";
-// // }
 .tabulator-tableholder {
-  height: 300px;
-  max-height: 700px;
+  // background-color: "blue";
+  text-align: center;
+}
+.tabulator-tableholder {
+  min-height: 25vw;
+  // max-height: 50vw;
   overflow: auto;
   //   background-color: red;
   // color: green;

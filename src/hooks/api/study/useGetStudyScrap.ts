@@ -2,10 +2,10 @@ import useSWR from "swr";
 import { fetcher } from "lib/api/fetcher";
 import { IStudy } from "types";
 
-function useGetStudy() {
-  const { data } = useSWR<IStudy[]>("/study/posts", fetcher);
+function useGetStudyScrap() {
+  const { data } = useSWR<IStudy[]>("/study/scrap", fetcher);
 
   return { data };
 }
 
-export default useGetStudy;
+export default useGetStudyScrap;

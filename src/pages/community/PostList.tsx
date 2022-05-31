@@ -1,21 +1,17 @@
 import { Link } from "react-router-dom";
 import { Loading } from "components/loading";
 import { PostCommunity } from "pages/community/PostCommunity";
-import { PostDetails } from "pages/community/PostDetails";
 import styled from "styled-components";
 import { Visibility, Chat, Favorite } from "@mui/icons-material";
-import useGetCommunity from "hooks/api/community/useGetCommunity";
-import storage from "hooks/store";
+import { ICommunity } from "types";
 
 interface IPostListProps {
   isMypage: boolean;
+  data?: ICommunity[];
   postCategory?: string | null;
 }
 
-export const PostList = ({ isMypage, postCategory }: IPostListProps) => {
-  const nickname = storage.get("user-nickname");
-  const { data } = useGetCommunity();
-
+export const PostList = ({ isMypage, data, postCategory }: IPostListProps) => {
   const IconStyle = {
     fontSize: 15,
     margin: "5px",
@@ -45,11 +41,9 @@ export const PostList = ({ isMypage, postCategory }: IPostListProps) => {
             {data?.map((list: any, index: number) => (
               <div key={index}>
                 {/* 클릭헤 해당하는 카테고리 별 리스트 출력 */}
-                {(isMypage === true && nickname === list.writer) ||
-                (isMypage === false &&
-                  (postCategory === null ||
-                    (postCategory !== null &&
-                      postCategory === list.postCategory))) ? (
+                {postCategory === null ||
+                (postCategory !== null &&
+                  postCategory === list.postCategory) ? (
                   // viewId를 params로 넘기며 details url로 이동.
                   <LinkStyle to={`/jobdam/${list.id}`}>
                     <PostWrapper>
