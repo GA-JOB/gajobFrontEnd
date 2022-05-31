@@ -41,6 +41,7 @@ export const StudyRegister = ({
   openTalkUrl = null,
 }: IStudyProps | any) => {
   const { postStudy, editStudy } = useStudy();
+
   //id !== 0 수정
   const isEditStudy = id !== 0;
   const [form, setForm] = useState({
@@ -187,8 +188,12 @@ export const StudyRegister = ({
             onChange={onChange}
             // inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
           />
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <LocalizationProvider
+            dateAdapter={AdapterDateFns}
+            startDate={startDate}
+          >
             <DatePicker
+              minDate={new Date()}
               label="모집 마감일"
               value={endDateForm}
               onChange={(newValue) => {
@@ -274,12 +279,3 @@ const MainInput = styled.div`
   display: grid;
   grid-gap: 1vh;
 `;
-// max-width: 100%;
-// title?: string;
-//   content?: string;
-//   studyCategory?: string;
-//   area?: string;
-//   minPeople?: number;
-//   maxPeople?: number;
-//   startDate?: string | Date;
-//   endDate?: string | Date;

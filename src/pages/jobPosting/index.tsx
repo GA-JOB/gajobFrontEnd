@@ -10,6 +10,7 @@ import { ReactTabulator } from "react-tabulator";
 import { ColumnDefinition, ReactTabulatorOptions } from "react-tabulator";
 import useGetJobPosting from "hooks/api/jobPosting/useGetJobPosting";
 import storage from "hooks/store";
+import { Bookmark } from "@mui/icons-material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -47,6 +48,10 @@ export const JobPosting = () => {
   };
   const noSelectBtn = {
     color: "black",
+  };
+
+  const onClickScrapLink = () => {
+    window.location.replace("mypage/scraps");
   };
 
   if (!token) {
@@ -101,6 +106,7 @@ export const JobPosting = () => {
           >
             # 신입
           </ListStyle>
+          <LinkStyle href="mypage/scraps"> {"> "} my scrap 보러가기</LinkStyle>
         </StateTag>
 
         <JobPostingList
@@ -159,4 +165,11 @@ const ListStyle = styled.li`
     border: 1px solid black;
     opacity: 1;
   }
+`;
+
+const LinkStyle = styled.a`
+  float: right;
+  margin-top: 1.5vw;
+  font-size: 10pt;
+  text-decoration: none;
 `;

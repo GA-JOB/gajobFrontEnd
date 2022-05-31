@@ -36,6 +36,10 @@ export const Community = () => {
           </SideNavWrapper>
 
           <ContentWrapper>
+            <Category>
+              <strong>✔️ JOB담 </strong>
+              {category === null ? "| 전체보기" : "| " + category}
+            </Category>
             <PostList isMypage={false} postCategory={category} />
           </ContentWrapper>
         </CommuContainer>
@@ -104,4 +108,9 @@ const ContentWrapper = styled.div`
   background-color: white;
   border: 1px solid #eaeaea;
   border-radius: 5px;
+`;
+const Category = styled.div`
+  margin: 0.5vw;
+  font-weight: lighter;
+  letter-spacing: 1px;
 `;

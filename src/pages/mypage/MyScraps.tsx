@@ -1,11 +1,15 @@
-import { PostList } from "pages/community/PostList";
+import { JobPostingList } from "pages/jobPosting/JobPostingList";
 import styled from "styled-components";
+import useGetJobPostingScrap from "hooks/api/jobPosting/useGetJobPostingScrap";
 
 export const MyScraps = () => {
+  const { data } = useGetJobPostingScrap();
+
+  if (!data) return <></>;
   return (
     <MyScrapsWrapper>
       <ContentWrapper>
-        <PostList isMypage={true} />
+        <JobPostingList data={data} careerState={null} />
       </ContentWrapper>
     </MyScrapsWrapper>
   );

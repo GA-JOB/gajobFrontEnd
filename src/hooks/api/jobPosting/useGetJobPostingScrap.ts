@@ -1,15 +1,9 @@
 import useSWR from "swr";
 import { fetcher } from "lib/api/fetcher";
-
-interface IJobPostingScrap {
-  id: number;
-  title: string;
-  scrapDate: string;
-  wantedInfoUrl: string;
-}
+import { IJobPostingCrawling } from "types";
 
 function useGetJobPostingScrap() {
-  const { data } = useSWR<IJobPostingScrap[]>(
+  const { data } = useSWR<IJobPostingCrawling[]>(
     "/issue/job-posting/scrap",
     fetcher
   );

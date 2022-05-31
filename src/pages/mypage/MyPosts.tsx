@@ -8,13 +8,30 @@ export const MyPosts = () => {
   const { data } = useGetMyStudyPosts();
   const [postType, setPostType] = useState<string>("커뮤니티");
 
+  // 상태 표시 style
+  const selectBtn = {
+    backgroundColor: "#eaeaea",
+    borderRadius: "10px",
+  };
+  const noSelectBtn = {};
+
   return (
     <MyPostsWrapper>
       <SideNavWrapper>
         <SideNav>
           <NavTitle>내 게시물</NavTitle>
-          <NavList onClick={() => setPostType("커뮤니티")}>🔥 JOB담</NavList>
-          <NavList onClick={() => setPostType("스터디")}>⭐️ STUDY</NavList>
+          <NavList
+            style={postType === "커뮤니티" ? selectBtn : noSelectBtn}
+            onClick={() => setPostType("커뮤니티")}
+          >
+            🔥 JOB담
+          </NavList>
+          <NavList
+            style={postType === "스터디" ? selectBtn : noSelectBtn}
+            onClick={() => setPostType("스터디")}
+          >
+            ⭐️ STUDY
+          </NavList>
         </SideNav>
       </SideNavWrapper>
 
@@ -71,17 +88,15 @@ const NavTitle = styled.div`
 `;
 const NavList = styled.div`
   list-style: none;
-  margin: 0.6vw;
-  padding: 0.3vw;
+  margin: 0.5vw;
+  padding: 0.6vw 1vw;
   font-size: 12pt;
   letter-spacing: 1px;
   cursor: pointer;
 
   &:hover {
-    padding: 0.3vw 1vw;
     background-color: #eaeaea;
-    border-radius: 5px;
-    transition: 0.5s;
+    border-radius: 10px;
   }
 `;
 

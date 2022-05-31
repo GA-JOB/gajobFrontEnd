@@ -149,7 +149,7 @@ const StudyTypeWrapper = styled.div`
   flex-direction: column;
 `;
 const Category = styled.div`
-  margin: 1vw;
+  margin: 0.5vw;
   font-weight: lighter;
   letter-spacing: 1px;
 `;

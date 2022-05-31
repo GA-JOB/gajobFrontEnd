@@ -28,19 +28,11 @@ export const PostDetails = () => {
   const [isOpenChat, setIsOpenChat] = useState<boolean>(true);
   const [isOpenLikesList, setIsOpenLikesList] = useState<boolean>(false);
 
-  // 좋아요, 스크랩
-  // scrapState 넣을 예정.
-  const [scrapState, setScrapState] = useState<boolean | undefined>(false);
-  const [likesState, setLikesState] = useState<boolean | undefined>(
-    data?.likeStatus
-  );
-
   // 스크랩
   const onClickScrapBtn = async (e: any) => {
     e.preventDefault();
 
     postScrap(viewId ? parseInt(viewId) : 0);
-    setScrapState((prev) => !prev);
   };
 
   // 좋아요
@@ -48,7 +40,6 @@ export const PostDetails = () => {
     e.preventDefault();
 
     postLikes(viewId ? parseInt(viewId) : 0);
-    setLikesState((prev) => !prev);
   };
 
   const clickIconStyle = {
@@ -180,7 +171,7 @@ export const PostDetails = () => {
           <IconTxt>likes</IconTxt>
         </LikesRound>
         <ScrapRound>
-          {scrapState === true ? (
+          {data.scrapStatus === true ? (
             <Bookmark style={clickIconStyle} onClick={onClickScrapBtn} />
           ) : (
             <BookmarkBorder style={clickIconStyle} onClick={onClickScrapBtn} />
