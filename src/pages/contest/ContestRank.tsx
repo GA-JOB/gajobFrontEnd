@@ -9,9 +9,14 @@ export const ContestRank = () => {
 
   const [state, setState] = useState<string | null>(null);
 
-  const IconStyle = {
-    fontSize: 50,
-    color: "white",
+  // 상태 표시 style
+  const selectBtn = {
+    backgroundColor: "white",
+    border: "1px solid black",
+    opacity: "1",
+  };
+  const noSelectBtn = {
+    color: "black",
   };
 
   if (!data) return <Loading />;
@@ -21,11 +26,36 @@ export const ContestRank = () => {
         <SubTitle>🔥 실시간 HOT 공모전</SubTitle>
 
         <StateTag>
-          <ListStyle onClick={() => setState(null)}># 전체</ListStyle>
-          <ListStyle onClick={() => setState("접수예정")}># 접수예정</ListStyle>
-          <ListStyle onClick={() => setState("접수중")}># 접수중</ListStyle>
-          <ListStyle onClick={() => setState("마감임박")}># 마감임박</ListStyle>
-          <ListStyle onClick={() => setState("마감")}># 마감</ListStyle>
+          <ListStyle
+            style={state === null ? selectBtn : noSelectBtn}
+            onClick={() => setState(null)}
+          >
+            # 전체
+          </ListStyle>
+          <ListStyle
+            style={state === "접수예정" ? selectBtn : noSelectBtn}
+            onClick={() => setState("접수예정")}
+          >
+            # 접수예정
+          </ListStyle>
+          <ListStyle
+            style={state === "접수중" ? selectBtn : noSelectBtn}
+            onClick={() => setState("접수중")}
+          >
+            # 접수중
+          </ListStyle>
+          <ListStyle
+            style={state === "마감임박" ? selectBtn : noSelectBtn}
+            onClick={() => setState("마감임박")}
+          >
+            # 마감임박
+          </ListStyle>
+          <ListStyle
+            style={state === "마감" ? selectBtn : noSelectBtn}
+            onClick={() => setState("마감")}
+          >
+            # 마감
+          </ListStyle>
         </StateTag>
 
         {/* 1, 2, 3랭킹 상단에 보이기 */}
@@ -37,16 +67,6 @@ export const ContestRank = () => {
                 <LinkStyle href={gallery.url} target="_blank">
                   <ContentsBox key={index}>
                     <ImgBox>
-                      {/* <Ranking>
-                        {(gallery.ranking === "1" ||
-                          gallery.ranking === "2" ||
-                          gallery.ranking === "3") && (
-                          <>
-                            {gallery.ranking}
-                            <EmojiEventsTwoTone style={IconStyle} />
-                          </>
-                        )}
-                      </Ranking> */}
                       <img
                         src={gallery.imgUrl}
                         alt="이미지 준비중 .."
@@ -100,13 +120,11 @@ const ListStyle = styled.li`
   margin: 1vw;
   padding: 0.5vw 1vw;
   cursor: pointer;
-  transition: 0.1s;
 
   &:hover {
     background-color: white;
     border: 1px solid black;
     opacity: 1;
-    transition: 0.1s;
   }
 `;
 const Box = styled.li`

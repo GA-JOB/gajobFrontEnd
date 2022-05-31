@@ -3,9 +3,9 @@ import { fetcher } from "lib/api/fetcher";
 import { IStudy } from "types";
 
 function useGetStudy() {
-  const { data, error } = useSWR<IStudy[]>("/study/posts", fetcher);
+  const { data } = useSWR<IStudy[]>("/study/posts", fetcher);
 
-  return { data, error };
+  return { data };
 }
 
 export default useGetStudy;

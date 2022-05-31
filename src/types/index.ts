@@ -87,6 +87,7 @@ export interface ICommunity {
   likesList?: ICommunityLikes[];
   likeStatus?: boolean;
   scrap?: number;
+  scrapStatus?: boolean;
   createdDate?: Date;
   modifiedDate?: Date;
 }
