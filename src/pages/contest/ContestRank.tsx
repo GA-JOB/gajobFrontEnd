@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Loading } from "components/loading/index";
 import styled from "styled-components";
-import { EmojiEventsTwoTone } from "@mui/icons-material";
 import useGetContestRank from "hooks/api/useGetContestRank";
 
 export const ContestRank = () => {

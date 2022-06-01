@@ -27,6 +27,7 @@ interface IStudyProps {
   endDate?: string | Date | null;
   status?: string;
   openTalkUrl?: string | null;
+  isEdit: boolean;
 }
 
 export const StudyRegister = ({
@@ -35,13 +36,14 @@ export const StudyRegister = ({
   content = "",
   studyCategory = "",
   area = "",
-  minPeople = 0,
+  minPeople = "",
   maxPeople = "",
   startDate = new Date(),
   endDate = null,
   status = "모집중",
   setRegister,
   openTalkUrl = null,
+  isEdit,
 }: IStudyProps | any) => {
   const { postStudy, editStudy } = useStudy();
 
@@ -152,13 +154,24 @@ export const StudyRegister = ({
     setRegister(false);
   };
 
+  // form width 조정.
+  const EditForm = {
+    width: "100%",
+  };
+  const RegisterForm = {
+    width: "70%",
+  };
+
   return (
     <StudyRegisterWrapper>
-      <MenuTitle
-        title="STUDY 등록"
-        info="STUDY 등록에 필요한 정보를 입력해주세요!"
-      ></MenuTitle>
-      <Form onSubmit={handleSubmit}>
+      {!isEdit && (
+        <MenuTitle
+          title="STUDY 등록"
+          info="STUDY 등록에 필요한 정보를 입력해주세요!"
+        ></MenuTitle>
+      )}
+
+      <Form onSubmit={handleSubmit} style={isEdit ? EditForm : RegisterForm}>
         <SmallInput>
           <InputSelectField variant="filled" sx={{ m: 0, minWidth: "100%" }}>
             <InputLabel>카테고리</InputLabel>
@@ -187,7 +200,17 @@ export const StudyRegister = ({
                 <MenuItem value={area}>{area}</MenuItem>
               ))}
             </Select>
-          </InputSelectField>
+          </InputSelectField>{" "}
+          <InputTextField
+            label="최소 인원"
+            variant="filled"
+            type="number"
+            name="minPeopleForm"
+            value={minPeopleForm}
+            onChange={onChange}
+            required
+            // inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
+          />
           <InputTextField
             label="최대 인원"
             variant="filled"
@@ -262,8 +285,7 @@ export const StudyRegister = ({
 };
 
 const StudyRegisterWrapper = styled.div`
-  width: 80%;
-  padding: 1vw;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -273,8 +295,7 @@ const StudyRegisterWrapper = styled.div`
 const Form = styled.form`
   position: relative;
   z-index: 5;
-  width: 100%;
-  margin: 1vw;
+  margin: 0.5vw;
 `;
 const InputTextField = styled(TextField)`
   width: 100%;
@@ -288,7 +309,7 @@ const InputSelectField = styled(FormControl)`
 
 const SmallInput = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   grid-gap: 12px;
   margin-bottom: 2vh;
 `;

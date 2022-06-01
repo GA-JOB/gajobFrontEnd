@@ -1,19 +1,21 @@
 import React, { useState } from "react";
 import { MenuTitle } from "components/Menutitle";
-import { SearchData } from "components/search";
+// import { SearchData } from "components/search";
 import { JobPostingList } from "./JobPostingList";
 import { Loading } from "components/loading/index";
 import "react-tabulator/lib/styles.css"; // default theme
 import "react-tabulator/css/bootstrap/tabulator_bootstrap.min.css"; // use Theme(s)
 import styled from "styled-components";
-import { ReactTabulator } from "react-tabulator";
 import { ColumnDefinition, ReactTabulatorOptions } from "react-tabulator";
+import {
+  MenuItem,
+  FormControl,
+  Select,
+  // SelectChangeEvent,
+} from "@mui/material";
 import useGetJobPosting from "hooks/api/jobPosting/useGetJobPosting";
 import storage from "hooks/store";
-import { Bookmark } from "@mui/icons-material";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
+
 export const JobPosting = () => {
   const token = storage.get("user-token");
   const { data } = useGetJobPosting();
@@ -48,10 +50,6 @@ export const JobPosting = () => {
   };
   const noSelectBtn = {
     color: "black",
-  };
-
-  const onClickScrapLink = () => {
-    window.location.replace("mypage/scraps");
   };
 
   if (!token) {
