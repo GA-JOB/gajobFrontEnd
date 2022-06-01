@@ -156,9 +156,9 @@ export const useStudy = () => {
   const postLikes = async (postId: number) => {
     await post(`/study/likes/${postId}`).then((res) => {
       if (res === "increase-likes") {
-        alert("스터디에 공감하셨습니다.");
+        alert("해당 스터디 게시글에 공감하셨습니다.");
       } else {
-        alert("스터디 공감을 취소하셨습니다.");
+        alert("해당 스터디 게시글 공감을 취소하셨습니다.");
       }
       window.location.reload();
     });

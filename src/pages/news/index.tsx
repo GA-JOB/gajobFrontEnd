@@ -20,7 +20,7 @@ export const JobNews = () => {
         title="JOB NEWS"
         info="실시간으로 제공되는 최신 취업 소식을 확인해보세요."
       />
-      <SearchData data={data} setSearchedData={setSearchedData} />
+      <SearchData newsData={data} setSearchedData={setSearchedData} />
       <NewsList searchedData={searchedData} />
     </JobNewsWrapper>
   );
