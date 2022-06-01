@@ -22,12 +22,13 @@ import { useStudy } from "hooks/api/study";
 
 export const StudyDetails = () => {
   const nickname = storage.get("user-nickname");
-  const { id } = useParams();
   const navigate = useNavigate();
+  const { id } = useParams();
   const { data } = useGetPieceStudy(Number(id));
   const { postScrap, postLikes } = useStudy();
 
-  const [register, setRegister] = useState<Boolean>(false);
+  const [isEdit, setIsEdit] = useState<boolean>(false);
+  const [register, setRegister] = useState<boolean>(false);
   const [isOpenChat, setIsOpenChat] = useState<boolean>(true);
   const [isOpenLikesList, setIsOpenLikesList] = useState<boolean>(false);
 
@@ -53,6 +54,16 @@ export const StudyDetails = () => {
     cursor: "pointer",
   };
 
+  // 모집 상태 css
+  const progressStatus = {
+    border: "1.5px solid #1245AB",
+    color: "#1245AB",
+  };
+  const closedStatus = {
+    border: "1.5px solid #DB0000",
+    color: "#DB0000",
+  };
+
   if (!data) return <Loading />;
   return (
     <ViewDetailWrapper>
@@ -72,7 +83,12 @@ export const StudyDetails = () => {
           {/* login user === post writer일 경우 수정 or 삭제 */}
           {data.writer === nickname ? (
             <ButtonTypeBox>
-              <EditTxt onClick={() => setRegister((prev) => !prev)}>
+              <EditTxt
+                onClick={() => {
+                  setRegister((prev) => !prev);
+                  setIsEdit((prev) => !prev);
+                }}
+              >
                 {!register ? "수정" : "닫기"}
                 <Edit style={IconStyle} />
               </EditTxt>
@@ -94,6 +110,12 @@ export const StudyDetails = () => {
                 <>{data.modifiedDate} 수정됨.</>
               )}
             </CreateDate>
+
+            <Status
+              style={data.status === "모집중" ? progressStatus : closedStatus}
+            >
+              {data.status}
+            </Status>
           </Writer>
 
           {register ? (
@@ -109,18 +131,41 @@ export const StudyDetails = () => {
                 startDate={data.startDate}
                 endDate={data.endDate}
                 status={data.status}
+                isEdit={isEdit}
                 setRegister={setRegister}
               />
             </ContentContainer>
           ) : (
             <ContentContainer>
               <Title>{data.title}</Title>
-              {data.openTalkUrl && (
-                <a href={data.openTalkUrl} target="_blank" rel="noreferrer">
-                  {data.openTalkUrl}
-                </a>
-              )}
-              <PostContent>{data.content}</PostContent>
+
+              <StudyInfo>
+                <Info>
+                  <div>
+                    분야 <strong>{data.studyCategory}</strong>
+                  </div>
+                  <div>
+                    지역 <strong>{data.area}</strong>
+                  </div>
+                  <div>
+                    인원{" "}
+                    <strong>{data.minPeople + "~" + data.maxPeople}명</strong>
+                  </div>
+                  <div>
+                    모집 마감일 <strong>{data.endDate}</strong>
+                  </div>
+                </Info>
+              </StudyInfo>
+
+              <PostContent>
+                {data.content}
+                <br />
+                {data.openTalkUrl && (
+                  <a href={data.openTalkUrl} target="_blank" rel="noreferrer">
+                    {data.openTalkUrl}
+                  </a>
+                )}
+              </PostContent>
             </ContentContainer>
           )}
 
@@ -240,7 +285,7 @@ const ButtonTypeBox = styled.div`
 `;
 const EditTxt = styled.span`
   opacity: 0.8;
-  font-size: 10pt;
+  font-size: 9pt;
   cursor: pointer;
 `;
 
@@ -270,6 +315,20 @@ const Writer = styled.div`
   font-size: 12pt;
   font-weight: bold;
 `;
+const CreateDate = styled.span`
+  margin-left: 5px;
+  font-size: 10pt;
+  font-weight: lighter;
+  color: gray;
+`;
+const Status = styled.span`
+  float: right;
+  padding: 0 0.5vw;
+  border-radius: 20px;
+  font-size: 10pt;
+  font-weight: lighter;
+`;
+
 const ContentContainer = styled.div`
   margin: 3vw 0;
 `;
@@ -278,16 +337,14 @@ const Title = styled.h4`
   color: #333;
   letter-spacing: 1px;
 `;
+const StudyInfo = styled.div`
+  margin-left: -1vw;
+  letter-spacing: 2px;
+`;
 const PostContent = styled.div`
   font-size: 12pt;
   padding-top: 1vw;
   font-weight: lighter;
-`;
-const CreateDate = styled.span`
-  margin-left: 5px;
-  font-size: 10pt;
-  font-weight: lighter;
-  color: gray;
 `;
 
 const ButtonWrapper = styled.div`
@@ -296,6 +353,7 @@ const ButtonWrapper = styled.div`
   color: black;
 `;
 
+// 좋아요, 스크랩 디자인
 const LikesRound = styled.div`
   position: fixed;
   top: 320px;

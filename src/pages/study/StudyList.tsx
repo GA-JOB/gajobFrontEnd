@@ -24,9 +24,9 @@ export const StudyList = ({ isMypage, data }: IStudyProps) => {
       title: "카테고리",
       field: "studyCategory",
       display: "block",
-      width: "15%",
+      width: "10%",
       hozAlign: "left",
-      headerSort: false,
+      headerSort: false, //sorting 안함
     },
 
     {
@@ -40,14 +40,21 @@ export const StudyList = ({ isMypage, data }: IStudyProps) => {
     {
       title: "모집인원",
       field: "maxPeople",
-      width: "10%",
-      hozAlign: "left",
+      width: "8%",
+      hozAlign: "center",
       headerSort: false,
     },
     {
       title: "상세내용",
       field: "content",
-      width: "35%",
+      width: "32%",
+      hozAlign: "left",
+      headerSort: false,
+    },
+    {
+      title: "등록일",
+      field: "startDate",
+      width: "10%",
       hozAlign: "left",
       headerSort: false,
     },
@@ -56,7 +63,7 @@ export const StudyList = ({ isMypage, data }: IStudyProps) => {
       field: "endDate",
       width: "10%",
       hozAlign: "left",
-      headerSort: false, //sorting안함
+      headerSort: false,
     },
     // {
     //   title: "오픈카톡",
