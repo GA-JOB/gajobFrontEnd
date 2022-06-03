@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Loading } from "components/loading";
+import { ButtonType } from "components/button/ButtonType";
 import { CommentForm } from "components/common/CommentForm";
 import { CommentList } from "./CommentList";
 import { StudyDelete } from "pages/study/StudyDetele";
@@ -15,16 +16,14 @@ import {
   FavoriteBorder,
   Favorite,
 } from "@mui/icons-material";
-import { Button } from "@mui/material";
 import storage from "hooks/store";
 import useGetPieceStudy from "hooks/api/study/useGetPieceStudy";
 import { useStudy } from "hooks/api/study";
-import { ButtonType } from "components/button/ButtonType";
 
 export const StudyDetails = () => {
   const nickname = storage.get("user-nickname");
-  const navigate = useNavigate();
   const { id } = useParams();
+  const navigate = useNavigate();
   const { data } = useGetPieceStudy(Number(id));
   const { postScrap, postLikes } = useStudy();
 
@@ -230,7 +229,11 @@ export const StudyDetails = () => {
         ) : null}
 
         <ButtonWrapper>
-          <Button onClick={() => navigate(-1)}>목록으로</Button>
+          <ButtonType
+            variants="text"
+            title="목록으로"
+            onClick={() => navigate(-1)}
+          />
         </ButtonWrapper>
       </DetailContainer>
 

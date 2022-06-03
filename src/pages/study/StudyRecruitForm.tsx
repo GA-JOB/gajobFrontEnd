@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useLocation } from "react-router";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { MenuTitle } from "components/Menutitle";
 import { ButtonType } from "components/button/ButtonType";
 import styled from "styled-components";
-import { TextField } from "@mui/material";
+import { TextField, Checkbox } from "@mui/material";
+import { ArrowDropDown, ArrowDropUp } from "@mui/icons-material";
 import useGetAuth from "hooks/api/auth/useGetAuth";
 import { useStudy } from "hooks/api/study/index";
 
@@ -15,9 +16,12 @@ interface StudyRecruitProps {
 }
 export const StudyRecruitForm = ({ introduction = "" }: StudyRecruitProps) => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const { state: data }: any = useLocation();
   const user = useGetAuth();
   const { recruitStudy } = useStudy();
+  const [checked, setChecked] = useState<boolean>(false);
+  const [isOpenAgreeContent, setIsOpenAgreeContent] = useState<boolean>(false);
   const competeRate = 8 / data.maxPeople;
 
   const [form, setForm] = useState({
@@ -32,6 +36,10 @@ export const StudyRecruitForm = ({ introduction = "" }: StudyRecruitProps) => {
       [name]: value,
     });
   };
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setChecked(e.target.checked);
+  };
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -49,13 +57,14 @@ export const StudyRecruitForm = ({ introduction = "" }: StudyRecruitProps) => {
       <StudyRecruitWrapper>
         <StudyInfoWrapper>
           <InfoTitle>스터디 정보</InfoTitle>
-          작성자: {data.writer} <br />
-          제목: {data.title} <br />
-          내용: {data.content} <br />
-          지역: {data.area} <br />
-          모집 마감일: {data.endDate} <br />
-          경쟁률 현황: {competeRate} : 1 (신청인원 : 8 / 모집 최대인원:{" "}
-          {data.maxPeople} ) <br />
+          <div>작성자</div> {data.writer} <br />
+          <div>카테고리</div> {data.studyCategory} <br />
+          <div>제목</div> {data.title} <br />
+          <div>내용</div> {data.content} <br />
+          <div>지역</div> {data.area} <br />
+          <div>모집 마감일</div> {data.endDate} <br />
+          <div>경쟁률 현황</div> {competeRate} : 1 (신청인원 : 8 / 모집
+          최대인원: {data.maxPeople} ) <br />
         </StudyInfoWrapper>
 
         <SignForm onSubmit={handleSubmit}>
@@ -74,7 +83,6 @@ export const StudyRecruitForm = ({ introduction = "" }: StudyRecruitProps) => {
               disabled
             />
           </InputLabel>
-
           <InputLabel>
             <span>닉네임</span>
             <InputField
@@ -89,7 +97,6 @@ export const StudyRecruitForm = ({ introduction = "" }: StudyRecruitProps) => {
               disabled
             />
           </InputLabel>
-
           <InputLabel>
             <span>학부</span>
             <InputField
@@ -143,14 +150,63 @@ export const StudyRecruitForm = ({ introduction = "" }: StudyRecruitProps) => {
               }}
               multiline
               rows={5}
-              required
             />
+          </InputLabel>{" "}
+          <InputLabel>
+            <Checkbox
+              checked={checked}
+              onChange={handleChange}
+              inputProps={{ "aria-label": "controlled" }}
+            />
+            <span>
+              개인정보 수집 및 이용 동의{" "}
+              {!isOpenAgreeContent ? (
+                <ArrowDropDown
+                  onClick={() => {
+                    setIsOpenAgreeContent((prev) => !prev);
+                  }}
+                />
+              ) : (
+                <>
+                  <ArrowDropUp
+                    onClick={() => {
+                      setIsOpenAgreeContent((prev) => !prev);
+                    }}
+                  />
+                  <ul>
+                    <li>
+                      개인정보 수집 및 이용 목적: 본인 확인과 서비스 제공을
+                      위함.
+                    </li>
+                    <li>
+                      수집 개인정보 항목: 이름, 닉네임, 학부, 학번, 이메일
+                    </li>
+                    <li>개인정보 보유 및 이용기간: 회원 탈퇴시 까지</li>
+                  </ul>
+                </>
+              )}
+            </span>
+            {console.log(checked)}
           </InputLabel>
           <ButtonWrapper>
-            <ButtonType title={"신청하기"} widthStyle={"100%"} />
+            <ButtonType
+              disabled={
+                introductionForm === "" || checked === false ? true : false
+              }
+              title={"신청하기"}
+              widthStyle={"100%"}
+            />
           </ButtonWrapper>
         </SignForm>
       </StudyRecruitWrapper>
+
+      <ButtonWrapper>
+        <ButtonType
+          title="상세 페이지로"
+          variants="text"
+          onClick={() => navigate(-1)}
+        />
+      </ButtonWrapper>
     </Box>
   );
 };
@@ -158,6 +214,8 @@ const Box = styled.div`
   width: 100%;
   padding: 1vw 10vw;
   display: column;
+  align-items: center;
+  justify-content: center;
 `;
 const StudyRecruitWrapper = styled.div`
   display: flex;
@@ -187,5 +245,6 @@ const InputField = styled(TextField)`
   font-size: 10pt;
 `;
 const ButtonWrapper = styled.div`
-  margin-top: 1vw;
+  text-align: center;
+  margin: 1vw 0;
 `;
