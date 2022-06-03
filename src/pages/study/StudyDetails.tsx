@@ -19,6 +19,7 @@ import { Button } from "@mui/material";
 import storage from "hooks/store";
 import useGetPieceStudy from "hooks/api/study/useGetPieceStudy";
 import { useStudy } from "hooks/api/study";
+import { ButtonType } from "components/button/ButtonType";
 
 export const StudyDetails = () => {
   const nickname = storage.get("user-nickname");
@@ -94,7 +95,17 @@ export const StudyDetails = () => {
               </EditTxt>
               <StudyDelete studyId={Number(id)} />
             </ButtonTypeBox>
-          ) : null}
+          ) : (
+            <ButtonType
+              variants="contained"
+              title="신청하러 가기"
+              link={`/study/recruitment/${Number(id)}`}
+              widthStyle="100%"
+              onClick={() => {
+                navigate(`/study/recruitment/${id}`, { state: data });
+              }}
+            />
+          )}
         </WriterInfo>
       </WriterInfoWrapper>
 
@@ -273,6 +284,7 @@ const WriterInfo = styled.div`
   border-radius: 10px;
   font-size: 13pt;
 `;
+
 const Info = styled.div`
   padding: 1vw;
   font-size: 11pt;

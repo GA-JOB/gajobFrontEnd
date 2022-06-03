@@ -35,7 +35,6 @@ export const ModalContent = ({
 // 전체 Modal 창
 const Wrapper = styled.div`
   min-width: 500px;
-  max-height: 550px;
   border-radius: 10px;
   padding: 20px;
   margin: 10px;

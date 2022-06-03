@@ -53,12 +53,15 @@ export const StudyDelete = ({ studyId, commentId }: IDeleteProps) => {
             <br />
             삭제된 이후 되돌릴 수 없습니다.
           </ModalTxt>
-          <ButtonType
-            title="삭제"
-            onClick={onClickDeleteBtn}
-            buttonColor="black"
-            widthStyle="100%"
-          />
+
+          <ButtonWrapper>
+            <ButtonType
+              title="삭제"
+              onClick={onClickDeleteBtn}
+              buttonColor="black"
+              widthStyle="100%"
+            />
+          </ButtonWrapper>
         </ModalContent>
       </Modal>
     </DeleteWrapper>
@@ -72,4 +75,7 @@ const DeleteWrapper = styled.span`
 `;
 const ModalTxt = styled.div`
   text-align: center;
+`;
+const ButtonWrapper = styled.div`
+  margin-top: 2vw;
 `;

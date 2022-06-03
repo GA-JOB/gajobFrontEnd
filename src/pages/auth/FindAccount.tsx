@@ -32,8 +32,11 @@ export const FindAccount = ({ name = "", email = "" }: IFindAccountProps) => {
     e.preventDefault();
     console.log(form);
 
-    if (isFindEmail) findAccountId({ name: nameForm, studentEmail: emailForm });
-    findAccountPwd({ email: emailForm });
+    if (isFindEmail) {
+      findAccountId({ name: nameForm, studentEmail: emailForm });
+    } else {
+      findAccountPwd({ email: emailForm });
+    }
   };
 
   return (

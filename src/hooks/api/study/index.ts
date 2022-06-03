@@ -22,6 +22,10 @@ interface IPostComment {
   id: number | null;
   comment: string;
 }
+interface IRecruitStudy {
+  postId: number | null;
+  content: string;
+}
 interface IEditComment {
   postId: number | null;
   commentId: number | null;
@@ -103,7 +107,22 @@ export const useStudy = () => {
     mutate(`/study/posts`);
   };
 
-  // post comment
+  // 스터디 신청
+  const recruitStudy = async ({ postId, content }: IRecruitStudy) => {
+    await post(`/study/recruitment/${postId}`, {
+      content,
+    }).then((data: any) => {
+      if (data.result) {
+        alert(
+          "스터디 신청이 완료되었습니다. \n 신청 내역과 결과는 마이페이지에서 확인 가능합니다!"
+        );
+
+        navigate(-1);
+      }
+    });
+  };
+
+  // 댓글 등록
   const postStudyComment = async ({ id, comment }: IPostComment) => {
     await post(`/study/comments/${id}`, {
       comment,
@@ -170,6 +189,7 @@ export const useStudy = () => {
     postStudy,
     editStudy,
     deleteStudy,
+    recruitStudy,
     postStudyComment,
     editStudyComment,
     deleteStudyComment,
