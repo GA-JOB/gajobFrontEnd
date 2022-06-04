@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { MenuTitle } from "components/Menutitle";
 import { JobPostingList } from "pages/jobPosting/JobPostingList";
 import { PostList } from "pages/community/PostList";
 import { StudyList } from "pages/study/StudyList";
@@ -26,51 +27,58 @@ export const MyScraps = () => {
   if (!(jobPosting?.data && community?.data)) return <></>;
   return (
     <MyScrapsWrapper>
-      <SideNavWrapper>
-        <SideNav>
-          <NavTitle>내 스크랩</NavTitle>
-          <NavList
-            style={scrapType === "채용공고" ? selectBtn : noSelectBtn}
-            onClick={() => setScrapType("채용공고")}
-          >
-            🔥 채용공고
-          </NavList>
-          <NavList
-            style={scrapType === "공모전" ? selectBtn : noSelectBtn}
-            onClick={() => setScrapType("공모전")}
-          >
-            🪧 공모전
-          </NavList>
-          <NavList
-            style={scrapType === "커뮤니티" ? selectBtn : noSelectBtn}
-            onClick={() => setScrapType("커뮤니티")}
-          >
-            ⭐️ JOB담
-          </NavList>
-          <NavList
-            style={scrapType === "스터디" ? selectBtn : noSelectBtn}
-            onClick={() => setScrapType("스터디")}
-          >
-            📚 STUDY
-          </NavList>
-        </SideNav>
-      </SideNavWrapper>
+      <MenuTitle
+        title="MY SCRAP"
+        info="스크랩한 게시물을 한눈에 보세요!"
+      ></MenuTitle>
 
-      <ContentWrapper>
-        {scrapType === "채용공고" && (
-          <JobPostingList data={jobPosting?.data} careerState={null} />
-        )}
-        {scrapType === "커뮤니티" && (
-          <PostList
-            data={community?.data}
-            isMypage={true}
-            postCategory={null}
-          />
-        )}
-        {scrapType === "스터디" && (
-          <StudyList data={study?.data} isMypage={true} />
-        )}
-      </ContentWrapper>
+      <Container>
+        <SideNavWrapper>
+          <SideNav>
+            <NavTitle>내 스크랩</NavTitle>
+            <NavList
+              style={scrapType === "채용공고" ? selectBtn : noSelectBtn}
+              onClick={() => setScrapType("채용공고")}
+            >
+              🔥 채용공고
+            </NavList>
+            <NavList
+              style={scrapType === "공모전" ? selectBtn : noSelectBtn}
+              onClick={() => setScrapType("공모전")}
+            >
+              🪧 공모전
+            </NavList>
+            <NavList
+              style={scrapType === "커뮤니티" ? selectBtn : noSelectBtn}
+              onClick={() => setScrapType("커뮤니티")}
+            >
+              ⭐️ JOB담
+            </NavList>
+            <NavList
+              style={scrapType === "스터디" ? selectBtn : noSelectBtn}
+              onClick={() => setScrapType("스터디")}
+            >
+              📚 STUDY
+            </NavList>
+          </SideNav>
+        </SideNavWrapper>
+
+        <ContentWrapper>
+          {scrapType === "채용공고" && (
+            <JobPostingList data={jobPosting?.data} careerState={null} />
+          )}
+          {scrapType === "커뮤니티" && (
+            <PostList
+              data={community?.data}
+              isMypage={true}
+              postCategory={null}
+            />
+          )}
+          {scrapType === "스터디" && (
+            <StudyList data={study?.data} isMypage={true} />
+          )}
+        </ContentWrapper>
+      </Container>
     </MyScrapsWrapper>
   );
 };
@@ -79,7 +87,8 @@ const MyScrapsWrapper = styled.div`
   width: 100%;
   padding: 2vw;
   background-color: #eaeaea;
-
+`;
+const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -98,7 +107,7 @@ const SideNav = styled.div`
   right: 0;
 
   width: 16%;
-  margin-top: 18vw;
+  margin-top: 19vw;
   margin-left: 6vw;
   padding: 1vw;
   border: 1px solid lightgray;
@@ -128,9 +137,9 @@ const NavList = styled.div`
 `;
 
 const ContentWrapper = styled.div`
-  margin: 3vw 1vw;
+  margin: 0 1vw;
   width: 80%;
-  height: 48vw;
+  height: 45vw;
   padding: 2vw;
   background-color: white;
   border: 1px solid #eaeaea;

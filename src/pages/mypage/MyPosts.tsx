@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { MenuTitle } from "components/Menutitle";
 import { PostList } from "pages/community/PostList";
 import { StudyList } from "pages/study/StudyList";
 import styled from "styled-components";
@@ -19,46 +20,53 @@ export const MyPosts = () => {
 
   return (
     <MyPostsWrapper>
-      <SideNavWrapper>
-        <SideNav>
-          <NavTitle>내 게시물</NavTitle>
-          <NavList
-            style={postType === "커뮤니티" ? selectBtn : noSelectBtn}
-            onClick={() => setPostType("커뮤니티")}
-          >
-            🔥 JOB담
-          </NavList>
-          <NavList
-            style={postType === "스터디" ? selectBtn : noSelectBtn}
-            onClick={() => setPostType("스터디")}
-          >
-            ⭐️ STUDY
-          </NavList>
-        </SideNav>
-      </SideNavWrapper>
+      <MenuTitle
+        title="내 게시물"
+        info="내가 작성한 게시물을 한눈에 확인하세요!"
+      ></MenuTitle>
+      <Container>
+        <SideNavWrapper>
+          <SideNav>
+            <NavTitle>내 게시물</NavTitle>
+            <NavList
+              style={postType === "커뮤니티" ? selectBtn : noSelectBtn}
+              onClick={() => setPostType("커뮤니티")}
+            >
+              🔥 JOB담
+            </NavList>
+            <NavList
+              style={postType === "스터디" ? selectBtn : noSelectBtn}
+              onClick={() => setPostType("스터디")}
+            >
+              ⭐️ STUDY
+            </NavList>
+          </SideNav>
+        </SideNavWrapper>
 
-      <ContentWrapper>
-        {postType === "커뮤니티" ? (
-          // 커뮤니티
-          <PostList
-            data={community?.data}
-            isMypage={true}
-            postCategory={null}
-          />
-        ) : (
-          // 스터디
-          <StudyList data={study?.data} isMypage={true} />
-        )}
-      </ContentWrapper>
+        <ContentWrapper>
+          {postType === "커뮤니티" ? (
+            // 커뮤니티
+            <PostList
+              data={community?.data}
+              isMypage={true}
+              postCategory={null}
+            />
+          ) : (
+            // 스터디
+            <StudyList data={study?.data} isMypage={true} />
+          )}
+        </ContentWrapper>
+      </Container>
     </MyPostsWrapper>
   );
 };
 
 const MyPostsWrapper = styled.div`
   width: 100%;
-  padding: 5vw;
+  padding: 1vw 5vw;
   background-color: #eaeaea;
-
+`;
+const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;

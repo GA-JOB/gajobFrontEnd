@@ -209,7 +209,7 @@ export const StudyRegister = ({
             value={minPeopleForm}
             onChange={onChange}
             required
-            // inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
+            inputProps={{ inputMode: "numeric", min: 2 }}
           />
           <InputTextField
             label="최대 인원"

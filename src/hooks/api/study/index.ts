@@ -21,11 +21,17 @@ interface IEditStudy extends Omit<IStudy, IOmitStudyPost> {
 interface IPostComment {
   id: number | null;
   comment: string;
+  isSecret: boolean;
+}
+interface IRecruitStudy {
+  postId: number | null;
+  content: string;
 }
 interface IEditComment {
   postId: number | null;
   commentId: number | null;
   comment: string;
+  isSecret: boolean;
 }
 export const useStudy = () => {
   const navigate = useNavigate();
@@ -103,10 +109,26 @@ export const useStudy = () => {
     mutate(`/study/posts`);
   };
 
-  // post comment
-  const postStudyComment = async ({ id, comment }: IPostComment) => {
+  // 스터디 신청
+  const recruitStudy = async ({ postId, content }: IRecruitStudy) => {
+    await post(`/study/recruitment/${postId}`, {
+      content,
+    }).then((data: any) => {
+      if (data.result) {
+        alert(
+          "스터디 신청이 완료되었습니다. \n 신청 내역과 결과는 마이페이지에서 확인 가능합니다!"
+        );
+
+        navigate(-1);
+      }
+    });
+  };
+
+  // 댓글 등록
+  const postStudyComment = async ({ id, comment, isSecret }: IPostComment) => {
     await post(`/study/comments/${id}`, {
       comment,
+      isSecret,
     }).then((data: any) => {
       if (data) {
         console.log(JSON.stringify(data));
@@ -119,9 +141,11 @@ export const useStudy = () => {
     postId,
     commentId,
     comment,
+    isSecret,
   }: IEditComment) => {
     await put(`/study/posts/${postId}/comments/${commentId}`, {
       comment,
+      isSecret,
     }).then((data: any) => {
       if (data) {
         console.log(JSON.stringify(data));
@@ -130,6 +154,7 @@ export const useStudy = () => {
 
     mutate(`/study/posts/${postId}/comments/${commentId}`, false);
   };
+  // 스터디 댓글 삭제
   const deleteStudyComment = async (studyId: number, commentId: number) => {
     await del(`/study/comments/${commentId}`).then(() => {
       window.confirm("댓글이 삭제되었습니다.");
@@ -170,6 +195,7 @@ export const useStudy = () => {
     postStudy,
     editStudy,
     deleteStudy,
+    recruitStudy,
     postStudyComment,
     editStudyComment,
     deleteStudyComment,

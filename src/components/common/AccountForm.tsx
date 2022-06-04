@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { MenuTitle } from "components/Menutitle";
 import { ButtonType } from "components/button/ButtonType";
 import styled from "styled-components";
-import { TextField, MenuItem, InputAdornment } from "@mui/material";
-import { Done, Forward } from "@mui/icons-material";
+import { TextField, MenuItem, InputAdornment, Checkbox } from "@mui/material";
+import { Done, Forward, ArrowDropDown, ArrowDropUp } from "@mui/icons-material";
 import storage from "hooks/store";
 import { useAuth } from "hooks/api/auth";
 
@@ -58,6 +58,10 @@ export const AccountForm = ({
   const [passwordCheck, setPasswordCheck] = useState<string>("");
   const [mismatchError, setMismatchError] = useState(false);
 
+  // 개인정보 수집 및 이용 동의 여부
+  const [checked, setChecked] = useState<boolean>(false);
+  const [isOpenAgreeContent, setIsOpenAgreeContent] = useState<boolean>(false);
+
   const [form, setForm] = useState({
     nameForm: name,
     nicknameForm: nickname,
@@ -87,6 +91,9 @@ export const AccountForm = ({
       ...form,
       [name]: value,
     });
+  };
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setChecked(e.target.checked);
   };
 
   // password check
@@ -363,11 +370,50 @@ export const AccountForm = ({
           </>
         ) : null}
 
+        {isSignup && (
+          <InputLabel>
+            <Checkbox
+              checked={checked}
+              onChange={handleChange}
+              inputProps={{ "aria-label": "controlled" }}
+            />
+            <span>
+              개인정보 수집 및 이용 동의{" "}
+              {!isOpenAgreeContent ? (
+                <ArrowDropDown
+                  onClick={() => {
+                    setIsOpenAgreeContent((prev) => !prev);
+                  }}
+                />
+              ) : (
+                <>
+                  <ArrowDropUp
+                    onClick={() => {
+                      setIsOpenAgreeContent((prev) => !prev);
+                    }}
+                  />
+                  <ul>
+                    <li>
+                      개인정보 수집 및 이용 목적: 본인 확인과 서비스 제공을
+                      위함.
+                    </li>
+                    <li>
+                      수집 개인정보 항목: 이름, 학교계정, 학부, 학번, 이메일
+                    </li>
+                    <li>개인정보 보유 및 이용기간: 회원 탈퇴시 까지</li>
+                  </ul>
+                </>
+              )}
+            </span>
+          </InputLabel>
+        )}
+
         <ButtonWrapper>
           <ButtonType
             disabled={
               (isSignup &&
-                storage.get("code-verify") === "authentication-success") ||
+                storage.get("code-verify") === "authentication-success" &&
+                checked === true) ||
               !isSignup
                 ? false
                 : true

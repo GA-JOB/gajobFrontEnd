@@ -18,11 +18,13 @@ interface IEditComment {
   postId: number | null;
   commentId: number | null;
   comment: string;
+  isSecret: boolean;
 }
 
 interface IPostComment {
   id: number | null;
   comment: string;
+  isSecret: boolean;
 }
 
 export const useCommunity = () => {
@@ -79,9 +81,10 @@ export const useCommunity = () => {
     mutate(`/community/posts`);
   };
 
-  const postComment = async ({ id, comment }: IPostComment) => {
+  const postComment = async ({ id, comment, isSecret }: IPostComment) => {
     await post(`/community/comments/${id}`, {
       comment,
+      isSecret,
     }).then((data: any) => {
       if (data) {
         console.log(JSON.stringify(data));
@@ -91,9 +94,15 @@ export const useCommunity = () => {
     mutate(`/community/comments/${id}`, false);
   };
 
-  const editComment = async ({ postId, commentId, comment }: IEditComment) => {
+  const editComment = async ({
+    postId,
+    commentId,
+    comment,
+    isSecret,
+  }: IEditComment) => {
     await put(`/community/posts/${postId}/comments/${commentId}`, {
       comment,
+      isSecret,
     }).then((data: any) => {
       if (data) {
         console.log(JSON.stringify(data));

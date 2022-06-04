@@ -211,9 +211,9 @@ export const useAuth = () => {
   // ID 찾기
   const findAccountId = async ({ name, studentEmail }: IPostFindIdRequest) => {
     await post(`/find-id`, { name, studentEmail }).then((res: any) => {
-      alert(
-        "입력하신 이메일로 임시 비밀번호를 발송해드렸습니다.\n로그인 후 임시 비밀번호를 변경하세요"
-      );
+      alert("이메일을 확인해주세요.");
+
+      console.log(res);
     });
   };
   // PW 찾기

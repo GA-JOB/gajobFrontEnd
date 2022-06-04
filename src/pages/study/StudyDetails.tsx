@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Loading } from "components/loading";
+import { ButtonType } from "components/button/ButtonType";
 import { CommentForm } from "components/common/CommentForm";
 import { CommentList } from "./CommentList";
 import { StudyDelete } from "pages/study/StudyDetele";
@@ -15,15 +16,14 @@ import {
   FavoriteBorder,
   Favorite,
 } from "@mui/icons-material";
-import { Button } from "@mui/material";
 import storage from "hooks/store";
 import useGetPieceStudy from "hooks/api/study/useGetPieceStudy";
 import { useStudy } from "hooks/api/study";
 
 export const StudyDetails = () => {
   const nickname = storage.get("user-nickname");
-  const navigate = useNavigate();
   const { id } = useParams();
+  const navigate = useNavigate();
   const { data } = useGetPieceStudy(Number(id));
   const { postScrap, postLikes } = useStudy();
 
@@ -94,7 +94,17 @@ export const StudyDetails = () => {
               </EditTxt>
               <StudyDelete studyId={Number(id)} />
             </ButtonTypeBox>
-          ) : null}
+          ) : (
+            <ButtonType
+              variants="contained"
+              title="신청하러 가기"
+              link={`/study/recruitment/${Number(id)}`}
+              widthStyle="100%"
+              onClick={() => {
+                navigate(`/study/recruitment/${id}`, { state: data });
+              }}
+            />
+          )}
         </WriterInfo>
       </WriterInfoWrapper>
 
@@ -214,12 +224,16 @@ export const StudyDetails = () => {
             />
 
             {/* 댓글 등록 */}
-            <CommentForm id={Number(id)} isStudy={true} />
+            <CommentForm id={Number(id)} isStudy={true} isSecret={false} />
           </>
         ) : null}
 
         <ButtonWrapper>
-          <Button onClick={() => navigate(-1)}>목록으로</Button>
+          <ButtonType
+            variants="text"
+            title="목록으로"
+            onClick={() => navigate(-1)}
+          />
         </ButtonWrapper>
       </DetailContainer>
 
@@ -273,6 +287,7 @@ const WriterInfo = styled.div`
   border-radius: 10px;
   font-size: 13pt;
 `;
+
 const Info = styled.div`
   padding: 1vw;
   font-size: 11pt;
