@@ -224,7 +224,7 @@ export const StudyDetails = () => {
             />
 
             {/* 댓글 등록 */}
-            <CommentForm id={Number(id)} isStudy={true} />
+            <CommentForm id={Number(id)} isStudy={true} isSecret={false} />
           </>
         ) : null}
 

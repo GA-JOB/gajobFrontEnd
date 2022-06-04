@@ -91,7 +91,6 @@ export const JobPostingList = ({ data, careerState }: IJobPostingProps) => {
             ? data
             : data?.filter((data) => data.career.startsWith(careerState))
         }
-        // data={data}
         options={options}
         events={{ rowClick: rowClickHandler }}
       />

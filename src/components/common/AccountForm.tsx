@@ -411,10 +411,10 @@ export const AccountForm = ({
         <ButtonWrapper>
           <ButtonType
             disabled={
-              ((isSignup &&
-                storage.get("code-verify") === "authentication-success") ||
-                !isSignup) &&
-              checked === true
+              (isSignup &&
+                storage.get("code-verify") === "authentication-success" &&
+                checked === true) ||
+              !isSignup
                 ? false
                 : true
             }

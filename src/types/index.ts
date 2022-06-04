@@ -123,6 +123,7 @@ type ILikesList = {
 };
 type ICommunityComment = {
   id?: number;
+  isSecret?: boolean;
   comment?: string;
   createdDate?: Date;
   modifiedDate?: Date;

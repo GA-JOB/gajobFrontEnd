@@ -2,7 +2,7 @@ import { useState } from "react";
 import { CommentForm } from "components/common/CommentForm";
 import { StudyDelete } from "./StudyDetele";
 import styled from "styled-components";
-import { Edit } from "@mui/icons-material";
+import { Edit, Lock } from "@mui/icons-material";
 import storage from "hooks/store";
 
 interface ICommentProps {
@@ -34,6 +34,9 @@ export const CommentList = ({
           {commentList?.map((comment: any, index: number) => (
             <CommentWrapper key={index}>
               <Writer>
+                {comment.isSecret ? (
+                  <Lock fontSize="small" style={IconStyle} />
+                ) : null}
                 {postWriter === comment.nickname
                   ? "작성자"
                   : comment.nickname + " "}
@@ -65,15 +68,25 @@ export const CommentList = ({
                 ) : null}
               </Writer>
 
-              {commentId === comment.id ? (
-                <CommentForm
-                  id={studyId}
-                  comment={comment.comment}
-                  commentStudyId={comment.id}
-                  isStudy={true}
-                />
+              {/* 비밀댓글 로직 구현 -> 비밀댓글일 경우, 게시글 작성자 및 댓글 작성자 본인만 조회 가능. */}
+              {comment.isSecret === false ||
+              (comment.isSecret === true &&
+                (comment.nickname === nickname || postWriter === nickname)) ? (
+                <>
+                  {commentId === comment.id ? (
+                    <CommentForm
+                      id={studyId}
+                      comment={comment.comment}
+                      commentStudyId={comment.id}
+                      isStudy={true}
+                      isSecret={comment.isSecret}
+                    />
+                  ) : (
+                    <PostContent>{comment.comment}</PostContent>
+                  )}
+                </>
               ) : (
-                <PostContent>{comment.comment}</PostContent>
+                <PostContent> 비밀 댓글입니다.</PostContent>
               )}
             </CommentWrapper>
           ))}
@@ -134,12 +147,11 @@ const PostContent = styled.div`
 `;
 
 const ButtonTypeBox = styled.span`
-  padding: 1vw;
-  text-align: right;
+  margin-left: 1vw;
   font-weight: lighter;
 `;
 const EditWrapper = styled.span`
-  margin: 1vw;
+  margin: 0.3vw;
   font-size: 9pt;
   opacity: 0.8;
   cursor: pointer;

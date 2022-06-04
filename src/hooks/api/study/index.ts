@@ -21,6 +21,7 @@ interface IEditStudy extends Omit<IStudy, IOmitStudyPost> {
 interface IPostComment {
   id: number | null;
   comment: string;
+  isSecret: boolean;
 }
 interface IRecruitStudy {
   postId: number | null;
@@ -30,6 +31,7 @@ interface IEditComment {
   postId: number | null;
   commentId: number | null;
   comment: string;
+  isSecret: boolean;
 }
 export const useStudy = () => {
   const navigate = useNavigate();
@@ -123,9 +125,10 @@ export const useStudy = () => {
   };
 
   // 댓글 등록
-  const postStudyComment = async ({ id, comment }: IPostComment) => {
+  const postStudyComment = async ({ id, comment, isSecret }: IPostComment) => {
     await post(`/study/comments/${id}`, {
       comment,
+      isSecret,
     }).then((data: any) => {
       if (data) {
         console.log(JSON.stringify(data));
@@ -138,9 +141,11 @@ export const useStudy = () => {
     postId,
     commentId,
     comment,
+    isSecret,
   }: IEditComment) => {
     await put(`/study/posts/${postId}/comments/${commentId}`, {
       comment,
+      isSecret,
     }).then((data: any) => {
       if (data) {
         console.log(JSON.stringify(data));
@@ -149,6 +154,7 @@ export const useStudy = () => {
 
     mutate(`/study/posts/${postId}/comments/${commentId}`, false);
   };
+  // 스터디 댓글 삭제
   const deleteStudyComment = async (studyId: number, commentId: number) => {
     await del(`/study/comments/${commentId}`).then(() => {
       window.confirm("댓글이 삭제되었습니다.");
