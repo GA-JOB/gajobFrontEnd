@@ -1,19 +1,22 @@
 import { useState } from "react";
 import { CommentForm } from "components/common/CommentForm";
-import { PostDelete } from "pages/community/PostDelete";
+import { StudyDelete } from "./StudyDetele";
 import styled from "styled-components";
 import { Edit, Lock } from "@mui/icons-material";
 import storage from "hooks/store";
-import useGetComment from "hooks/api/community/useGetComment";
 
 interface ICommentProps {
-  postId: number;
-  postWriter: string | undefined;
+  studyId: number;
+  postWriter: string;
+  commentList: string[];
 }
-export const CommentList = ({ postId, postWriter }: ICommentProps) => {
+export const CommentList = ({
+  studyId,
+  postWriter,
+  commentList,
+}: ICommentProps) => {
   const nickname = storage.get("user-nickname");
 
-  const { data } = useGetComment(postId);
   const [commentId, setCommentId] = useState<number>(0);
   const isEditComment = commentId > 0;
 
@@ -24,12 +27,11 @@ export const CommentList = ({ postId, postWriter }: ICommentProps) => {
     opacity: "0.8",
   };
 
-  if (!data) return <></>;
   return (
     <>
-      {data.length !== 0 ? (
+      {commentList.length !== 0 ? (
         <>
-          {data?.map((comment: any, index: number) => (
+          {commentList?.map((comment: any, index: number) => (
             <CommentWrapper key={index}>
               <Writer>
                 {comment.isSecret ? (
@@ -38,6 +40,7 @@ export const CommentList = ({ postId, postWriter }: ICommentProps) => {
                 {postWriter === comment.nickname
                   ? "작성자"
                   : comment.nickname + " "}
+
                 <CreateDate>
                   {comment.createdDate === comment.modifiedDate ? (
                     <>{comment.createdDate}</>
@@ -45,6 +48,7 @@ export const CommentList = ({ postId, postWriter }: ICommentProps) => {
                     <>{comment.modifiedDate} 수정됨.</>
                   )}
                 </CreateDate>
+
                 {comment.nickname === nickname ? (
                   <ButtonTypeBox>
                     <EditWrapper
@@ -59,7 +63,7 @@ export const CommentList = ({ postId, postWriter }: ICommentProps) => {
                       {!isEditComment ? "수정" : "닫기"}
                       <Edit style={IconStyle} />
                     </EditWrapper>
-                    <PostDelete postId={postId} commentId={comment.id} />
+                    <StudyDelete studyId={studyId} commentId={comment.id} />
                   </ButtonTypeBox>
                 ) : null}
               </Writer>
@@ -71,10 +75,10 @@ export const CommentList = ({ postId, postWriter }: ICommentProps) => {
                 <>
                   {commentId === comment.id ? (
                     <CommentForm
-                      id={postId}
+                      id={studyId}
                       comment={comment.comment}
-                      commentId={comment.id}
-                      isStudy={false}
+                      commentStudyId={comment.id}
+                      isStudy={true}
                       isSecret={comment.isSecret}
                     />
                   ) : (
@@ -91,7 +95,7 @@ export const CommentList = ({ postId, postWriter }: ICommentProps) => {
         <BlankInfo>
           <ImgStyle
             src="https://png.pngtree.com/png-vector/20191024/ourlarge/pngtree-comment-icon-isolated-on-background-png-image_1861070.jpg"
-            width={"8%"}
+            width={"6%"}
           />
           첫 댓글을 남겨주세요 !
         </BlankInfo>
@@ -109,7 +113,7 @@ const CommentWrapper = styled.div`
 const BlankInfo = styled.div`
   display: flex;
   flex-wrap: wrap;
-  flex-direction: column;
+  flex-direction: column; /*수평 정렬*/
   align-items: center;
   justify-content: center;
 

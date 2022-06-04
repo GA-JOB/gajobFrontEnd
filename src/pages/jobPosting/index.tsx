@@ -1,18 +1,21 @@
 import React, { useState } from "react";
 import { MenuTitle } from "components/Menutitle";
-import { SearchData } from "components/search";
+// import { SearchData } from "components/search";
 import { JobPostingList } from "./JobPostingList";
 import { Loading } from "components/loading/index";
 import "react-tabulator/lib/styles.css"; // default theme
 import "react-tabulator/css/bootstrap/tabulator_bootstrap.min.css"; // use Theme(s)
 import styled from "styled-components";
-import { ReactTabulator } from "react-tabulator";
 import { ColumnDefinition, ReactTabulatorOptions } from "react-tabulator";
+import {
+  MenuItem,
+  FormControl,
+  Select,
+  // SelectChangeEvent,
+} from "@mui/material";
 import useGetJobPosting from "hooks/api/jobPosting/useGetJobPosting";
 import storage from "hooks/store";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
+
 export const JobPosting = () => {
   const token = storage.get("user-token");
   const { data } = useGetJobPosting();
@@ -38,6 +41,16 @@ export const JobPosting = () => {
     "제주",
   ];
   const [state, setState] = useState<string | null>(null);
+
+  // 상태 표시 style
+  const selectBtn = {
+    backgroundColor: "white",
+    border: "1px solid black",
+    opacity: "1",
+  };
+  const noSelectBtn = {
+    color: "black",
+  };
 
   if (!token) {
     window.confirm("로그인 후 이용가능합니다.") === true
@@ -67,10 +80,31 @@ export const JobPosting = () => {
         </InputSelectField>
 
         <StateTag>
-          <ListStyle onClick={() => setState(null)}># 전체</ListStyle>
-          <ListStyle onClick={() => setState("관계없음")}># 관계없음</ListStyle>
-          <ListStyle onClick={() => setState("경력")}># 경력</ListStyle>
-          <ListStyle onClick={() => setState("신입")}># 신입</ListStyle>
+          <ListStyle
+            style={state === null ? selectBtn : noSelectBtn}
+            onClick={() => setState(null)}
+          >
+            # 전체
+          </ListStyle>
+          <ListStyle
+            style={state === "관계없음" ? selectBtn : noSelectBtn}
+            onClick={() => setState("관계없음")}
+          >
+            # 관계없음
+          </ListStyle>
+          <ListStyle
+            style={state === "경력" ? selectBtn : noSelectBtn}
+            onClick={() => setState("경력")}
+          >
+            # 경력
+          </ListStyle>
+          <ListStyle
+            style={state === "신입" ? selectBtn : noSelectBtn}
+            onClick={() => setState("신입")}
+          >
+            # 신입
+          </ListStyle>
+          <LinkStyle href="mypage/scraps"> {"> "} my scrap 보러가기</LinkStyle>
         </StateTag>
 
         <JobPostingList
@@ -129,4 +163,11 @@ const ListStyle = styled.li`
     border: 1px solid black;
     opacity: 1;
   }
+`;
+
+const LinkStyle = styled.a`
+  float: right;
+  margin-top: 1.5vw;
+  font-size: 10pt;
+  text-decoration: none;
 `;

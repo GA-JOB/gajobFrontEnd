@@ -13,11 +13,11 @@ import { INewsCrawling } from "types";
 import { debounce } from "lodash";
 
 interface ISearchDataProps {
-  data: INewsCrawling[] | undefined;
+  newsData: INewsCrawling[] | undefined;
   setSearchedData: Dispatch<SetStateAction<INewsCrawling[]>>;
 }
 
-export const SearchData = ({ data, setSearchedData }: ISearchDataProps) => {
+export const SearchData = ({ newsData, setSearchedData }: ISearchDataProps) => {
   const [keyword, setKeyword] = useState<string>("");
   const [searchedKeyword, setSearchedKeyword] = useState<string>("");
 
@@ -39,13 +39,13 @@ export const SearchData = ({ data, setSearchedData }: ISearchDataProps) => {
 
   useEffect(() => {
     const updateSearchedData = () => {
-      if (!data) return;
+      if (!newsData) return;
       if (searchedKeyword.length === 0) {
-        setSearchedData(data);
+        setSearchedData(newsData);
         return;
       }
       const tempData: INewsCrawling[] = [];
-      data.forEach((news) => {
+      newsData.forEach((news) => {
         if (
           news.title.includes(searchedKeyword) ||
           news.contents.includes(searchedKeyword)
@@ -56,7 +56,7 @@ export const SearchData = ({ data, setSearchedData }: ISearchDataProps) => {
       setSearchedData(tempData);
     };
     updateSearchedData();
-  }, [data, searchedKeyword, setSearchedData]);
+  }, [newsData, searchedKeyword, setSearchedData]);
 
   return (
     <>

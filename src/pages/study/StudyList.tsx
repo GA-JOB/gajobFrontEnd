@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { Loading } from "components/loading";
+import { ButtonType } from "components/button/ButtonType";
 import styled from "styled-components";
 import "react-tabulator/lib/styles.css"; // default theme
 import "react-tabulator/css/bootstrap/tabulator_bootstrap.min.css"; // use Theme(s)
@@ -9,60 +11,59 @@ import "styles/tabulator.scss";
 import { useNavigate } from "react-router-dom";
 
 interface IStudyProps {
+  isMypage?: boolean;
   data: IStudy[] | undefined;
 }
-export const StudyList = ({ data }: IStudyProps) => {
+export const StudyList = ({ isMypage, data }: IStudyProps) => {
   const navigate = useNavigate();
+
+  const [state, setState] = useState<string | null>(null);
   const columns: ColumnDefinition[] | any = [
-    { formatter: "rownum", hozAlign: "center", width: 40, headerSort: false },
+    { formatter: "rownum", hozAlign: "center", width: "5%", headerSort: false },
     {
       title: "카테고리",
       field: "studyCategory",
-      hozAlign: "center",
-      vertAlign: "middle",
       display: "block",
-      width: 120,
-      headerSort: false, //sorting안함
+      width: "10%",
+      hozAlign: "left",
+      headerSort: false, //sorting 안함
     },
 
     {
       title: "제목",
       field: "title",
-      width: 180,
+      width: "25%",
+      hozAlign: "left",
       // text-overflow: ellipsis; 사용을 위해 주석처리
-      //   hozAlign: "center",
-      //   vertAlign: "middle",
-
-      headerSort: false, //sorting안함
-    },
-    {
-      title: "인원제한",
-      field: "maxPeople",
-      hozAlign: "center",
-      vertAlign: "middle",
-      width: 120,
       headerSort: false,
     },
-
     {
-      title: "모집상태",
-      field: "status",
+      title: "모집인원",
+      field: "maxPeople",
+      width: "8%",
       hozAlign: "center",
-      vertAlign: "middle",
-      width: 100,
       headerSort: false,
     },
     {
       title: "상세내용",
       field: "content",
-      width: 300,
-      headerSort: false, //sorting안함
+      width: "32%",
+      hozAlign: "left",
+      headerSort: false,
+    },
+    {
+      title: "등록일",
+      field: "startDate",
+      width: "10%",
+      hozAlign: "left",
+      headerSort: false,
     },
     {
       title: "모집마감일",
       field: "endDate",
-      width: 100,
-      headerSort: false, //sorting안함
+      width: "10%",
+      hozAlign: "left",
+      headerSort: false,
     },
     // {
     //   title: "오픈카톡",
@@ -94,13 +95,58 @@ export const StudyList = ({ data }: IStudyProps) => {
     const id = data._row.data.id;
     navigate(`/study-detail/${id}`);
   };
+
+  // 상태 표시 style
+  const selectBtn = {
+    backgroundColor: "white",
+    border: "1px solid black",
+    opacity: "1",
+  };
+  const noSelectBtn = {
+    color: "black",
+  };
+
   if (!data) return <Loading />;
   return (
     <StudyListWrapper>
+      <ButtonTypeWrapper>
+        <ButtonType
+          variants="text"
+          title="본인의 관심 분야인 스터디를 만들고 홍보해주세요 !"
+          link="/study/posting"
+          widthStyle="100%"
+        />
+      </ButtonTypeWrapper>
+
+      <StateTag>
+        <ListStyle
+          style={state === null ? selectBtn : noSelectBtn}
+          onClick={() => setState(null)}
+        >
+          # 전체
+        </ListStyle>
+        <ListStyle
+          style={state === "모집중" ? selectBtn : noSelectBtn}
+          onClick={() => setState("모집중")}
+        >
+          # 모집중
+        </ListStyle>
+        <ListStyle
+          style={state === "모집종료" ? selectBtn : noSelectBtn}
+          onClick={() => setState("모집종료")}
+        >
+          #모집종료
+        </ListStyle>
+      </StateTag>
+
       <TabulatorStyle
         className="Table"
         columns={columns}
-        data={data}
+        data={
+          state === null
+            ? data
+            : data?.filter((data) => data.status.startsWith(state))
+        }
         options={options}
         events={{ rowClick: rowClickHandler }}
       />
@@ -111,13 +157,39 @@ export const StudyList = ({ data }: IStudyProps) => {
 const StudyListWrapper = styled.div`
   width: 100%;
 `;
+const ButtonTypeWrapper = styled.div`
+  margin-bottom: 1vw;
+  font-size: 12pt;
+`;
+
+const StateTag = styled.div`
+  width: 100%;
+`;
+const ListStyle = styled.li`
+  list-style: none;
+  display: inline-block;
+  background-color: #eaeaea;
+  border-radius: 15px;
+  font-size: 9pt;
+  opacity: 0.7;
+
+  margin: 1vw;
+  padding: 0.5vw 1vw;
+  cursor: pointer;
+
+  &:hover {
+    background-color: white;
+    border: 1px solid black;
+    opacity: 1;
+  }
+`;
 
 const TabulatorStyle = styled(ReactTabulator)`
   .tabulator .tabulator-tableHolder {
     position: relative;
     width: 100%;
     white-space: nowrap;
-    overflow: auto;
+    overflow: hidden;
     -webkit-overflow-scrolling: touch;
   }
 `;

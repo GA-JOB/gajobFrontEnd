@@ -1,23 +1,23 @@
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { UserProfile } from "./UserProfile";
 import { UserInfoSettings } from "./UserInfoSettings";
-import { PostList } from "pages/community/PostList";
 import styled from "styled-components";
 import storage from "hooks/store";
 
 export const MyPage = () => {
+  const navigate = useNavigate();
   const token = storage.get("user-token");
-  const [category, setCategory] = useState<string>("개인정보설정");
 
   const selectBtn = {
     color: "white",
     backgroundColor: "#F2BA49",
   };
-  const noSelectBtn = {
-    color: "black",
-  };
 
-  if (!token) return <>접근 못함</>;
+  if (!token) {
+    window.confirm("로그인 후 이용가능합니다.") === true
+      ? window.location.replace("/login")
+      : window.location.replace("/");
+  }
   return (
     <MyPageWrapper>
       <InfoWrapper>
@@ -26,41 +26,20 @@ export const MyPage = () => {
 
       <ContentContainer>
         <CategoryWrapper>
-          <Categories
-            style={category === "개인정보설정" ? selectBtn : noSelectBtn}
-            onClick={() => setCategory("개인정보설정")}
-          >
-            개인정보 설정
-          </Categories>
-          <Categories
-            style={category === "게시물" ? selectBtn : noSelectBtn}
-            onClick={() => setCategory("게시물")}
-          >
+          <Categories style={selectBtn}>개인정보 설정</Categories>
+          <Categories onClick={() => navigate("/mypage/posts")}>
             내 게시물
           </Categories>
-          <Categories
-            style={category === "스크랩" ? selectBtn : noSelectBtn}
-            onClick={() => setCategory("스크랩")}
-          >
+          <Categories onClick={() => navigate("/mypage/scraps")}>
             스크랩
           </Categories>
-          <Categories
-            style={category === "포트폴리오" ? selectBtn : noSelectBtn}
-            onClick={() => setCategory("포트폴리오")}
-          >
+          <Categories onClick={() => navigate("/mypage")}>
             포트폴리오
           </Categories>
         </CategoryWrapper>
 
         <Containers>
-          {category === "개인정보설정" && <UserInfoSettings></UserInfoSettings>}
-
-          {(category === "게시물" || category === "포트폴리오") && (
-            <MypagePostWrapper>
-              {category === "게시물" ? <PostList isMypage={true} /> : null}
-              {category === "포트폴리오" ? <>서비스 준비 중입니다.</> : null}
-            </MypagePostWrapper>
-          )}
+          <UserInfoSettings></UserInfoSettings>
         </Containers>
       </ContentContainer>
     </MyPageWrapper>
@@ -106,13 +85,4 @@ const Containers = styled.div`
   width: 100%;
   min-height: 40vw;
   margin: 3vw 1vw;
-`;
-const MypagePostWrapper = styled.div`
-  margin-bottom: 3vw;
-  height: 48vw;
-  padding: 2vw;
-  background-color: white;
-  border: 1px solid #eaeaea;
-  border-radius: 5px;
-  overflow: scroll;
 `;

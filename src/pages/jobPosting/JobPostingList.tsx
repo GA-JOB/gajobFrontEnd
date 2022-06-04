@@ -1,12 +1,12 @@
 import React from "react";
-import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import { ReactTabulator } from "react-tabulator";
-import { IJobPostingCrawling } from "types";
 import { ColumnDefinition, ReactTabulatorOptions } from "react-tabulator";
 import "react-tabulator/lib/styles.css"; // default theme
 import "react-tabulator/css/bootstrap/tabulator_bootstrap.min.css"; // use Theme(s)
 import "styles/tabulator.scss";
-import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import { IJobPostingCrawling } from "types";
 interface IJobPostingProps {
   data: IJobPostingCrawling[];
   careerState: string | null;
@@ -19,44 +19,56 @@ export const JobPostingList = ({ data, careerState }: IJobPostingProps) => {
     {
       formatter: "rownum",
       hozAlign: "center",
-      width: 40,
+      width: "5%",
       headerSort: false,
     },
     {
       title: "채용공고명",
       field: "title",
-      width: 250,
+      width: "27%",
       hozAlign: "left",
       headerSort: false,
     },
-    { title: "회사명", field: "company", hozAlign: "left", headerSort: false },
+    {
+      title: "회사명",
+      field: "company",
+      width: "12%",
+      hozAlign: "left",
+      headerSort: false,
+    },
     {
       title: "급여형태",
       field: "salaryType",
-      width: 100,
+      width: "6%",
       hozAlign: "left",
       headerSort: false,
     },
-    { title: "급여", field: "salary", hozAlign: "left", headerSort: false },
+    {
+      title: "급여",
+      field: "salary",
+      width: "15%",
+      hozAlign: "left",
+      headerSort: false,
+    },
     {
       title: "마감일",
       field: "closeDate",
       hozAlign: "left",
-      width: 150,
+      width: "15%",
       headerSort: false,
     },
     {
       title: "경력",
       field: "career",
       hozAlign: "left",
-      width: 100,
+      width: "8%",
       headerSort: false,
     },
     {
       title: "지역",
       field: "region",
       hozAlign: "left",
-      width: 150,
+      width: "12%",
       headerSort: false,
     },
   ];
@@ -79,7 +91,6 @@ export const JobPostingList = ({ data, careerState }: IJobPostingProps) => {
             ? data
             : data?.filter((data) => data.career.startsWith(careerState))
         }
-        // data={data}
         options={options}
         events={{ rowClick: rowClickHandler }}
       />

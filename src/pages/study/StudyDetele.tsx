@@ -22,13 +22,13 @@ export const StudyDelete = ({ studyId, commentId }: IDeleteProps) => {
   };
 
   // 해당 id delete
-  const { deleteStudy, deleteComment } = useStudy();
+  const { deleteStudy, deleteStudyComment } = useStudy();
   const onClickDeleteBtn = () => {
     if (!commentId) {
       deleteStudy(studyId);
       window.location.replace("/study");
     } else {
-      deleteComment(studyId, commentId);
+      deleteStudyComment(studyId, commentId);
       setOpenModal(false);
     }
   };
@@ -53,12 +53,15 @@ export const StudyDelete = ({ studyId, commentId }: IDeleteProps) => {
             <br />
             삭제된 이후 되돌릴 수 없습니다.
           </ModalTxt>
-          <ButtonType
-            title="삭제"
-            onClick={onClickDeleteBtn}
-            buttonColor="black"
-            widthStyle="100%"
-          />
+
+          <ButtonWrapper>
+            <ButtonType
+              title="삭제"
+              onClick={onClickDeleteBtn}
+              buttonColor="black"
+              widthStyle="100%"
+            />
+          </ButtonWrapper>
         </ModalContent>
       </Modal>
     </DeleteWrapper>
@@ -66,11 +69,13 @@ export const StudyDelete = ({ studyId, commentId }: IDeleteProps) => {
 };
 
 const DeleteWrapper = styled.span`
-  margin: 0 0.5vw;
-  font-size: 10pt;
+  font-size: 9pt;
   opacity: 0.8;
   cursor: pointer;
 `;
 const ModalTxt = styled.div`
   text-align: center;
+`;
+const ButtonWrapper = styled.div`
+  margin-top: 2vw;
 `;

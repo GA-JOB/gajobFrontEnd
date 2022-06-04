@@ -19,11 +19,15 @@ import { JobPostingDetails } from "./pages/jobPosting/JobPostingDetails";
 import { Community } from "pages/community";
 import { PostDetails } from "pages/community/PostDetails";
 import { Study } from "pages/study/index";
+import { StudyRegister } from "pages/study/StudyRegister";
 import { StudyDetails } from "pages/study/StudyDetails";
+import { StudyRecruitForm } from "pages/study/StudyRecruitForm";
 import { Portfolio } from "pages/Portfolio";
 import { Calendar } from "pages/Calendar";
 import { MyPage } from "pages/mypage";
 import { SeeUserInfo } from "pages/mypage/SeeUserInfo";
+import { MyPosts } from "pages/mypage/MyPosts";
+import { MyScraps } from "pages/mypage/MyScraps";
 import { NoEmail } from "components/footer/NoEmail";
 import { PersonalRule } from "components/footer/PersonalRules";
 import { Sitemap } from "components/footer/Sitemap";
@@ -60,10 +64,14 @@ export default function App() {
           <Route path="/jobdam" element={<Community />} />
           <Route path="/jobdam/:viewId" element={<PostDetails />} />
           <Route path="/study" element={<Study />} />
+          <Route path="/study/posting" element={<StudyRegister />} />
           <Route path="/study-detail/:id" element={<StudyDetails />} />
+          <Route path="/study/recruitment/:id" element={<StudyRecruitForm />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/mypage" element={<MyPage />} />
+          <Route path="/mypage/posts" element={<MyPosts />} />
+          <Route path="/mypage/scraps" element={<MyScraps />} />
           <Route path="/personal-info" element={<SeeUserInfo />} />
           {/* footer link */}
           <Route path="/noEmail" element={<NoEmail />}></Route>

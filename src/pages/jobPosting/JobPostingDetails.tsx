@@ -1,12 +1,14 @@
 import React from "react";
 import { Loading } from "components/loading";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router";
 import { ButtonType } from "components/button/ButtonType";
 import { BookmarkBorder, Bookmark } from "@mui/icons-material";
 import { useJobPosting } from "hooks/api/jobPosting";
 
 export const JobPostingDetails = () => {
+  const navigate = useNavigate();
   const { state: data }: any = useLocation();
   const { postScrap } = useJobPosting();
 
@@ -69,7 +71,7 @@ export const JobPostingDetails = () => {
           <ButtonType
             variants="standard"
             title={"목록으로"}
-            link="/job-posting"
+            onClick={() => navigate(-1)}
           />
         </ButtonWrapper>
       </ContentWrapper>
