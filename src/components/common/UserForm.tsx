@@ -204,6 +204,7 @@ const InputLabel = styled.div`
 const InputField = styled(TextField)`
   width: 100%;
   font-size: 9pt;
+  white-space: pre-line;
 `;
 const ButtonWrapper = styled.div`
   float: right;

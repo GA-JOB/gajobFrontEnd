@@ -4,7 +4,7 @@ import { IContestRankingCrawling } from "types";
 
 function useGetContestRank() {
   const { data } = useSWR<IContestRankingCrawling[]>(
-    "/issue/exhibit-ranking",
+    "/issue/exhibit-rankings",
     fetcher
   );
 

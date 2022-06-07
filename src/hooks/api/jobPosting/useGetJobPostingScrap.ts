@@ -4,7 +4,7 @@ import { IJobPostingCrawling } from "types";
 
 function useGetJobPostingScrap() {
   const { data } = useSWR<IJobPostingCrawling[]>(
-    "/issue/job-posting/scrap",
+    "/issue/job-posting/scraps",
     fetcher
   );
 

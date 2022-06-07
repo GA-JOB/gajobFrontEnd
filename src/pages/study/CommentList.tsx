@@ -109,6 +109,7 @@ const CommentWrapper = styled.div`
   height: 100%;
   padding: 3vw;
   border-top: 1px solid #eaeaea;
+  white-space: pre-line;
 `;
 const BlankInfo = styled.div`
   display: flex;

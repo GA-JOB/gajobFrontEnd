@@ -116,10 +116,10 @@ const NavList = styled.div`
 
 const ContentWrapper = styled.div`
   width: 90%;
-  height: 45vw;
+  min-height: 45vw;
   padding: 2vw;
+  margin-bottom: 2vw;
   background-color: white;
   border: 1px solid #eaeaea;
   border-radius: 5px;
-  overflow: scroll;
 `;

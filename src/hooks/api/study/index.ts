@@ -27,6 +27,11 @@ interface IRecruitStudy {
   postId: number | null;
   content: string;
 }
+interface IRecruitResultStudy {
+  postId: number;
+  studentId: number;
+  result: string;
+}
 interface IEditComment {
   postId: number | null;
   commentId: number | null;
@@ -124,6 +129,26 @@ export const useStudy = () => {
     });
   };
 
+  // 스터디 신청 모집 결과 설정
+  const recruitResultStudy = async ({
+    postId,
+    studentId,
+    result,
+  }: IRecruitResultStudy) => {
+    await post(`/study/recruitment/${postId}/result/${studentId}`, {
+      result,
+    }).then((data: any) => {
+      if (data.result) {
+        alert(
+          "스터디 승인 결과가 저장되었습니다. \n 신청 내역과 결과는 상세페이지에서 확인 가능합니다!"
+        );
+
+        navigate(-1);
+      }
+      console.log(data);
+    });
+  };
+
   // 댓글 등록
   const postStudyComment = async ({ id, comment, isSecret }: IPostComment) => {
     await post(`/study/comments/${id}`, {
@@ -196,6 +221,7 @@ export const useStudy = () => {
     editStudy,
     deleteStudy,
     recruitStudy,
+    recruitResultStudy,
     postStudyComment,
     editStudyComment,
     deleteStudyComment,

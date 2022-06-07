@@ -20,12 +20,14 @@ export const JobPostingList = ({ data, careerState }: IJobPostingProps) => {
       formatter: "rownum",
       hozAlign: "center",
       width: "5%",
+      vertAlign: "middle",
       headerSort: false,
     },
     {
       title: "채용공고명",
       field: "title",
       width: "27%",
+      vertAlign: "middle",
       hozAlign: "left",
       headerSort: false,
     },
@@ -33,6 +35,7 @@ export const JobPostingList = ({ data, careerState }: IJobPostingProps) => {
       title: "회사명",
       field: "company",
       width: "12%",
+      vertAlign: "middle",
       hozAlign: "left",
       headerSort: false,
     },
@@ -40,6 +43,7 @@ export const JobPostingList = ({ data, careerState }: IJobPostingProps) => {
       title: "급여형태",
       field: "salaryType",
       width: "6%",
+      vertAlign: "middle",
       hozAlign: "left",
       headerSort: false,
     },
@@ -47,12 +51,14 @@ export const JobPostingList = ({ data, careerState }: IJobPostingProps) => {
       title: "급여",
       field: "salary",
       width: "15%",
+      vertAlign: "middle",
       hozAlign: "left",
       headerSort: false,
     },
     {
       title: "마감일",
       field: "closeDate",
+      vertAlign: "middle",
       hozAlign: "left",
       width: "15%",
       headerSort: false,
@@ -60,6 +66,7 @@ export const JobPostingList = ({ data, careerState }: IJobPostingProps) => {
     {
       title: "경력",
       field: "career",
+      vertAlign: "middle",
       hozAlign: "left",
       width: "8%",
       headerSort: false,
@@ -67,6 +74,7 @@ export const JobPostingList = ({ data, careerState }: IJobPostingProps) => {
     {
       title: "지역",
       field: "region",
+      vertAlign: "middle",
       hozAlign: "left",
       width: "12%",
       headerSort: false,
@@ -106,4 +114,9 @@ const TabulatorStyle = styled(ReactTabulator)`
   align-items: center;
   justify-content: center;
   text-align: center;
+
+  .tabulator-row {
+    height: 50px;
+    line-height: 30px;
+  }
 `;

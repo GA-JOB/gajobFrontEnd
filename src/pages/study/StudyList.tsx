@@ -6,8 +6,8 @@ import "react-tabulator/lib/styles.css"; // default theme
 import "react-tabulator/css/bootstrap/tabulator_bootstrap.min.css"; // use Theme(s)
 import { ReactTabulator } from "react-tabulator";
 import { ColumnDefinition, ReactTabulatorOptions } from "react-tabulator";
-import { IStudy } from "types";
 import "styles/tabulator.scss";
+import { IStudy } from "types";
 import { useNavigate } from "react-router-dom";
 
 interface IStudyProps {
@@ -19,12 +19,12 @@ export const StudyList = ({ isMypage, data }: IStudyProps) => {
 
   const [state, setState] = useState<string | null>(null);
   const columns: ColumnDefinition[] | any = [
-    { formatter: "rownum", hozAlign: "center", width: "5%", headerSort: false },
+    { formatter: "rownum", hozAlign: "center", width: "3%", headerSort: false },
     {
       title: "카테고리",
       field: "studyCategory",
       display: "block",
-      width: "10%",
+      width: "9%",
       hozAlign: "left",
       headerSort: false, //sorting 안함
     },
@@ -32,27 +32,34 @@ export const StudyList = ({ isMypage, data }: IStudyProps) => {
     {
       title: "제목",
       field: "title",
-      width: "25%",
+      width: "21%",
       hozAlign: "left",
       // text-overflow: ellipsis; 사용을 위해 주석처리
       headerSort: false,
     },
     {
+      title: "작성자",
+      field: "writer",
+      width: "10%",
+      hozAlign: "left",
+      headerSort: false,
+    },
+    {
       title: "모집인원",
       field: "maxPeople",
-      width: "8%",
+      width: "7%",
       hozAlign: "center",
       headerSort: false,
     },
     {
       title: "상세내용",
       field: "content",
-      width: "32%",
+      width: "30%",
       hozAlign: "left",
       headerSort: false,
     },
     {
-      title: "등록일",
+      title: "모집예정일",
       field: "startDate",
       width: "10%",
       hozAlign: "left",
@@ -93,7 +100,7 @@ export const StudyList = ({ isMypage, data }: IStudyProps) => {
   const rowClickHandler = (e: any, data: any) => {
     console.log(data._row.data.id); // 선택했을 때 id값
     const id = data._row.data.id;
-    navigate(`/study-detail/${id}`);
+    navigate(`/study/${id}`);
   };
 
   // 상태 표시 style
@@ -124,6 +131,12 @@ export const StudyList = ({ isMypage, data }: IStudyProps) => {
           onClick={() => setState(null)}
         >
           # 전체
+        </ListStyle>
+        <ListStyle
+          style={state === "모집예정" ? selectBtn : noSelectBtn}
+          onClick={() => setState("모집예정")}
+        >
+          # 모집예정
         </ListStyle>
         <ListStyle
           style={state === "모집중" ? selectBtn : noSelectBtn}
