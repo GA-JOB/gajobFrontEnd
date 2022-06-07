@@ -21,7 +21,8 @@ import { PostDetails } from "pages/community/PostDetails";
 import { Study } from "pages/study/index";
 import { StudyRegister } from "pages/study/StudyRegister";
 import { StudyDetails } from "pages/study/StudyDetails";
-import { StudyRecruitForm } from "pages/study/StudyRecruitForm";
+import { StudyRecruit } from "pages/study/StudyRecruit";
+import { StudyRecruitApplicant } from "pages/study/StudyRecruitApplicant";
 import { Portfolio } from "pages/Portfolio";
 import { Calendar } from "pages/Calendar";
 import { MyPage } from "pages/mypage";
@@ -65,8 +66,12 @@ export default function App() {
           <Route path="/jobdam/:viewId" element={<PostDetails />} />
           <Route path="/study" element={<Study />} />
           <Route path="/study/posting" element={<StudyRegister />} />
-          <Route path="/study-detail/:id" element={<StudyDetails />} />
-          <Route path="/study/recruitment/:id" element={<StudyRecruitForm />} />
+          <Route path="/study/:id" element={<StudyDetails />} />
+          <Route path="/study/recruitment/:id" element={<StudyRecruit />} />
+          <Route
+            path="/study/:postId/applicants/:studentId"
+            element={<StudyRecruitApplicant />}
+          />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/mypage" element={<MyPage />} />

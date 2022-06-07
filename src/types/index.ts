@@ -114,6 +114,7 @@ export interface IStudy {
   likeStatus?: boolean;
   scrap?: number;
   scrapStatus?: boolean;
+  supplyCnt?: number;
   openTalkUrl: string | null;
 }
 

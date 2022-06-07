@@ -19,6 +19,7 @@ import {
 import storage from "hooks/store";
 import useGetPieceStudy from "hooks/api/study/useGetPieceStudy";
 import { useStudy } from "hooks/api/study";
+import { StudyApplicantsList } from "./StudyApplicantsList";
 
 export const StudyDetails = () => {
   const nickname = storage.get("user-nickname");
@@ -31,6 +32,8 @@ export const StudyDetails = () => {
   const [register, setRegister] = useState<boolean>(false);
   const [isOpenChat, setIsOpenChat] = useState<boolean>(true);
   const [isOpenLikesList, setIsOpenLikesList] = useState<boolean>(false);
+  const [isOpenApplicantsList, setIsOpenApplicantsList] =
+    useState<boolean>(false);
 
   // 스크랩
   const onClickScrapBtn = async (e: any) => {
@@ -77,7 +80,7 @@ export const StudyDetails = () => {
             <div>
               카테고리: {data.studyCategory ? data.studyCategory : "선택 안함"}
             </div>
-            <div>등록일: {data.startDate ? data.startDate : ""}</div>
+            <div>등록일: {data.createdDate}</div>
           </Info>
 
           {/* login user === post writer일 경우 수정 or 삭제 */}
@@ -98,10 +101,18 @@ export const StudyDetails = () => {
             <ButtonType
               variants="contained"
               title="신청하러 가기"
-              link={`/study/recruitment/${Number(id)}`}
+              link={
+                data.status === "모집중"
+                  ? `/study/recruitment/${Number(id)}`
+                  : ""
+              }
               widthStyle="100%"
               onClick={() => {
-                navigate(`/study/recruitment/${id}`, { state: data });
+                if (data.status === "모집중") {
+                  navigate(`/study/recruitment/${id}`, { state: data });
+                } else {
+                  alert("모집 기간이 아닙니다.");
+                }
               }}
             />
           )}
@@ -158,8 +169,14 @@ export const StudyDetails = () => {
                     지역 <strong>{data.area}</strong>
                   </div>
                   <div>
-                    인원{" "}
-                    <strong>{data.minPeople + "~" + data.maxPeople}명</strong>
+                    모집 인원{" "}
+                    <strong>{data.minPeople + "-" + data.maxPeople}명</strong>
+                  </div>
+                  <div>
+                    현재 신청 인원 <strong>{data.supplyCnt}명</strong>
+                  </div>
+                  <div>
+                    모집 시작일 <strong>{data.startDate}</strong>
                   </div>
                   <div>
                     모집 마감일 <strong>{data.endDate}</strong>
@@ -178,6 +195,25 @@ export const StudyDetails = () => {
               </PostContent>
             </ContentContainer>
           )}
+
+          {/* 신청자 목록 조회 */}
+          <ButtonType
+            variants="contained"
+            title={
+              !isOpenApplicantsList ? `신청자 목록 조회` : "신청자 목록 닫기"
+            }
+            widthStyle="100%"
+            onClick={() => {
+              if (data.writer === nickname) {
+                setIsOpenApplicantsList((prev) => !prev);
+              } else {
+                alert("접근 권한이 없습니다.");
+              }
+            }}
+          />
+          {isOpenApplicantsList ? (
+            <StudyApplicantsList postId={Number(id)} />
+          ) : null}
 
           <IconWrapper>
             <IconContent>
@@ -213,7 +249,6 @@ export const StudyDetails = () => {
             ))}
           </>
         ) : null}
-
         {isOpenChat ? (
           <>
             {/* 댓글 리스트 */}
@@ -360,6 +395,7 @@ const PostContent = styled.div`
   font-size: 12pt;
   padding-top: 1vw;
   font-weight: lighter;
+  white-space: pre-line;
 `;
 
 const ButtonWrapper = styled.div`
