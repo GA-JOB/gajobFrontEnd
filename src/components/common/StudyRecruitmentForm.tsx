@@ -59,7 +59,7 @@ export const StudyRecruitmentForm = ({
             variant="standard"
             type="text"
             name="nameForm"
-            value={!isResult ? user.data?.name || "" : data.writer || ""}
+            value={!isResult ? user.data?.name || "" : data.name || ""}
             size="small"
             inputProps={{
               style: { fontSize: 15, verticalAlign: "middle" },
@@ -73,7 +73,7 @@ export const StudyRecruitmentForm = ({
             variant="standard"
             type="text"
             name="nicknameForm"
-            value={!isResult ? user.data?.nickname || "" : data.nickname || ""}
+            value={!isResult ? user.data?.nickname || "" : data.writer || ""}
             size="small"
             inputProps={{
               style: { fontSize: 15, verticalAlign: "middle" },
@@ -197,7 +197,7 @@ export const StudyRecruitmentForm = ({
 };
 
 const Form = styled.form`
-  width: 40%;
+  width: 100%;
   margin: 1vw;
 `;
 const InfoTitle = styled.h4`

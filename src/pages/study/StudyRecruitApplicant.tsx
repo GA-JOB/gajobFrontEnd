@@ -23,21 +23,27 @@ export const StudyRecruitApplicant = () => {
 
   if (!data) <Loading></Loading>;
   return (
-    <>
+    <StudyRecruitWrapper>
       <StudyRecruitmentForm introduction={data.content} isResult={true} />
-      현재 상태: {data.result}
-      <ButtonType
-        title={"승인"}
-        onClick={() => {
-          onClickrRecruitResult("승인");
-        }}
-      />
-      <ButtonType
-        title={"반려"}
-        onClick={() => {
-          onClickrRecruitResult("반려");
-        }}
-      />
+      상태: <span>{data.result}</span>
+      <ResultBtn>
+        <ButtonType
+          variants={data.result !== "반려" ? "text" : ""}
+          title={"승인"}
+          onClick={() => {
+            onClickrRecruitResult("승인");
+          }}
+          widthStyle={"50%"}
+        />
+        <ButtonType
+          variants={data.result !== "승인" ? "text" : ""}
+          title={"반려"}
+          onClick={() => {
+            onClickrRecruitResult("반려");
+          }}
+          widthStyle={"50%"}
+        />
+      </ResultBtn>
       <ButtonWrapper>
         <ButtonType
           variants="text"
@@ -45,10 +51,21 @@ export const StudyRecruitApplicant = () => {
           onClick={() => navigate(-1)}
         />
       </ButtonWrapper>
-    </>
+    </StudyRecruitWrapper>
   );
 };
 
+const StudyRecruitWrapper = styled.div`
+  width: 50%;
+  padding: 3vw;
+  justify-content: center;
+  align-items: center;
+`;
+const ResultBtn = styled.div`
+  justify-content: center;
+  align-items: center;
+  padding: 0 15vw;
+`;
 const ButtonWrapper = styled.div`
   text-align: center;
   margin: 1vw 0;

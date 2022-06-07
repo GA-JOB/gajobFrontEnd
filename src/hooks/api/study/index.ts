@@ -140,12 +140,11 @@ export const useStudy = () => {
     }).then((data: any) => {
       if (data.result) {
         alert(
-          "스터디 승인 결과가 저장되었습니다. \n 신청 내역과 결과는 상세페이지에서 확인 가능합니다!"
+          "스터디 승인 결과가 저장되었습니다.\n 모집 종료 시점에 지원자에게 메일로 결과 안내 발송될 예정입니다."
         );
 
         navigate(-1);
       }
-      console.log(data);
     });
   };
 
@@ -154,11 +153,7 @@ export const useStudy = () => {
     await post(`/study/comments/${id}`, {
       comment,
       isSecret,
-    }).then((data: any) => {
-      if (data) {
-        console.log(JSON.stringify(data));
-      }
-    });
+    }).then((data: any) => {});
 
     mutate(`/study/comments/${id}`, false);
   };
@@ -172,8 +167,8 @@ export const useStudy = () => {
       comment,
       isSecret,
     }).then((data: any) => {
-      if (data) {
-        console.log(JSON.stringify(data));
+      if (data.comment) {
+        alert("댓글이 수정되었습니다.");
       }
     });
 

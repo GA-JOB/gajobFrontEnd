@@ -37,7 +37,9 @@ export const StudyRecruit = () => {
           / 모집 최대인원: {data.maxPeople} ) <br />
         </StudyInfoWrapper>
 
-        <StudyRecruitmentForm isResult={false} />
+        <FormWrapper>
+          <StudyRecruitmentForm isResult={false} />
+        </FormWrapper>
       </StudyRecruitWrapper>
 
       <ButtonWrapper>
@@ -69,6 +71,10 @@ const InfoTitle = styled.h4`
   margin: 1vw 0;
   text-align: center;
   font-weight: lighter;
+`;
+
+const FormWrapper = styled.div`
+  width: 40%;
 `;
 const ButtonWrapper = styled.div`
   text-align: center;
