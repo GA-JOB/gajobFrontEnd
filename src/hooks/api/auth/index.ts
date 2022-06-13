@@ -211,9 +211,7 @@ export const useAuth = () => {
   // ID 찾기
   const findAccountId = async ({ name, studentEmail }: IPostFindIdRequest) => {
     await post(`/find-id`, { name, studentEmail }).then((res: any) => {
-      alert("이메일을 확인해주세요.");
-
-      console.log(res);
+      alert(`회원님의 이메일 ID는 ${res[0].email} 입니다.`);
     });
   };
   // PW 찾기

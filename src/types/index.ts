@@ -25,7 +25,8 @@ export interface IContestCrawling {
   id: number;
   title: string;
   organization: string;
-  category: string;
+  categories: string[];
+  targets: string[];
   state: string;
   todayState: string;
   url: string;
@@ -114,6 +115,7 @@ export interface IStudy {
   likeStatus?: boolean;
   scrap?: number;
   scrapStatus?: boolean;
+  supplyCnt?: number;
   openTalkUrl: string | null;
 }
 

@@ -1,14 +1,17 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import { MenuTitle } from "components/Menutitle";
 import { JobPostingList } from "pages/jobPosting/JobPostingList";
 import { PostList } from "pages/community/PostList";
 import { StudyList } from "pages/study/StudyList";
+import { ButtonType } from "components/button/ButtonType";
 import styled from "styled-components";
 import useGetJobPostingScrap from "hooks/api/jobPosting/useGetJobPostingScrap";
 import useGetCommunityScrap from "hooks/api/community/useGetCommunityScrap";
 import useGetStudyScrap from "hooks/api/study/useGetStudyScrap";
 
 export const MyScraps = () => {
+  const navigate = useNavigate();
   const jobPosting = useGetJobPostingScrap();
   const community = useGetCommunityScrap();
   const study = useGetStudyScrap();
@@ -42,12 +45,12 @@ export const MyScraps = () => {
             >
               🔥 채용공고
             </NavList>
-            <NavList
+            {/* <NavList
               style={scrapType === "공모전" ? selectBtn : noSelectBtn}
               onClick={() => setScrapType("공모전")}
             >
               🪧 공모전
-            </NavList>
+            </NavList> */}
             <NavList
               style={scrapType === "커뮤니티" ? selectBtn : noSelectBtn}
               onClick={() => setScrapType("커뮤니티")}
@@ -60,6 +63,14 @@ export const MyScraps = () => {
             >
               📚 STUDY
             </NavList>
+
+            <ButtonWrapper>
+              <ButtonType
+                variants="text"
+                title={"목록으로"}
+                onClick={() => navigate(-1)}
+              ></ButtonType>
+            </ButtonWrapper>
           </SideNav>
         </SideNavWrapper>
 
@@ -85,7 +96,7 @@ export const MyScraps = () => {
 
 const MyScrapsWrapper = styled.div`
   width: 100%;
-  padding: 2vw;
+  padding: 0 3vw 3vw 0;
   background-color: #eaeaea;
 `;
 const Container = styled.div`
@@ -106,8 +117,8 @@ const SideNav = styled.div`
   left: 0;
   right: 0;
 
-  width: 16%;
-  margin-top: 19vw;
+  width: 15%;
+  margin-top: 17vw;
   margin-left: 6vw;
   padding: 1vw;
   border: 1px solid lightgray;
@@ -118,6 +129,10 @@ const SideNav = styled.div`
     display: none;
   }
 `;
+const ButtonWrapper = styled.div`
+  text-align: center;
+`;
+
 const NavTitle = styled.div`
   font-weight: lighter;
   margin: 0.3vw 0.5vw;
@@ -125,7 +140,7 @@ const NavTitle = styled.div`
 const NavList = styled.div`
   list-style: none;
   margin: 0.5vw;
-  padding: 0.6vw 1vw;
+  padding: 0.4vw 1vw;
   font-size: 12pt;
   letter-spacing: 1px;
   cursor: pointer;
@@ -137,12 +152,12 @@ const NavList = styled.div`
 `;
 
 const ContentWrapper = styled.div`
-  margin: 0 1vw;
   width: 80%;
-  height: 45vw;
-  padding: 2vw;
+  min-height: 45vw;
+  padding: 2vw 1vw;
   background-color: white;
   border: 1px solid #eaeaea;
   border-radius: 5px;
-  overflow: scroll;
+  display: flex;
+  flex-direction: column;
 `;

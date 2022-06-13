@@ -186,6 +186,7 @@ const CommunityWrapper = styled.div`
   align-items: center;
   justify-content: center;
   font-size: 50px;
+  white-space: pre-line;
 `;
 
 const Form = styled.form`

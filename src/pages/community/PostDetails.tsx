@@ -69,6 +69,7 @@ export const PostDetails = () => {
               <div>
                 전공별: {data.jobCategory ? data.jobCategory : "선택 안함"}
               </div>
+              <div>등록일: {data.createdDate}</div>
             </Info>
 
             {/* login user === post writer일 경우 수정 or 삭제 */}
@@ -257,6 +258,7 @@ const PostContent = styled.div`
   font-size: 12pt;
   padding-top: 1vw;
   font-weight: lighter;
+  white-space: pre-line; // 줄바꿈
 `;
 const CreateDate = styled.span`
   margin-left: 5px;

@@ -290,6 +290,7 @@ const StudyRegisterWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  white-space: pre-line;
 `;
 
 const Form = styled.form`
