@@ -25,7 +25,8 @@ export interface IContestCrawling {
   id: number;
   title: string;
   organization: string;
-  category: string;
+  categories: string[];
+  targets: string[];
   state: string;
   todayState: string;
   url: string;

@@ -25,7 +25,7 @@ export const Contest = () => {
             </NavList>
             <NavList>
               <NavLink onClick={() => window.scrollTo(5500, 5500)}>
-                ⭐️ 공모전 전체
+                ⭐️ 공모전 모집중
               </NavLink>
             </NavList>
             <NavList>
@@ -37,7 +37,7 @@ export const Contest = () => {
         </SideNavWrapper>
 
         <ContentsTypeWrapper>
-          <ContestRank />
+          {/* <ContestRank /> */}
           <ContestList data={data} />
         </ContentsTypeWrapper>
       </ContestContainer>

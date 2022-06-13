@@ -19,7 +19,6 @@ export const StudyRecruitmentForm = ({
 }: StudyRecruitProps) => {
   const { id } = useParams();
   const { state: data }: any = useLocation();
-  const navigate = useNavigate();
   const user = useGetAuth();
   const { recruitStudy } = useStudy();
   const [checked, setChecked] = useState<boolean>(false);

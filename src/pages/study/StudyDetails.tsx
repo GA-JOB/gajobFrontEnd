@@ -187,11 +187,13 @@ export const StudyDetails = () => {
               <PostContent>
                 {data.content}
                 <br />
-                {data.openTalkUrl && (
-                  <a href={data.openTalkUrl} target="_blank" rel="noreferrer">
-                    {data.openTalkUrl}
-                  </a>
-                )}
+                <UrlForm>
+                  {data.openTalkUrl && (
+                    <a href={data.openTalkUrl} target="_blank" rel="noreferrer">
+                      {data.openTalkUrl}
+                    </a>
+                  )}
+                </UrlForm>
               </PostContent>
             </ContentContainer>
           )}
@@ -397,6 +399,7 @@ const PostContent = styled.div`
   font-weight: lighter;
   white-space: pre-line;
 `;
+const UrlForm = styled.div``;
 
 const ButtonWrapper = styled.div`
   margin: 2vw;
