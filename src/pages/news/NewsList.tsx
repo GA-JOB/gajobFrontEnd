@@ -1,7 +1,7 @@
-import { ReactTabulator } from "react-tabulator";
-import { ColumnDefinition, ReactTabulatorOptions } from "react-tabulator";
 import "react-tabulator/lib/styles.css"; // default theme
 import "react-tabulator/css/bootstrap/tabulator_bootstrap.min.css"; // use Theme(s)
+import { ReactTabulator } from "react-tabulator";
+import { ColumnDefinition, ReactTabulatorOptions } from "react-tabulator";
 import styled from "styled-components";
 import { INewsCrawling } from "types";
 
@@ -10,61 +10,72 @@ interface INewsProps {
 }
 
 export const NewsList = ({ searchedData }: INewsProps) => {
-  const columns: ColumnDefinition[] = [
+  const columns: ColumnDefinition[] | any = [
     {
-      title: "id",
-      field: "id",
-      width: 80,
+      formatter: "rownum",
+      width: "5%",
       hozAlign: "center",
       vertAlign: "middle",
+      headerSort: false,
     },
     {
       title: "이미지",
       field: "imgUrl",
       formatter: "image",
       formatterParams: {
-        height: "100px",
+        height: "120px",
         width: "150px",
       },
-      width: 200,
-      hozAlign: "center",
+      width: "15%",
+      hozAlign: "left",
       vertAlign: "middle",
+      headerSort: false,
     },
     {
       title: "제목",
       field: "title",
-      hozAlign: "center",
+      width: "35%",
+      hozAlign: "left",
       vertAlign: "middle",
     },
-
+    {
+      title: "내용",
+      field: "contents",
+      width: "35%",
+      hozAlign: "left",
+      vertAlign: "middle",
+    },
     {
       title: "작성일",
       field: "createTime",
       sorter: "date",
-      width: 120,
+      width: "10%",
       hozAlign: "center",
       vertAlign: "middle",
     },
-    {
-      title: "상세페이지",
-      field: "url",
-      formatter: "link",
-      formatterParams: {
-        label: "Click Here",
-        urlPrefix: "https://" || "http://", // tabulator link 적용하기.
-        urlField: "url",
-        target: "_blank", // 새 탭에서 링크를 열기 위함.
-      },
-      width: 150,
-      hozAlign: "center",
-      vertAlign: "middle",
-    },
+    // {
+    //   title: "상세페이지",
+    //   field: "url",
+    //   formatter: "link",
+    //   formatterParams: {
+    //     label: "Click Here",
+    //     urlPrefix: "https://" || "http://", // tabulator link 적용하기.
+    //     urlField: "url",
+    //     target: "_blank", // 새 탭에서 링크를 열기 위함.
+    //   },
+    //   width: 150,
+    //   hozAlign: "center",
+    //   vertAlign: "middle",
+    // },
   ];
+  const rowClickHandler = (e: any, data: any) => {
+    const newsUrl = data._row.data.url; // 선택한 id 값
+    window.location.href = `https://${newsUrl}`;
+  };
 
   const options: ReactTabulatorOptions = {
     height: "100%",
-    movableRows: false,
-    movableColumns: true,
+    layout: "fitColumns",
     pagination: true,
     paginationMode: "local",
     paginationSize: 10,
@@ -72,7 +83,12 @@ export const NewsList = ({ searchedData }: INewsProps) => {
 
   return (
     <NewsListWrapper>
-      <TabulatorStyle columns={columns} data={searchedData} options={options} />
+      <TabulatorStyle
+        columns={columns}
+        data={searchedData}
+        options={options}
+        events={{ rowClick: rowClickHandler }}
+      />
     </NewsListWrapper>
   );
 };
@@ -93,6 +109,10 @@ const TabulatorStyle = styled(ReactTabulator)`
   .tabulator-row table {
     vertical-align: middle;
     border-collapse: collapse;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .tabulator-row table img {

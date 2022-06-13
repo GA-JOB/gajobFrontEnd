@@ -127,6 +127,8 @@ const Writer = styled.div`
 `;
 const ContentContainer = styled.div`
   margin: 5px;
+  width: 90%;
+  height: 75px;
 `;
 const Title = styled.h5`
   color: #333;
@@ -134,7 +136,11 @@ const Title = styled.h5`
 `;
 const PostContent = styled.div`
   font-size: 11pt;
+
   font-weight: lighter;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 `;
 const CreateDate = styled.span`
   margin-left: 5px;
