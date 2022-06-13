@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import "react-tabulator/lib/styles.css"; // default theme
 import "react-tabulator/css/bootstrap/tabulator_bootstrap.min.css"; // use Theme(s)
@@ -11,8 +10,6 @@ interface IContestProps {
 }
 
 export const ContestList = ({ data }: IContestProps) => {
-  const navigate = useNavigate();
-
   const columns: ColumnDefinition[] | any = [
     {
       formatter: "rownum",
