@@ -33,7 +33,9 @@ export const MyPage = () => {
           <Categories onClick={() => navigate("/mypage/scraps")}>
             스크랩
           </Categories>
-          <Categories onClick={() => navigate("/mypage")}>
+          <Categories
+            onClick={() => alert("포트폴리오 서비스 기능 준비 중입니다...")}
+          >
             포트폴리오
           </Categories>
         </CategoryWrapper>

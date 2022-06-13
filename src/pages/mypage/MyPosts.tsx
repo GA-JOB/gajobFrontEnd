@@ -1,12 +1,15 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import { MenuTitle } from "components/Menutitle";
 import { PostList } from "pages/community/PostList";
 import { StudyList } from "pages/study/StudyList";
+import { ButtonType } from "components/button/ButtonType";
 import styled from "styled-components";
 import useGetMyStudyPosts from "hooks/api/study/useGetMyStudyPosts";
 import useGetMyCommunityPosts from "hooks/api/community/useGetMyCommunityPosts";
 
 export const MyPosts = () => {
+  const navigate = useNavigate();
   const study = useGetMyStudyPosts();
   const community = useGetMyCommunityPosts();
   const [postType, setPostType] = useState<string>("커뮤니티");
@@ -21,13 +24,13 @@ export const MyPosts = () => {
   return (
     <MyPostsWrapper>
       <MenuTitle
-        title="내 게시물"
-        info="내가 작성한 게시물을 한눈에 확인하세요!"
+        title="내 활동"
+        info="JOB담, 스터디에서의 나의 활동을 한눈에 확인하세요!"
       ></MenuTitle>
       <Container>
         <SideNavWrapper>
           <SideNav>
-            <NavTitle>내 게시물</NavTitle>
+            <NavTitle>내 활동</NavTitle>
             <NavList
               style={postType === "커뮤니티" ? selectBtn : noSelectBtn}
               onClick={() => setPostType("커뮤니티")}
@@ -40,6 +43,14 @@ export const MyPosts = () => {
             >
               ⭐️ STUDY
             </NavList>
+
+            <ButtonWrapper>
+              <ButtonType
+                variants="text"
+                title={"목록으로"}
+                onClick={() => navigate(-1)}
+              ></ButtonType>
+            </ButtonWrapper>
           </SideNav>
         </SideNavWrapper>
 
@@ -53,7 +64,16 @@ export const MyPosts = () => {
             />
           ) : (
             // 스터디
-            <StudyList data={study?.data} isMypage={true} />
+            <>
+              <Category>
+                <strong>✔️ STUDY | 게시글</strong>
+              </Category>
+              <StudyList data={study?.data} isMypage={true} />
+
+              <Category>
+                <strong>✔️ STUDY | 신청 목록 및 확인</strong>
+              </Category>
+            </>
           )}
         </ContentWrapper>
       </Container>
@@ -113,6 +133,9 @@ const NavList = styled.div`
     border-radius: 10px;
   }
 `;
+const ButtonWrapper = styled.div`
+  text-align: center;
+`;
 
 const ContentWrapper = styled.div`
   width: 90%;
@@ -122,4 +145,9 @@ const ContentWrapper = styled.div`
   background-color: white;
   border: 1px solid #eaeaea;
   border-radius: 5px;
+`;
+const Category = styled.div`
+  margin: 0.5vw;
+  font-weight: lighter;
+  letter-spacing: 1px;
 `;

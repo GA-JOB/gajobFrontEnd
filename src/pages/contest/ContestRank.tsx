@@ -57,7 +57,6 @@ export const ContestRank = () => {
           </ListStyle>
         </StateTag>
 
-        {/* 1, 2, 3랭킹 상단에 보이기 */}
         {data.map((gallery: any, index: number) => (
           <>
             {(state === null ||

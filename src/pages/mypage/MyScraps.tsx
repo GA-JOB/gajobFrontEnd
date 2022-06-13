@@ -45,12 +45,12 @@ export const MyScraps = () => {
             >
               🔥 채용공고
             </NavList>
-            <NavList
+            {/* <NavList
               style={scrapType === "공모전" ? selectBtn : noSelectBtn}
               onClick={() => setScrapType("공모전")}
             >
               🪧 공모전
-            </NavList>
+            </NavList> */}
             <NavList
               style={scrapType === "커뮤니티" ? selectBtn : noSelectBtn}
               onClick={() => setScrapType("커뮤니티")}
@@ -140,7 +140,7 @@ const NavTitle = styled.div`
 const NavList = styled.div`
   list-style: none;
   margin: 0.5vw;
-  padding: 0.6vw 1vw;
+  padding: 0.4vw 1vw;
   font-size: 12pt;
   letter-spacing: 1px;
   cursor: pointer;
