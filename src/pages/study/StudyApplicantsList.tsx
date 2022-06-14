@@ -4,22 +4,24 @@ import "react-tabulator/lib/styles.css"; // default theme
 import "react-tabulator/css/bootstrap/tabulator_bootstrap.min.css"; // use Theme(s)
 import { ReactTabulator } from "react-tabulator";
 import { ColumnDefinition, ReactTabulatorOptions } from "react-tabulator";
-
 import styled from "styled-components";
-import useGetRecruitmentStudy from "hooks/api/study/useGetRecruitmentStudy";
+import { IStudyRecruitment } from "types/index";
 
 interface IApplicantsListProps {
-  postId: number;
+  data?: IStudyRecruitment[];
+  isMypage: boolean;
 }
-export const StudyApplicantsList = ({ postId }: IApplicantsListProps) => {
+export const StudyApplicantsList = ({
+  data,
+  isMypage,
+}: IApplicantsListProps) => {
   const navigate = useNavigate();
-  const { data } = useGetRecruitmentStudy(postId);
 
   const columns: ColumnDefinition[] | any = [
     { formatter: "rownum", hozAlign: "center", headerSort: false },
     {
       title: "신청자",
-      field: "writer",
+      field: "name",
       display: "block",
       width: "10%",
       hozAlign: "left",
@@ -63,8 +65,8 @@ export const StudyApplicantsList = ({ postId }: IApplicantsListProps) => {
   };
   const rowClickHandler = (e: any, data: any) => {
     const studentId = data._row.data.id; // 선택한 id 값
-    navigate(`/study/${postId}/applicants/${studentId}`, {
-      state: data._row.data,
+    navigate(`/study/${data._row.data.postId}/applicants/${studentId}`, {
+      state: { data: data._row.data, isMypage: isMypage },
     });
   };
 
@@ -80,7 +82,9 @@ export const StudyApplicantsList = ({ postId }: IApplicantsListProps) => {
           events={{ rowClick: rowClickHandler }}
         />
       ) : (
-        "신청자가 없습니다."
+        <>
+          {!isMypage ? "신청자가 없습니다." : "신청 내역이 존재하지 않습니다."}
+        </>
       )}
     </ApplicantsWrapper>
   );

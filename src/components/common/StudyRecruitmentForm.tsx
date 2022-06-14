@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, useLocation } from "react-router";
+import { useLocation } from "react-router";
 import { useParams } from "react-router-dom";
 import { ButtonType } from "components/button/ButtonType";
 import styled from "styled-components";
@@ -51,14 +51,13 @@ export const StudyRecruitmentForm = ({
   return (
     <>
       <Form onSubmit={handleSubmit}>
-        <InfoTitle>작성자 정보</InfoTitle>
         <InputLabel>
           <span>이름</span>
           <InputField
             variant="standard"
             type="text"
             name="nameForm"
-            value={!isResult ? user.data?.name || "" : data.name || ""}
+            value={!isResult ? user.data?.name || "" : data.data.name || ""}
             size="small"
             inputProps={{
               style: { fontSize: 15, verticalAlign: "middle" },
@@ -72,7 +71,9 @@ export const StudyRecruitmentForm = ({
             variant="standard"
             type="text"
             name="nicknameForm"
-            value={!isResult ? user.data?.nickname || "" : data.writer || ""}
+            value={
+              !isResult ? user.data?.nickname || "" : data.data.writer || ""
+            }
             size="small"
             inputProps={{
               style: { fontSize: 15, verticalAlign: "middle" },
@@ -87,7 +88,9 @@ export const StudyRecruitmentForm = ({
             variant="standard"
             name="departmentForm"
             value={
-              !isResult ? user.data?.department || "" : data.department || ""
+              !isResult
+                ? user.data?.department || ""
+                : data.data.department || ""
             }
             size="small"
             inputProps={{ style: { fontSize: 15 } }}
@@ -101,7 +104,7 @@ export const StudyRecruitmentForm = ({
             type="text"
             name="studentIdForm"
             value={
-              !isResult ? user.data?.studentId || "" : data.studentId || ""
+              !isResult ? user.data?.studentId || "" : data.data.studentId || ""
             }
             size="small"
             inputProps={{
@@ -116,7 +119,9 @@ export const StudyRecruitmentForm = ({
             variant="standard"
             type="email"
             name="emailForm"
-            value={!isResult ? user.data?.email || "" : data.studentEmail || ""}
+            value={
+              !isResult ? user.data?.email || "" : data.data.studentEmail || ""
+            }
             size="small"
             inputProps={{
               style: { fontSize: 15, verticalAlign: "middle" },
@@ -198,11 +203,6 @@ export const StudyRecruitmentForm = ({
 const Form = styled.form`
   width: 100%;
   margin: 1vw;
-`;
-const InfoTitle = styled.h4`
-  margin: 1vw 0;
-  text-align: center;
-  font-weight: lighter;
 `;
 const InputLabel = styled.div`
   width: 100%;

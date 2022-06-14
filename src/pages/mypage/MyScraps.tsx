@@ -16,7 +16,7 @@ export const MyScraps = () => {
   const community = useGetCommunityScrap();
   const study = useGetStudyScrap();
 
-  const [scrapType, setScrapType] = useState<string>("채용공고");
+  const [scrapType, setScrapType] = useState<string>("커뮤니티");
 
   console.log(community.data);
 
@@ -41,16 +41,22 @@ export const MyScraps = () => {
             <NavTitle>내 스크랩</NavTitle>
             <NavList
               style={scrapType === "채용공고" ? selectBtn : noSelectBtn}
-              onClick={() => setScrapType("채용공고")}
+              // onClick={() => setScrapType("채용공고")}
+              onClick={() =>
+                alert("준비중입니다.\n더 나은 서비스로 찾아뵙겠습니다.")
+              }
             >
               🔥 채용공고
             </NavList>
-            {/* <NavList
+            <NavList
               style={scrapType === "공모전" ? selectBtn : noSelectBtn}
-              onClick={() => setScrapType("공모전")}
+              // onClick={() => setScrapType("공모전")}
+              onClick={() =>
+                alert("준비중입니다.\n더 나은 서비스로 찾아뵙겠습니다.")
+              }
             >
               🪧 공모전
-            </NavList> */}
+            </NavList>
             <NavList
               style={scrapType === "커뮤니티" ? selectBtn : noSelectBtn}
               onClick={() => setScrapType("커뮤니티")}
@@ -96,7 +102,7 @@ export const MyScraps = () => {
 
 const MyScrapsWrapper = styled.div`
   width: 100%;
-  padding: 0 3vw 3vw 0;
+  padding: 1vw 5vw;
   background-color: #eaeaea;
 `;
 const Container = styled.div`
@@ -117,8 +123,8 @@ const SideNav = styled.div`
   left: 0;
   right: 0;
 
-  width: 15%;
-  margin-top: 17vw;
+  width: 16%;
+  margin-top: 18vw;
   margin-left: 6vw;
   padding: 1vw;
   border: 1px solid lightgray;
@@ -129,18 +135,14 @@ const SideNav = styled.div`
     display: none;
   }
 `;
-const ButtonWrapper = styled.div`
-  text-align: center;
-`;
-
 const NavTitle = styled.div`
   font-weight: lighter;
   margin: 0.3vw 0.5vw;
 `;
 const NavList = styled.div`
   list-style: none;
-  margin: 0.5vw;
-  padding: 0.4vw 1vw;
+  margin: 0.25vw;
+  padding: 0.45vw 1vw;
   font-size: 12pt;
   letter-spacing: 1px;
   cursor: pointer;
@@ -150,14 +152,16 @@ const NavList = styled.div`
     border-radius: 10px;
   }
 `;
+const ButtonWrapper = styled.div`
+  text-align: center;
+`;
 
 const ContentWrapper = styled.div`
-  width: 80%;
+  width: 90%;
   min-height: 45vw;
-  padding: 2vw 1vw;
+  padding: 2vw;
+  margin-bottom: 2vw;
   background-color: white;
   border: 1px solid #eaeaea;
   border-radius: 5px;
-  display: flex;
-  flex-direction: column;
 `;

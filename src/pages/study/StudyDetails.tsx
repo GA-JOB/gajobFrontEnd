@@ -18,6 +18,7 @@ import {
 } from "@mui/icons-material";
 import storage from "hooks/store";
 import useGetPieceStudy from "hooks/api/study/useGetPieceStudy";
+import useGetRecruitmentStudy from "hooks/api/study/useGetRecruitmentStudy";
 import { useStudy } from "hooks/api/study";
 import { StudyApplicantsList } from "./StudyApplicantsList";
 
@@ -26,6 +27,7 @@ export const StudyDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { data } = useGetPieceStudy(Number(id));
+  const studyRecruitment = useGetRecruitmentStudy(Number(id));
   const { postScrap, postLikes } = useStudy();
 
   const [isEdit, setIsEdit] = useState<boolean>(false);
@@ -100,13 +102,18 @@ export const StudyDetails = () => {
           ) : (
             <ButtonType
               variants="contained"
-              title="신청하러 가기"
+              title={
+                data.applyStatus
+                  ? "지원 완료된 스터디 입니다."
+                  : "신청하러 가기"
+              }
               link={
                 data.status === "모집중"
                   ? `/study/recruitment/${Number(id)}`
                   : ""
               }
               widthStyle="100%"
+              color="green"
               onClick={() => {
                 if (data.status === "모집중") {
                   navigate(`/study/recruitment/${id}`, { state: data });
@@ -214,7 +221,10 @@ export const StudyDetails = () => {
             }}
           />
           {isOpenApplicantsList ? (
-            <StudyApplicantsList postId={Number(id)} />
+            <StudyApplicantsList
+              data={studyRecruitment.data}
+              isMypage={false}
+            />
           ) : null}
 
           <IconWrapper>

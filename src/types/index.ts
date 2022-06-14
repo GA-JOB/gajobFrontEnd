@@ -117,6 +117,21 @@ export interface IStudy {
   scrapStatus?: boolean;
   supplyCnt?: number;
   openTalkUrl: string | null;
+  applyStatus?: boolean;
+}
+
+export interface IStudyRecruitment {
+  postId?: number;
+  supplyId?: number;
+  id?: number;
+  name?: string;
+  writer?: string;
+  studentId?: string;
+  department?: string;
+  studentEmail?: string;
+  content?: string;
+  applicationDate?: string;
+  result?: string;
 }
 
 type ILikesList = {

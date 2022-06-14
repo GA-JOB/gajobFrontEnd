@@ -4,14 +4,17 @@ import { MenuTitle } from "components/Menutitle";
 import { PostList } from "pages/community/PostList";
 import { StudyList } from "pages/study/StudyList";
 import { ButtonType } from "components/button/ButtonType";
+import { StudyApplicantsList } from "pages/study/StudyApplicantsList";
 import styled from "styled-components";
 import useGetMyStudyPosts from "hooks/api/study/useGetMyStudyPosts";
 import useGetMyCommunityPosts from "hooks/api/community/useGetMyCommunityPosts";
+import { useGetMyApplyStudy } from "hooks/api/study/useGetMyApplyStudy";
 
 export const MyPosts = () => {
   const navigate = useNavigate();
-  const study = useGetMyStudyPosts();
   const community = useGetMyCommunityPosts();
+  const study = useGetMyStudyPosts();
+  const myApplyStudy = useGetMyApplyStudy();
   const [postType, setPostType] = useState<string>("커뮤니티");
 
   // 상태 표시 style
@@ -73,6 +76,9 @@ export const MyPosts = () => {
               <Category>
                 <strong>✔️ STUDY | 신청 목록 및 확인</strong>
               </Category>
+              <strong>
+                <StudyApplicantsList data={myApplyStudy.data} isMypage={true} />
+              </strong>
             </>
           )}
         </ContentWrapper>

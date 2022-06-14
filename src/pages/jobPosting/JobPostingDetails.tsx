@@ -1,25 +1,24 @@
-import React from "react";
 import { Loading } from "components/loading";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router";
 import { ButtonType } from "components/button/ButtonType";
-import { BookmarkBorder, Bookmark } from "@mui/icons-material";
-import { useJobPosting } from "hooks/api/jobPosting";
+// import { BookmarkBorder, Bookmark } from "@mui/icons-material";
+// import { useJobPosting } from "hooks/api/jobPosting";
 
 export const JobPostingDetails = () => {
   const navigate = useNavigate();
   const { state: data }: any = useLocation();
-  const { postScrap } = useJobPosting();
+  // const { postScrap } = useJobPosting();
 
-  const IconStyle = {
-    fontSize: 26,
-    cursor: "pointer",
-  };
+  // const IconStyle = {
+  //   fontSize: 26,
+  //   cursor: "pointer",
+  // };
 
-  const onClickScrap = () => {
-    postScrap(data.id);
-  };
+  // const onClickScrap = () => {
+  //   postScrap(data.id);
+  // };
 
   if (!data) return <Loading />;
   return (
@@ -75,10 +74,10 @@ export const JobPostingDetails = () => {
           />
         </ButtonWrapper>
       </ContentWrapper>
-      <ScrapRound>
+      {/* <ScrapRound>
         <BookmarkBorder style={IconStyle} onClick={() => postScrap(data.id)} />
         <IconTxt>scrap</IconTxt>
-      </ScrapRound>
+      </ScrapRound> */}
     </JobPostingDetailWrapper>
   );
 };
@@ -135,39 +134,16 @@ const LinkToDetail = styled.a`
 const ButtonWrapper = styled.div`
   text-align: center;
 `;
-const ScrapRound = styled.div`
-  position: fixed;
-  top: 400px;
-  right: 180px;
-  padding: 0.8vw;
-  border-radius: 50px;
-  background-color: white;
-`;
-const IconTxt = styled.div`
-  text-align: center;
-  font-size: 8pt;
-  font-weight: bold;
-`;
-// authNum: "K151152205130096"
-// basicAddress: "경기도 화성시 팔탄면 터넉골로 202-7"
-// career: "경력"
-// closeDate: "채용시까지  22-06-30"
-// company: "(주)코싸인"
-// employTypeCode: 10
-// id: 1
-// infoSource: "VALIDATION"
-// jobCode: null
-// lastModifyDate: 202205131430
-// maxSalary: 0
-// minEdu: "학력무관"
-// minSalary: 3000000
-// prefCode: ""
-// region: "경기 화성시"
-// registrationDate: "22-05-13"
-// salary: "300만원"
-// salaryType: "월급"
-// streetNameAddress: 415903210109
-// title: "[코싸인] 용접공 및 도장공 모집합니다."
-// wantedInfoUrl: "http://www.work.go.kr/empDetailRedirect.do?wantedAuthNo=K151152205130096"
-// wantedMobileInfoUrl: "https://m.work.go.kr/regionJobsWorknet/jobDetailView2.do?srchInfotypeNm=VALIDATION&srchWantedAuthNo=K151152205130096"
-// workType: "주5일근무"
+// const ScrapRound = styled.div`
+//   position: fixed;
+//   top: 400px;
+//   right: 180px;
+//   padding: 0.8vw;
+//   border-radius: 50px;
+//   background-color: white;
+// `;
+// const IconTxt = styled.div`
+//   text-align: center;
+//   font-size: 8pt;
+//   font-weight: bold;
+// `;
