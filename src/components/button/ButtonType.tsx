@@ -7,6 +7,7 @@ interface IButtonProps {
   widthStyle?: string;
   paddingStyle?: string;
   buttonColor?: string;
+  color?: string;
   disabled?: boolean;
   onClick?: () => void;
 }
@@ -18,6 +19,7 @@ export const ButtonType = ({
   widthStyle,
   paddingStyle,
   buttonColor,
+  color,
   disabled,
   onClick,
 }: IButtonProps) => {
@@ -25,6 +27,7 @@ export const ButtonType = ({
     padding: paddingStyle,
     width: widthStyle,
     backgroundColor: buttonColor,
+    color: color,
   };
 
   return (

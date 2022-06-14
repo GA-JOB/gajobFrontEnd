@@ -37,7 +37,7 @@ export const Contest = () => {
         </SideNavWrapper>
 
         <ContentsTypeWrapper>
-          {/* <ContestRank /> */}
+          <ContestRank />
           <ContestList data={data} />
         </ContentsTypeWrapper>
       </ContestContainer>

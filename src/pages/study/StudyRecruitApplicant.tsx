@@ -4,12 +4,13 @@ import { Loading } from "components/loading";
 import { StudyRecruitmentForm } from "components/common/StudyRecruitmentForm";
 import { ButtonType } from "components/button/ButtonType";
 import styled from "styled-components";
+import { ArrowBack } from "@mui/icons-material";
 import { useStudy } from "hooks/api/study";
 
 export const StudyRecruitApplicant = () => {
   const { postId, studentId } = useParams();
   const { state: data }: any = useLocation();
-  const { recruitResultStudy } = useStudy();
+  const { recruitResultStudy, deleteRecruitStudy } = useStudy();
   const navigate = useNavigate();
 
   const onClickrRecruitResult = (recruitResult: string) => {
@@ -20,36 +21,62 @@ export const StudyRecruitApplicant = () => {
     });
   };
 
+  const approveColor = {
+    color: "green",
+    border: "2px solid green",
+  };
+  const denyColor = {
+    color: "red",
+    border: "2px solid red",
+  };
+
   if (!data) <Loading></Loading>;
   return (
     <StudyRecruitWrapper>
-      <StudyRecruitmentForm introduction={data.content} isResult={true} />
-      상태: <span>{data.result}</span>
-      <ResultBtn>
-        <ButtonType
-          variants={data.result !== "반려" ? "text" : ""}
-          title={"승인"}
-          onClick={() => {
-            onClickrRecruitResult("승인");
-          }}
-          widthStyle={"50%"}
-        />
-        <ButtonType
-          variants={data.result !== "승인" ? "text" : ""}
-          title={"반려"}
-          onClick={() => {
-            onClickrRecruitResult("반려");
-          }}
-          widthStyle={"50%"}
-        />
-      </ResultBtn>
-      <ButtonWrapper>
-        <ButtonType
-          variants="text"
-          title={"목록으로"}
-          onClick={() => navigate(-1)}
-        />
-      </ButtonWrapper>
+      <InfoTitle>신청자 정보 </InfoTitle>{" "}
+      <IconWrapper>
+        {!data.isMypage ? (
+          <ArrowBack onClick={() => navigate(-1)} />
+        ) : (
+          <ButtonType
+            variants="text"
+            link={`/study/${Number(postId)}`}
+            title={"< 상세페이지로"}
+          />
+        )}
+      </IconWrapper>
+      <Status style={data.data.result === "승인" ? approveColor : denyColor}>
+        {data.data.result}
+      </Status>
+      <StudyRecruitmentForm introduction={data.data.content} isResult={true} />
+      {!data.isMypage ? (
+        <ResultBtn>
+          <ButtonType
+            variants={data.data.result !== "반려" ? "text" : ""}
+            title={"승인"}
+            onClick={() => {
+              onClickrRecruitResult("승인");
+            }}
+            widthStyle={"10%"}
+          />
+          <ButtonType
+            variants={data.data.result !== "승인" ? "text" : ""}
+            title={"반려"}
+            onClick={() => {
+              onClickrRecruitResult("반려");
+            }}
+            widthStyle={"10%"}
+          />
+        </ResultBtn>
+      ) : (
+        <ResultBtn>
+          <ButtonType
+            variants="text"
+            title="신청 취소"
+            onClick={() => deleteRecruitStudy(Number(postId))}
+          ></ButtonType>
+        </ResultBtn>
+      )}
     </StudyRecruitWrapper>
   );
 };
@@ -60,12 +87,27 @@ const StudyRecruitWrapper = styled.div`
   justify-content: center;
   align-items: center;
 `;
-const ResultBtn = styled.div`
-  justify-content: center;
-  align-items: center;
-  padding: 0 15vw;
-`;
-const ButtonWrapper = styled.div`
-  text-align: center;
+const InfoTitle = styled.h4`
   margin: 1vw 0;
+  text-align: center;
+  font-weight: lighter;
+`;
+const IconWrapper = styled.span`
+  margin: 0 1vw;
+  cursor: pointer;
+  width: 10px;
+`;
+const Status = styled.span`
+  float: right;
+  color: black;
+  font-size: 11pt;
+  font-weight: bold;
+  padding: 0.2vw 1vw;
+  border: 2px solid black;
+  border-radius: 20px;
+`;
+
+const ResultBtn = styled.span`
+  margin-left: 45%;
+  width: 100%;
 `;

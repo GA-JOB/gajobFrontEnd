@@ -28,7 +28,7 @@ export const MyPage = () => {
         <CategoryWrapper>
           <Categories style={selectBtn}>개인정보 설정</Categories>
           <Categories onClick={() => navigate("/mypage/posts")}>
-            내 게시물
+            내 활동
           </Categories>
           <Categories onClick={() => navigate("/mypage/scraps")}>
             스크랩

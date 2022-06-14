@@ -6,10 +6,6 @@ import { StudyRecruitmentForm } from "components/common/StudyRecruitmentForm";
 import styled from "styled-components";
 import useGetAuth from "hooks/api/auth/useGetAuth";
 
-interface StudyRecruitProps {
-  title?: string;
-  content?: string;
-}
 export const StudyRecruit = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -25,21 +21,46 @@ export const StudyRecruit = () => {
         info={"STUDY 신청을 위한 정보들을 작성해주세요!"}
       />
       <StudyRecruitWrapper>
-        <StudyInfoWrapper>
-          <InfoTitle>스터디 정보</InfoTitle>
-          <div>작성자</div> {data.writer} <br />
-          <div>카테고리</div> {data.studyCategory} <br />
-          <div>제목</div> {data.title} <br />
-          <div>내용</div> {data.content} <br />
-          <div>지역</div> {data.area} <br />
-          <div>모집 마감일</div> {data.endDate} <br />
-          <div>경쟁률 현황</div> {competeRate} : 1 (신청인원 : {data.supplyCnt}{" "}
-          / 모집 최대인원: {data.maxPeople} ) <br />
-        </StudyInfoWrapper>
+        <BoxWrapper>
+          <InfoTitle> 📖 스터디 정보</InfoTitle>
+          <Content>
+            <ContentTitle>
+              작성자 <Contents>{data.writer}</Contents>
+            </ContentTitle>
+            <ContentTitle>
+              카테고리 <Contents>{data.studyCategory}</Contents>
+            </ContentTitle>
+            <ContentTitle>
+              제목 <Contents>{data.title}</Contents>
+            </ContentTitle>
+            <ContentTitle>
+              내용 <Contents>{data.content}</Contents>
+            </ContentTitle>
+            <ContentTitle>
+              지역 <Contents>{data.area}</Contents>
+            </ContentTitle>
+            <ContentTitle>
+              모집기간
+              <Contents> {data.startDate + " ~ " + data.endDate}</Contents>
+            </ContentTitle>
+            <ContentTitle>
+              경쟁률 현황
+              <Contents>
+                {competeRate} : 1{" "}
+                {"(신청인원 : " +
+                  data.supplyCnt +
+                  " / 모집 최대인원: " +
+                  data.maxPeople +
+                  ")"}
+              </Contents>
+            </ContentTitle>
+          </Content>
+        </BoxWrapper>
 
-        <FormWrapper>
+        <BoxWrapper>
+          <InfoTitle> 신청자 소개 </InfoTitle>
           <StudyRecruitmentForm isResult={false} />
-        </FormWrapper>
+        </BoxWrapper>
       </StudyRecruitWrapper>
 
       <ButtonWrapper>
@@ -63,19 +84,37 @@ const StudyRecruitWrapper = styled.div`
   display: flex;
   justify-content: center;
 `;
-const StudyInfoWrapper = styled.div`
+const BoxWrapper = styled.div`
   width: 40%;
-  margin: 1vw;
+  height: 48vw;
+  margin: 0 1vw;
 `;
 const InfoTitle = styled.h4`
   margin: 1vw 0;
   text-align: center;
+  /* font-weight: lighter; */
+`;
+const Content = styled.div`
+  margin: 1vw;
+  padding: 0 1vw;
+  border-top: 3px solid #002187;
+  border-bottom: 3px solid #002187;
+`;
+const ContentTitle = styled.div`
+  padding: 0.6vw 0;
+  line-height: 2vw;
+`;
+const Contents = styled.div`
+  border-top: 1px solid #eaeaea;
+  font-size: 13pt;
   font-weight: lighter;
+  height: 35px;
+
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 `;
 
-const FormWrapper = styled.div`
-  width: 40%;
-`;
 const ButtonWrapper = styled.div`
   text-align: center;
   margin: 1vw 0;

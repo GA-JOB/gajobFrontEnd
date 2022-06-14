@@ -1,16 +1,9 @@
 import useSWR from "swr";
 import { fetcher } from "lib/api/fetcher";
+import { IStudyRecruitment } from "types/index";
 
-interface IRecruitmentProps {
-  id: number;
-  content: string;
-  writer: string;
-  studentId: string;
-  applicationDate: string;
-  result: string;
-}
 function useGetRecruitmentStudy(id: number) {
-  const { data } = useSWR<IRecruitmentProps[]>(
+  const { data } = useSWR<IStudyRecruitment[]>(
     `/study/recruitment/${id}`,
     fetcher
   );

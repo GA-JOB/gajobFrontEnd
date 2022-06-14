@@ -128,7 +128,14 @@ export const useStudy = () => {
       }
     });
   };
-
+  // 스터디 신청 취소
+  const deleteRecruitStudy = async (postId: number) => {
+    await del(`/study/recruitment/${postId}`).then(() => {
+      window.confirm("신청이 취소되었습니다.");
+      navigate(-1);
+      mutate(`/study/recruitment/${postId}`, false);
+    });
+  };
   // 스터디 신청 모집 결과 설정
   const recruitResultStudy = async ({
     postId,
@@ -216,6 +223,7 @@ export const useStudy = () => {
     editStudy,
     deleteStudy,
     recruitStudy,
+    deleteRecruitStudy,
     recruitResultStudy,
     postStudyComment,
     editStudyComment,
